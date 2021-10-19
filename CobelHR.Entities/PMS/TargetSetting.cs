@@ -39,6 +39,8 @@ namespace CobelHR.Entities.PMS
 
         public Base.PMS.TargetSettingType TargetSettingType { get; set; }
 		
+		public HR.Employee	Appraiser { get; set; }
+
 		public DateTime? Date { get; set; }
 		
 		public string Comment { get; set; }
@@ -49,11 +51,19 @@ namespace CobelHR.Entities.PMS
 		
 		public bool? IsValid { get; set; }
 
-		#endregion
+        public int? TotalFunctionalWeight { get; set; }
+
+        public int? TotalBehavioralWeight { get; set; }
+        
+        public int? TotalQualitativeWeight { get; set; }
+        
+        public int? TotalQuantitativeWeight { get; set; }
+
+        #endregion
 
         #region    List Of Related Entities
 
-		public List<AppraiseResult> ListOfAppraiseResult { get; set; }
+        public List<AppraiseResult> ListOfAppraiseResult { get; set; }
 
 		public List<BehavioralObjective> ListOfBehavioralObjective { get; set; }
 

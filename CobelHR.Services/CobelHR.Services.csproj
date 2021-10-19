@@ -9,8 +9,4 @@
     <ProjectReference Include="..\EssentialCore\EssentialCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Partial\Core\Abstract\" />
-  </ItemGroup>
-
 </Project>

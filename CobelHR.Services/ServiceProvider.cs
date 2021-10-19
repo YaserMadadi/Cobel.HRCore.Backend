@@ -24,6 +24,8 @@ using CobelHR.Services.Partial.HR.Abstract;
 using CobelHR.Services.Partial.HR;
 using CobelHR.Services.Partial.PMS.Abstract;
 using CobelHR.Services.Partial.PMS;
+using CobelHR.Services.Partial.Core.Abstract;
+using CobelHR.Services.Partial.Core;
 
 namespace CobelHR.Services
 {
@@ -34,6 +36,7 @@ namespace CobelHR.Services
         {
             services.AddScoped<IEmployeeServicePartial, EmployeeServicePartial>();
             services.AddScoped<ITargetSettingServicePartial, TargetSettingServicePartial>();
+            services.AddScoped<ILogServicePartial, LogServicePartial>();
         }
 
 
