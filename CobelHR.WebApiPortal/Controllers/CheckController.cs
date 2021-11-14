@@ -8,14 +8,22 @@ using System.Threading.Tasks;
 
 namespace CobelHR.WebApiPortal.Controllers
 {
-    [Route("api/Check")]
+    [Route("api")]
     [ApiController]
     public class CheckController : ControllerBase
     {
         [HttpGet]
+        [Route("Check")]
         public ActionResult Check()
         {
             return Ok(new Check().ToString());
+        }
+
+        [HttpGet]
+        [Route("CheckConnection")]
+        public ActionResult ChackConnection()
+        {
+            return Ok(new CheckConnection().ToString());
         }
 
 

@@ -12,6 +12,8 @@ namespace CobelHR.ApiServices.Controllers.Base
     [Route("api/Base")]
     public class CityController : BaseController
     {
+     
+        //
         public CityController(ICityService cityService)
         {
             this.cityService = cityService;
@@ -32,9 +34,9 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             return this.cityService.RetrieveAll(City.Informer, paginate, this.UserCredit).ToActionResult<City>();
         }
-            
 
-        
+
+
         [HttpPost]
         [Route("City/Save")]
         public IActionResult Save([FromBody] City city)
@@ -42,7 +44,7 @@ namespace CobelHR.ApiServices.Controllers.Base
             return this.cityService.Save(city, this.UserCredit).ToActionResult<City>();
         }
 
-        
+
         [HttpPost]
         [Route("City/SaveAttached")]
         public IActionResult SaveAttached([FromBody] City city)
@@ -50,7 +52,7 @@ namespace CobelHR.ApiServices.Controllers.Base
             return this.cityService.SaveAttached(city, this.UserCredit).ToActionResult();
         }
 
-        
+
         [HttpPost]
         [Route("City/SaveBulk")]
         public IActionResult SaveBulk([FromBody] IList<City> cityList)
@@ -87,7 +89,7 @@ namespace CobelHR.ApiServices.Controllers.Base
             return this.cityService.CollectionOfHabitancy(id, habitancy).ToActionResult();
         }
 
-		// CollectionOfPerson_BirthCity
+        // CollectionOfPerson_BirthCity
         [HttpPost]
         [Route("BirthCity/{city_id:int}/Person")]
         public IActionResult CollectionOfPerson_BirthCity([FromRoute(Name = "city_id")] int id, Person person)
@@ -95,7 +97,7 @@ namespace CobelHR.ApiServices.Controllers.Base
             return this.cityService.CollectionOfPerson_BirthCity(id, person).ToActionResult();
         }
 
-		// CollectionOfUniversity
+        // CollectionOfUniversity
         [HttpPost]
         [Route("City/{city_id:int}/University")]
         public IActionResult CollectionOfUniversity([FromRoute(Name = "city_id")] int id, University university)

@@ -40,7 +40,20 @@ namespace EssentialCore.Controllers
 
             this.UserCredit = userCreditResult.IsSucceeded ? userCreditResult.Data : null;
 
+
+
             base.OnActionExecuting(context);
+        }
+
+        private void updateToken()
+        {
+            //var accessToken = this.tokenHelper.CreateToken(userCheck.Data);
+
+            //if (accessToken == null || accessToken == default)
+
+            //    return new ErrorDataResult<AccessToken>(accessToken);
+
+            //return new SuccessfulDataResult<AccessToken>(accessToken);
         }
     }
 }
