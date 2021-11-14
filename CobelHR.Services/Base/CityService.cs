@@ -12,11 +12,16 @@ using CobelHR.Services.Base.Abstract;using CobelHR.Entities.HR;
 
 namespace CobelHR.Services.Base
 {
+    /// <summary>
+    /// This is a test Comment
+    /// </summary>
     public class CityService : Service<City>, ICityService
     {
         public CityService() : base()
         {
         }
+
+        //test
 
         public override async Task<DataResult<City>> SaveAttached(City city, UserCredit userCredit)
         {
