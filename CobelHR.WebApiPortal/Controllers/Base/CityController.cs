@@ -17,6 +17,9 @@ namespace CobelHR.ApiServices.Controllers.Base
             this.cityService = cityService;
         }
 
+
+
+        //test
         private ICityService cityService { get; set; }
 
         [HttpGet]
