@@ -35,7 +35,7 @@ namespace CobelHR.Entities.HR
 		
         public HR.Department Department { get; set; }
 		
-        public Base.HR.PositionCategory PositionCategory { get; set; }
+        public Base.HR.PositionDivision PositionDivision { get; set; }
 		
 		public bool? IsActive { get; set; }
 
@@ -52,7 +52,7 @@ namespace CobelHR.Entities.HR
         {
             return Title.Validate() &&
 					Department.Validate() &&
-					PositionCategory.Validate() &&
+					PositionDivision.Validate() &&
 					IsActive.Validate();
         }
     }

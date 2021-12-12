@@ -83,7 +83,7 @@ namespace CobelHR.Services.Base.HR.Actions
 
             if(positionCategory.ListOfUnit.CheckList())
             {
-                positionCategory.ListOfUnit.ForEach(i => i.PositionCategory.Id = result.Id);
+                positionCategory.ListOfUnit.ForEach(i => i.PositionDivision.Id = result.Id);
 
                 childResult = await positionCategory.ListOfUnit.SaveCollection(userCredit, transaction, depth + 1);
             
