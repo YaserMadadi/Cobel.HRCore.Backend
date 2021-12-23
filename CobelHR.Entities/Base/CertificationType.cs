@@ -45,7 +45,7 @@ namespace CobelHR.Entities.Base
 
         
         public override bool Validate()
-        {
+        {//test
             return Title.Validate() &&
 					IsActive.Validate();
         }
