@@ -109,7 +109,7 @@ namespace CobelHR.Services
             services.AddScoped<IMeasurementUnitService, MeasurementUnitService>();
             services.AddScoped<ISubjectService, SubjectService>();
             services.AddScoped<ITargetSettingTypeService, TargetSettingTypeService>();
-
+            services.AddScoped<ITargetSettingModeService, TargetSettingModeService>();
             #endregion
 
             #region Core

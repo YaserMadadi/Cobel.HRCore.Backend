@@ -38,6 +38,8 @@ namespace CobelHR.Entities.PMS
         public Base.Year Year { get; set; }
 
         public Base.PMS.TargetSettingType TargetSettingType { get; set; }
+
+        public Base.PMS.TargetSettingMode TargetSettingMode { get; set; }
 		
 		public HR.Employee	Appraiser { get; set; }
 
