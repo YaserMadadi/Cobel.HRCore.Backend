@@ -105,8 +105,6 @@ namespace EssentialCore.BusinessLogic
 
             var result = await transaction.ExecuteResult(command);
 
-            
-
             if (result.Id < 0)
 
                 return new ErrorDataResult<T>(result.Id, result.Message);

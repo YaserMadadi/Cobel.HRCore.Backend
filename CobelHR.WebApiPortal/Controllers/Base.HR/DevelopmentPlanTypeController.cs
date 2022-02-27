@@ -1,10 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using CobelHR.Entities.Base.HR;
+using CobelHR.Services.Base.HR.Abstract;
 using EssentialCore.Controllers;
 using EssentialCore.Tools.Pagination;
 using EssentialCore.Tools.Result;
-using CobelHR.Services.Base.HR.Abstract;
-using CobelHR.Entities.Base.HR;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace CobelHR.ApiServices.Controllers.Base.HR
 {
@@ -31,9 +31,9 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             return this.developmentPlanTypeService.RetrieveAll(DevelopmentPlanType.Informer, paginate, this.UserCredit).ToActionResult<DevelopmentPlanType>();
         }
-            
 
-        
+
+
         [HttpPost]
         [Route("DevelopmentPlanType/Save")]
         public IActionResult Save([FromBody] DevelopmentPlanType developmentPlanType)
@@ -41,7 +41,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
             return this.developmentPlanTypeService.Save(developmentPlanType, this.UserCredit).ToActionResult<DevelopmentPlanType>();
         }
 
-        
+
         [HttpPost]
         [Route("DevelopmentPlanType/SaveAttached")]
         public IActionResult SaveAttached([FromBody] DevelopmentPlanType developmentPlanType)
@@ -49,7 +49,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
             return this.developmentPlanTypeService.SaveAttached(developmentPlanType, this.UserCredit).ToActionResult();
         }
 
-        
+
         [HttpPost]
         [Route("DevelopmentPlanType/SaveBulk")]
         public IActionResult SaveBulk([FromBody] IList<DevelopmentPlanType> developmentPlanTypeList)
@@ -78,6 +78,6 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
             return this.developmentPlanTypeService.Delete(developmentPlanType, id, this.UserCredit).ToActionResult();
         }
 
-        
+
     }
 }

@@ -13,7 +13,7 @@ namespace EssentialCore.DataAccess
         {
             var connection = Tools.Configuartion.ConfigurationService.ReadSection<Connection>("Connection");
 
-            ConnectionManager.ConnectionString = $"Server={connection.Server};DataBase={connection.DataBase};UID={connection.UID};PWD={connection.Password};";
+            ConnectionManager.ConnectionString = $"Server={connection.Server.Replace(@"\\",@"\")};DataBase={connection.DataBase};UID={connection.UID};PWD={connection.Password};";
         }
 
 

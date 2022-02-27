@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EssentialCore.Tools.Serializer;
 using System.Data.SqlClient;
+using EssentialCore.Entities;
 
 namespace CobelHR.Services.Partial.HR
 {
@@ -25,10 +26,11 @@ namespace CobelHR.Services.Partial.HR
             return dataResult;
         }
 
-        public DataResult<List<TargetSetting>> LoadTargetSetting(int employee_id)
+        public DataResult<List<TargetSetting>> LoadTargetSetting(int employee_id, TargetSetting targetSetting)
         {
             var dataResult = UserClass.CreateCommand("[HR].[Employee.LoadTargetSettings]",
-                                                new SqlParameter("@Employee_Id", employee_id))
+                                                new SqlParameter("@Employee_Id", employee_id),
+                                                new SqlParameter("@jsonValue", targetSetting.ToJson()))
                                                         .ExecuteDataResult<List<TargetSetting>>(JsonType.Collection);
 
             return dataResult;

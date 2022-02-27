@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EssentialCore.Controllers;
+using CobelHR.Entities.PMS;
 
 namespace CobelHR.WebApiPortal.Partial.Controller.HR
 {
@@ -22,11 +23,11 @@ namespace CobelHR.WebApiPortal.Partial.Controller.HR
             this.employeeService = employeeService;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Employee/{employee_id:int}/LoadTargetSettings")]
-        public IActionResult LoadTargetSetting(int employee_id)
+        public IActionResult LoadTargetSetting(int employee_id, TargetSetting targetSetting)
         {
-            return this.employeeService.LoadTargetSetting(employee_id).ToActionResult();
+            return this.employeeService.LoadTargetSetting(employee_id, targetSetting).ToActionResult();
         }
 
         [HttpGet]

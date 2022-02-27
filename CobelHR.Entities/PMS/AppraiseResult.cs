@@ -34,8 +34,6 @@ namespace CobelHR.Entities.PMS
 		
         public Base.PMS.AppraiseType AppraiseType { get; set; }
 		
-        public Base.PMS.AppraiseTime AppraiseTime { get; set; }
-		
         public decimal? FunctionalScore { get; set; }
 		
         public decimal? BehavioralScore { get; set; }
@@ -59,7 +57,6 @@ namespace CobelHR.Entities.PMS
         {
             return TargetSetting.Validate() &&
 					AppraiseType.Validate() &&
-					AppraiseTime.Validate() &&
 					FunctionalScore.Validate() &&
 					BehavioralScore.Validate() &&
 					QuantitativeScore.Validate() &&

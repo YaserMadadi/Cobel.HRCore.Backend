@@ -48,7 +48,7 @@ namespace CobelHR.Services
 
             services.AddScoped<IUserClass, UserClass>();
 
-
+            services.AddScoped<IOrgChartService, OrgChartService>();
 
             #region Base
 
@@ -98,7 +98,6 @@ namespace CobelHR.Services
             #region Base.PMS
 
             // Base.PMS Services
-            services.AddScoped<IAppraiseTimeService, AppraiseTimeService>();
             services.AddScoped<IAppraiseTypeService, AppraiseTypeService>();
             services.AddScoped<IApprovementTypeService, ApprovementTypeService>();
             services.AddScoped<IApproverTypeService, ApproverTypeService>();

@@ -55,7 +55,7 @@ namespace CobelHR.Services.Base.Actions
                 }
             }
 
-            if(city.ListOfBirthCity_Person.CheckList())
+            if (city.ListOfBirthCity_Person.CheckList())
             {
                 city.ListOfBirthCity_Person.ForEach(i => i.BirthCity.Id = result.Id);
 
