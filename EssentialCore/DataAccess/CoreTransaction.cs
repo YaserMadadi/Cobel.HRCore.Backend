@@ -76,13 +76,15 @@ namespace EssentialCore.DataAccess
             {
                 this.RollBack();
 
-                //if (!command.CommandText.Contains("[Core].[ExceptionLog") || !command.CommandText.Contains("[Core].[CommandParameter."))
+                //await new LogManager<SqlException>(ex, command).Save();
 
-                //    await new LogManager<SqlException>(ex, command).Save();
+                if (!command.CommandText.Contains("[Log].[Exception."))
 
-                //else
+                    await new LogManager<SqlException>(ex, command).Save();
 
-                //  Save Log in File.csv
+                else
+
+                    await new LogManager<SqlException>(ex, command).WriteToFile();
 
                 return new ErrorResult(ex.ErrorCode, string.Empty, ex.Message);
             }
@@ -90,13 +92,13 @@ namespace EssentialCore.DataAccess
             {
                 this.RollBack();
 
-                //if (!command.CommandText.Contains("[Core].[ExceptionLog") || !command.CommandText.Contains("[Core].[CommandParameter."))
+                if (!command.CommandText.Contains("[Core].[ExceptionLog"))
 
-                //    await new LogManager<Exception>(ex, command).Save();
+                    await new LogManager<Exception>(ex, command).Save();
 
-                //else
+                else
 
-                //  Save Log in File.csv
+                    await new LogManager<Exception>(ex, command).WriteToFile();
 
                 return new ErrorResult(-1, string.Empty, ex.Message);
             }

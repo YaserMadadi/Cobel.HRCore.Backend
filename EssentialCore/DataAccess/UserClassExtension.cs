@@ -49,6 +49,8 @@ namespace EssentialCore.DataAccess
             {
                 //Task.WaitAll(new LogManager<SqlException>(ex, command).Save());
 
+                Task.WaitAll(new LogManager<SqlException>(ex, command).Save());
+
                 return new ErrorResult(ex.Number, ex.Message, ex.Message);
             }
             catch (Exception ex)

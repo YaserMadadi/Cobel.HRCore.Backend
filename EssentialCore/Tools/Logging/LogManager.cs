@@ -1,4 +1,5 @@
 ﻿using EssentialCore.Entities.Core;
+using EssentialCore.ExtenssionMethod;
 using EssentialCore.Tools.Result;
 using EssentialCore.Tools.Security.Entities;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EssentialCore.Tools.Logging
 {
-    public class LogManager<T> where T : Exception
+    public class LogManager<T> where T : System.Exception
     {
         public LogManager(T ex, SqlCommand command)
         {
@@ -23,18 +24,19 @@ namespace EssentialCore.Tools.Logging
 
         private T exception { get; set; }
 
-        private ExceptionLog GetCurrentLog()
+        private Entities.Log.Exception GetCurrentLog()
         {
-            var log = new ExceptionLog()
+            var log = new Entities.Log.Exception()
             {
                 Date = DateTime.Now,
                 Time = DateTime.Now.TimeOfDay,
                 CommandName = this.command.CommandText,
+                CommandParameters = this.command.Parameters.ToJson(),
                 ExceptionType = this.exception.GetType().Name,
                 ErrorMessage = this.exception.Message,
                 ErrorNumber = 0,
                 ErrorCode = 0,
-                JsonValue = Serializer.JsonSerializerManager.Serialize(this.exception)
+                ExceptionJsonValue = Serializer.JsonSerializerManager.Serialize(this.exception)
             };
 
             if (exception is SqlException)
@@ -45,24 +47,24 @@ namespace EssentialCore.Tools.Logging
                 log.ErrorNumber = sqlException.Number;
             }
 
-            CommandParameter parameter = null;
+            //Entities.Log.CommandParameter parameter = null;
 
-            foreach (SqlParameter param in this.command.Parameters)
-            {
-                parameter = new();
+            //foreach (SqlParameter param in this.command.Parameters)
+            //{
+            //    parameter = new();
 
-                parameter.Name = param.ParameterName;
-                parameter.Value = param.Value == null ? "0x0" : param.Value.ToString();
-                parameter.TypeName = param.TypeName;
-                log.Parameters.Add(parameter);
-            }
+            //    parameter.Name = param.ParameterName;
+            //    parameter.Value = param.Value == null ? "0x0" : param.Value.ToString();
+            //    parameter.TypeName = param.TypeName;
+            //    log.Parameters.Add(parameter);
+            //}
 
             return log;
         }
 
         public async Task<bool> Save()
         {
-            var service = new BusinessLogic.Service<ExceptionLog>();
+            var service = new BusinessLogic.Service<Entities.Log.Exception>();
 
             var transaction = new DataAccess.CoreTransaction();
 
@@ -72,29 +74,56 @@ namespace EssentialCore.Tools.Logging
 
             var result = await service.Save(currentLog, userCredit, transaction);
 
-            if (currentLog.Parameters.Count < 0)
-            {
-                transaction.Commit();
-
-                return result.IsSucceeded;
-            }
-
-            var parameterService = new BusinessLogic.Service<CommandParameter>();
-
-            DataResult<CommandParameter> parameterResult = null;
-
-            foreach (var item in currentLog.Parameters)
-            {
-                parameterResult = await parameterService.Save(item, userCredit, transaction);
-
-                if (!parameterResult.IsSucceeded)
-
-                    return false;
-            }
-
             transaction.Commit();
 
+            //var parameterService = new BusinessLogic.Service<Entities.Log.CommandParameter>();
+
+            //DataResult<Entities.Log.CommandParameter> parameterResult = null;
+
+            //foreach (var item in currentLog.Parameters)
+            //{
+            //    parameterResult = await parameterService.Save(item, userCredit, transaction);
+
+            //    if (!parameterResult.IsSucceeded)
+
+            //        return false;
+            //}
+
+            //transaction.Commit();
+
             return result.IsSucceeded;
+        }
+
+        public async Task<bool> WriteToFile()
+        {
+            string path = "C:\\Logs";
+
+            if(!System.IO.Directory.Exists(path))
+
+                System.IO.Directory.CreateDirectory(path);
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            try
+            {
+                stringBuilder.AppendLine("-------------------------------");
+
+                stringBuilder.AppendLine($"DateTime : {DateTime.Now}");
+
+                stringBuilder.AppendLine("-------------------------------");
+
+                stringBuilder.AppendLine(Tools.Serializer.JsonSerializerManager.Serialize(this.GetCurrentLog()));
+
+                stringBuilder.AppendLine("-------------------------------");
+
+                await System.IO.File.WriteAllTextAsync($"{path}\\LogFile.txt", stringBuilder.ToString());
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

@@ -11,9 +11,9 @@ using EssentialCore.Entities;
 
 namespace EssentialCore.Tools.Logging
 {
-    public class ExceptionLogService : Service<ExceptionLog>
+    public class ExceptionLogService : Service<Entities.Log.Exception>
     {
-        public async Task<DataResult<ExceptionLog>> SaveAttached(ExceptionLog exceptionLog)
+        public async Task<DataResult<Entities.Log.Exception>> SaveAttached(Entities.Log.Exception exceptionLog)
         {
             var transaction = new CoreTransaction();
 
@@ -23,26 +23,26 @@ namespace EssentialCore.Tools.Logging
 
             if (result.Id <= 0)
 
-                return result.ToDataResult<ExceptionLog>(exceptionLog);
+                return result.ToDataResult(exceptionLog);
 
             Result.Result childResult = null;
 
-            if (exceptionLog.Parameters.CheckList())
-            {
-                exceptionLog.Parameters.ForEach(i => i.Log.Id = result.Id);
+            //if (exceptionLog.Parameters.CheckList())
+            //{
+            //    exceptionLog.Parameters.ForEach(i => i.Log.Id = result.Id);
 
-                var commandParameterService = new Service<CommandParameter>();
+            //    var commandParameterService = new Service<Entities.Log.CommandParameter>();
 
-                foreach (var commandParameter in exceptionLog.Parameters)
-                {
-                    childResult = await commandParameterService.Save(commandParameter, userCredit, transaction);
+            //    foreach (var commandParameter in exceptionLog.Parameters)
+            //    {
+            //        childResult = await commandParameterService.Save(commandParameter, userCredit, transaction);
 
-                    if(!childResult.IsSucceeded)
-                    {
-                        return new ErrorDataResult<ExceptionLog>(-1, "Error On Saveing");
-                    }
-                }
-            }
+            //        if(!childResult.IsSucceeded)
+            //        {
+            //            return new ErrorDataResult<Entities.Log.Exception>(-1, "Error On Saveing");
+            //        }
+            //    }
+            //}
 
             transaction.Commit();
 
