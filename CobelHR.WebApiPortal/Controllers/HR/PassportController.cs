@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("Passport/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.passportService.RetrieveById(id, Passport.Informer, this.UserCredit).ToActionResult<Passport>();
+            var result = await this.passportService.RetrieveById(id, Passport.Informer, this.UserCredit);
+
+			return result.ToActionResult<Passport>();
         }
 
         [HttpPost]
         [Route("Passport/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.passportService.RetrieveAll(Passport.Informer, paginate, this.UserCredit).ToActionResult<Passport>();
+            var result = await this.passportService.RetrieveAll(Passport.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Passport>();
         }
             
 
         
         [HttpPost]
         [Route("Passport/Save")]
-        public IActionResult Save([FromBody] Passport passport)
+        public async Task<IActionResult> Save([FromBody] Passport passport)
         {
-            return this.passportService.Save(passport, this.UserCredit).ToActionResult<Passport>();
+            var result = await this.passportService.Save(passport, this.UserCredit);
+
+			return result.ToActionResult<Passport>();
         }
 
         
         [HttpPost]
         [Route("Passport/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Passport passport)
+        public async Task<IActionResult> SaveAttached([FromBody] Passport passport)
         {
-            return this.passportService.SaveAttached(passport, this.UserCredit).ToActionResult();
+            var result = await this.passportService.SaveAttached(passport, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Passport/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Passport> passportList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Passport> passportList)
         {
-            return this.passportService.SaveBulk(passportList, this.UserCredit).ToActionResult();
+            var result = await this.passportService.SaveBulk(passportList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Passport/Seek")]
-        public IActionResult Seek([FromBody] Passport passport)
+        public async Task<IActionResult> Seek([FromBody] Passport passport)
         {
-            return this.passportService.Seek(passport).ToActionResult<Passport>();
+            var result = await this.passportService.Seek(passport);
+
+			return result.ToActionResult<Passport>();
         }
 
         [HttpGet]
         [Route("Passport/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.passportService.SeekByValue(seekValue, Passport.Informer).ToActionResult<Passport>();
+            var result = await this.passportService.SeekByValue(seekValue, Passport.Informer);
+
+			return result.ToActionResult<Passport>();
         }
 
         [HttpPost]
         [Route("Passport/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Passport passport)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Passport passport)
         {
-            return this.passportService.Delete(passport, id, this.UserCredit).ToActionResult();
+            var result = await this.passportService.Delete(passport, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

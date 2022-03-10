@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("DevelopmentPlanCompetency/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.developmentPlanCompetencyService.RetrieveById(id, DevelopmentPlanCompetency.Informer, this.UserCredit).ToActionResult<DevelopmentPlanCompetency>();
+            var result = await this.developmentPlanCompetencyService.RetrieveById(id, DevelopmentPlanCompetency.Informer, this.UserCredit);
+
+			return result.ToActionResult<DevelopmentPlanCompetency>();
         }
 
         [HttpPost]
         [Route("DevelopmentPlanCompetency/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.developmentPlanCompetencyService.RetrieveAll(DevelopmentPlanCompetency.Informer, paginate, this.UserCredit).ToActionResult<DevelopmentPlanCompetency>();
+            var result = await this.developmentPlanCompetencyService.RetrieveAll(DevelopmentPlanCompetency.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<DevelopmentPlanCompetency>();
         }
             
 
         
         [HttpPost]
         [Route("DevelopmentPlanCompetency/Save")]
-        public IActionResult Save([FromBody] DevelopmentPlanCompetency developmentPlanCompetency)
+        public async Task<IActionResult> Save([FromBody] DevelopmentPlanCompetency developmentPlanCompetency)
         {
-            return this.developmentPlanCompetencyService.Save(developmentPlanCompetency, this.UserCredit).ToActionResult<DevelopmentPlanCompetency>();
+            var result = await this.developmentPlanCompetencyService.Save(developmentPlanCompetency, this.UserCredit);
+
+			return result.ToActionResult<DevelopmentPlanCompetency>();
         }
 
         
         [HttpPost]
         [Route("DevelopmentPlanCompetency/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] DevelopmentPlanCompetency developmentPlanCompetency)
+        public async Task<IActionResult> SaveAttached([FromBody] DevelopmentPlanCompetency developmentPlanCompetency)
         {
-            return this.developmentPlanCompetencyService.SaveAttached(developmentPlanCompetency, this.UserCredit).ToActionResult();
+            var result = await this.developmentPlanCompetencyService.SaveAttached(developmentPlanCompetency, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("DevelopmentPlanCompetency/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<DevelopmentPlanCompetency> developmentPlanCompetencyList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<DevelopmentPlanCompetency> developmentPlanCompetencyList)
         {
-            return this.developmentPlanCompetencyService.SaveBulk(developmentPlanCompetencyList, this.UserCredit).ToActionResult();
+            var result = await this.developmentPlanCompetencyService.SaveBulk(developmentPlanCompetencyList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("DevelopmentPlanCompetency/Seek")]
-        public IActionResult Seek([FromBody] DevelopmentPlanCompetency developmentPlanCompetency)
+        public async Task<IActionResult> Seek([FromBody] DevelopmentPlanCompetency developmentPlanCompetency)
         {
-            return this.developmentPlanCompetencyService.Seek(developmentPlanCompetency).ToActionResult<DevelopmentPlanCompetency>();
+            var result = await this.developmentPlanCompetencyService.Seek(developmentPlanCompetency);
+
+			return result.ToActionResult<DevelopmentPlanCompetency>();
         }
 
         [HttpGet]
         [Route("DevelopmentPlanCompetency/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.developmentPlanCompetencyService.SeekByValue(seekValue, DevelopmentPlanCompetency.Informer).ToActionResult<DevelopmentPlanCompetency>();
+            var result = await this.developmentPlanCompetencyService.SeekByValue(seekValue, DevelopmentPlanCompetency.Informer);
+
+			return result.ToActionResult<DevelopmentPlanCompetency>();
         }
 
         [HttpPost]
         [Route("DevelopmentPlanCompetency/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] DevelopmentPlanCompetency developmentPlanCompetency)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] DevelopmentPlanCompetency developmentPlanCompetency)
         {
-            return this.developmentPlanCompetencyService.Delete(developmentPlanCompetency, id, this.UserCredit).ToActionResult();
+            var result = await this.developmentPlanCompetencyService.Delete(developmentPlanCompetency, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

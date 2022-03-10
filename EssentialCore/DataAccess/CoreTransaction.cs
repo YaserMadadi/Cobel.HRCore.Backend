@@ -76,15 +76,7 @@ namespace EssentialCore.DataAccess
             {
                 this.RollBack();
 
-                //await new LogManager<SqlException>(ex, command).Save();
-
-                if (!command.CommandText.Contains("[Log].[Exception."))
-
-                    await new LogManager<SqlException>(ex, command).Save();
-
-                else
-
-                    await new LogManager<SqlException>(ex, command).WriteToFile();
+                await LogManager.Save(ex, command);
 
                 return new ErrorResult(ex.ErrorCode, string.Empty, ex.Message);
             }
@@ -92,13 +84,7 @@ namespace EssentialCore.DataAccess
             {
                 this.RollBack();
 
-                if (!command.CommandText.Contains("[Core].[ExceptionLog"))
-
-                    await new LogManager<Exception>(ex, command).Save();
-
-                else
-
-                    await new LogManager<Exception>(ex, command).WriteToFile();
+                await LogManager.Save(ex, command);
 
                 return new ErrorResult(-1, string.Empty, ex.Message);
             }

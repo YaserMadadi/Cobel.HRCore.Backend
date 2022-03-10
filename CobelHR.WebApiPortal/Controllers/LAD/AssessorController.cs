@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.LAD.Abstract;
 using CobelHR.Entities.LAD;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.LAD
 {
     [Route("api/LAD")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.LAD
 
         [HttpGet]
         [Route("Assessor/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.assessorService.RetrieveById(id, Assessor.Informer, this.UserCredit).ToActionResult<Assessor>();
+            var result = await this.assessorService.RetrieveById(id, Assessor.Informer, this.UserCredit);
+
+			return result.ToActionResult<Assessor>();
         }
 
         [HttpPost]
         [Route("Assessor/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.assessorService.RetrieveAll(Assessor.Informer, paginate, this.UserCredit).ToActionResult<Assessor>();
+            var result = await this.assessorService.RetrieveAll(Assessor.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Assessor>();
         }
             
 
         
         [HttpPost]
         [Route("Assessor/Save")]
-        public IActionResult Save([FromBody] Assessor assessor)
+        public async Task<IActionResult> Save([FromBody] Assessor assessor)
         {
-            return this.assessorService.Save(assessor, this.UserCredit).ToActionResult<Assessor>();
+            var result = await this.assessorService.Save(assessor, this.UserCredit);
+
+			return result.ToActionResult<Assessor>();
         }
 
         
         [HttpPost]
         [Route("Assessor/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Assessor assessor)
+        public async Task<IActionResult> SaveAttached([FromBody] Assessor assessor)
         {
-            return this.assessorService.SaveAttached(assessor, this.UserCredit).ToActionResult();
+            var result = await this.assessorService.SaveAttached(assessor, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Assessor/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Assessor> assessorList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Assessor> assessorList)
         {
-            return this.assessorService.SaveBulk(assessorList, this.UserCredit).ToActionResult();
+            var result = await this.assessorService.SaveBulk(assessorList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Assessor/Seek")]
-        public IActionResult Seek([FromBody] Assessor assessor)
+        public async Task<IActionResult> Seek([FromBody] Assessor assessor)
         {
-            return this.assessorService.Seek(assessor).ToActionResult<Assessor>();
+            var result = await this.assessorService.Seek(assessor);
+
+			return result.ToActionResult<Assessor>();
         }
 
         [HttpGet]
         [Route("Assessor/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.assessorService.SeekByValue(seekValue, Assessor.Informer).ToActionResult<Assessor>();
+            var result = await this.assessorService.SeekByValue(seekValue, Assessor.Informer);
+
+			return result.ToActionResult<Assessor>();
         }
 
         [HttpPost]
         [Route("Assessor/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Assessor assessor)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Assessor assessor)
         {
-            return this.assessorService.Delete(assessor, id, this.UserCredit).ToActionResult();
+            var result = await this.assessorService.Delete(assessor, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfAssessment

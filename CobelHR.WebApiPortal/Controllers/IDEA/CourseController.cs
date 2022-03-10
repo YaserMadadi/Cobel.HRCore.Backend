@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.IDEA.Abstract;
 using CobelHR.Entities.IDEA;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.IDEA
 {
     [Route("api/IDEA")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.IDEA
 
         [HttpGet]
         [Route("Course/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.courseService.RetrieveById(id, Course.Informer, this.UserCredit).ToActionResult<Course>();
+            var result = await this.courseService.RetrieveById(id, Course.Informer, this.UserCredit);
+
+			return result.ToActionResult<Course>();
         }
 
         [HttpPost]
         [Route("Course/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.courseService.RetrieveAll(Course.Informer, paginate, this.UserCredit).ToActionResult<Course>();
+            var result = await this.courseService.RetrieveAll(Course.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Course>();
         }
             
 
         
         [HttpPost]
         [Route("Course/Save")]
-        public IActionResult Save([FromBody] Course course)
+        public async Task<IActionResult> Save([FromBody] Course course)
         {
-            return this.courseService.Save(course, this.UserCredit).ToActionResult<Course>();
+            var result = await this.courseService.Save(course, this.UserCredit);
+
+			return result.ToActionResult<Course>();
         }
 
         
         [HttpPost]
         [Route("Course/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Course course)
+        public async Task<IActionResult> SaveAttached([FromBody] Course course)
         {
-            return this.courseService.SaveAttached(course, this.UserCredit).ToActionResult();
+            var result = await this.courseService.SaveAttached(course, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Course/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Course> courseList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Course> courseList)
         {
-            return this.courseService.SaveBulk(courseList, this.UserCredit).ToActionResult();
+            var result = await this.courseService.SaveBulk(courseList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Course/Seek")]
-        public IActionResult Seek([FromBody] Course course)
+        public async Task<IActionResult> Seek([FromBody] Course course)
         {
-            return this.courseService.Seek(course).ToActionResult<Course>();
+            var result = await this.courseService.Seek(course);
+
+			return result.ToActionResult<Course>();
         }
 
         [HttpGet]
         [Route("Course/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.courseService.SeekByValue(seekValue, Course.Informer).ToActionResult<Course>();
+            var result = await this.courseService.SeekByValue(seekValue, Course.Informer);
+
+			return result.ToActionResult<Course>();
         }
 
         [HttpPost]
         [Route("Course/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Course course)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Course course)
         {
-            return this.courseService.Delete(course, id, this.UserCredit).ToActionResult();
+            var result = await this.courseService.Delete(course, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfTraining

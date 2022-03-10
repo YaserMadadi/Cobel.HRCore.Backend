@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("Contract/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.contractService.RetrieveById(id, Contract.Informer, this.UserCredit).ToActionResult<Contract>();
+            var result = await this.contractService.RetrieveById(id, Contract.Informer, this.UserCredit);
+
+			return result.ToActionResult<Contract>();
         }
 
         [HttpPost]
         [Route("Contract/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.contractService.RetrieveAll(Contract.Informer, paginate, this.UserCredit).ToActionResult<Contract>();
+            var result = await this.contractService.RetrieveAll(Contract.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Contract>();
         }
             
 
         
         [HttpPost]
         [Route("Contract/Save")]
-        public IActionResult Save([FromBody] Contract contract)
+        public async Task<IActionResult> Save([FromBody] Contract contract)
         {
-            return this.contractService.Save(contract, this.UserCredit).ToActionResult<Contract>();
+            var result = await this.contractService.Save(contract, this.UserCredit);
+
+			return result.ToActionResult<Contract>();
         }
 
         
         [HttpPost]
         [Route("Contract/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Contract contract)
+        public async Task<IActionResult> SaveAttached([FromBody] Contract contract)
         {
-            return this.contractService.SaveAttached(contract, this.UserCredit).ToActionResult();
+            var result = await this.contractService.SaveAttached(contract, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Contract/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Contract> contractList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Contract> contractList)
         {
-            return this.contractService.SaveBulk(contractList, this.UserCredit).ToActionResult();
+            var result = await this.contractService.SaveBulk(contractList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Contract/Seek")]
-        public IActionResult Seek([FromBody] Contract contract)
+        public async Task<IActionResult> Seek([FromBody] Contract contract)
         {
-            return this.contractService.Seek(contract).ToActionResult<Contract>();
+            var result = await this.contractService.Seek(contract);
+
+			return result.ToActionResult<Contract>();
         }
 
         [HttpGet]
         [Route("Contract/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.contractService.SeekByValue(seekValue, Contract.Informer).ToActionResult<Contract>();
+            var result = await this.contractService.SeekByValue(seekValue, Contract.Informer);
+
+			return result.ToActionResult<Contract>();
         }
 
         [HttpPost]
         [Route("Contract/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Contract contract)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Contract contract)
         {
-            return this.contractService.Delete(contract, id, this.UserCredit).ToActionResult();
+            var result = await this.contractService.Delete(contract, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

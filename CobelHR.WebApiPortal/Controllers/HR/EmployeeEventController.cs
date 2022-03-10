@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("EmployeeEvent/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.employeeEventService.RetrieveById(id, EmployeeEvent.Informer, this.UserCredit).ToActionResult<EmployeeEvent>();
+            var result = await this.employeeEventService.RetrieveById(id, EmployeeEvent.Informer, this.UserCredit);
+
+			return result.ToActionResult<EmployeeEvent>();
         }
 
         [HttpPost]
         [Route("EmployeeEvent/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.employeeEventService.RetrieveAll(EmployeeEvent.Informer, paginate, this.UserCredit).ToActionResult<EmployeeEvent>();
+            var result = await this.employeeEventService.RetrieveAll(EmployeeEvent.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<EmployeeEvent>();
         }
             
 
         
         [HttpPost]
         [Route("EmployeeEvent/Save")]
-        public IActionResult Save([FromBody] EmployeeEvent employeeEvent)
+        public async Task<IActionResult> Save([FromBody] EmployeeEvent employeeEvent)
         {
-            return this.employeeEventService.Save(employeeEvent, this.UserCredit).ToActionResult<EmployeeEvent>();
+            var result = await this.employeeEventService.Save(employeeEvent, this.UserCredit);
+
+			return result.ToActionResult<EmployeeEvent>();
         }
 
         
         [HttpPost]
         [Route("EmployeeEvent/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] EmployeeEvent employeeEvent)
+        public async Task<IActionResult> SaveAttached([FromBody] EmployeeEvent employeeEvent)
         {
-            return this.employeeEventService.SaveAttached(employeeEvent, this.UserCredit).ToActionResult();
+            var result = await this.employeeEventService.SaveAttached(employeeEvent, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("EmployeeEvent/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<EmployeeEvent> employeeEventList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<EmployeeEvent> employeeEventList)
         {
-            return this.employeeEventService.SaveBulk(employeeEventList, this.UserCredit).ToActionResult();
+            var result = await this.employeeEventService.SaveBulk(employeeEventList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("EmployeeEvent/Seek")]
-        public IActionResult Seek([FromBody] EmployeeEvent employeeEvent)
+        public async Task<IActionResult> Seek([FromBody] EmployeeEvent employeeEvent)
         {
-            return this.employeeEventService.Seek(employeeEvent).ToActionResult<EmployeeEvent>();
+            var result = await this.employeeEventService.Seek(employeeEvent);
+
+			return result.ToActionResult<EmployeeEvent>();
         }
 
         [HttpGet]
         [Route("EmployeeEvent/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.employeeEventService.SeekByValue(seekValue, EmployeeEvent.Informer).ToActionResult<EmployeeEvent>();
+            var result = await this.employeeEventService.SeekByValue(seekValue, EmployeeEvent.Informer);
+
+			return result.ToActionResult<EmployeeEvent>();
         }
 
         [HttpPost]
         [Route("EmployeeEvent/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] EmployeeEvent employeeEvent)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] EmployeeEvent employeeEvent)
         {
-            return this.employeeEventService.Delete(employeeEvent, id, this.UserCredit).ToActionResult();
+            var result = await this.employeeEventService.Delete(employeeEvent, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

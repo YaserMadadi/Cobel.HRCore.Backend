@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("VisionComment/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.visionCommentService.RetrieveById(id, VisionComment.Informer, this.UserCredit).ToActionResult<VisionComment>();
+            var result = await this.visionCommentService.RetrieveById(id, VisionComment.Informer, this.UserCredit);
+
+			return result.ToActionResult<VisionComment>();
         }
 
         [HttpPost]
         [Route("VisionComment/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.visionCommentService.RetrieveAll(VisionComment.Informer, paginate, this.UserCredit).ToActionResult<VisionComment>();
+            var result = await this.visionCommentService.RetrieveAll(VisionComment.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<VisionComment>();
         }
             
 
         
         [HttpPost]
         [Route("VisionComment/Save")]
-        public IActionResult Save([FromBody] VisionComment visionComment)
+        public async Task<IActionResult> Save([FromBody] VisionComment visionComment)
         {
-            return this.visionCommentService.Save(visionComment, this.UserCredit).ToActionResult<VisionComment>();
+            var result = await this.visionCommentService.Save(visionComment, this.UserCredit);
+
+			return result.ToActionResult<VisionComment>();
         }
 
         
         [HttpPost]
         [Route("VisionComment/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] VisionComment visionComment)
+        public async Task<IActionResult> SaveAttached([FromBody] VisionComment visionComment)
         {
-            return this.visionCommentService.SaveAttached(visionComment, this.UserCredit).ToActionResult();
+            var result = await this.visionCommentService.SaveAttached(visionComment, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("VisionComment/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<VisionComment> visionCommentList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<VisionComment> visionCommentList)
         {
-            return this.visionCommentService.SaveBulk(visionCommentList, this.UserCredit).ToActionResult();
+            var result = await this.visionCommentService.SaveBulk(visionCommentList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("VisionComment/Seek")]
-        public IActionResult Seek([FromBody] VisionComment visionComment)
+        public async Task<IActionResult> Seek([FromBody] VisionComment visionComment)
         {
-            return this.visionCommentService.Seek(visionComment).ToActionResult<VisionComment>();
+            var result = await this.visionCommentService.Seek(visionComment);
+
+			return result.ToActionResult<VisionComment>();
         }
 
         [HttpGet]
         [Route("VisionComment/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.visionCommentService.SeekByValue(seekValue, VisionComment.Informer).ToActionResult<VisionComment>();
+            var result = await this.visionCommentService.SeekByValue(seekValue, VisionComment.Informer);
+
+			return result.ToActionResult<VisionComment>();
         }
 
         [HttpPost]
         [Route("VisionComment/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] VisionComment visionComment)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] VisionComment visionComment)
         {
-            return this.visionCommentService.Delete(visionComment, id, this.UserCredit).ToActionResult();
+            var result = await this.visionCommentService.Delete(visionComment, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

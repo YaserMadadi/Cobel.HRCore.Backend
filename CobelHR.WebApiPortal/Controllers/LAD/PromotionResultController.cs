@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.LAD.Abstract;
 using CobelHR.Entities.LAD;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.LAD
 {
     [Route("api/LAD")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.LAD
 
         [HttpGet]
         [Route("PromotionResult/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.promotionResultService.RetrieveById(id, PromotionResult.Informer, this.UserCredit).ToActionResult<PromotionResult>();
+            var result = await this.promotionResultService.RetrieveById(id, PromotionResult.Informer, this.UserCredit);
+
+			return result.ToActionResult<PromotionResult>();
         }
 
         [HttpPost]
         [Route("PromotionResult/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.promotionResultService.RetrieveAll(PromotionResult.Informer, paginate, this.UserCredit).ToActionResult<PromotionResult>();
+            var result = await this.promotionResultService.RetrieveAll(PromotionResult.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<PromotionResult>();
         }
             
 
         
         [HttpPost]
         [Route("PromotionResult/Save")]
-        public IActionResult Save([FromBody] PromotionResult promotionResult)
+        public async Task<IActionResult> Save([FromBody] PromotionResult promotionResult)
         {
-            return this.promotionResultService.Save(promotionResult, this.UserCredit).ToActionResult<PromotionResult>();
+            var result = await this.promotionResultService.Save(promotionResult, this.UserCredit);
+
+			return result.ToActionResult<PromotionResult>();
         }
 
         
         [HttpPost]
         [Route("PromotionResult/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] PromotionResult promotionResult)
+        public async Task<IActionResult> SaveAttached([FromBody] PromotionResult promotionResult)
         {
-            return this.promotionResultService.SaveAttached(promotionResult, this.UserCredit).ToActionResult();
+            var result = await this.promotionResultService.SaveAttached(promotionResult, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("PromotionResult/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<PromotionResult> promotionResultList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<PromotionResult> promotionResultList)
         {
-            return this.promotionResultService.SaveBulk(promotionResultList, this.UserCredit).ToActionResult();
+            var result = await this.promotionResultService.SaveBulk(promotionResultList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("PromotionResult/Seek")]
-        public IActionResult Seek([FromBody] PromotionResult promotionResult)
+        public async Task<IActionResult> Seek([FromBody] PromotionResult promotionResult)
         {
-            return this.promotionResultService.Seek(promotionResult).ToActionResult<PromotionResult>();
+            var result = await this.promotionResultService.Seek(promotionResult);
+
+			return result.ToActionResult<PromotionResult>();
         }
 
         [HttpGet]
         [Route("PromotionResult/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.promotionResultService.SeekByValue(seekValue, PromotionResult.Informer).ToActionResult<PromotionResult>();
+            var result = await this.promotionResultService.SeekByValue(seekValue, PromotionResult.Informer);
+
+			return result.ToActionResult<PromotionResult>();
         }
 
         [HttpPost]
         [Route("PromotionResult/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] PromotionResult promotionResult)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] PromotionResult promotionResult)
         {
-            return this.promotionResultService.Delete(promotionResult, id, this.UserCredit).ToActionResult();
+            var result = await this.promotionResultService.Delete(promotionResult, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfPromotionAssessment

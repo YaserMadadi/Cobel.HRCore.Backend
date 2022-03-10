@@ -5,6 +5,9 @@ using EssentialCore.Tools.Pagination;
 using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
+using System.Threading.Tasks;
+
+using System.Threading.Tasks;
 
 namespace CobelHR.ApiServices.Controllers.PMS
 {
@@ -20,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("ConfigTargetSetting/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.configTargetSettingService.RetrieveById(id, ConfigTargetSetting.Informer, this.UserCredit).ToActionResult<ConfigTargetSetting>();
+            var result = await this.configTargetSettingService.RetrieveById(id, ConfigTargetSetting.Informer, this.UserCredit);
+
+			return result.ToActionResult<ConfigTargetSetting>();
         }
 
         [HttpPost]
         [Route("ConfigTargetSetting/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.configTargetSettingService.RetrieveAll(ConfigTargetSetting.Informer, paginate, this.UserCredit).ToActionResult<ConfigTargetSetting>();
+            var result = await this.configTargetSettingService.RetrieveAll(ConfigTargetSetting.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<ConfigTargetSetting>();
         }
             
 
         
         [HttpPost]
         [Route("ConfigTargetSetting/Save")]
-        public IActionResult Save([FromBody] ConfigTargetSetting configTargetSetting)
+        public async Task<IActionResult> Save([FromBody] ConfigTargetSetting configTargetSetting)
         {
-            return this.configTargetSettingService.Save(configTargetSetting, this.UserCredit).ToActionResult<ConfigTargetSetting>();
+            var result = await this.configTargetSettingService.Save(configTargetSetting, this.UserCredit);
+
+			return result.ToActionResult<ConfigTargetSetting>();
         }
 
         
         [HttpPost]
         [Route("ConfigTargetSetting/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] ConfigTargetSetting configTargetSetting)
+        public async Task<IActionResult> SaveAttached([FromBody] ConfigTargetSetting configTargetSetting)
         {
-            return this.configTargetSettingService.SaveAttached(configTargetSetting, this.UserCredit).ToActionResult();
+            var result = await this.configTargetSettingService.SaveAttached(configTargetSetting, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("ConfigTargetSetting/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<ConfigTargetSetting> configTargetSettingList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<ConfigTargetSetting> configTargetSettingList)
         {
-            return this.configTargetSettingService.SaveBulk(configTargetSettingList, this.UserCredit).ToActionResult();
+            var result = await this.configTargetSettingService.SaveBulk(configTargetSettingList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("ConfigTargetSetting/Seek")]
-        public IActionResult Seek([FromBody] ConfigTargetSetting configTargetSetting)
+        public async Task<IActionResult> Seek([FromBody] ConfigTargetSetting configTargetSetting)
         {
-            return this.configTargetSettingService.Seek(configTargetSetting).ToActionResult<ConfigTargetSetting>();
+            var result = await this.configTargetSettingService.Seek(configTargetSetting);
+
+			return result.ToActionResult<ConfigTargetSetting>();
         }
 
         [HttpGet]
         [Route("ConfigTargetSetting/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.configTargetSettingService.SeekByValue(seekValue, ConfigTargetSetting.Informer).ToActionResult<ConfigTargetSetting>();
+            var result = await this.configTargetSettingService.SeekByValue(seekValue, ConfigTargetSetting.Informer);
+
+			return result.ToActionResult<ConfigTargetSetting>();
         }
 
         [HttpPost]
         [Route("ConfigTargetSetting/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] ConfigTargetSetting configTargetSetting)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] ConfigTargetSetting configTargetSetting)
         {
-            return this.configTargetSettingService.Delete(configTargetSetting, id, this.UserCredit).ToActionResult();
+            var result = await this.configTargetSettingService.Delete(configTargetSetting, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfConfigQualitativeObjective

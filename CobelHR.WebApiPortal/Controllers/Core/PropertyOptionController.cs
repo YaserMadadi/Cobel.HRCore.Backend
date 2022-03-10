@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Core.Abstract;
 using CobelHR.Entities.Core;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Core
 {
     [Route("api/Core")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.Core
 
         [HttpGet]
         [Route("PropertyOption/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.propertyOptionService.RetrieveById(id, PropertyOption.Informer, this.UserCredit).ToActionResult<PropertyOption>();
+            var result = await this.propertyOptionService.RetrieveById(id, PropertyOption.Informer, this.UserCredit);
+
+			return result.ToActionResult<PropertyOption>();
         }
 
         [HttpPost]
         [Route("PropertyOption/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.propertyOptionService.RetrieveAll(PropertyOption.Informer, paginate, this.UserCredit).ToActionResult<PropertyOption>();
+            var result = await this.propertyOptionService.RetrieveAll(PropertyOption.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<PropertyOption>();
         }
             
 
         
         [HttpPost]
         [Route("PropertyOption/Save")]
-        public IActionResult Save([FromBody] PropertyOption propertyOption)
+        public async Task<IActionResult> Save([FromBody] PropertyOption propertyOption)
         {
-            return this.propertyOptionService.Save(propertyOption, this.UserCredit).ToActionResult<PropertyOption>();
+            var result = await this.propertyOptionService.Save(propertyOption, this.UserCredit);
+
+			return result.ToActionResult<PropertyOption>();
         }
 
         
         [HttpPost]
         [Route("PropertyOption/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] PropertyOption propertyOption)
+        public async Task<IActionResult> SaveAttached([FromBody] PropertyOption propertyOption)
         {
-            return this.propertyOptionService.SaveAttached(propertyOption, this.UserCredit).ToActionResult();
+            var result = await this.propertyOptionService.SaveAttached(propertyOption, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("PropertyOption/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<PropertyOption> propertyOptionList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<PropertyOption> propertyOptionList)
         {
-            return this.propertyOptionService.SaveBulk(propertyOptionList, this.UserCredit).ToActionResult();
+            var result = await this.propertyOptionService.SaveBulk(propertyOptionList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("PropertyOption/Seek")]
-        public IActionResult Seek([FromBody] PropertyOption propertyOption)
+        public async Task<IActionResult> Seek([FromBody] PropertyOption propertyOption)
         {
-            return this.propertyOptionService.Seek(propertyOption).ToActionResult<PropertyOption>();
+            var result = await this.propertyOptionService.Seek(propertyOption);
+
+			return result.ToActionResult<PropertyOption>();
         }
 
         [HttpGet]
         [Route("PropertyOption/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.propertyOptionService.SeekByValue(seekValue, PropertyOption.Informer).ToActionResult<PropertyOption>();
+            var result = await this.propertyOptionService.SeekByValue(seekValue, PropertyOption.Informer);
+
+			return result.ToActionResult<PropertyOption>();
         }
 
         [HttpPost]
         [Route("PropertyOption/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] PropertyOption propertyOption)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] PropertyOption propertyOption)
         {
-            return this.propertyOptionService.Delete(propertyOption, id, this.UserCredit).ToActionResult();
+            var result = await this.propertyOptionService.Delete(propertyOption, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

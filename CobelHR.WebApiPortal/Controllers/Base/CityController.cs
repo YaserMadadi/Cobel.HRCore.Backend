@@ -7,6 +7,12 @@ using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
+using System.Threading.Tasks;
+
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -26,62 +32,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("City/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.cityService.RetrieveById(id, City.Informer, this.UserCredit).ToActionResult<City>();
+            var result = await this.cityService.RetrieveById(id, City.Informer, this.UserCredit);
+
+			return result.ToActionResult<City>();
         }
 
         [HttpPost]
         [Route("City/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.cityService.RetrieveAll(City.Informer, paginate, this.UserCredit).ToActionResult<City>();
+            var result = await this.cityService.RetrieveAll(City.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<City>();
         }
 
 
 
         [HttpPost]
         [Route("City/Save")]
-        public IActionResult Save([FromBody] City city)
+        public async Task<IActionResult> Save([FromBody] City city)
         {
-            return this.cityService.Save(city, this.UserCredit).ToActionResult<City>();
+            var result = await this.cityService.Save(city, this.UserCredit);
+
+			return result.ToActionResult<City>();
         }
 
 
         [HttpPost]
         [Route("City/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] City city)
+        public async Task<IActionResult> SaveAttached([FromBody] City city)
         {
-            return this.cityService.SaveAttached(city, this.UserCredit).ToActionResult();
+            var result = await this.cityService.SaveAttached(city, this.UserCredit);
+
+            return result.ToActionResult();
         }
 
 
         [HttpPost]
         [Route("City/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<City> cityList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<City> cityList)
         {
-            return this.cityService.SaveBulk(cityList, this.UserCredit).ToActionResult();
+            var result = await this.cityService.SaveBulk(cityList, this.UserCredit);
+
+            return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("City/Seek")]
-        public IActionResult Seek([FromBody] City city)
+        public async Task<IActionResult> Seek([FromBody] City city)
         {
-            return this.cityService.Seek(city).ToActionResult<City>();
+            var result = await this.cityService.Seek(city);
+
+            return result.ToActionResult<City>();
         }
 
         [HttpGet]
         [Route("City/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.cityService.SeekByValue(seekValue, City.Informer).ToActionResult<City>();
+            var result = await this.cityService.SeekByValue(seekValue, City.Informer);
+
+            return result.ToActionResult<City>();
         }
 
         [HttpPost]
         [Route("City/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] City city)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] City city)
         {
-            return this.cityService.Delete(city, id, this.UserCredit).ToActionResult();
+            var result = await this.cityService.Delete(city, id, this.UserCredit);
+
+            return result.ToActionResult();
         }
 
         // CollectionOfHabitancy

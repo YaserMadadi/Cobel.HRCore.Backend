@@ -10,6 +10,6 @@ namespace EssentialCore.Tools.Security.Service
 {
     public interface IUserService
     {
-        public DataResult<UserCredit> RetrieveByUserName(string userName);
+        public Task<DataResult<UserCredit>> RetrieveByUserName(string userName);
     }
 }

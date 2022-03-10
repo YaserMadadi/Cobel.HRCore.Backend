@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.LAD.Abstract;
 using CobelHR.Entities.LAD;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.LAD
 {
     [Route("api/LAD")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.LAD
 
         [HttpGet]
         [Route("QuestionaryType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.questionaryTypeService.RetrieveById(id, QuestionaryType.Informer, this.UserCredit).ToActionResult<QuestionaryType>();
+            var result = await this.questionaryTypeService.RetrieveById(id, QuestionaryType.Informer, this.UserCredit);
+
+			return result.ToActionResult<QuestionaryType>();
         }
 
         [HttpPost]
         [Route("QuestionaryType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.questionaryTypeService.RetrieveAll(QuestionaryType.Informer, paginate, this.UserCredit).ToActionResult<QuestionaryType>();
+            var result = await this.questionaryTypeService.RetrieveAll(QuestionaryType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<QuestionaryType>();
         }
             
 
         
         [HttpPost]
         [Route("QuestionaryType/Save")]
-        public IActionResult Save([FromBody] QuestionaryType questionaryType)
+        public async Task<IActionResult> Save([FromBody] QuestionaryType questionaryType)
         {
-            return this.questionaryTypeService.Save(questionaryType, this.UserCredit).ToActionResult<QuestionaryType>();
+            var result = await this.questionaryTypeService.Save(questionaryType, this.UserCredit);
+
+			return result.ToActionResult<QuestionaryType>();
         }
 
         
         [HttpPost]
         [Route("QuestionaryType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] QuestionaryType questionaryType)
+        public async Task<IActionResult> SaveAttached([FromBody] QuestionaryType questionaryType)
         {
-            return this.questionaryTypeService.SaveAttached(questionaryType, this.UserCredit).ToActionResult();
+            var result = await this.questionaryTypeService.SaveAttached(questionaryType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("QuestionaryType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<QuestionaryType> questionaryTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<QuestionaryType> questionaryTypeList)
         {
-            return this.questionaryTypeService.SaveBulk(questionaryTypeList, this.UserCredit).ToActionResult();
+            var result = await this.questionaryTypeService.SaveBulk(questionaryTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("QuestionaryType/Seek")]
-        public IActionResult Seek([FromBody] QuestionaryType questionaryType)
+        public async Task<IActionResult> Seek([FromBody] QuestionaryType questionaryType)
         {
-            return this.questionaryTypeService.Seek(questionaryType).ToActionResult<QuestionaryType>();
+            var result = await this.questionaryTypeService.Seek(questionaryType);
+
+			return result.ToActionResult<QuestionaryType>();
         }
 
         [HttpGet]
         [Route("QuestionaryType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.questionaryTypeService.SeekByValue(seekValue, QuestionaryType.Informer).ToActionResult<QuestionaryType>();
+            var result = await this.questionaryTypeService.SeekByValue(seekValue, QuestionaryType.Informer);
+
+			return result.ToActionResult<QuestionaryType>();
         }
 
         [HttpPost]
         [Route("QuestionaryType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] QuestionaryType questionaryType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] QuestionaryType questionaryType)
         {
-            return this.questionaryTypeService.Delete(questionaryType, id, this.UserCredit).ToActionResult();
+            var result = await this.questionaryTypeService.Delete(questionaryType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfCoachingQuestionary

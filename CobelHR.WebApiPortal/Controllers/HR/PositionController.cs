@@ -8,6 +8,8 @@ using CobelHR.Entities.HR;
 using CobelHR.Entities.PMS;
 using CobelHR.Entities.LAD;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -22,62 +24,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("Position/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.positionService.RetrieveById(id, Position.Informer, this.UserCredit).ToActionResult<Position>();
+            var result = await this.positionService.RetrieveById(id, Position.Informer, this.UserCredit);
+
+			return result.ToActionResult<Position>();
         }
 
         [HttpPost]
         [Route("Position/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.positionService.RetrieveAll(Position.Informer, paginate, this.UserCredit).ToActionResult<Position>();
+            var result = await this.positionService.RetrieveAll(Position.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Position>();
         }
             
 
         
         [HttpPost]
         [Route("Position/Save")]
-        public IActionResult Save([FromBody] Position position)
+        public async Task<IActionResult> Save([FromBody] Position position)
         {
-            return this.positionService.Save(position, this.UserCredit).ToActionResult<Position>();
+            var result = await this.positionService.Save(position, this.UserCredit);
+
+			return result.ToActionResult<Position>();
         }
 
         
         [HttpPost]
         [Route("Position/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Position position)
+        public async Task<IActionResult> SaveAttached([FromBody] Position position)
         {
-            return this.positionService.SaveAttached(position, this.UserCredit).ToActionResult();
+            var result = await this.positionService.SaveAttached(position, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Position/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Position> positionList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Position> positionList)
         {
-            return this.positionService.SaveBulk(positionList, this.UserCredit).ToActionResult();
+            var result = await this.positionService.SaveBulk(positionList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Position/Seek")]
-        public IActionResult Seek([FromBody] Position position)
+        public async Task<IActionResult> Seek([FromBody] Position position)
         {
-            return this.positionService.Seek(position).ToActionResult<Position>();
+            var result = await this.positionService.Seek(position);
+
+			return result.ToActionResult<Position>();
         }
 
         [HttpGet]
         [Route("Position/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.positionService.SeekByValue(seekValue, Position.Informer).ToActionResult<Position>();
+            var result = await this.positionService.SeekByValue(seekValue, Position.Informer);
+
+			return result.ToActionResult<Position>();
         }
 
         [HttpPost]
         [Route("Position/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Position position)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Position position)
         {
-            return this.positionService.Delete(position, id, this.UserCredit).ToActionResult();
+            var result = await this.positionService.Delete(position, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfConfigTargetSetting

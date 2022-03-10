@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("CriticalIncidentType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.criticalIncidentTypeService.RetrieveById(id, CriticalIncidentType.Informer, this.UserCredit).ToActionResult<CriticalIncidentType>();
+            var result = await this.criticalIncidentTypeService.RetrieveById(id, CriticalIncidentType.Informer, this.UserCredit);
+
+			return result.ToActionResult<CriticalIncidentType>();
         }
 
         [HttpPost]
         [Route("CriticalIncidentType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.criticalIncidentTypeService.RetrieveAll(CriticalIncidentType.Informer, paginate, this.UserCredit).ToActionResult<CriticalIncidentType>();
+            var result = await this.criticalIncidentTypeService.RetrieveAll(CriticalIncidentType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<CriticalIncidentType>();
         }
             
 
         
         [HttpPost]
         [Route("CriticalIncidentType/Save")]
-        public IActionResult Save([FromBody] CriticalIncidentType criticalIncidentType)
+        public async Task<IActionResult> Save([FromBody] CriticalIncidentType criticalIncidentType)
         {
-            return this.criticalIncidentTypeService.Save(criticalIncidentType, this.UserCredit).ToActionResult<CriticalIncidentType>();
+            var result = await this.criticalIncidentTypeService.Save(criticalIncidentType, this.UserCredit);
+
+			return result.ToActionResult<CriticalIncidentType>();
         }
 
         
         [HttpPost]
         [Route("CriticalIncidentType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] CriticalIncidentType criticalIncidentType)
+        public async Task<IActionResult> SaveAttached([FromBody] CriticalIncidentType criticalIncidentType)
         {
-            return this.criticalIncidentTypeService.SaveAttached(criticalIncidentType, this.UserCredit).ToActionResult();
+            var result = await this.criticalIncidentTypeService.SaveAttached(criticalIncidentType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("CriticalIncidentType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<CriticalIncidentType> criticalIncidentTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<CriticalIncidentType> criticalIncidentTypeList)
         {
-            return this.criticalIncidentTypeService.SaveBulk(criticalIncidentTypeList, this.UserCredit).ToActionResult();
+            var result = await this.criticalIncidentTypeService.SaveBulk(criticalIncidentTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("CriticalIncidentType/Seek")]
-        public IActionResult Seek([FromBody] CriticalIncidentType criticalIncidentType)
+        public async Task<IActionResult> Seek([FromBody] CriticalIncidentType criticalIncidentType)
         {
-            return this.criticalIncidentTypeService.Seek(criticalIncidentType).ToActionResult<CriticalIncidentType>();
+            var result = await this.criticalIncidentTypeService.Seek(criticalIncidentType);
+
+			return result.ToActionResult<CriticalIncidentType>();
         }
 
         [HttpGet]
         [Route("CriticalIncidentType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.criticalIncidentTypeService.SeekByValue(seekValue, CriticalIncidentType.Informer).ToActionResult<CriticalIncidentType>();
+            var result = await this.criticalIncidentTypeService.SeekByValue(seekValue, CriticalIncidentType.Informer);
+
+			return result.ToActionResult<CriticalIncidentType>();
         }
 
         [HttpPost]
         [Route("CriticalIncidentType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] CriticalIncidentType criticalIncidentType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] CriticalIncidentType criticalIncidentType)
         {
-            return this.criticalIncidentTypeService.Delete(criticalIncidentType, id, this.UserCredit).ToActionResult();
+            var result = await this.criticalIncidentTypeService.Delete(criticalIncidentType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfCriticalIncident

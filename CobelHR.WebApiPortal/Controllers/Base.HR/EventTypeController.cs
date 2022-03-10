@@ -7,6 +7,8 @@ using CobelHR.Services.Base.HR.Abstract;
 using CobelHR.Entities.Base.HR;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base.HR
 {
     [Route("api/Base.HR")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
 
         [HttpGet]
         [Route("EventType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.eventTypeService.RetrieveById(id, EventType.Informer, this.UserCredit).ToActionResult<EventType>();
+            var result = await this.eventTypeService.RetrieveById(id, EventType.Informer, this.UserCredit);
+
+			return result.ToActionResult<EventType>();
         }
 
         [HttpPost]
         [Route("EventType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.eventTypeService.RetrieveAll(EventType.Informer, paginate, this.UserCredit).ToActionResult<EventType>();
+            var result = await this.eventTypeService.RetrieveAll(EventType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<EventType>();
         }
             
 
         
         [HttpPost]
         [Route("EventType/Save")]
-        public IActionResult Save([FromBody] EventType eventType)
+        public async Task<IActionResult> Save([FromBody] EventType eventType)
         {
-            return this.eventTypeService.Save(eventType, this.UserCredit).ToActionResult<EventType>();
+            var result = await this.eventTypeService.Save(eventType, this.UserCredit);
+
+			return result.ToActionResult<EventType>();
         }
 
         
         [HttpPost]
         [Route("EventType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] EventType eventType)
+        public async Task<IActionResult> SaveAttached([FromBody] EventType eventType)
         {
-            return this.eventTypeService.SaveAttached(eventType, this.UserCredit).ToActionResult();
+            var result = await this.eventTypeService.SaveAttached(eventType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("EventType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<EventType> eventTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<EventType> eventTypeList)
         {
-            return this.eventTypeService.SaveBulk(eventTypeList, this.UserCredit).ToActionResult();
+            var result = await this.eventTypeService.SaveBulk(eventTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("EventType/Seek")]
-        public IActionResult Seek([FromBody] EventType eventType)
+        public async Task<IActionResult> Seek([FromBody] EventType eventType)
         {
-            return this.eventTypeService.Seek(eventType).ToActionResult<EventType>();
+            var result = await this.eventTypeService.Seek(eventType);
+
+			return result.ToActionResult<EventType>();
         }
 
         [HttpGet]
         [Route("EventType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.eventTypeService.SeekByValue(seekValue, EventType.Informer).ToActionResult<EventType>();
+            var result = await this.eventTypeService.SeekByValue(seekValue, EventType.Informer);
+
+			return result.ToActionResult<EventType>();
         }
 
         [HttpPost]
         [Route("EventType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] EventType eventType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] EventType eventType)
         {
-            return this.eventTypeService.Delete(eventType, id, this.UserCredit).ToActionResult();
+            var result = await this.eventTypeService.Delete(eventType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfEmployeeEvent

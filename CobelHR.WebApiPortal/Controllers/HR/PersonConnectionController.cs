@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("PersonConnection/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.personConnectionService.RetrieveById(id, PersonConnection.Informer, this.UserCredit).ToActionResult<PersonConnection>();
+            var result = await this.personConnectionService.RetrieveById(id, PersonConnection.Informer, this.UserCredit);
+
+			return result.ToActionResult<PersonConnection>();
         }
 
         [HttpPost]
         [Route("PersonConnection/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.personConnectionService.RetrieveAll(PersonConnection.Informer, paginate, this.UserCredit).ToActionResult<PersonConnection>();
+            var result = await this.personConnectionService.RetrieveAll(PersonConnection.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<PersonConnection>();
         }
             
 
         
         [HttpPost]
         [Route("PersonConnection/Save")]
-        public IActionResult Save([FromBody] PersonConnection personConnection)
+        public async Task<IActionResult> Save([FromBody] PersonConnection personConnection)
         {
-            return this.personConnectionService.Save(personConnection, this.UserCredit).ToActionResult<PersonConnection>();
+            var result = await this.personConnectionService.Save(personConnection, this.UserCredit);
+
+			return result.ToActionResult<PersonConnection>();
         }
 
         
         [HttpPost]
         [Route("PersonConnection/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] PersonConnection personConnection)
+        public async Task<IActionResult> SaveAttached([FromBody] PersonConnection personConnection)
         {
-            return this.personConnectionService.SaveAttached(personConnection, this.UserCredit).ToActionResult();
+            var result = await this.personConnectionService.SaveAttached(personConnection, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("PersonConnection/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<PersonConnection> personConnectionList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<PersonConnection> personConnectionList)
         {
-            return this.personConnectionService.SaveBulk(personConnectionList, this.UserCredit).ToActionResult();
+            var result = await this.personConnectionService.SaveBulk(personConnectionList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("PersonConnection/Seek")]
-        public IActionResult Seek([FromBody] PersonConnection personConnection)
+        public async Task<IActionResult> Seek([FromBody] PersonConnection personConnection)
         {
-            return this.personConnectionService.Seek(personConnection).ToActionResult<PersonConnection>();
+            var result = await this.personConnectionService.Seek(personConnection);
+
+			return result.ToActionResult<PersonConnection>();
         }
 
         [HttpGet]
         [Route("PersonConnection/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.personConnectionService.SeekByValue(seekValue, PersonConnection.Informer).ToActionResult<PersonConnection>();
+            var result = await this.personConnectionService.SeekByValue(seekValue, PersonConnection.Informer);
+
+			return result.ToActionResult<PersonConnection>();
         }
 
         [HttpPost]
         [Route("PersonConnection/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] PersonConnection personConnection)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] PersonConnection personConnection)
         {
-            return this.personConnectionService.Delete(personConnection, id, this.UserCredit).ToActionResult();
+            var result = await this.personConnectionService.Delete(personConnection, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

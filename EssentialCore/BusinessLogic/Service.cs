@@ -15,13 +15,9 @@ namespace EssentialCore.BusinessLogic
     public class Service<T> : IService<T> where T : IEntityBase
     {
 
-        public Service()
-        {
+        public Service() { }
 
-        }
-
-
-        public DataResult<T> RetrieveById(int id, Info info, UserCredit userCredit)
+        public async Task<DataResult<T>> RetrieveById(int id, Info info, UserCredit userCredit)
         {
             //TODO: CheckPermission
             //                                                                   RetrieveById
@@ -29,7 +25,7 @@ namespace EssentialCore.BusinessLogic
                                                                         new SqlParameter("@Id", id));
 
 
-            IDataResult<string> result = command.ExecuteDataResult();
+            IDataResult<string> result = await command.ExecuteDataResult();
 
             if (!result.IsSucceeded)
 
@@ -44,19 +40,19 @@ namespace EssentialCore.BusinessLogic
             return new SuccessfulDataResult<T>(entity);
         }
 
-        public DataResult<List<T>> RetrieveAll(Info info, Paginate paginate, UserCredit userCredit)
+        public async Task<DataResult<List<T>>> RetrieveAll(Info info, Paginate paginate, UserCredit userCredit)
         {
             if (!Permission.CheckPermission(PermissionType.Retrieve, info, userCredit))
 
                 return new ErrorDataResult<List<T>>(-1, "You have no Permission to Retrieve data!", null);
 
-            return RetrieveAll(info, paginate);
+            return await RetrieveAll(info, paginate);
         }
 
 
-        internal DataResult<List<T>> RetrieveAll(Info info, Paginate paginate)
+        internal async Task<DataResult<List<T>>> RetrieveAll(Info info, Paginate paginate)
         {
-            IDataResult<string> result = UserClass.CreateCommand($"[{info.Schema}].[{info.Name}.RetrieveAll]",
+            IDataResult<string> result = await UserClass.CreateCommand($"[{info.Schema}].[{info.Name}.RetrieveAll]",
                                                             new SqlParameter("@PaginateJson", paginate.ToJson()),
                                                             new SqlParameter("@User_Id", 1))
                                                                 .ExecuteDataResult();
@@ -89,7 +85,7 @@ namespace EssentialCore.BusinessLogic
 
             transaction.Commit();
 
-            var dataResult = this.RetrieveById(result.Id, entity.Info, userCredit);
+            var dataResult = await this.RetrieveById(result.Id, entity.Info, userCredit);
 
             dataResult.Message = result.Message;
 
@@ -129,7 +125,7 @@ namespace EssentialCore.BusinessLogic
 
             transaction.Commit();
 
-            
+
 
             return new Result(true);
 
@@ -140,7 +136,7 @@ namespace EssentialCore.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public DataResult<List<T>> Seek(T entity)
+        public async Task<DataResult<List<T>>> Seek(T entity)
         {
             var paginate = entity.Paginate == null || entity.Paginate == default ? new Paginate(80, 1, 1) : entity.Paginate;
 
@@ -150,7 +146,7 @@ namespace EssentialCore.BusinessLogic
                                                             new SqlParameter("@jsonValue", entity.ToJson()),
                                                             new SqlParameter("@PaginateJson", paginate.ToJson()));
 
-            var result = command.ExecuteDataResult();
+            var result = await command.ExecuteDataResult();
 
             if (!result.IsSucceeded)
 
@@ -159,15 +155,17 @@ namespace EssentialCore.BusinessLogic
             return new SuccessfulDataResult<List<T>>(result.Data.Deserialize<List<T>>(JsonType.Collection));
         }
 
-        public DataResult<List<T>> SeekByValue(string value, Info info)
+        public async Task<DataResult<List<T>>> SeekByValue(string value, Info info)
         {
             //TODO: CheckPermission
 
             value = $"%{value}%";
 
-            IDataResult<string> result = UserClass.CreateCommand($"[{info.Schema}].[{info.Name}.SeekByValue]",
-                                                            new SqlParameter("@value", value))
-                                                                .ExecuteDataResult();
+            var command = UserClass.CreateCommand($"[{info.Schema}].[{info.Name}.SeekByValue]",
+                                                            new SqlParameter("@value", value));
+
+
+            IDataResult<string> result = await command.ExecuteDataResult();
 
             if (!result.IsSucceeded)
 
@@ -178,7 +176,7 @@ namespace EssentialCore.BusinessLogic
 
 
 
-        public Result Delete(T entity, int id, UserCredit userCredit)
+        public async Task<Result> Delete(T entity, int id, UserCredit userCredit)
         {
             //TODO: CheckPermission
 
@@ -186,7 +184,7 @@ namespace EssentialCore.BusinessLogic
 
                 return new ErrorResult(-1, $"Sent {entity?.Info?.Name ?? "Object"} Has Problem!", string.Empty);
 
-            IResult result = UserClass.CreateCommand($"[{entity.Info.Schema}].[{entity.Info.Name}.Delete]",
+            IResult result = await UserClass.CreateCommand($"[{entity.Info.Schema}].[{entity.Info.Name}.Delete]",
                                                             new SqlParameter("@Id", entity.Id),
                                                             new SqlParameter("@TimeStamp", entity.TimeStamp),
                                                             new SqlParameter("@User_Id", userCredit.Person_Id))
@@ -212,7 +210,7 @@ namespace EssentialCore.BusinessLogic
             var result = UserClass.CreateCommand(procedureName, parameter)
                                             .ExecuteDataResult();
 
-            var data = result.Data.Deserialize<List<U>>(JsonType.Collection);
+            var data = result.Result.Data.Deserialize<List<U>>(JsonType.Collection);
 
             return data.ToListDataResult<U>();
         }

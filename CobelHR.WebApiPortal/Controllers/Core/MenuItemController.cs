@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Core.Abstract;
 using CobelHR.Entities.Core;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Core
 {
     [Route("api/Core")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.Core
 
         [HttpGet]
         [Route("MenuItem/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.menuItemService.RetrieveById(id, MenuItem.Informer, this.UserCredit).ToActionResult<MenuItem>();
+            var result = await this.menuItemService.RetrieveById(id, MenuItem.Informer, this.UserCredit);
+
+			return result.ToActionResult<MenuItem>();
         }
 
         [HttpPost]
         [Route("MenuItem/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.menuItemService.RetrieveAll(MenuItem.Informer, paginate, this.UserCredit).ToActionResult<MenuItem>();
+            var result = await this.menuItemService.RetrieveAll(MenuItem.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<MenuItem>();
         }
             
 
         
         [HttpPost]
         [Route("MenuItem/Save")]
-        public IActionResult Save([FromBody] MenuItem menuItem)
+        public async Task<IActionResult> Save([FromBody] MenuItem menuItem)
         {
-            return this.menuItemService.Save(menuItem, this.UserCredit).ToActionResult<MenuItem>();
+            var result = await this.menuItemService.Save(menuItem, this.UserCredit);
+
+			return result.ToActionResult<MenuItem>();
         }
 
         
         [HttpPost]
         [Route("MenuItem/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] MenuItem menuItem)
+        public async Task<IActionResult> SaveAttached([FromBody] MenuItem menuItem)
         {
-            return this.menuItemService.SaveAttached(menuItem, this.UserCredit).ToActionResult();
+            var result = await this.menuItemService.SaveAttached(menuItem, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("MenuItem/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<MenuItem> menuItemList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<MenuItem> menuItemList)
         {
-            return this.menuItemService.SaveBulk(menuItemList, this.UserCredit).ToActionResult();
+            var result = await this.menuItemService.SaveBulk(menuItemList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("MenuItem/Seek")]
-        public IActionResult Seek([FromBody] MenuItem menuItem)
+        public async Task<IActionResult> Seek([FromBody] MenuItem menuItem)
         {
-            return this.menuItemService.Seek(menuItem).ToActionResult<MenuItem>();
+            var result = await this.menuItemService.Seek(menuItem);
+
+			return result.ToActionResult<MenuItem>();
         }
 
         [HttpGet]
         [Route("MenuItem/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.menuItemService.SeekByValue(seekValue, MenuItem.Informer).ToActionResult<MenuItem>();
+            var result = await this.menuItemService.SeekByValue(seekValue, MenuItem.Informer);
+
+			return result.ToActionResult<MenuItem>();
         }
 
         [HttpPost]
         [Route("MenuItem/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] MenuItem menuItem)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] MenuItem menuItem)
         {
-            return this.menuItemService.Delete(menuItem, id, this.UserCredit).ToActionResult();
+            var result = await this.menuItemService.Delete(menuItem, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfBadge

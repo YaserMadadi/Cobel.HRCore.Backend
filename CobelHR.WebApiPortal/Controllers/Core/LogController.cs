@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Core.Abstract;
 using CobelHR.Entities.Core;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Core
 {
     [Route("api/Core")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.Core
 
         [HttpGet]
         [Route("Log/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.logService.RetrieveById(id, Log.Informer, this.UserCredit).ToActionResult<Log>();
+            var result = await this.logService.RetrieveById(id, Log.Informer, this.UserCredit);
+
+			return result.ToActionResult<Log>();
         }
 
         [HttpPost]
         [Route("Log/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.logService.RetrieveAll(Log.Informer, paginate, this.UserCredit).ToActionResult<Log>();
+            var result = await this.logService.RetrieveAll(Log.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Log>();
         }
             
 
         
         [HttpPost]
         [Route("Log/Save")]
-        public IActionResult Save([FromBody] Log log)
+        public async Task<IActionResult> Save([FromBody] Log log)
         {
-            return this.logService.Save(log, this.UserCredit).ToActionResult<Log>();
+            var result = await this.logService.Save(log, this.UserCredit);
+
+			return result.ToActionResult<Log>();
         }
 
         
         [HttpPost]
         [Route("Log/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Log log)
+        public async Task<IActionResult> SaveAttached([FromBody] Log log)
         {
-            return this.logService.SaveAttached(log, this.UserCredit).ToActionResult();
+            var result = await this.logService.SaveAttached(log, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Log/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Log> logList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Log> logList)
         {
-            return this.logService.SaveBulk(logList, this.UserCredit).ToActionResult();
+            var result = await this.logService.SaveBulk(logList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Log/Seek")]
-        public IActionResult Seek([FromBody] Log log)
+        public async Task<IActionResult> Seek([FromBody] Log log)
         {
-            return this.logService.Seek(log).ToActionResult<Log>();
+            var result = await this.logService.Seek(log);
+
+			return result.ToActionResult<Log>();
         }
 
         [HttpGet]
         [Route("Log/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.logService.SeekByValue(seekValue, Log.Informer).ToActionResult<Log>();
+            var result = await this.logService.SeekByValue(seekValue, Log.Informer);
+
+			return result.ToActionResult<Log>();
         }
 
         [HttpPost]
         [Route("Log/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Log log)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Log log)
         {
-            return this.logService.Delete(log, id, this.UserCredit).ToActionResult();
+            var result = await this.logService.Delete(log, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

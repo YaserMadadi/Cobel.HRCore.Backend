@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("ScoreCell/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.scoreCellService.RetrieveById(id, ScoreCell.Informer, this.UserCredit).ToActionResult<ScoreCell>();
+            var result = await this.scoreCellService.RetrieveById(id, ScoreCell.Informer, this.UserCredit);
+
+			return result.ToActionResult<ScoreCell>();
         }
 
         [HttpPost]
         [Route("ScoreCell/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.scoreCellService.RetrieveAll(ScoreCell.Informer, paginate, this.UserCredit).ToActionResult<ScoreCell>();
+            var result = await this.scoreCellService.RetrieveAll(ScoreCell.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<ScoreCell>();
         }
             
 
         
         [HttpPost]
         [Route("ScoreCell/Save")]
-        public IActionResult Save([FromBody] ScoreCell scoreCell)
+        public async Task<IActionResult> Save([FromBody] ScoreCell scoreCell)
         {
-            return this.scoreCellService.Save(scoreCell, this.UserCredit).ToActionResult<ScoreCell>();
+            var result = await this.scoreCellService.Save(scoreCell, this.UserCredit);
+
+			return result.ToActionResult<ScoreCell>();
         }
 
         
         [HttpPost]
         [Route("ScoreCell/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] ScoreCell scoreCell)
+        public async Task<IActionResult> SaveAttached([FromBody] ScoreCell scoreCell)
         {
-            return this.scoreCellService.SaveAttached(scoreCell, this.UserCredit).ToActionResult();
+            var result = await this.scoreCellService.SaveAttached(scoreCell, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("ScoreCell/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<ScoreCell> scoreCellList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<ScoreCell> scoreCellList)
         {
-            return this.scoreCellService.SaveBulk(scoreCellList, this.UserCredit).ToActionResult();
+            var result = await this.scoreCellService.SaveBulk(scoreCellList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("ScoreCell/Seek")]
-        public IActionResult Seek([FromBody] ScoreCell scoreCell)
+        public async Task<IActionResult> Seek([FromBody] ScoreCell scoreCell)
         {
-            return this.scoreCellService.Seek(scoreCell).ToActionResult<ScoreCell>();
+            var result = await this.scoreCellService.Seek(scoreCell);
+
+			return result.ToActionResult<ScoreCell>();
         }
 
         [HttpGet]
         [Route("ScoreCell/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.scoreCellService.SeekByValue(seekValue, ScoreCell.Informer).ToActionResult<ScoreCell>();
+            var result = await this.scoreCellService.SeekByValue(seekValue, ScoreCell.Informer);
+
+			return result.ToActionResult<ScoreCell>();
         }
 
         [HttpPost]
         [Route("ScoreCell/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] ScoreCell scoreCell)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] ScoreCell scoreCell)
         {
-            return this.scoreCellService.Delete(scoreCell, id, this.UserCredit).ToActionResult();
+            var result = await this.scoreCellService.Delete(scoreCell, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfAppraiseResult

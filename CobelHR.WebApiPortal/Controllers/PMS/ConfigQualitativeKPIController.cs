@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("ConfigQualitativeKPI/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.configQualitativeKPIService.RetrieveById(id, ConfigQualitativeKPI.Informer, this.UserCredit).ToActionResult<ConfigQualitativeKPI>();
+            var result = await this.configQualitativeKPIService.RetrieveById(id, ConfigQualitativeKPI.Informer, this.UserCredit);
+
+			return result.ToActionResult<ConfigQualitativeKPI>();
         }
 
         [HttpPost]
         [Route("ConfigQualitativeKPI/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.configQualitativeKPIService.RetrieveAll(ConfigQualitativeKPI.Informer, paginate, this.UserCredit).ToActionResult<ConfigQualitativeKPI>();
+            var result = await this.configQualitativeKPIService.RetrieveAll(ConfigQualitativeKPI.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<ConfigQualitativeKPI>();
         }
             
 
         
         [HttpPost]
         [Route("ConfigQualitativeKPI/Save")]
-        public IActionResult Save([FromBody] ConfigQualitativeKPI configQualitativeKPI)
+        public async Task<IActionResult> Save([FromBody] ConfigQualitativeKPI configQualitativeKPI)
         {
-            return this.configQualitativeKPIService.Save(configQualitativeKPI, this.UserCredit).ToActionResult<ConfigQualitativeKPI>();
+            var result = await this.configQualitativeKPIService.Save(configQualitativeKPI, this.UserCredit);
+
+			return result.ToActionResult<ConfigQualitativeKPI>();
         }
 
         
         [HttpPost]
         [Route("ConfigQualitativeKPI/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] ConfigQualitativeKPI configQualitativeKPI)
+        public async Task<IActionResult> SaveAttached([FromBody] ConfigQualitativeKPI configQualitativeKPI)
         {
-            return this.configQualitativeKPIService.SaveAttached(configQualitativeKPI, this.UserCredit).ToActionResult();
+            var result = await this.configQualitativeKPIService.SaveAttached(configQualitativeKPI, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("ConfigQualitativeKPI/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<ConfigQualitativeKPI> configQualitativeKPIList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<ConfigQualitativeKPI> configQualitativeKPIList)
         {
-            return this.configQualitativeKPIService.SaveBulk(configQualitativeKPIList, this.UserCredit).ToActionResult();
+            var result = await this.configQualitativeKPIService.SaveBulk(configQualitativeKPIList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("ConfigQualitativeKPI/Seek")]
-        public IActionResult Seek([FromBody] ConfigQualitativeKPI configQualitativeKPI)
+        public async Task<IActionResult> Seek([FromBody] ConfigQualitativeKPI configQualitativeKPI)
         {
-            return this.configQualitativeKPIService.Seek(configQualitativeKPI).ToActionResult<ConfigQualitativeKPI>();
+            var result = await this.configQualitativeKPIService.Seek(configQualitativeKPI);
+
+			return result.ToActionResult<ConfigQualitativeKPI>();
         }
 
         [HttpGet]
         [Route("ConfigQualitativeKPI/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.configQualitativeKPIService.SeekByValue(seekValue, ConfigQualitativeKPI.Informer).ToActionResult<ConfigQualitativeKPI>();
+            var result = await this.configQualitativeKPIService.SeekByValue(seekValue, ConfigQualitativeKPI.Informer);
+
+			return result.ToActionResult<ConfigQualitativeKPI>();
         }
 
         [HttpPost]
         [Route("ConfigQualitativeKPI/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] ConfigQualitativeKPI configQualitativeKPI)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] ConfigQualitativeKPI configQualitativeKPI)
         {
-            return this.configQualitativeKPIService.Delete(configQualitativeKPI, id, this.UserCredit).ToActionResult();
+            var result = await this.configQualitativeKPIService.Delete(configQualitativeKPI, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("AbilityLevel/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.abilityLevelService.RetrieveById(id, AbilityLevel.Informer, this.UserCredit).ToActionResult<AbilityLevel>();
+            var result = await this.abilityLevelService.RetrieveById(id, AbilityLevel.Informer, this.UserCredit);
+
+			return result.ToActionResult<AbilityLevel>();
         }
 
         [HttpPost]
         [Route("AbilityLevel/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.abilityLevelService.RetrieveAll(AbilityLevel.Informer, paginate, this.UserCredit).ToActionResult<AbilityLevel>();
+            var result = await this.abilityLevelService.RetrieveAll(AbilityLevel.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<AbilityLevel>();
         }
             
 
         
         [HttpPost]
         [Route("AbilityLevel/Save")]
-        public IActionResult Save([FromBody] AbilityLevel abilityLevel)
+        public async Task<IActionResult> Save([FromBody] AbilityLevel abilityLevel)
         {
-            return this.abilityLevelService.Save(abilityLevel, this.UserCredit).ToActionResult<AbilityLevel>();
+            var result = await this.abilityLevelService.Save(abilityLevel, this.UserCredit);
+
+			return result.ToActionResult<AbilityLevel>();
         }
 
         
         [HttpPost]
         [Route("AbilityLevel/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] AbilityLevel abilityLevel)
+        public async Task<IActionResult> SaveAttached([FromBody] AbilityLevel abilityLevel)
         {
-            return this.abilityLevelService.SaveAttached(abilityLevel, this.UserCredit).ToActionResult();
+            var result = await this.abilityLevelService.SaveAttached(abilityLevel, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("AbilityLevel/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<AbilityLevel> abilityLevelList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<AbilityLevel> abilityLevelList)
         {
-            return this.abilityLevelService.SaveBulk(abilityLevelList, this.UserCredit).ToActionResult();
+            var result = await this.abilityLevelService.SaveBulk(abilityLevelList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("AbilityLevel/Seek")]
-        public IActionResult Seek([FromBody] AbilityLevel abilityLevel)
+        public async Task<IActionResult> Seek([FromBody] AbilityLevel abilityLevel)
         {
-            return this.abilityLevelService.Seek(abilityLevel).ToActionResult<AbilityLevel>();
+            var result = await this.abilityLevelService.Seek(abilityLevel);
+
+			return result.ToActionResult<AbilityLevel>();
         }
 
         [HttpGet]
         [Route("AbilityLevel/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.abilityLevelService.SeekByValue(seekValue, AbilityLevel.Informer).ToActionResult<AbilityLevel>();
+            var result = await this.abilityLevelService.SeekByValue(seekValue, AbilityLevel.Informer);
+
+			return result.ToActionResult<AbilityLevel>();
         }
 
         [HttpPost]
         [Route("AbilityLevel/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] AbilityLevel abilityLevel)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] AbilityLevel abilityLevel)
         {
-            return this.abilityLevelService.Delete(abilityLevel, id, this.UserCredit).ToActionResult();
+            var result = await this.abilityLevelService.Delete(abilityLevel, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfLanguageAbility_ListeningLevel

@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Core.Abstract;
 using CobelHR.Entities.Core;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Core
 {
     [Route("api/Core")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.Core
 
         [HttpGet]
         [Route("BadgeType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.badgeTypeService.RetrieveById(id, BadgeType.Informer, this.UserCredit).ToActionResult<BadgeType>();
+            var result = await this.badgeTypeService.RetrieveById(id, BadgeType.Informer, this.UserCredit);
+
+			return result.ToActionResult<BadgeType>();
         }
 
         [HttpPost]
         [Route("BadgeType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.badgeTypeService.RetrieveAll(BadgeType.Informer, paginate, this.UserCredit).ToActionResult<BadgeType>();
+            var result = await this.badgeTypeService.RetrieveAll(BadgeType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<BadgeType>();
         }
             
 
         
         [HttpPost]
         [Route("BadgeType/Save")]
-        public IActionResult Save([FromBody] BadgeType badgeType)
+        public async Task<IActionResult> Save([FromBody] BadgeType badgeType)
         {
-            return this.badgeTypeService.Save(badgeType, this.UserCredit).ToActionResult<BadgeType>();
+            var result = await this.badgeTypeService.Save(badgeType, this.UserCredit);
+
+			return result.ToActionResult<BadgeType>();
         }
 
         
         [HttpPost]
         [Route("BadgeType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] BadgeType badgeType)
+        public async Task<IActionResult> SaveAttached([FromBody] BadgeType badgeType)
         {
-            return this.badgeTypeService.SaveAttached(badgeType, this.UserCredit).ToActionResult();
+            var result = await this.badgeTypeService.SaveAttached(badgeType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("BadgeType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<BadgeType> badgeTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<BadgeType> badgeTypeList)
         {
-            return this.badgeTypeService.SaveBulk(badgeTypeList, this.UserCredit).ToActionResult();
+            var result = await this.badgeTypeService.SaveBulk(badgeTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("BadgeType/Seek")]
-        public IActionResult Seek([FromBody] BadgeType badgeType)
+        public async Task<IActionResult> Seek([FromBody] BadgeType badgeType)
         {
-            return this.badgeTypeService.Seek(badgeType).ToActionResult<BadgeType>();
+            var result = await this.badgeTypeService.Seek(badgeType);
+
+			return result.ToActionResult<BadgeType>();
         }
 
         [HttpGet]
         [Route("BadgeType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.badgeTypeService.SeekByValue(seekValue, BadgeType.Informer).ToActionResult<BadgeType>();
+            var result = await this.badgeTypeService.SeekByValue(seekValue, BadgeType.Informer);
+
+			return result.ToActionResult<BadgeType>();
         }
 
         [HttpPost]
         [Route("BadgeType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] BadgeType badgeType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] BadgeType badgeType)
         {
-            return this.badgeTypeService.Delete(badgeType, id, this.UserCredit).ToActionResult();
+            var result = await this.badgeTypeService.Delete(badgeType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfBadge

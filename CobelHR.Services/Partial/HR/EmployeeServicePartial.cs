@@ -23,7 +23,7 @@ namespace CobelHR.Services.Partial.HR
                                                 new SqlParameter("@Employee_Id", employee_id))
                                                         .ExecuteDataResult<List<RolePermission>>(JsonType.Collection);
 
-            return dataResult;
+            return dataResult.Result;
         }
 
         public DataResult<List<TargetSetting>> LoadTargetSetting(int employee_id, TargetSetting targetSetting)
@@ -33,7 +33,7 @@ namespace CobelHR.Services.Partial.HR
                                                 new SqlParameter("@jsonValue", targetSetting.ToJson()))
                                                         .ExecuteDataResult<List<TargetSetting>>(JsonType.Collection);
 
-            return dataResult;
+            return dataResult.Result;
         }
     }
 }

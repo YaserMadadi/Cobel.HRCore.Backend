@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("UniversityFieldCategory/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.universityFieldCategoryService.RetrieveById(id, UniversityFieldCategory.Informer, this.UserCredit).ToActionResult<UniversityFieldCategory>();
+            var result = await this.universityFieldCategoryService.RetrieveById(id, UniversityFieldCategory.Informer, this.UserCredit);
+
+			return result.ToActionResult<UniversityFieldCategory>();
         }
 
         [HttpPost]
         [Route("UniversityFieldCategory/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.universityFieldCategoryService.RetrieveAll(UniversityFieldCategory.Informer, paginate, this.UserCredit).ToActionResult<UniversityFieldCategory>();
+            var result = await this.universityFieldCategoryService.RetrieveAll(UniversityFieldCategory.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<UniversityFieldCategory>();
         }
             
 
         
         [HttpPost]
         [Route("UniversityFieldCategory/Save")]
-        public IActionResult Save([FromBody] UniversityFieldCategory universityFieldCategory)
+        public async Task<IActionResult> Save([FromBody] UniversityFieldCategory universityFieldCategory)
         {
-            return this.universityFieldCategoryService.Save(universityFieldCategory, this.UserCredit).ToActionResult<UniversityFieldCategory>();
+            var result = await this.universityFieldCategoryService.Save(universityFieldCategory, this.UserCredit);
+
+			return result.ToActionResult<UniversityFieldCategory>();
         }
 
         
         [HttpPost]
         [Route("UniversityFieldCategory/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] UniversityFieldCategory universityFieldCategory)
+        public async Task<IActionResult> SaveAttached([FromBody] UniversityFieldCategory universityFieldCategory)
         {
-            return this.universityFieldCategoryService.SaveAttached(universityFieldCategory, this.UserCredit).ToActionResult();
+            var result = await this.universityFieldCategoryService.SaveAttached(universityFieldCategory, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("UniversityFieldCategory/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<UniversityFieldCategory> universityFieldCategoryList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<UniversityFieldCategory> universityFieldCategoryList)
         {
-            return this.universityFieldCategoryService.SaveBulk(universityFieldCategoryList, this.UserCredit).ToActionResult();
+            var result = await this.universityFieldCategoryService.SaveBulk(universityFieldCategoryList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("UniversityFieldCategory/Seek")]
-        public IActionResult Seek([FromBody] UniversityFieldCategory universityFieldCategory)
+        public async Task<IActionResult> Seek([FromBody] UniversityFieldCategory universityFieldCategory)
         {
-            return this.universityFieldCategoryService.Seek(universityFieldCategory).ToActionResult<UniversityFieldCategory>();
+            var result = await this.universityFieldCategoryService.Seek(universityFieldCategory);
+
+			return result.ToActionResult<UniversityFieldCategory>();
         }
 
         [HttpGet]
         [Route("UniversityFieldCategory/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.universityFieldCategoryService.SeekByValue(seekValue, UniversityFieldCategory.Informer).ToActionResult<UniversityFieldCategory>();
+            var result = await this.universityFieldCategoryService.SeekByValue(seekValue, UniversityFieldCategory.Informer);
+
+			return result.ToActionResult<UniversityFieldCategory>();
         }
 
         [HttpPost]
         [Route("UniversityFieldCategory/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] UniversityFieldCategory universityFieldCategory)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] UniversityFieldCategory universityFieldCategory)
         {
-            return this.universityFieldCategoryService.Delete(universityFieldCategory, id, this.UserCredit).ToActionResult();
+            var result = await this.universityFieldCategoryService.Delete(universityFieldCategory, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfFieldOfStudy

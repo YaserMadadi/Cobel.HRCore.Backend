@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("Province/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.provinceService.RetrieveById(id, Province.Informer, this.UserCredit).ToActionResult<Province>();
+            var result = await this.provinceService.RetrieveById(id, Province.Informer, this.UserCredit);
+
+			return result.ToActionResult<Province>();
         }
 
         [HttpPost]
         [Route("Province/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.provinceService.RetrieveAll(Province.Informer, paginate, this.UserCredit).ToActionResult<Province>();
+            var result = await this.provinceService.RetrieveAll(Province.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Province>();
         }
             
 
         
         [HttpPost]
         [Route("Province/Save")]
-        public IActionResult Save([FromBody] Province province)
+        public async Task<IActionResult> Save([FromBody] Province province)
         {
-            return this.provinceService.Save(province, this.UserCredit).ToActionResult<Province>();
+            var result = await this.provinceService.Save(province, this.UserCredit);
+
+			return result.ToActionResult<Province>();
         }
 
         
         [HttpPost]
         [Route("Province/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Province province)
+        public async Task<IActionResult> SaveAttached([FromBody] Province province)
         {
-            return this.provinceService.SaveAttached(province, this.UserCredit).ToActionResult();
+            var result = await this.provinceService.SaveAttached(province, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Province/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Province> provinceList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Province> provinceList)
         {
-            return this.provinceService.SaveBulk(provinceList, this.UserCredit).ToActionResult();
+            var result = await this.provinceService.SaveBulk(provinceList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Province/Seek")]
-        public IActionResult Seek([FromBody] Province province)
+        public async Task<IActionResult> Seek([FromBody] Province province)
         {
-            return this.provinceService.Seek(province).ToActionResult<Province>();
+            var result = await this.provinceService.Seek(province);
+
+			return result.ToActionResult<Province>();
         }
 
         [HttpGet]
         [Route("Province/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.provinceService.SeekByValue(seekValue, Province.Informer).ToActionResult<Province>();
+            var result = await this.provinceService.SeekByValue(seekValue, Province.Informer);
+
+			return result.ToActionResult<Province>();
         }
 
         [HttpPost]
         [Route("Province/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Province province)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Province province)
         {
-            return this.provinceService.Delete(province, id, this.UserCredit).ToActionResult();
+            var result = await this.provinceService.Delete(province, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfCity

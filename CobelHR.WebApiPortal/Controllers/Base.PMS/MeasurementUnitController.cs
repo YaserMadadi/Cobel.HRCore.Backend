@@ -7,6 +7,8 @@ using CobelHR.Services.Base.PMS.Abstract;
 using CobelHR.Entities.Base.PMS;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base.PMS
 {
     [Route("api/Base.PMS")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
 
         [HttpGet]
         [Route("MeasurementUnit/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.measurementUnitService.RetrieveById(id, MeasurementUnit.Informer, this.UserCredit).ToActionResult<MeasurementUnit>();
+            var result = await this.measurementUnitService.RetrieveById(id, MeasurementUnit.Informer, this.UserCredit);
+
+			return result.ToActionResult<MeasurementUnit>();
         }
 
         [HttpPost]
         [Route("MeasurementUnit/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.measurementUnitService.RetrieveAll(MeasurementUnit.Informer, paginate, this.UserCredit).ToActionResult<MeasurementUnit>();
+            var result = await this.measurementUnitService.RetrieveAll(MeasurementUnit.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<MeasurementUnit>();
         }
             
 
         
         [HttpPost]
         [Route("MeasurementUnit/Save")]
-        public IActionResult Save([FromBody] MeasurementUnit measurementUnit)
+        public async Task<IActionResult> Save([FromBody] MeasurementUnit measurementUnit)
         {
-            return this.measurementUnitService.Save(measurementUnit, this.UserCredit).ToActionResult<MeasurementUnit>();
+            var result = await this.measurementUnitService.Save(measurementUnit, this.UserCredit);
+
+			return result.ToActionResult<MeasurementUnit>();
         }
 
         
         [HttpPost]
         [Route("MeasurementUnit/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] MeasurementUnit measurementUnit)
+        public async Task<IActionResult> SaveAttached([FromBody] MeasurementUnit measurementUnit)
         {
-            return this.measurementUnitService.SaveAttached(measurementUnit, this.UserCredit).ToActionResult();
+            var result = await this.measurementUnitService.SaveAttached(measurementUnit, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("MeasurementUnit/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<MeasurementUnit> measurementUnitList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<MeasurementUnit> measurementUnitList)
         {
-            return this.measurementUnitService.SaveBulk(measurementUnitList, this.UserCredit).ToActionResult();
+            var result = await this.measurementUnitService.SaveBulk(measurementUnitList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("MeasurementUnit/Seek")]
-        public IActionResult Seek([FromBody] MeasurementUnit measurementUnit)
+        public async Task<IActionResult> Seek([FromBody] MeasurementUnit measurementUnit)
         {
-            return this.measurementUnitService.Seek(measurementUnit).ToActionResult<MeasurementUnit>();
+            var result = await this.measurementUnitService.Seek(measurementUnit);
+
+			return result.ToActionResult<MeasurementUnit>();
         }
 
         [HttpGet]
         [Route("MeasurementUnit/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.measurementUnitService.SeekByValue(seekValue, MeasurementUnit.Informer).ToActionResult<MeasurementUnit>();
+            var result = await this.measurementUnitService.SeekByValue(seekValue, MeasurementUnit.Informer);
+
+			return result.ToActionResult<MeasurementUnit>();
         }
 
         [HttpPost]
         [Route("MeasurementUnit/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] MeasurementUnit measurementUnit)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] MeasurementUnit measurementUnit)
         {
-            return this.measurementUnitService.Delete(measurementUnit, id, this.UserCredit).ToActionResult();
+            var result = await this.measurementUnitService.Delete(measurementUnit, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfFunctionalKPI

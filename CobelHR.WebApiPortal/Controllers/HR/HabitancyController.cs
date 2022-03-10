@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("Habitancy/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.habitancyService.RetrieveById(id, Habitancy.Informer, this.UserCredit).ToActionResult<Habitancy>();
+            var result = await this.habitancyService.RetrieveById(id, Habitancy.Informer, this.UserCredit);
+
+			return result.ToActionResult<Habitancy>();
         }
 
         [HttpPost]
         [Route("Habitancy/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.habitancyService.RetrieveAll(Habitancy.Informer, paginate, this.UserCredit).ToActionResult<Habitancy>();
+            var result = await this.habitancyService.RetrieveAll(Habitancy.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Habitancy>();
         }
             
 
         
         [HttpPost]
         [Route("Habitancy/Save")]
-        public IActionResult Save([FromBody] Habitancy habitancy)
+        public async Task<IActionResult> Save([FromBody] Habitancy habitancy)
         {
-            return this.habitancyService.Save(habitancy, this.UserCredit).ToActionResult<Habitancy>();
+            var result = await this.habitancyService.Save(habitancy, this.UserCredit);
+
+			return result.ToActionResult<Habitancy>();
         }
 
         
         [HttpPost]
         [Route("Habitancy/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Habitancy habitancy)
+        public async Task<IActionResult> SaveAttached([FromBody] Habitancy habitancy)
         {
-            return this.habitancyService.SaveAttached(habitancy, this.UserCredit).ToActionResult();
+            var result = await this.habitancyService.SaveAttached(habitancy, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Habitancy/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Habitancy> habitancyList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Habitancy> habitancyList)
         {
-            return this.habitancyService.SaveBulk(habitancyList, this.UserCredit).ToActionResult();
+            var result = await this.habitancyService.SaveBulk(habitancyList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Habitancy/Seek")]
-        public IActionResult Seek([FromBody] Habitancy habitancy)
+        public async Task<IActionResult> Seek([FromBody] Habitancy habitancy)
         {
-            return this.habitancyService.Seek(habitancy).ToActionResult<Habitancy>();
+            var result = await this.habitancyService.Seek(habitancy);
+
+			return result.ToActionResult<Habitancy>();
         }
 
         [HttpGet]
         [Route("Habitancy/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.habitancyService.SeekByValue(seekValue, Habitancy.Informer).ToActionResult<Habitancy>();
+            var result = await this.habitancyService.SeekByValue(seekValue, Habitancy.Informer);
+
+			return result.ToActionResult<Habitancy>();
         }
 
         [HttpPost]
         [Route("Habitancy/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Habitancy habitancy)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Habitancy habitancy)
         {
-            return this.habitancyService.Delete(habitancy, id, this.UserCredit).ToActionResult();
+            var result = await this.habitancyService.Delete(habitancy, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

@@ -1,9 +1,11 @@
-﻿using EssentialCore.Tools.Result;
+﻿using EssentialCore.Tools.Logging;
+using EssentialCore.Tools.Result;
 using EssentialCore.Tools.Security.Entities;
 using EssentialCore.Tools.Security.JWT;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.DirectoryServices;
+using System.Threading.Tasks;
 using DirectoryEntry = System.DirectoryServices.DirectoryEntry;
 
 namespace EssentialCore.Tools.Security.Service
@@ -11,7 +13,7 @@ namespace EssentialCore.Tools.Security.Service
     public class AuthService : IAuthService
     {
         private ITokenHelper tokenHelper;
-        
+
         private IUserService userService;
 
         private IConfiguration configuration;
@@ -26,15 +28,15 @@ namespace EssentialCore.Tools.Security.Service
         }
 
 
-        public IDataResult<AccessToken> Login(LoginUser loginUser)
+        public async Task<IDataResult<AccessToken>> Login(LoginUser loginUser)
         {
-            var result = CheckInActiveDirectory(loginUser);
+            var result = await CheckInActiveDirectory(loginUser);
 
             if (!result.IsSucceeded)
 
                 return new ErrorDataResult<AccessToken>(-1, result.Message);
 
-            var userCheck = this.CheckInDataBase(loginUser.UserName);
+            var userCheck = await this.CheckInDataBase(loginUser.UserName);
 
             if (userCheck == null || !userCheck.IsSucceeded)
             {
@@ -55,7 +57,7 @@ namespace EssentialCore.Tools.Security.Service
             return new SuccessfulDataResult<AccessToken>(accessToken);
         }
 
-        private Result.Result CheckInActiveDirectory(LoginUser loginUser)
+        private async Task<Result.Result> CheckInActiveDirectory(LoginUser loginUser)
         {
 #if DEBUG 
 
@@ -65,7 +67,7 @@ namespace EssentialCore.Tools.Security.Service
             try
             {
                 string domainName = this.configuration.GetValue<string>("DC:DomainName");
-                
+
                 string dcPath = this.configuration.GetValue<string>("DC:Path");
 
                 using (DirectoryEntry entry = new DirectoryEntry($"LDAP://{domainName}/{dcPath}", $"{loginUser.UserName}@{domainName}", loginUser.Password))
@@ -73,41 +75,40 @@ namespace EssentialCore.Tools.Security.Service
                     using (DirectorySearcher searcher = new DirectorySearcher(entry))
                     {
                         searcher.Filter = String.Format("(SAMAccountName={0})", loginUser.UserName);
-                        
+
                         searcher.PropertiesToLoad.Add("DisplayName");
-                        
+
                         searcher.PropertiesToLoad.Add("SAMAccountName");
 
                         var result = searcher.FindOne();
-                        
-                        if (result != null)
-                        {
-                            var displayName = result.Properties["DisplayName"];
-                        
-                            var samAccountName = result.Properties["SAMAccountName"];
 
-                            if (displayName?.Count > 0)
+                        if (result == null)
 
-                                return new SuccessfulResult();
-                        }
+                            throw new Exception($"User Not Exists in the {domainName} Domain!");
 
-                        return new ErrorResult(-1, $"User Not Exists in the {domainName} Domain!");
+                        var displayName = result.Properties["DisplayName"];
+
+                        var samAccountName = result.Properties["SAMAccountName"];
+
+                        if (displayName?.Count > 0)
+
+                            return new SuccessfulResult();
                     }
                 }
             }
             catch (Exception ex)
             {
+                await LogManager.Save<Exception>(ex, "Check User In ActiveDirectory", Serializer.JsonSerializerManager.Serialize(loginUser));
+
                 return new ErrorResult(-1, "Error in CheckInDomain Exception : " + ex.Message);
             }
-
-            return new ErrorResult(-1, "end of CheckInDomain and not returned.");
         }
 
 
 
-        public IDataResult<UserCredit> CheckInDataBase(string userName)
+        public async Task<IDataResult<UserCredit>> CheckInDataBase(string userName)
         {
-            var dataResult = this.userService.RetrieveByUserName(userName);
+            var dataResult = await this.userService.RetrieveByUserName(userName);
 
             if (!dataResult.IsSucceeded)
             {
@@ -126,7 +127,7 @@ namespace EssentialCore.Tools.Security.Service
             return new SuccessfulDataResult<AccessToken>(acssessToken);
         }
 
-        
+
 
         //public IDataResult<User> Register(UserForRigsterDto rigsterDto, string password)
         //{

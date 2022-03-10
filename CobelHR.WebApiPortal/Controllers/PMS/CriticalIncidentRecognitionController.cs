@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("CriticalIncidentRecognition/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.criticalIncidentRecognitionService.RetrieveById(id, CriticalIncidentRecognition.Informer, this.UserCredit).ToActionResult<CriticalIncidentRecognition>();
+            var result = await this.criticalIncidentRecognitionService.RetrieveById(id, CriticalIncidentRecognition.Informer, this.UserCredit);
+
+			return result.ToActionResult<CriticalIncidentRecognition>();
         }
 
         [HttpPost]
         [Route("CriticalIncidentRecognition/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.criticalIncidentRecognitionService.RetrieveAll(CriticalIncidentRecognition.Informer, paginate, this.UserCredit).ToActionResult<CriticalIncidentRecognition>();
+            var result = await this.criticalIncidentRecognitionService.RetrieveAll(CriticalIncidentRecognition.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<CriticalIncidentRecognition>();
         }
             
 
         
         [HttpPost]
         [Route("CriticalIncidentRecognition/Save")]
-        public IActionResult Save([FromBody] CriticalIncidentRecognition criticalIncidentRecognition)
+        public async Task<IActionResult> Save([FromBody] CriticalIncidentRecognition criticalIncidentRecognition)
         {
-            return this.criticalIncidentRecognitionService.Save(criticalIncidentRecognition, this.UserCredit).ToActionResult<CriticalIncidentRecognition>();
+            var result = await this.criticalIncidentRecognitionService.Save(criticalIncidentRecognition, this.UserCredit);
+
+			return result.ToActionResult<CriticalIncidentRecognition>();
         }
 
         
         [HttpPost]
         [Route("CriticalIncidentRecognition/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] CriticalIncidentRecognition criticalIncidentRecognition)
+        public async Task<IActionResult> SaveAttached([FromBody] CriticalIncidentRecognition criticalIncidentRecognition)
         {
-            return this.criticalIncidentRecognitionService.SaveAttached(criticalIncidentRecognition, this.UserCredit).ToActionResult();
+            var result = await this.criticalIncidentRecognitionService.SaveAttached(criticalIncidentRecognition, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("CriticalIncidentRecognition/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<CriticalIncidentRecognition> criticalIncidentRecognitionList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<CriticalIncidentRecognition> criticalIncidentRecognitionList)
         {
-            return this.criticalIncidentRecognitionService.SaveBulk(criticalIncidentRecognitionList, this.UserCredit).ToActionResult();
+            var result = await this.criticalIncidentRecognitionService.SaveBulk(criticalIncidentRecognitionList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("CriticalIncidentRecognition/Seek")]
-        public IActionResult Seek([FromBody] CriticalIncidentRecognition criticalIncidentRecognition)
+        public async Task<IActionResult> Seek([FromBody] CriticalIncidentRecognition criticalIncidentRecognition)
         {
-            return this.criticalIncidentRecognitionService.Seek(criticalIncidentRecognition).ToActionResult<CriticalIncidentRecognition>();
+            var result = await this.criticalIncidentRecognitionService.Seek(criticalIncidentRecognition);
+
+			return result.ToActionResult<CriticalIncidentRecognition>();
         }
 
         [HttpGet]
         [Route("CriticalIncidentRecognition/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.criticalIncidentRecognitionService.SeekByValue(seekValue, CriticalIncidentRecognition.Informer).ToActionResult<CriticalIncidentRecognition>();
+            var result = await this.criticalIncidentRecognitionService.SeekByValue(seekValue, CriticalIncidentRecognition.Informer);
+
+			return result.ToActionResult<CriticalIncidentRecognition>();
         }
 
         [HttpPost]
         [Route("CriticalIncidentRecognition/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] CriticalIncidentRecognition criticalIncidentRecognition)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] CriticalIncidentRecognition criticalIncidentRecognition)
         {
-            return this.criticalIncidentRecognitionService.Delete(criticalIncidentRecognition, id, this.UserCredit).ToActionResult();
+            var result = await this.criticalIncidentRecognitionService.Delete(criticalIncidentRecognition, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

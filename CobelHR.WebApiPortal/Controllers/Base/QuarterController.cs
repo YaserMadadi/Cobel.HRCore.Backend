@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("Quarter/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.quarterService.RetrieveById(id, Quarter.Informer, this.UserCredit).ToActionResult<Quarter>();
+            var result = await this.quarterService.RetrieveById(id, Quarter.Informer, this.UserCredit);
+
+			return result.ToActionResult<Quarter>();
         }
 
         [HttpPost]
         [Route("Quarter/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.quarterService.RetrieveAll(Quarter.Informer, paginate, this.UserCredit).ToActionResult<Quarter>();
+            var result = await this.quarterService.RetrieveAll(Quarter.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Quarter>();
         }
             
 
         
         [HttpPost]
         [Route("Quarter/Save")]
-        public IActionResult Save([FromBody] Quarter quarter)
+        public async Task<IActionResult> Save([FromBody] Quarter quarter)
         {
-            return this.quarterService.Save(quarter, this.UserCredit).ToActionResult<Quarter>();
+            var result = await this.quarterService.Save(quarter, this.UserCredit);
+
+			return result.ToActionResult<Quarter>();
         }
 
         
         [HttpPost]
         [Route("Quarter/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Quarter quarter)
+        public async Task<IActionResult> SaveAttached([FromBody] Quarter quarter)
         {
-            return this.quarterService.SaveAttached(quarter, this.UserCredit).ToActionResult();
+            var result = await this.quarterService.SaveAttached(quarter, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Quarter/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Quarter> quarterList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Quarter> quarterList)
         {
-            return this.quarterService.SaveBulk(quarterList, this.UserCredit).ToActionResult();
+            var result = await this.quarterService.SaveBulk(quarterList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Quarter/Seek")]
-        public IActionResult Seek([FromBody] Quarter quarter)
+        public async Task<IActionResult> Seek([FromBody] Quarter quarter)
         {
-            return this.quarterService.Seek(quarter).ToActionResult<Quarter>();
+            var result = await this.quarterService.Seek(quarter);
+
+			return result.ToActionResult<Quarter>();
         }
 
         [HttpGet]
         [Route("Quarter/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.quarterService.SeekByValue(seekValue, Quarter.Informer).ToActionResult<Quarter>();
+            var result = await this.quarterService.SeekByValue(seekValue, Quarter.Informer);
+
+			return result.ToActionResult<Quarter>();
         }
 
         [HttpPost]
         [Route("Quarter/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Quarter quarter)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Quarter quarter)
         {
-            return this.quarterService.Delete(quarter, id, this.UserCredit).ToActionResult();
+            var result = await this.quarterService.Delete(quarter, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfYearQuarter

@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Core.Abstract;
 using CobelHR.Entities.Core;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Core
 {
     [Route("api/Core")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.Core
 
         [HttpGet]
         [Route("Entity/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.entityService.RetrieveById(id, Entity.Informer, this.UserCredit).ToActionResult<Entity>();
+            var result = await this.entityService.RetrieveById(id, Entity.Informer, this.UserCredit);
+
+			return result.ToActionResult<Entity>();
         }
 
         [HttpPost]
         [Route("Entity/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.entityService.RetrieveAll(Entity.Informer, paginate, this.UserCredit).ToActionResult<Entity>();
+            var result = await this.entityService.RetrieveAll(Entity.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Entity>();
         }
             
 
         
         [HttpPost]
         [Route("Entity/Save")]
-        public IActionResult Save([FromBody] Entity entity)
+        public async Task<IActionResult> Save([FromBody] Entity entity)
         {
-            return this.entityService.Save(entity, this.UserCredit).ToActionResult<Entity>();
+            var result = await this.entityService.Save(entity, this.UserCredit);
+
+			return result.ToActionResult<Entity>();
         }
 
         
         [HttpPost]
         [Route("Entity/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Entity entity)
+        public async Task<IActionResult> SaveAttached([FromBody] Entity entity)
         {
-            return this.entityService.SaveAttached(entity, this.UserCredit).ToActionResult();
+            var result = await this.entityService.SaveAttached(entity, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Entity/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Entity> entityList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Entity> entityList)
         {
-            return this.entityService.SaveBulk(entityList, this.UserCredit).ToActionResult();
+            var result = await this.entityService.SaveBulk(entityList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Entity/Seek")]
-        public IActionResult Seek([FromBody] Entity entity)
+        public async Task<IActionResult> Seek([FromBody] Entity entity)
         {
-            return this.entityService.Seek(entity).ToActionResult<Entity>();
+            var result = await this.entityService.Seek(entity);
+
+			return result.ToActionResult<Entity>();
         }
 
         [HttpGet]
         [Route("Entity/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.entityService.SeekByValue(seekValue, Entity.Informer).ToActionResult<Entity>();
+            var result = await this.entityService.SeekByValue(seekValue, Entity.Informer);
+
+			return result.ToActionResult<Entity>();
         }
 
         [HttpPost]
         [Route("Entity/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Entity entity)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Entity entity)
         {
-            return this.entityService.Delete(entity, id, this.UserCredit).ToActionResult();
+            var result = await this.entityService.Delete(entity, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfProperty

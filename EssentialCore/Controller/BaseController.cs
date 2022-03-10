@@ -38,7 +38,7 @@ namespace EssentialCore.Controllers
 
             var userCreditResult = this.userService.RetrieveByUserName(userName);
 
-            this.UserCredit = userCreditResult.IsSucceeded ? userCreditResult.Data : null;
+            this.UserCredit = userCreditResult.Result.IsSucceeded ? userCreditResult.Result.Data : null;
 
 
 

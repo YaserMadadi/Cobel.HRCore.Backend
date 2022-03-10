@@ -7,6 +7,8 @@ using CobelHR.Services.Base.PMS.Abstract;
 using CobelHR.Entities.Base.PMS;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base.PMS
 {
     [Route("api/Base.PMS")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
 
         [HttpGet]
         [Route("ApproverType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.approverTypeService.RetrieveById(id, ApproverType.Informer, this.UserCredit).ToActionResult<ApproverType>();
+            var result = await this.approverTypeService.RetrieveById(id, ApproverType.Informer, this.UserCredit);
+
+			return result.ToActionResult<ApproverType>();
         }
 
         [HttpPost]
         [Route("ApproverType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.approverTypeService.RetrieveAll(ApproverType.Informer, paginate, this.UserCredit).ToActionResult<ApproverType>();
+            var result = await this.approverTypeService.RetrieveAll(ApproverType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<ApproverType>();
         }
             
 
         
         [HttpPost]
         [Route("ApproverType/Save")]
-        public IActionResult Save([FromBody] ApproverType approverType)
+        public async Task<IActionResult> Save([FromBody] ApproverType approverType)
         {
-            return this.approverTypeService.Save(approverType, this.UserCredit).ToActionResult<ApproverType>();
+            var result = await this.approverTypeService.Save(approverType, this.UserCredit);
+
+			return result.ToActionResult<ApproverType>();
         }
 
         
         [HttpPost]
         [Route("ApproverType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] ApproverType approverType)
+        public async Task<IActionResult> SaveAttached([FromBody] ApproverType approverType)
         {
-            return this.approverTypeService.SaveAttached(approverType, this.UserCredit).ToActionResult();
+            var result = await this.approverTypeService.SaveAttached(approverType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("ApproverType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<ApproverType> approverTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<ApproverType> approverTypeList)
         {
-            return this.approverTypeService.SaveBulk(approverTypeList, this.UserCredit).ToActionResult();
+            var result = await this.approverTypeService.SaveBulk(approverTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("ApproverType/Seek")]
-        public IActionResult Seek([FromBody] ApproverType approverType)
+        public async Task<IActionResult> Seek([FromBody] ApproverType approverType)
         {
-            return this.approverTypeService.Seek(approverType).ToActionResult<ApproverType>();
+            var result = await this.approverTypeService.Seek(approverType);
+
+			return result.ToActionResult<ApproverType>();
         }
 
         [HttpGet]
         [Route("ApproverType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.approverTypeService.SeekByValue(seekValue, ApproverType.Informer).ToActionResult<ApproverType>();
+            var result = await this.approverTypeService.SeekByValue(seekValue, ApproverType.Informer);
+
+			return result.ToActionResult<ApproverType>();
         }
 
         [HttpPost]
         [Route("ApproverType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] ApproverType approverType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] ApproverType approverType)
         {
-            return this.approverTypeService.Delete(approverType, id, this.UserCredit).ToActionResult();
+            var result = await this.approverTypeService.Delete(approverType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfAppraisalApproverConfig

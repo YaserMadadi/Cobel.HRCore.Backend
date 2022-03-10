@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Core.Abstract;
 using CobelHR.Entities.Core;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Core
 {
     [Route("api/Core")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.Core
 
         [HttpGet]
         [Route("Impersonate/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.impersonateService.RetrieveById(id, Impersonate.Informer, this.UserCredit).ToActionResult<Impersonate>();
+            var result = await this.impersonateService.RetrieveById(id, Impersonate.Informer, this.UserCredit);
+
+			return result.ToActionResult<Impersonate>();
         }
 
         [HttpPost]
         [Route("Impersonate/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.impersonateService.RetrieveAll(Impersonate.Informer, paginate, this.UserCredit).ToActionResult<Impersonate>();
+            var result = await this.impersonateService.RetrieveAll(Impersonate.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Impersonate>();
         }
             
 
         
         [HttpPost]
         [Route("Impersonate/Save")]
-        public IActionResult Save([FromBody] Impersonate impersonate)
+        public async Task<IActionResult> Save([FromBody] Impersonate impersonate)
         {
-            return this.impersonateService.Save(impersonate, this.UserCredit).ToActionResult<Impersonate>();
+            var result = await this.impersonateService.Save(impersonate, this.UserCredit);
+
+			return result.ToActionResult<Impersonate>();
         }
 
         
         [HttpPost]
         [Route("Impersonate/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Impersonate impersonate)
+        public async Task<IActionResult> SaveAttached([FromBody] Impersonate impersonate)
         {
-            return this.impersonateService.SaveAttached(impersonate, this.UserCredit).ToActionResult();
+            var result = await this.impersonateService.SaveAttached(impersonate, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Impersonate/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Impersonate> impersonateList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Impersonate> impersonateList)
         {
-            return this.impersonateService.SaveBulk(impersonateList, this.UserCredit).ToActionResult();
+            var result = await this.impersonateService.SaveBulk(impersonateList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Impersonate/Seek")]
-        public IActionResult Seek([FromBody] Impersonate impersonate)
+        public async Task<IActionResult> Seek([FromBody] Impersonate impersonate)
         {
-            return this.impersonateService.Seek(impersonate).ToActionResult<Impersonate>();
+            var result = await this.impersonateService.Seek(impersonate);
+
+			return result.ToActionResult<Impersonate>();
         }
 
         [HttpGet]
         [Route("Impersonate/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.impersonateService.SeekByValue(seekValue, Impersonate.Informer).ToActionResult<Impersonate>();
+            var result = await this.impersonateService.SeekByValue(seekValue, Impersonate.Informer);
+
+			return result.ToActionResult<Impersonate>();
         }
 
         [HttpPost]
         [Route("Impersonate/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Impersonate impersonate)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Impersonate impersonate)
         {
-            return this.impersonateService.Delete(impersonate, id, this.UserCredit).ToActionResult();
+            var result = await this.impersonateService.Delete(impersonate, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

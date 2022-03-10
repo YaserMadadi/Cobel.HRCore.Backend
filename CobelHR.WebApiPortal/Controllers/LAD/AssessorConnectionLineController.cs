@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.LAD.Abstract;
 using CobelHR.Entities.LAD;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.LAD
 {
     [Route("api/LAD")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.LAD
 
         [HttpGet]
         [Route("AssessorConnectionLine/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.assessorConnectionLineService.RetrieveById(id, AssessorConnectionLine.Informer, this.UserCredit).ToActionResult<AssessorConnectionLine>();
+            var result = await this.assessorConnectionLineService.RetrieveById(id, AssessorConnectionLine.Informer, this.UserCredit);
+
+			return result.ToActionResult<AssessorConnectionLine>();
         }
 
         [HttpPost]
         [Route("AssessorConnectionLine/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.assessorConnectionLineService.RetrieveAll(AssessorConnectionLine.Informer, paginate, this.UserCredit).ToActionResult<AssessorConnectionLine>();
+            var result = await this.assessorConnectionLineService.RetrieveAll(AssessorConnectionLine.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<AssessorConnectionLine>();
         }
             
 
         
         [HttpPost]
         [Route("AssessorConnectionLine/Save")]
-        public IActionResult Save([FromBody] AssessorConnectionLine assessorConnectionLine)
+        public async Task<IActionResult> Save([FromBody] AssessorConnectionLine assessorConnectionLine)
         {
-            return this.assessorConnectionLineService.Save(assessorConnectionLine, this.UserCredit).ToActionResult<AssessorConnectionLine>();
+            var result = await this.assessorConnectionLineService.Save(assessorConnectionLine, this.UserCredit);
+
+			return result.ToActionResult<AssessorConnectionLine>();
         }
 
         
         [HttpPost]
         [Route("AssessorConnectionLine/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] AssessorConnectionLine assessorConnectionLine)
+        public async Task<IActionResult> SaveAttached([FromBody] AssessorConnectionLine assessorConnectionLine)
         {
-            return this.assessorConnectionLineService.SaveAttached(assessorConnectionLine, this.UserCredit).ToActionResult();
+            var result = await this.assessorConnectionLineService.SaveAttached(assessorConnectionLine, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("AssessorConnectionLine/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<AssessorConnectionLine> assessorConnectionLineList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<AssessorConnectionLine> assessorConnectionLineList)
         {
-            return this.assessorConnectionLineService.SaveBulk(assessorConnectionLineList, this.UserCredit).ToActionResult();
+            var result = await this.assessorConnectionLineService.SaveBulk(assessorConnectionLineList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("AssessorConnectionLine/Seek")]
-        public IActionResult Seek([FromBody] AssessorConnectionLine assessorConnectionLine)
+        public async Task<IActionResult> Seek([FromBody] AssessorConnectionLine assessorConnectionLine)
         {
-            return this.assessorConnectionLineService.Seek(assessorConnectionLine).ToActionResult<AssessorConnectionLine>();
+            var result = await this.assessorConnectionLineService.Seek(assessorConnectionLine);
+
+			return result.ToActionResult<AssessorConnectionLine>();
         }
 
         [HttpGet]
         [Route("AssessorConnectionLine/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.assessorConnectionLineService.SeekByValue(seekValue, AssessorConnectionLine.Informer).ToActionResult<AssessorConnectionLine>();
+            var result = await this.assessorConnectionLineService.SeekByValue(seekValue, AssessorConnectionLine.Informer);
+
+			return result.ToActionResult<AssessorConnectionLine>();
         }
 
         [HttpPost]
         [Route("AssessorConnectionLine/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] AssessorConnectionLine assessorConnectionLine)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] AssessorConnectionLine assessorConnectionLine)
         {
-            return this.assessorConnectionLineService.Delete(assessorConnectionLine, id, this.UserCredit).ToActionResult();
+            var result = await this.assessorConnectionLineService.Delete(assessorConnectionLine, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

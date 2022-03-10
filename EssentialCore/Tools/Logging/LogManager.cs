@@ -11,94 +11,108 @@ using System.Threading.Tasks;
 
 namespace EssentialCore.Tools.Logging
 {
-    public class LogManager<T> where T : System.Exception
+    public class LogManager
     {
-        public LogManager(T ex, SqlCommand command)
-        {
-            this.exception = ex;
+        //public LogManager(T ex, SqlCommand command) : this(ex, command.CommandText, command.Parameters.ToJson())
+        //{
+        //}
 
-            this.command = command;
-        }
+        //public LogManager(T ex, string commandName, string parameters)
+        //{
+        //    this.exception = ex;
 
-        private SqlCommand command { get; set; }
+        //    this.commandName = commandName;
 
-        private T exception { get; set; }
+        //    this.commandParameters = parameters;
+        //}
 
-        private Entities.Log.Exception GetCurrentLog()
+        //private string commandName { get; set; }
+
+        ///// <summary>
+        ///// JsonString : Key/Value paire of Parameters ...
+        ///// </summary>
+        //public string commandParameters { get; set; }
+
+
+        //private T exception { get; set; }
+
+        //private Entities.Log.Exception GetCurrentLog()
+        //{
+        //    return this.GetCurrentLog(this.exception);
+        //}
+
+
+
+        private static Entities.Log.Exception GetCurrentLog(Exception ex, string commandName, string commandParameters)
         {
             var log = new Entities.Log.Exception()
             {
                 Date = DateTime.Now,
                 Time = DateTime.Now.TimeOfDay,
-                CommandName = this.command.CommandText,
-                CommandParameters = this.command.Parameters.ToJson(),
-                ExceptionType = this.exception.GetType().Name,
-                ErrorMessage = this.exception.Message,
+                CommandName = commandName,
+                CommandParameters = commandParameters,
+                ExceptionType = ex.GetType().Name,
+                ErrorMessage = ex.Message,
                 ErrorNumber = 0,
                 ErrorCode = 0,
-                ExceptionJsonValue = Serializer.JsonSerializerManager.Serialize(this.exception)
+                ExceptionJsonValue = Serializer.JsonSerializerManager.Serialize(ex)
             };
 
-            if (exception is SqlException)
+            if (ex is SqlException)
             {
-                var sqlException = exception as SqlException;
+                var sqlException = ex as SqlException;
 
                 log.ErrorCode = sqlException.ErrorCode;
                 log.ErrorNumber = sqlException.Number;
             }
 
-            //Entities.Log.CommandParameter parameter = null;
-
-            //foreach (SqlParameter param in this.command.Parameters)
-            //{
-            //    parameter = new();
-
-            //    parameter.Name = param.ParameterName;
-            //    parameter.Value = param.Value == null ? "0x0" : param.Value.ToString();
-            //    parameter.TypeName = param.TypeName;
-            //    log.Parameters.Add(parameter);
-            //}
-
             return log;
         }
 
-        public async Task<bool> Save()
+        public static async Task<bool> Save<T>(T ex, SqlCommand command) where T : Exception
+        {
+            return await Save<T>(ex, command.CommandText, command.Parameters.ToJson());
+        }
+
+        public static async Task<bool> Save<T>(T ex, string commandName, string commandParameters) where T : Exception
         {
             var service = new BusinessLogic.Service<Entities.Log.Exception>();
 
             var transaction = new DataAccess.CoreTransaction();
 
-            var currentLog = this.GetCurrentLog();
+            var currentLog = GetCurrentLog(ex, commandName, commandParameters);
 
             var userCredit = new UserCredit();
 
-            var result = await service.Save(currentLog, userCredit, transaction);
+            IResult result = null;
 
-            transaction.Commit();
+            try
+            {
+                result = await service.Save(currentLog, userCredit, transaction);
 
-            //var parameterService = new BusinessLogic.Service<Entities.Log.CommandParameter>();
+                transaction.Commit();
+            }
+            catch (Exception localEx)
+            {
+                // Command Exception ( Last Failed Command !!! )
+                await WriteToFile(ex, commandName, commandParameters);
 
-            //DataResult<Entities.Log.CommandParameter> parameterResult = null;
+                // Log Exception ( Save Log Exception in to DataBase Failed !!! )
+                await WriteToFile(localEx, "Saving Log in Database", "");
+            }
+            finally
+            {
 
-            //foreach (var item in currentLog.Parameters)
-            //{
-            //    parameterResult = await parameterService.Save(item, userCredit, transaction);
-
-            //    if (!parameterResult.IsSucceeded)
-
-            //        return false;
-            //}
-
-            //transaction.Commit();
+            }
 
             return result.IsSucceeded;
         }
 
-        public async Task<bool> WriteToFile()
+        public static async Task<bool> WriteToFile<T>(T ex, string commandName = "", string commandParameters = "") where T : Exception
         {
-            string path = "C:\\Logs";
+            string path = Configuartion.ConfigurationService.GetValue("LogFile\\path");
 
-            if(!System.IO.Directory.Exists(path))
+            if (!System.IO.Directory.Exists(path))
 
                 System.IO.Directory.CreateDirectory(path);
 
@@ -112,7 +126,7 @@ namespace EssentialCore.Tools.Logging
 
                 stringBuilder.AppendLine("-------------------------------");
 
-                stringBuilder.AppendLine(Tools.Serializer.JsonSerializerManager.Serialize(this.GetCurrentLog()));
+                stringBuilder.AppendLine(Serializer.JsonSerializerManager.Serialize(GetCurrentLog(ex, commandName, commandParameters)));
 
                 stringBuilder.AppendLine("-------------------------------");
 

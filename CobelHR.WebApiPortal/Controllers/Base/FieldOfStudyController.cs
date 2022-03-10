@@ -7,6 +7,8 @@ using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("FieldOfStudy/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.fieldOfStudyService.RetrieveById(id, FieldOfStudy.Informer, this.UserCredit).ToActionResult<FieldOfStudy>();
+            var result = await this.fieldOfStudyService.RetrieveById(id, FieldOfStudy.Informer, this.UserCredit);
+
+			return result.ToActionResult<FieldOfStudy>();
         }
 
         [HttpPost]
         [Route("FieldOfStudy/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.fieldOfStudyService.RetrieveAll(FieldOfStudy.Informer, paginate, this.UserCredit).ToActionResult<FieldOfStudy>();
+            var result = await this.fieldOfStudyService.RetrieveAll(FieldOfStudy.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<FieldOfStudy>();
         }
             
 
         
         [HttpPost]
         [Route("FieldOfStudy/Save")]
-        public IActionResult Save([FromBody] FieldOfStudy fieldOfStudy)
+        public async Task<IActionResult> Save([FromBody] FieldOfStudy fieldOfStudy)
         {
-            return this.fieldOfStudyService.Save(fieldOfStudy, this.UserCredit).ToActionResult<FieldOfStudy>();
+            var result = await this.fieldOfStudyService.Save(fieldOfStudy, this.UserCredit);
+
+			return result.ToActionResult<FieldOfStudy>();
         }
 
         
         [HttpPost]
         [Route("FieldOfStudy/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] FieldOfStudy fieldOfStudy)
+        public async Task<IActionResult> SaveAttached([FromBody] FieldOfStudy fieldOfStudy)
         {
-            return this.fieldOfStudyService.SaveAttached(fieldOfStudy, this.UserCredit).ToActionResult();
+            var result = await this.fieldOfStudyService.SaveAttached(fieldOfStudy, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("FieldOfStudy/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<FieldOfStudy> fieldOfStudyList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<FieldOfStudy> fieldOfStudyList)
         {
-            return this.fieldOfStudyService.SaveBulk(fieldOfStudyList, this.UserCredit).ToActionResult();
+            var result = await this.fieldOfStudyService.SaveBulk(fieldOfStudyList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("FieldOfStudy/Seek")]
-        public IActionResult Seek([FromBody] FieldOfStudy fieldOfStudy)
+        public async Task<IActionResult> Seek([FromBody] FieldOfStudy fieldOfStudy)
         {
-            return this.fieldOfStudyService.Seek(fieldOfStudy).ToActionResult<FieldOfStudy>();
+            var result = await this.fieldOfStudyService.Seek(fieldOfStudy);
+
+			return result.ToActionResult<FieldOfStudy>();
         }
 
         [HttpGet]
         [Route("FieldOfStudy/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.fieldOfStudyService.SeekByValue(seekValue, FieldOfStudy.Informer).ToActionResult<FieldOfStudy>();
+            var result = await this.fieldOfStudyService.SeekByValue(seekValue, FieldOfStudy.Informer);
+
+			return result.ToActionResult<FieldOfStudy>();
         }
 
         [HttpPost]
         [Route("FieldOfStudy/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] FieldOfStudy fieldOfStudy)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] FieldOfStudy fieldOfStudy)
         {
-            return this.fieldOfStudyService.Delete(fieldOfStudy, id, this.UserCredit).ToActionResult();
+            var result = await this.fieldOfStudyService.Delete(fieldOfStudy, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfUniversityHistory

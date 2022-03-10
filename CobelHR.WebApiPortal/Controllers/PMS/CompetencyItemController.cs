@@ -7,6 +7,8 @@ using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 using CobelHR.Entities.LAD;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("CompetencyItem/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.competencyItemService.RetrieveById(id, CompetencyItem.Informer, this.UserCredit).ToActionResult<CompetencyItem>();
+            var result = await this.competencyItemService.RetrieveById(id, CompetencyItem.Informer, this.UserCredit);
+
+			return result.ToActionResult<CompetencyItem>();
         }
 
         [HttpPost]
         [Route("CompetencyItem/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.competencyItemService.RetrieveAll(CompetencyItem.Informer, paginate, this.UserCredit).ToActionResult<CompetencyItem>();
+            var result = await this.competencyItemService.RetrieveAll(CompetencyItem.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<CompetencyItem>();
         }
             
 
         
         [HttpPost]
         [Route("CompetencyItem/Save")]
-        public IActionResult Save([FromBody] CompetencyItem competencyItem)
+        public async Task<IActionResult> Save([FromBody] CompetencyItem competencyItem)
         {
-            return this.competencyItemService.Save(competencyItem, this.UserCredit).ToActionResult<CompetencyItem>();
+            var result = await this.competencyItemService.Save(competencyItem, this.UserCredit);
+
+			return result.ToActionResult<CompetencyItem>();
         }
 
         
         [HttpPost]
         [Route("CompetencyItem/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] CompetencyItem competencyItem)
+        public async Task<IActionResult> SaveAttached([FromBody] CompetencyItem competencyItem)
         {
-            return this.competencyItemService.SaveAttached(competencyItem, this.UserCredit).ToActionResult();
+            var result = await this.competencyItemService.SaveAttached(competencyItem, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("CompetencyItem/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<CompetencyItem> competencyItemList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<CompetencyItem> competencyItemList)
         {
-            return this.competencyItemService.SaveBulk(competencyItemList, this.UserCredit).ToActionResult();
+            var result = await this.competencyItemService.SaveBulk(competencyItemList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("CompetencyItem/Seek")]
-        public IActionResult Seek([FromBody] CompetencyItem competencyItem)
+        public async Task<IActionResult> Seek([FromBody] CompetencyItem competencyItem)
         {
-            return this.competencyItemService.Seek(competencyItem).ToActionResult<CompetencyItem>();
+            var result = await this.competencyItemService.Seek(competencyItem);
+
+			return result.ToActionResult<CompetencyItem>();
         }
 
         [HttpGet]
         [Route("CompetencyItem/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.competencyItemService.SeekByValue(seekValue, CompetencyItem.Informer).ToActionResult<CompetencyItem>();
+            var result = await this.competencyItemService.SeekByValue(seekValue, CompetencyItem.Informer);
+
+			return result.ToActionResult<CompetencyItem>();
         }
 
         [HttpPost]
         [Route("CompetencyItem/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] CompetencyItem competencyItem)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] CompetencyItem competencyItem)
         {
-            return this.competencyItemService.Delete(competencyItem, id, this.UserCredit).ToActionResult();
+            var result = await this.competencyItemService.Delete(competencyItem, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfAssessmentScore

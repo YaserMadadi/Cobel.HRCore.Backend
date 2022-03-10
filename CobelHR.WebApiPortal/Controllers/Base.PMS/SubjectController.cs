@@ -7,6 +7,8 @@ using CobelHR.Services.Base.PMS.Abstract;
 using CobelHR.Entities.Base.PMS;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base.PMS
 {
     [Route("api/Base.PMS")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
 
         [HttpGet]
         [Route("Subject/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.subjectService.RetrieveById(id, Subject.Informer, this.UserCredit).ToActionResult<Subject>();
+            var result = await this.subjectService.RetrieveById(id, Subject.Informer, this.UserCredit);
+
+			return result.ToActionResult<Subject>();
         }
 
         [HttpPost]
         [Route("Subject/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.subjectService.RetrieveAll(Subject.Informer, paginate, this.UserCredit).ToActionResult<Subject>();
+            var result = await this.subjectService.RetrieveAll(Subject.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Subject>();
         }
             
 
         
         [HttpPost]
         [Route("Subject/Save")]
-        public IActionResult Save([FromBody] Subject subject)
+        public async Task<IActionResult> Save([FromBody] Subject subject)
         {
-            return this.subjectService.Save(subject, this.UserCredit).ToActionResult<Subject>();
+            var result = await this.subjectService.Save(subject, this.UserCredit);
+
+			return result.ToActionResult<Subject>();
         }
 
         
         [HttpPost]
         [Route("Subject/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Subject subject)
+        public async Task<IActionResult> SaveAttached([FromBody] Subject subject)
         {
-            return this.subjectService.SaveAttached(subject, this.UserCredit).ToActionResult();
+            var result = await this.subjectService.SaveAttached(subject, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Subject/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Subject> subjectList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Subject> subjectList)
         {
-            return this.subjectService.SaveBulk(subjectList, this.UserCredit).ToActionResult();
+            var result = await this.subjectService.SaveBulk(subjectList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Subject/Seek")]
-        public IActionResult Seek([FromBody] Subject subject)
+        public async Task<IActionResult> Seek([FromBody] Subject subject)
         {
-            return this.subjectService.Seek(subject).ToActionResult<Subject>();
+            var result = await this.subjectService.Seek(subject);
+
+			return result.ToActionResult<Subject>();
         }
 
         [HttpGet]
         [Route("Subject/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.subjectService.SeekByValue(seekValue, Subject.Informer).ToActionResult<Subject>();
+            var result = await this.subjectService.SeekByValue(seekValue, Subject.Informer);
+
+			return result.ToActionResult<Subject>();
         }
 
         [HttpPost]
         [Route("Subject/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Subject subject)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Subject subject)
         {
-            return this.subjectService.Delete(subject, id, this.UserCredit).ToActionResult();
+            var result = await this.subjectService.Delete(subject, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfIndividualDevelopmentPlan

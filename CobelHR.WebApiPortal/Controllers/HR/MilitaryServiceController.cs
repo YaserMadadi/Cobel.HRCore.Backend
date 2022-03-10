@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("MilitaryService/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.militaryServiceService.RetrieveById(id, MilitaryService.Informer, this.UserCredit).ToActionResult<MilitaryService>();
+            var result = await this.militaryServiceService.RetrieveById(id, MilitaryService.Informer, this.UserCredit);
+
+			return result.ToActionResult<MilitaryService>();
         }
 
         [HttpPost]
         [Route("MilitaryService/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.militaryServiceService.RetrieveAll(MilitaryService.Informer, paginate, this.UserCredit).ToActionResult<MilitaryService>();
+            var result = await this.militaryServiceService.RetrieveAll(MilitaryService.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<MilitaryService>();
         }
             
 
         
         [HttpPost]
         [Route("MilitaryService/Save")]
-        public IActionResult Save([FromBody] MilitaryService militaryService)
+        public async Task<IActionResult> Save([FromBody] MilitaryService militaryService)
         {
-            return this.militaryServiceService.Save(militaryService, this.UserCredit).ToActionResult<MilitaryService>();
+            var result = await this.militaryServiceService.Save(militaryService, this.UserCredit);
+
+			return result.ToActionResult<MilitaryService>();
         }
 
         
         [HttpPost]
         [Route("MilitaryService/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] MilitaryService militaryService)
+        public async Task<IActionResult> SaveAttached([FromBody] MilitaryService militaryService)
         {
-            return this.militaryServiceService.SaveAttached(militaryService, this.UserCredit).ToActionResult();
+            var result = await this.militaryServiceService.SaveAttached(militaryService, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("MilitaryService/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<MilitaryService> militaryServiceList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<MilitaryService> militaryServiceList)
         {
-            return this.militaryServiceService.SaveBulk(militaryServiceList, this.UserCredit).ToActionResult();
+            var result = await this.militaryServiceService.SaveBulk(militaryServiceList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("MilitaryService/Seek")]
-        public IActionResult Seek([FromBody] MilitaryService militaryService)
+        public async Task<IActionResult> Seek([FromBody] MilitaryService militaryService)
         {
-            return this.militaryServiceService.Seek(militaryService).ToActionResult<MilitaryService>();
+            var result = await this.militaryServiceService.Seek(militaryService);
+
+			return result.ToActionResult<MilitaryService>();
         }
 
         [HttpGet]
         [Route("MilitaryService/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.militaryServiceService.SeekByValue(seekValue, MilitaryService.Informer).ToActionResult<MilitaryService>();
+            var result = await this.militaryServiceService.SeekByValue(seekValue, MilitaryService.Informer);
+
+			return result.ToActionResult<MilitaryService>();
         }
 
         [HttpPost]
         [Route("MilitaryService/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] MilitaryService militaryService)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] MilitaryService militaryService)
         {
-            return this.militaryServiceService.Delete(militaryService, id, this.UserCredit).ToActionResult();
+            var result = await this.militaryServiceService.Delete(militaryService, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfMilitaryServiceExcemption

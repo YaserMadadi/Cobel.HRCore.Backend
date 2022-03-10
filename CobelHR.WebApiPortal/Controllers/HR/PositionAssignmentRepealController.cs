@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("PositionAssignmentRepeal/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.positionAssignmentRepealService.RetrieveById(id, PositionAssignmentRepeal.Informer, this.UserCredit).ToActionResult<PositionAssignmentRepeal>();
+            var result = await this.positionAssignmentRepealService.RetrieveById(id, PositionAssignmentRepeal.Informer, this.UserCredit);
+
+			return result.ToActionResult<PositionAssignmentRepeal>();
         }
 
         [HttpPost]
         [Route("PositionAssignmentRepeal/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.positionAssignmentRepealService.RetrieveAll(PositionAssignmentRepeal.Informer, paginate, this.UserCredit).ToActionResult<PositionAssignmentRepeal>();
+            var result = await this.positionAssignmentRepealService.RetrieveAll(PositionAssignmentRepeal.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<PositionAssignmentRepeal>();
         }
             
 
         
         [HttpPost]
         [Route("PositionAssignmentRepeal/Save")]
-        public IActionResult Save([FromBody] PositionAssignmentRepeal positionAssignmentRepeal)
+        public async Task<IActionResult> Save([FromBody] PositionAssignmentRepeal positionAssignmentRepeal)
         {
-            return this.positionAssignmentRepealService.Save(positionAssignmentRepeal, this.UserCredit).ToActionResult<PositionAssignmentRepeal>();
+            var result = await this.positionAssignmentRepealService.Save(positionAssignmentRepeal, this.UserCredit);
+
+			return result.ToActionResult<PositionAssignmentRepeal>();
         }
 
         
         [HttpPost]
         [Route("PositionAssignmentRepeal/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] PositionAssignmentRepeal positionAssignmentRepeal)
+        public async Task<IActionResult> SaveAttached([FromBody] PositionAssignmentRepeal positionAssignmentRepeal)
         {
-            return this.positionAssignmentRepealService.SaveAttached(positionAssignmentRepeal, this.UserCredit).ToActionResult();
+            var result = await this.positionAssignmentRepealService.SaveAttached(positionAssignmentRepeal, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("PositionAssignmentRepeal/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<PositionAssignmentRepeal> positionAssignmentRepealList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<PositionAssignmentRepeal> positionAssignmentRepealList)
         {
-            return this.positionAssignmentRepealService.SaveBulk(positionAssignmentRepealList, this.UserCredit).ToActionResult();
+            var result = await this.positionAssignmentRepealService.SaveBulk(positionAssignmentRepealList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("PositionAssignmentRepeal/Seek")]
-        public IActionResult Seek([FromBody] PositionAssignmentRepeal positionAssignmentRepeal)
+        public async Task<IActionResult> Seek([FromBody] PositionAssignmentRepeal positionAssignmentRepeal)
         {
-            return this.positionAssignmentRepealService.Seek(positionAssignmentRepeal).ToActionResult<PositionAssignmentRepeal>();
+            var result = await this.positionAssignmentRepealService.Seek(positionAssignmentRepeal);
+
+			return result.ToActionResult<PositionAssignmentRepeal>();
         }
 
         [HttpGet]
         [Route("PositionAssignmentRepeal/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.positionAssignmentRepealService.SeekByValue(seekValue, PositionAssignmentRepeal.Informer).ToActionResult<PositionAssignmentRepeal>();
+            var result = await this.positionAssignmentRepealService.SeekByValue(seekValue, PositionAssignmentRepeal.Informer);
+
+			return result.ToActionResult<PositionAssignmentRepeal>();
         }
 
         [HttpPost]
         [Route("PositionAssignmentRepeal/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] PositionAssignmentRepeal positionAssignmentRepeal)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] PositionAssignmentRepeal positionAssignmentRepeal)
         {
-            return this.positionAssignmentRepealService.Delete(positionAssignmentRepeal, id, this.UserCredit).ToActionResult();
+            var result = await this.positionAssignmentRepealService.Delete(positionAssignmentRepeal, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

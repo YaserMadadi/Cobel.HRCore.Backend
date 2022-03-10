@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("MilitaryServiceExcemption/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.militaryServiceExcemptionService.RetrieveById(id, MilitaryServiceExcemption.Informer, this.UserCredit).ToActionResult<MilitaryServiceExcemption>();
+            var result = await this.militaryServiceExcemptionService.RetrieveById(id, MilitaryServiceExcemption.Informer, this.UserCredit);
+
+			return result.ToActionResult<MilitaryServiceExcemption>();
         }
 
         [HttpPost]
         [Route("MilitaryServiceExcemption/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.militaryServiceExcemptionService.RetrieveAll(MilitaryServiceExcemption.Informer, paginate, this.UserCredit).ToActionResult<MilitaryServiceExcemption>();
+            var result = await this.militaryServiceExcemptionService.RetrieveAll(MilitaryServiceExcemption.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<MilitaryServiceExcemption>();
         }
             
 
         
         [HttpPost]
         [Route("MilitaryServiceExcemption/Save")]
-        public IActionResult Save([FromBody] MilitaryServiceExcemption militaryServiceExcemption)
+        public async Task<IActionResult> Save([FromBody] MilitaryServiceExcemption militaryServiceExcemption)
         {
-            return this.militaryServiceExcemptionService.Save(militaryServiceExcemption, this.UserCredit).ToActionResult<MilitaryServiceExcemption>();
+            var result = await this.militaryServiceExcemptionService.Save(militaryServiceExcemption, this.UserCredit);
+
+			return result.ToActionResult<MilitaryServiceExcemption>();
         }
 
         
         [HttpPost]
         [Route("MilitaryServiceExcemption/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] MilitaryServiceExcemption militaryServiceExcemption)
+        public async Task<IActionResult> SaveAttached([FromBody] MilitaryServiceExcemption militaryServiceExcemption)
         {
-            return this.militaryServiceExcemptionService.SaveAttached(militaryServiceExcemption, this.UserCredit).ToActionResult();
+            var result = await this.militaryServiceExcemptionService.SaveAttached(militaryServiceExcemption, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("MilitaryServiceExcemption/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<MilitaryServiceExcemption> militaryServiceExcemptionList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<MilitaryServiceExcemption> militaryServiceExcemptionList)
         {
-            return this.militaryServiceExcemptionService.SaveBulk(militaryServiceExcemptionList, this.UserCredit).ToActionResult();
+            var result = await this.militaryServiceExcemptionService.SaveBulk(militaryServiceExcemptionList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("MilitaryServiceExcemption/Seek")]
-        public IActionResult Seek([FromBody] MilitaryServiceExcemption militaryServiceExcemption)
+        public async Task<IActionResult> Seek([FromBody] MilitaryServiceExcemption militaryServiceExcemption)
         {
-            return this.militaryServiceExcemptionService.Seek(militaryServiceExcemption).ToActionResult<MilitaryServiceExcemption>();
+            var result = await this.militaryServiceExcemptionService.Seek(militaryServiceExcemption);
+
+			return result.ToActionResult<MilitaryServiceExcemption>();
         }
 
         [HttpGet]
         [Route("MilitaryServiceExcemption/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.militaryServiceExcemptionService.SeekByValue(seekValue, MilitaryServiceExcemption.Informer).ToActionResult<MilitaryServiceExcemption>();
+            var result = await this.militaryServiceExcemptionService.SeekByValue(seekValue, MilitaryServiceExcemption.Informer);
+
+			return result.ToActionResult<MilitaryServiceExcemption>();
         }
 
         [HttpPost]
         [Route("MilitaryServiceExcemption/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] MilitaryServiceExcemption militaryServiceExcemption)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] MilitaryServiceExcemption militaryServiceExcemption)
         {
-            return this.militaryServiceExcemptionService.Delete(militaryServiceExcemption, id, this.UserCredit).ToActionResult();
+            var result = await this.militaryServiceExcemptionService.Delete(militaryServiceExcemption, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

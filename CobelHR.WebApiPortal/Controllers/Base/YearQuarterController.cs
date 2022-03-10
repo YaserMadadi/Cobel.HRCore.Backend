@@ -7,6 +7,8 @@ using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 using CobelHR.Entities.LAD;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("YearQuarter/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.yearQuarterService.RetrieveById(id, YearQuarter.Informer, this.UserCredit).ToActionResult<YearQuarter>();
+            var result = await this.yearQuarterService.RetrieveById(id, YearQuarter.Informer, this.UserCredit);
+
+			return result.ToActionResult<YearQuarter>();
         }
 
         [HttpPost]
         [Route("YearQuarter/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.yearQuarterService.RetrieveAll(YearQuarter.Informer, paginate, this.UserCredit).ToActionResult<YearQuarter>();
+            var result = await this.yearQuarterService.RetrieveAll(YearQuarter.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<YearQuarter>();
         }
             
 
         
         [HttpPost]
         [Route("YearQuarter/Save")]
-        public IActionResult Save([FromBody] YearQuarter yearQuarter)
+        public async Task<IActionResult> Save([FromBody] YearQuarter yearQuarter)
         {
-            return this.yearQuarterService.Save(yearQuarter, this.UserCredit).ToActionResult<YearQuarter>();
+            var result = await this.yearQuarterService.Save(yearQuarter, this.UserCredit);
+
+			return result.ToActionResult<YearQuarter>();
         }
 
         
         [HttpPost]
         [Route("YearQuarter/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] YearQuarter yearQuarter)
+        public async Task<IActionResult> SaveAttached([FromBody] YearQuarter yearQuarter)
         {
-            return this.yearQuarterService.SaveAttached(yearQuarter, this.UserCredit).ToActionResult();
+            var result = await this.yearQuarterService.SaveAttached(yearQuarter, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("YearQuarter/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<YearQuarter> yearQuarterList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<YearQuarter> yearQuarterList)
         {
-            return this.yearQuarterService.SaveBulk(yearQuarterList, this.UserCredit).ToActionResult();
+            var result = await this.yearQuarterService.SaveBulk(yearQuarterList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("YearQuarter/Seek")]
-        public IActionResult Seek([FromBody] YearQuarter yearQuarter)
+        public async Task<IActionResult> Seek([FromBody] YearQuarter yearQuarter)
         {
-            return this.yearQuarterService.Seek(yearQuarter).ToActionResult<YearQuarter>();
+            var result = await this.yearQuarterService.Seek(yearQuarter);
+
+			return result.ToActionResult<YearQuarter>();
         }
 
         [HttpGet]
         [Route("YearQuarter/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.yearQuarterService.SeekByValue(seekValue, YearQuarter.Informer).ToActionResult<YearQuarter>();
+            var result = await this.yearQuarterService.SeekByValue(seekValue, YearQuarter.Informer);
+
+			return result.ToActionResult<YearQuarter>();
         }
 
         [HttpPost]
         [Route("YearQuarter/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] YearQuarter yearQuarter)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] YearQuarter yearQuarter)
         {
-            return this.yearQuarterService.Delete(yearQuarter, id, this.UserCredit).ToActionResult();
+            var result = await this.yearQuarterService.Delete(yearQuarter, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfAssessmentTraining_DeadLine

@@ -7,6 +7,8 @@ using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("DrivingLicenseType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.drivingLicenseTypeService.RetrieveById(id, DrivingLicenseType.Informer, this.UserCredit).ToActionResult<DrivingLicenseType>();
+            var result = await this.drivingLicenseTypeService.RetrieveById(id, DrivingLicenseType.Informer, this.UserCredit);
+
+			return result.ToActionResult<DrivingLicenseType>();
         }
 
         [HttpPost]
         [Route("DrivingLicenseType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.drivingLicenseTypeService.RetrieveAll(DrivingLicenseType.Informer, paginate, this.UserCredit).ToActionResult<DrivingLicenseType>();
+            var result = await this.drivingLicenseTypeService.RetrieveAll(DrivingLicenseType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<DrivingLicenseType>();
         }
             
 
         
         [HttpPost]
         [Route("DrivingLicenseType/Save")]
-        public IActionResult Save([FromBody] DrivingLicenseType drivingLicenseType)
+        public async Task<IActionResult> Save([FromBody] DrivingLicenseType drivingLicenseType)
         {
-            return this.drivingLicenseTypeService.Save(drivingLicenseType, this.UserCredit).ToActionResult<DrivingLicenseType>();
+            var result = await this.drivingLicenseTypeService.Save(drivingLicenseType, this.UserCredit);
+
+			return result.ToActionResult<DrivingLicenseType>();
         }
 
         
         [HttpPost]
         [Route("DrivingLicenseType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] DrivingLicenseType drivingLicenseType)
+        public async Task<IActionResult> SaveAttached([FromBody] DrivingLicenseType drivingLicenseType)
         {
-            return this.drivingLicenseTypeService.SaveAttached(drivingLicenseType, this.UserCredit).ToActionResult();
+            var result = await this.drivingLicenseTypeService.SaveAttached(drivingLicenseType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("DrivingLicenseType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<DrivingLicenseType> drivingLicenseTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<DrivingLicenseType> drivingLicenseTypeList)
         {
-            return this.drivingLicenseTypeService.SaveBulk(drivingLicenseTypeList, this.UserCredit).ToActionResult();
+            var result = await this.drivingLicenseTypeService.SaveBulk(drivingLicenseTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("DrivingLicenseType/Seek")]
-        public IActionResult Seek([FromBody] DrivingLicenseType drivingLicenseType)
+        public async Task<IActionResult> Seek([FromBody] DrivingLicenseType drivingLicenseType)
         {
-            return this.drivingLicenseTypeService.Seek(drivingLicenseType).ToActionResult<DrivingLicenseType>();
+            var result = await this.drivingLicenseTypeService.Seek(drivingLicenseType);
+
+			return result.ToActionResult<DrivingLicenseType>();
         }
 
         [HttpGet]
         [Route("DrivingLicenseType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.drivingLicenseTypeService.SeekByValue(seekValue, DrivingLicenseType.Informer).ToActionResult<DrivingLicenseType>();
+            var result = await this.drivingLicenseTypeService.SeekByValue(seekValue, DrivingLicenseType.Informer);
+
+			return result.ToActionResult<DrivingLicenseType>();
         }
 
         [HttpPost]
         [Route("DrivingLicenseType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] DrivingLicenseType drivingLicenseType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] DrivingLicenseType drivingLicenseType)
         {
-            return this.drivingLicenseTypeService.Delete(drivingLicenseType, id, this.UserCredit).ToActionResult();
+            var result = await this.drivingLicenseTypeService.Delete(drivingLicenseType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfPersonDrivingLicense

@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("Department/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.departmentService.RetrieveById(id, Department.Informer, this.UserCredit).ToActionResult<Department>();
+            var result = await this.departmentService.RetrieveById(id, Department.Informer, this.UserCredit);
+
+			return result.ToActionResult<Department>();
         }
 
         [HttpPost]
         [Route("Department/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.departmentService.RetrieveAll(Department.Informer, paginate, this.UserCredit).ToActionResult<Department>();
+            var result = await this.departmentService.RetrieveAll(Department.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Department>();
         }
             
 
         
         [HttpPost]
         [Route("Department/Save")]
-        public IActionResult Save([FromBody] Department department)
+        public async Task<IActionResult> Save([FromBody] Department department)
         {
-            return this.departmentService.Save(department, this.UserCredit).ToActionResult<Department>();
+            var result = await this.departmentService.Save(department, this.UserCredit);
+
+			return result.ToActionResult<Department>();
         }
 
         
         [HttpPost]
         [Route("Department/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Department department)
+        public async Task<IActionResult> SaveAttached([FromBody] Department department)
         {
-            return this.departmentService.SaveAttached(department, this.UserCredit).ToActionResult();
+            var result = await this.departmentService.SaveAttached(department, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Department/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Department> departmentList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Department> departmentList)
         {
-            return this.departmentService.SaveBulk(departmentList, this.UserCredit).ToActionResult();
+            var result = await this.departmentService.SaveBulk(departmentList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Department/Seek")]
-        public IActionResult Seek([FromBody] Department department)
+        public async Task<IActionResult> Seek([FromBody] Department department)
         {
-            return this.departmentService.Seek(department).ToActionResult<Department>();
+            var result = await this.departmentService.Seek(department);
+
+			return result.ToActionResult<Department>();
         }
 
         [HttpGet]
         [Route("Department/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.departmentService.SeekByValue(seekValue, Department.Informer).ToActionResult<Department>();
+            var result = await this.departmentService.SeekByValue(seekValue, Department.Informer);
+
+			return result.ToActionResult<Department>();
         }
 
         [HttpPost]
         [Route("Department/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Department department)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Department department)
         {
-            return this.departmentService.Delete(department, id, this.UserCredit).ToActionResult();
+            var result = await this.departmentService.Delete(department, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfUnit

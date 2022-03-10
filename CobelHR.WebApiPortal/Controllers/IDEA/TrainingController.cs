@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.IDEA.Abstract;
 using CobelHR.Entities.IDEA;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.IDEA
 {
     [Route("api/IDEA")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.IDEA
 
         [HttpGet]
         [Route("Training/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.trainingService.RetrieveById(id, Training.Informer, this.UserCredit).ToActionResult<Training>();
+            var result = await this.trainingService.RetrieveById(id, Training.Informer, this.UserCredit);
+
+			return result.ToActionResult<Training>();
         }
 
         [HttpPost]
         [Route("Training/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.trainingService.RetrieveAll(Training.Informer, paginate, this.UserCredit).ToActionResult<Training>();
+            var result = await this.trainingService.RetrieveAll(Training.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Training>();
         }
             
 
         
         [HttpPost]
         [Route("Training/Save")]
-        public IActionResult Save([FromBody] Training training)
+        public async Task<IActionResult> Save([FromBody] Training training)
         {
-            return this.trainingService.Save(training, this.UserCredit).ToActionResult<Training>();
+            var result = await this.trainingService.Save(training, this.UserCredit);
+
+			return result.ToActionResult<Training>();
         }
 
         
         [HttpPost]
         [Route("Training/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Training training)
+        public async Task<IActionResult> SaveAttached([FromBody] Training training)
         {
-            return this.trainingService.SaveAttached(training, this.UserCredit).ToActionResult();
+            var result = await this.trainingService.SaveAttached(training, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Training/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Training> trainingList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Training> trainingList)
         {
-            return this.trainingService.SaveBulk(trainingList, this.UserCredit).ToActionResult();
+            var result = await this.trainingService.SaveBulk(trainingList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Training/Seek")]
-        public IActionResult Seek([FromBody] Training training)
+        public async Task<IActionResult> Seek([FromBody] Training training)
         {
-            return this.trainingService.Seek(training).ToActionResult<Training>();
+            var result = await this.trainingService.Seek(training);
+
+			return result.ToActionResult<Training>();
         }
 
         [HttpGet]
         [Route("Training/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.trainingService.SeekByValue(seekValue, Training.Informer).ToActionResult<Training>();
+            var result = await this.trainingService.SeekByValue(seekValue, Training.Informer);
+
+			return result.ToActionResult<Training>();
         }
 
         [HttpPost]
         [Route("Training/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Training training)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Training training)
         {
-            return this.trainingService.Delete(training, id, this.UserCredit).ToActionResult();
+            var result = await this.trainingService.Delete(training, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

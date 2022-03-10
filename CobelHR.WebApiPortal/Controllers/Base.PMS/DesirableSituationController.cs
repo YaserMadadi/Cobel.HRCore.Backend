@@ -7,6 +7,8 @@ using CobelHR.Services.Base.PMS.Abstract;
 using CobelHR.Entities.Base.PMS;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base.PMS
 {
     [Route("api/Base.PMS")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
 
         [HttpGet]
         [Route("DesirableSituation/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.desirableSituationService.RetrieveById(id, DesirableSituation.Informer, this.UserCredit).ToActionResult<DesirableSituation>();
+            var result = await this.desirableSituationService.RetrieveById(id, DesirableSituation.Informer, this.UserCredit);
+
+			return result.ToActionResult<DesirableSituation>();
         }
 
         [HttpPost]
         [Route("DesirableSituation/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.desirableSituationService.RetrieveAll(DesirableSituation.Informer, paginate, this.UserCredit).ToActionResult<DesirableSituation>();
+            var result = await this.desirableSituationService.RetrieveAll(DesirableSituation.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<DesirableSituation>();
         }
             
 
         
         [HttpPost]
         [Route("DesirableSituation/Save")]
-        public IActionResult Save([FromBody] DesirableSituation desirableSituation)
+        public async Task<IActionResult> Save([FromBody] DesirableSituation desirableSituation)
         {
-            return this.desirableSituationService.Save(desirableSituation, this.UserCredit).ToActionResult<DesirableSituation>();
+            var result = await this.desirableSituationService.Save(desirableSituation, this.UserCredit);
+
+			return result.ToActionResult<DesirableSituation>();
         }
 
         
         [HttpPost]
         [Route("DesirableSituation/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] DesirableSituation desirableSituation)
+        public async Task<IActionResult> SaveAttached([FromBody] DesirableSituation desirableSituation)
         {
-            return this.desirableSituationService.SaveAttached(desirableSituation, this.UserCredit).ToActionResult();
+            var result = await this.desirableSituationService.SaveAttached(desirableSituation, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("DesirableSituation/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<DesirableSituation> desirableSituationList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<DesirableSituation> desirableSituationList)
         {
-            return this.desirableSituationService.SaveBulk(desirableSituationList, this.UserCredit).ToActionResult();
+            var result = await this.desirableSituationService.SaveBulk(desirableSituationList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("DesirableSituation/Seek")]
-        public IActionResult Seek([FromBody] DesirableSituation desirableSituation)
+        public async Task<IActionResult> Seek([FromBody] DesirableSituation desirableSituation)
         {
-            return this.desirableSituationService.Seek(desirableSituation).ToActionResult<DesirableSituation>();
+            var result = await this.desirableSituationService.Seek(desirableSituation);
+
+			return result.ToActionResult<DesirableSituation>();
         }
 
         [HttpGet]
         [Route("DesirableSituation/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.desirableSituationService.SeekByValue(seekValue, DesirableSituation.Informer).ToActionResult<DesirableSituation>();
+            var result = await this.desirableSituationService.SeekByValue(seekValue, DesirableSituation.Informer);
+
+			return result.ToActionResult<DesirableSituation>();
         }
 
         [HttpPost]
         [Route("DesirableSituation/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] DesirableSituation desirableSituation)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] DesirableSituation desirableSituation)
         {
-            return this.desirableSituationService.Delete(desirableSituation, id, this.UserCredit).ToActionResult();
+            var result = await this.desirableSituationService.Delete(desirableSituation, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfIndividualDevelopmentPlan

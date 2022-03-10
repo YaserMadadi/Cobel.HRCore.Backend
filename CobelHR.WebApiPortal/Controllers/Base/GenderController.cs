@@ -8,6 +8,8 @@ using CobelHR.Entities.Base;
 using CobelHR.Entities.LAD;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -22,62 +24,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("Gender/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.genderService.RetrieveById(id, Gender.Informer, this.UserCredit).ToActionResult<Gender>();
+            var result = await this.genderService.RetrieveById(id, Gender.Informer, this.UserCredit);
+
+			return result.ToActionResult<Gender>();
         }
 
         [HttpPost]
         [Route("Gender/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.genderService.RetrieveAll(Gender.Informer, paginate, this.UserCredit).ToActionResult<Gender>();
+            var result = await this.genderService.RetrieveAll(Gender.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Gender>();
         }
             
 
         
         [HttpPost]
         [Route("Gender/Save")]
-        public IActionResult Save([FromBody] Gender gender)
+        public async Task<IActionResult> Save([FromBody] Gender gender)
         {
-            return this.genderService.Save(gender, this.UserCredit).ToActionResult<Gender>();
+            var result = await this.genderService.Save(gender, this.UserCredit);
+
+			return result.ToActionResult<Gender>();
         }
 
         
         [HttpPost]
         [Route("Gender/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Gender gender)
+        public async Task<IActionResult> SaveAttached([FromBody] Gender gender)
         {
-            return this.genderService.SaveAttached(gender, this.UserCredit).ToActionResult();
+            var result = await this.genderService.SaveAttached(gender, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Gender/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Gender> genderList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Gender> genderList)
         {
-            return this.genderService.SaveBulk(genderList, this.UserCredit).ToActionResult();
+            var result = await this.genderService.SaveBulk(genderList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Gender/Seek")]
-        public IActionResult Seek([FromBody] Gender gender)
+        public async Task<IActionResult> Seek([FromBody] Gender gender)
         {
-            return this.genderService.Seek(gender).ToActionResult<Gender>();
+            var result = await this.genderService.Seek(gender);
+
+			return result.ToActionResult<Gender>();
         }
 
         [HttpGet]
         [Route("Gender/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.genderService.SeekByValue(seekValue, Gender.Informer).ToActionResult<Gender>();
+            var result = await this.genderService.SeekByValue(seekValue, Gender.Informer);
+
+			return result.ToActionResult<Gender>();
         }
 
         [HttpPost]
         [Route("Gender/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Gender gender)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Gender gender)
         {
-            return this.genderService.Delete(gender, id, this.UserCredit).ToActionResult();
+            var result = await this.genderService.Delete(gender, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfAssessor

@@ -8,6 +8,8 @@ using CobelHR.Entities.Base.HR;
 using CobelHR.Entities.PMS;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base.HR
 {
     [Route("api/Base.HR")]
@@ -22,62 +24,78 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
 
         [HttpGet]
         [Route("PositionCategory/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.positionCategoryService.RetrieveById(id, PositionCategory.Informer, this.UserCredit).ToActionResult<PositionCategory>();
+            var result = await this.positionCategoryService.RetrieveById(id, PositionCategory.Informer, this.UserCredit);
+
+			return result.ToActionResult<PositionCategory>();
         }
 
         [HttpPost]
         [Route("PositionCategory/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.positionCategoryService.RetrieveAll(PositionCategory.Informer, paginate, this.UserCredit).ToActionResult<PositionCategory>();
+            var result = await this.positionCategoryService.RetrieveAll(PositionCategory.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<PositionCategory>();
         }
             
 
         
         [HttpPost]
         [Route("PositionCategory/Save")]
-        public IActionResult Save([FromBody] PositionCategory positionCategory)
+        public async Task<IActionResult> Save([FromBody] PositionCategory positionCategory)
         {
-            return this.positionCategoryService.Save(positionCategory, this.UserCredit).ToActionResult<PositionCategory>();
+            var result = await this.positionCategoryService.Save(positionCategory, this.UserCredit);
+
+			return result.ToActionResult<PositionCategory>();
         }
 
         
         [HttpPost]
         [Route("PositionCategory/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] PositionCategory positionCategory)
+        public async Task<IActionResult> SaveAttached([FromBody] PositionCategory positionCategory)
         {
-            return this.positionCategoryService.SaveAttached(positionCategory, this.UserCredit).ToActionResult();
+            var result = await this.positionCategoryService.SaveAttached(positionCategory, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("PositionCategory/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<PositionCategory> positionCategoryList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<PositionCategory> positionCategoryList)
         {
-            return this.positionCategoryService.SaveBulk(positionCategoryList, this.UserCredit).ToActionResult();
+            var result = await this.positionCategoryService.SaveBulk(positionCategoryList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("PositionCategory/Seek")]
-        public IActionResult Seek([FromBody] PositionCategory positionCategory)
+        public async Task<IActionResult> Seek([FromBody] PositionCategory positionCategory)
         {
-            return this.positionCategoryService.Seek(positionCategory).ToActionResult<PositionCategory>();
+            var result = await this.positionCategoryService.Seek(positionCategory);
+
+			return result.ToActionResult<PositionCategory>();
         }
 
         [HttpGet]
         [Route("PositionCategory/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.positionCategoryService.SeekByValue(seekValue, PositionCategory.Informer).ToActionResult<PositionCategory>();
+            var result = await this.positionCategoryService.SeekByValue(seekValue, PositionCategory.Informer);
+
+			return result.ToActionResult<PositionCategory>();
         }
 
         [HttpPost]
         [Route("PositionCategory/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] PositionCategory positionCategory)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] PositionCategory positionCategory)
         {
-            return this.positionCategoryService.Delete(positionCategory, id, this.UserCredit).ToActionResult();
+            var result = await this.positionCategoryService.Delete(positionCategory, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfAppraisalApproverConfig

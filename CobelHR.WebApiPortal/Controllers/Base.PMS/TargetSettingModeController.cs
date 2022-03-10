@@ -8,6 +8,8 @@ using CobelHR.Entities.Base.PMS;
 using CobelHR.Entities.PMS;
 using CobelHR.Services.PMS.Abstract;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base.PMS
 {
     [Route("api/Base.PMS")]
@@ -22,62 +24,78 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
 
         [HttpGet]
         [Route("TargetSettingMode/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.targetSettingModeService.RetrieveById(id, TargetSettingMode.Informer, this.UserCredit).ToActionResult<TargetSettingMode>();
+            var result = await this.targetSettingModeService.RetrieveById(id, TargetSettingMode.Informer, this.UserCredit);
+
+			return result.ToActionResult<TargetSettingMode>();
         }
 
         [HttpPost]
         [Route("TargetSettingMode/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.targetSettingModeService.RetrieveAll(TargetSettingMode.Informer, paginate, this.UserCredit).ToActionResult<TargetSettingMode>();
+            var result = await this.targetSettingModeService.RetrieveAll(TargetSettingMode.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<TargetSettingMode>();
         }
             
 
         
         [HttpPost]
         [Route("TargetSettingMode/Save")]
-        public IActionResult Save([FromBody] TargetSettingMode TargetSettingMode)
+        public async Task<IActionResult> Save([FromBody] TargetSettingMode TargetSettingMode)
         {
-            return this.targetSettingModeService.Save(TargetSettingMode, this.UserCredit).ToActionResult<TargetSettingMode>();
+            var result = await this.targetSettingModeService.Save(TargetSettingMode, this.UserCredit);
+
+			return result.ToActionResult<TargetSettingMode>();
         }
 
         
         [HttpPost]
         [Route("TargetSettingMode/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] TargetSettingMode TargetSettingMode)
+        public async Task<IActionResult> SaveAttached([FromBody] TargetSettingMode TargetSettingMode)
         {
-            return this.targetSettingModeService.SaveAttached(TargetSettingMode, this.UserCredit).ToActionResult();
+            var result = await this.targetSettingModeService.SaveAttached(TargetSettingMode, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("TargetSettingMode/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<TargetSettingMode> TargetSettingModeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<TargetSettingMode> TargetSettingModeList)
         {
-            return this.targetSettingModeService.SaveBulk(TargetSettingModeList, this.UserCredit).ToActionResult();
+            var result = await this.targetSettingModeService.SaveBulk(TargetSettingModeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("TargetSettingMode/Seek")]
-        public IActionResult Seek([FromBody] TargetSettingMode TargetSettingMode)
+        public async Task<IActionResult> Seek([FromBody] TargetSettingMode TargetSettingMode)
         {
-            return this.targetSettingModeService.Seek(TargetSettingMode).ToActionResult<TargetSettingMode>();
+            var result = await this.targetSettingModeService.Seek(TargetSettingMode);
+
+			return result.ToActionResult<TargetSettingMode>();
         }
 
         [HttpGet]
         [Route("TargetSettingMode/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.targetSettingModeService.SeekByValue(seekValue, TargetSettingMode.Informer).ToActionResult<TargetSettingMode>();
+            var result = await this.targetSettingModeService.SeekByValue(seekValue, TargetSettingMode.Informer);
+
+			return result.ToActionResult<TargetSettingMode>();
         }
 
         [HttpPost]
         [Route("TargetSettingMode/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] TargetSettingMode TargetSettingMode)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] TargetSettingMode TargetSettingMode)
         {
-            return this.targetSettingModeService.Delete(TargetSettingMode, id, this.UserCredit).ToActionResult();
+            var result = await this.targetSettingModeService.Delete(TargetSettingMode, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfTargetSetting

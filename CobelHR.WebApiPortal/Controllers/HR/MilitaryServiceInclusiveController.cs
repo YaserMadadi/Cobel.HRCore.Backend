@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("MilitaryServiceInclusive/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.militaryServiceInclusiveService.RetrieveById(id, MilitaryServiceInclusive.Informer, this.UserCredit).ToActionResult<MilitaryServiceInclusive>();
+            var result = await this.militaryServiceInclusiveService.RetrieveById(id, MilitaryServiceInclusive.Informer, this.UserCredit);
+
+			return result.ToActionResult<MilitaryServiceInclusive>();
         }
 
         [HttpPost]
         [Route("MilitaryServiceInclusive/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.militaryServiceInclusiveService.RetrieveAll(MilitaryServiceInclusive.Informer, paginate, this.UserCredit).ToActionResult<MilitaryServiceInclusive>();
+            var result = await this.militaryServiceInclusiveService.RetrieveAll(MilitaryServiceInclusive.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<MilitaryServiceInclusive>();
         }
             
 
         
         [HttpPost]
         [Route("MilitaryServiceInclusive/Save")]
-        public IActionResult Save([FromBody] MilitaryServiceInclusive militaryServiceInclusive)
+        public async Task<IActionResult> Save([FromBody] MilitaryServiceInclusive militaryServiceInclusive)
         {
-            return this.militaryServiceInclusiveService.Save(militaryServiceInclusive, this.UserCredit).ToActionResult<MilitaryServiceInclusive>();
+            var result = await this.militaryServiceInclusiveService.Save(militaryServiceInclusive, this.UserCredit);
+
+			return result.ToActionResult<MilitaryServiceInclusive>();
         }
 
         
         [HttpPost]
         [Route("MilitaryServiceInclusive/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] MilitaryServiceInclusive militaryServiceInclusive)
+        public async Task<IActionResult> SaveAttached([FromBody] MilitaryServiceInclusive militaryServiceInclusive)
         {
-            return this.militaryServiceInclusiveService.SaveAttached(militaryServiceInclusive, this.UserCredit).ToActionResult();
+            var result = await this.militaryServiceInclusiveService.SaveAttached(militaryServiceInclusive, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("MilitaryServiceInclusive/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<MilitaryServiceInclusive> militaryServiceInclusiveList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<MilitaryServiceInclusive> militaryServiceInclusiveList)
         {
-            return this.militaryServiceInclusiveService.SaveBulk(militaryServiceInclusiveList, this.UserCredit).ToActionResult();
+            var result = await this.militaryServiceInclusiveService.SaveBulk(militaryServiceInclusiveList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("MilitaryServiceInclusive/Seek")]
-        public IActionResult Seek([FromBody] MilitaryServiceInclusive militaryServiceInclusive)
+        public async Task<IActionResult> Seek([FromBody] MilitaryServiceInclusive militaryServiceInclusive)
         {
-            return this.militaryServiceInclusiveService.Seek(militaryServiceInclusive).ToActionResult<MilitaryServiceInclusive>();
+            var result = await this.militaryServiceInclusiveService.Seek(militaryServiceInclusive);
+
+			return result.ToActionResult<MilitaryServiceInclusive>();
         }
 
         [HttpGet]
         [Route("MilitaryServiceInclusive/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.militaryServiceInclusiveService.SeekByValue(seekValue, MilitaryServiceInclusive.Informer).ToActionResult<MilitaryServiceInclusive>();
+            var result = await this.militaryServiceInclusiveService.SeekByValue(seekValue, MilitaryServiceInclusive.Informer);
+
+			return result.ToActionResult<MilitaryServiceInclusive>();
         }
 
         [HttpPost]
         [Route("MilitaryServiceInclusive/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] MilitaryServiceInclusive militaryServiceInclusive)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] MilitaryServiceInclusive militaryServiceInclusive)
         {
-            return this.militaryServiceInclusiveService.Delete(militaryServiceInclusive, id, this.UserCredit).ToActionResult();
+            var result = await this.militaryServiceInclusiveService.Delete(militaryServiceInclusive, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

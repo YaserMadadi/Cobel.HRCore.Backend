@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("PersonCertificate/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.personCertificateService.RetrieveById(id, PersonCertificate.Informer, this.UserCredit).ToActionResult<PersonCertificate>();
+            var result = await this.personCertificateService.RetrieveById(id, PersonCertificate.Informer, this.UserCredit);
+
+			return result.ToActionResult<PersonCertificate>();
         }
 
         [HttpPost]
         [Route("PersonCertificate/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.personCertificateService.RetrieveAll(PersonCertificate.Informer, paginate, this.UserCredit).ToActionResult<PersonCertificate>();
+            var result = await this.personCertificateService.RetrieveAll(PersonCertificate.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<PersonCertificate>();
         }
             
 
         
         [HttpPost]
         [Route("PersonCertificate/Save")]
-        public IActionResult Save([FromBody] PersonCertificate personCertificate)
+        public async Task<IActionResult> Save([FromBody] PersonCertificate personCertificate)
         {
-            return this.personCertificateService.Save(personCertificate, this.UserCredit).ToActionResult<PersonCertificate>();
+            var result = await this.personCertificateService.Save(personCertificate, this.UserCredit);
+
+			return result.ToActionResult<PersonCertificate>();
         }
 
         
         [HttpPost]
         [Route("PersonCertificate/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] PersonCertificate personCertificate)
+        public async Task<IActionResult> SaveAttached([FromBody] PersonCertificate personCertificate)
         {
-            return this.personCertificateService.SaveAttached(personCertificate, this.UserCredit).ToActionResult();
+            var result = await this.personCertificateService.SaveAttached(personCertificate, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("PersonCertificate/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<PersonCertificate> personCertificateList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<PersonCertificate> personCertificateList)
         {
-            return this.personCertificateService.SaveBulk(personCertificateList, this.UserCredit).ToActionResult();
+            var result = await this.personCertificateService.SaveBulk(personCertificateList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("PersonCertificate/Seek")]
-        public IActionResult Seek([FromBody] PersonCertificate personCertificate)
+        public async Task<IActionResult> Seek([FromBody] PersonCertificate personCertificate)
         {
-            return this.personCertificateService.Seek(personCertificate).ToActionResult<PersonCertificate>();
+            var result = await this.personCertificateService.Seek(personCertificate);
+
+			return result.ToActionResult<PersonCertificate>();
         }
 
         [HttpGet]
         [Route("PersonCertificate/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.personCertificateService.SeekByValue(seekValue, PersonCertificate.Informer).ToActionResult<PersonCertificate>();
+            var result = await this.personCertificateService.SeekByValue(seekValue, PersonCertificate.Informer);
+
+			return result.ToActionResult<PersonCertificate>();
         }
 
         [HttpPost]
         [Route("PersonCertificate/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] PersonCertificate personCertificate)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] PersonCertificate personCertificate)
         {
-            return this.personCertificateService.Delete(personCertificate, id, this.UserCredit).ToActionResult();
+            var result = await this.personCertificateService.Delete(personCertificate, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("LanguageAbility/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.languageAbilityService.RetrieveById(id, LanguageAbility.Informer, this.UserCredit).ToActionResult<LanguageAbility>();
+            var result = await this.languageAbilityService.RetrieveById(id, LanguageAbility.Informer, this.UserCredit);
+
+			return result.ToActionResult<LanguageAbility>();
         }
 
         [HttpPost]
         [Route("LanguageAbility/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.languageAbilityService.RetrieveAll(LanguageAbility.Informer, paginate, this.UserCredit).ToActionResult<LanguageAbility>();
+            var result = await this.languageAbilityService.RetrieveAll(LanguageAbility.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<LanguageAbility>();
         }
             
 
         
         [HttpPost]
         [Route("LanguageAbility/Save")]
-        public IActionResult Save([FromBody] LanguageAbility languageAbility)
+        public async Task<IActionResult> Save([FromBody] LanguageAbility languageAbility)
         {
-            return this.languageAbilityService.Save(languageAbility, this.UserCredit).ToActionResult<LanguageAbility>();
+            var result = await this.languageAbilityService.Save(languageAbility, this.UserCredit);
+
+			return result.ToActionResult<LanguageAbility>();
         }
 
         
         [HttpPost]
         [Route("LanguageAbility/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] LanguageAbility languageAbility)
+        public async Task<IActionResult> SaveAttached([FromBody] LanguageAbility languageAbility)
         {
-            return this.languageAbilityService.SaveAttached(languageAbility, this.UserCredit).ToActionResult();
+            var result = await this.languageAbilityService.SaveAttached(languageAbility, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("LanguageAbility/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<LanguageAbility> languageAbilityList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<LanguageAbility> languageAbilityList)
         {
-            return this.languageAbilityService.SaveBulk(languageAbilityList, this.UserCredit).ToActionResult();
+            var result = await this.languageAbilityService.SaveBulk(languageAbilityList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("LanguageAbility/Seek")]
-        public IActionResult Seek([FromBody] LanguageAbility languageAbility)
+        public async Task<IActionResult> Seek([FromBody] LanguageAbility languageAbility)
         {
-            return this.languageAbilityService.Seek(languageAbility).ToActionResult<LanguageAbility>();
+            var result = await this.languageAbilityService.Seek(languageAbility);
+
+			return result.ToActionResult<LanguageAbility>();
         }
 
         [HttpGet]
         [Route("LanguageAbility/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.languageAbilityService.SeekByValue(seekValue, LanguageAbility.Informer).ToActionResult<LanguageAbility>();
+            var result = await this.languageAbilityService.SeekByValue(seekValue, LanguageAbility.Informer);
+
+			return result.ToActionResult<LanguageAbility>();
         }
 
         [HttpPost]
         [Route("LanguageAbility/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] LanguageAbility languageAbility)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] LanguageAbility languageAbility)
         {
-            return this.languageAbilityService.Delete(languageAbility, id, this.UserCredit).ToActionResult();
+            var result = await this.languageAbilityService.Delete(languageAbility, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

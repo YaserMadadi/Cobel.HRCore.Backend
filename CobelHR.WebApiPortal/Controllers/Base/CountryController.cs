@@ -7,6 +7,8 @@ using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("Country/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.countryService.RetrieveById(id, Country.Informer, this.UserCredit).ToActionResult<Country>();
+            var result = await this.countryService.RetrieveById(id, Country.Informer, this.UserCredit);
+
+			return result.ToActionResult<Country>();
         }
 
         [HttpPost]
         [Route("Country/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.countryService.RetrieveAll(Country.Informer, paginate, this.UserCredit).ToActionResult<Country>();
+            var result = await this.countryService.RetrieveAll(Country.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Country>();
         }
             
 
         
         [HttpPost]
         [Route("Country/Save")]
-        public IActionResult Save([FromBody] Country country)
+        public async Task<IActionResult> Save([FromBody] Country country)
         {
-            return this.countryService.Save(country, this.UserCredit).ToActionResult<Country>();
+            var result = await this.countryService.Save(country, this.UserCredit);
+
+			return result.ToActionResult<Country>();
         }
 
         
         [HttpPost]
         [Route("Country/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Country country)
+        public async Task<IActionResult> SaveAttached([FromBody] Country country)
         {
-            return this.countryService.SaveAttached(country, this.UserCredit).ToActionResult();
+            var result = await this.countryService.SaveAttached(country, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Country/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Country> countryList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Country> countryList)
         {
-            return this.countryService.SaveBulk(countryList, this.UserCredit).ToActionResult();
+            var result = await this.countryService.SaveBulk(countryList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Country/Seek")]
-        public IActionResult Seek([FromBody] Country country)
+        public async Task<IActionResult> Seek([FromBody] Country country)
         {
-            return this.countryService.Seek(country).ToActionResult<Country>();
+            var result = await this.countryService.Seek(country);
+
+			return result.ToActionResult<Country>();
         }
 
         [HttpGet]
         [Route("Country/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.countryService.SeekByValue(seekValue, Country.Informer).ToActionResult<Country>();
+            var result = await this.countryService.SeekByValue(seekValue, Country.Informer);
+
+			return result.ToActionResult<Country>();
         }
 
         [HttpPost]
         [Route("Country/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Country country)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Country country)
         {
-            return this.countryService.Delete(country, id, this.UserCredit).ToActionResult();
+            var result = await this.countryService.Delete(country, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfPerson_Nationality

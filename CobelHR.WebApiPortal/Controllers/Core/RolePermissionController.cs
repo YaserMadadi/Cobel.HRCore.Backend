@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Core.Abstract;
 using CobelHR.Entities.Core;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Core
 {
     [Route("api/Core")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.Core
 
         [HttpGet]
         [Route("RolePermission/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.rolePermissionService.RetrieveById(id, RolePermission.Informer, this.UserCredit).ToActionResult<RolePermission>();
+            var result = await this.rolePermissionService.RetrieveById(id, RolePermission.Informer, this.UserCredit);
+
+			return result.ToActionResult<RolePermission>();
         }
 
         [HttpPost]
         [Route("RolePermission/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.rolePermissionService.RetrieveAll(RolePermission.Informer, paginate, this.UserCredit).ToActionResult<RolePermission>();
+            var result = await this.rolePermissionService.RetrieveAll(RolePermission.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<RolePermission>();
         }
             
 
         
         [HttpPost]
         [Route("RolePermission/Save")]
-        public IActionResult Save([FromBody] RolePermission rolePermission)
+        public async Task<IActionResult> Save([FromBody] RolePermission rolePermission)
         {
-            return this.rolePermissionService.Save(rolePermission, this.UserCredit).ToActionResult<RolePermission>();
+            var result = await this.rolePermissionService.Save(rolePermission, this.UserCredit);
+
+			return result.ToActionResult<RolePermission>();
         }
 
         
         [HttpPost]
         [Route("RolePermission/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] RolePermission rolePermission)
+        public async Task<IActionResult> SaveAttached([FromBody] RolePermission rolePermission)
         {
-            return this.rolePermissionService.SaveAttached(rolePermission, this.UserCredit).ToActionResult();
+            var result = await this.rolePermissionService.SaveAttached(rolePermission, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("RolePermission/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<RolePermission> rolePermissionList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<RolePermission> rolePermissionList)
         {
-            return this.rolePermissionService.SaveBulk(rolePermissionList, this.UserCredit).ToActionResult();
+            var result = await this.rolePermissionService.SaveBulk(rolePermissionList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("RolePermission/Seek")]
-        public IActionResult Seek([FromBody] RolePermission rolePermission)
+        public async Task<IActionResult> Seek([FromBody] RolePermission rolePermission)
         {
-            return this.rolePermissionService.Seek(rolePermission).ToActionResult<RolePermission>();
+            var result = await this.rolePermissionService.Seek(rolePermission);
+
+			return result.ToActionResult<RolePermission>();
         }
 
         [HttpGet]
         [Route("RolePermission/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.rolePermissionService.SeekByValue(seekValue, RolePermission.Informer).ToActionResult<RolePermission>();
+            var result = await this.rolePermissionService.SeekByValue(seekValue, RolePermission.Informer);
+
+			return result.ToActionResult<RolePermission>();
         }
 
         [HttpPost]
         [Route("RolePermission/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] RolePermission rolePermission)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] RolePermission rolePermission)
         {
-            return this.rolePermissionService.Delete(rolePermission, id, this.UserCredit).ToActionResult();
+            var result = await this.rolePermissionService.Delete(rolePermission, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

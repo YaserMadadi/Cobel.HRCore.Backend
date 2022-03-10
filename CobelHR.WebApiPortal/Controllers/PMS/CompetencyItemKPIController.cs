@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("CompetencyItemKPI/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.competencyItemKPIService.RetrieveById(id, CompetencyItemKPI.Informer, this.UserCredit).ToActionResult<CompetencyItemKPI>();
+            var result = await this.competencyItemKPIService.RetrieveById(id, CompetencyItemKPI.Informer, this.UserCredit);
+
+			return result.ToActionResult<CompetencyItemKPI>();
         }
 
         [HttpPost]
         [Route("CompetencyItemKPI/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.competencyItemKPIService.RetrieveAll(CompetencyItemKPI.Informer, paginate, this.UserCredit).ToActionResult<CompetencyItemKPI>();
+            var result = await this.competencyItemKPIService.RetrieveAll(CompetencyItemKPI.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<CompetencyItemKPI>();
         }
             
 
         
         [HttpPost]
         [Route("CompetencyItemKPI/Save")]
-        public IActionResult Save([FromBody] CompetencyItemKPI competencyItemKPI)
+        public async Task<IActionResult> Save([FromBody] CompetencyItemKPI competencyItemKPI)
         {
-            return this.competencyItemKPIService.Save(competencyItemKPI, this.UserCredit).ToActionResult<CompetencyItemKPI>();
+            var result = await this.competencyItemKPIService.Save(competencyItemKPI, this.UserCredit);
+
+			return result.ToActionResult<CompetencyItemKPI>();
         }
 
         
         [HttpPost]
         [Route("CompetencyItemKPI/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] CompetencyItemKPI competencyItemKPI)
+        public async Task<IActionResult> SaveAttached([FromBody] CompetencyItemKPI competencyItemKPI)
         {
-            return this.competencyItemKPIService.SaveAttached(competencyItemKPI, this.UserCredit).ToActionResult();
+            var result = await this.competencyItemKPIService.SaveAttached(competencyItemKPI, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("CompetencyItemKPI/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<CompetencyItemKPI> competencyItemKPIList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<CompetencyItemKPI> competencyItemKPIList)
         {
-            return this.competencyItemKPIService.SaveBulk(competencyItemKPIList, this.UserCredit).ToActionResult();
+            var result = await this.competencyItemKPIService.SaveBulk(competencyItemKPIList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("CompetencyItemKPI/Seek")]
-        public IActionResult Seek([FromBody] CompetencyItemKPI competencyItemKPI)
+        public async Task<IActionResult> Seek([FromBody] CompetencyItemKPI competencyItemKPI)
         {
-            return this.competencyItemKPIService.Seek(competencyItemKPI).ToActionResult<CompetencyItemKPI>();
+            var result = await this.competencyItemKPIService.Seek(competencyItemKPI);
+
+			return result.ToActionResult<CompetencyItemKPI>();
         }
 
         [HttpGet]
         [Route("CompetencyItemKPI/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.competencyItemKPIService.SeekByValue(seekValue, CompetencyItemKPI.Informer).ToActionResult<CompetencyItemKPI>();
+            var result = await this.competencyItemKPIService.SeekByValue(seekValue, CompetencyItemKPI.Informer);
+
+			return result.ToActionResult<CompetencyItemKPI>();
         }
 
         [HttpPost]
         [Route("CompetencyItemKPI/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] CompetencyItemKPI competencyItemKPI)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] CompetencyItemKPI competencyItemKPI)
         {
-            return this.competencyItemKPIService.Delete(competencyItemKPI, id, this.UserCredit).ToActionResult();
+            var result = await this.competencyItemKPIService.Delete(competencyItemKPI, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfBehavioralKPI

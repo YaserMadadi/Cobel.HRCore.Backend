@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("FunctionalKPI/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.functionalKPIService.RetrieveById(id, FunctionalKPI.Informer, this.UserCredit).ToActionResult<FunctionalKPI>();
+            var result = await this.functionalKPIService.RetrieveById(id, FunctionalKPI.Informer, this.UserCredit);
+
+			return result.ToActionResult<FunctionalKPI>();
         }
 
         [HttpPost]
         [Route("FunctionalKPI/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.functionalKPIService.RetrieveAll(FunctionalKPI.Informer, paginate, this.UserCredit).ToActionResult<FunctionalKPI>();
+            var result = await this.functionalKPIService.RetrieveAll(FunctionalKPI.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<FunctionalKPI>();
         }
             
 
         
         [HttpPost]
         [Route("FunctionalKPI/Save")]
-        public IActionResult Save([FromBody] FunctionalKPI functionalKPI)
+        public async Task<IActionResult> Save([FromBody] FunctionalKPI functionalKPI)
         {
-            return this.functionalKPIService.Save(functionalKPI, this.UserCredit).ToActionResult<FunctionalKPI>();
+            var result = await this.functionalKPIService.Save(functionalKPI, this.UserCredit);
+
+			return result.ToActionResult<FunctionalKPI>();
         }
 
         
         [HttpPost]
         [Route("FunctionalKPI/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] FunctionalKPI functionalKPI)
+        public async Task<IActionResult> SaveAttached([FromBody] FunctionalKPI functionalKPI)
         {
-            return this.functionalKPIService.SaveAttached(functionalKPI, this.UserCredit).ToActionResult();
+            var result = await this.functionalKPIService.SaveAttached(functionalKPI, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("FunctionalKPI/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<FunctionalKPI> functionalKPIList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<FunctionalKPI> functionalKPIList)
         {
-            return this.functionalKPIService.SaveBulk(functionalKPIList, this.UserCredit).ToActionResult();
+            var result = await this.functionalKPIService.SaveBulk(functionalKPIList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("FunctionalKPI/Seek")]
-        public IActionResult Seek([FromBody] FunctionalKPI functionalKPI)
+        public async Task<IActionResult> Seek([FromBody] FunctionalKPI functionalKPI)
         {
-            return this.functionalKPIService.Seek(functionalKPI).ToActionResult<FunctionalKPI>();
+            var result = await this.functionalKPIService.Seek(functionalKPI);
+
+			return result.ToActionResult<FunctionalKPI>();
         }
 
         [HttpGet]
         [Route("FunctionalKPI/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.functionalKPIService.SeekByValue(seekValue, FunctionalKPI.Informer).ToActionResult<FunctionalKPI>();
+            var result = await this.functionalKPIService.SeekByValue(seekValue, FunctionalKPI.Informer);
+
+			return result.ToActionResult<FunctionalKPI>();
         }
 
         [HttpPost]
         [Route("FunctionalKPI/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] FunctionalKPI functionalKPI)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] FunctionalKPI functionalKPI)
         {
-            return this.functionalKPIService.Delete(functionalKPI, id, this.UserCredit).ToActionResult();
+            var result = await this.functionalKPIService.Delete(functionalKPI, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfFunctionalAppraise
