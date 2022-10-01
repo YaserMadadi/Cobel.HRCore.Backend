@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EssentialCore.ExtenssionMethod;
+using EssentialCore.Tools.Middleware;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace CobelHR.WebApiPortal
 {
@@ -37,6 +39,7 @@ namespace CobelHR.WebApiPortal
             services.AddControllers().AddNewtonsoftJson(a =>
             {
                 a.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
+                //a.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
 
             services.AddSwaggerGen(c =>
@@ -95,6 +98,10 @@ namespace CobelHR.WebApiPortal
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            
+
+            app.UseMiddleware<AuthenticationMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

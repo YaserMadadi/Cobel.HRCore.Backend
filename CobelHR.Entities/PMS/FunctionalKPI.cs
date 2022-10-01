@@ -52,10 +52,8 @@ namespace CobelHR.Entities.PMS
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<FunctionalAppraise> ListOfFunctionalAppraise { get; set; }
-
-		public List<FunctionalKPIComment> ListOfFunctionalKPIComment { get; set; }
+		[JsonIgnore]		public List<FunctionalAppraise> ListOfFunctionalAppraise { get; set; }
+		[JsonIgnore]		public List<FunctionalKPIComment> ListOfFunctionalKPIComment { get; set; }
 
 		#endregion
 

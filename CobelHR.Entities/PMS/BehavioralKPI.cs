@@ -44,8 +44,7 @@ namespace CobelHR.Entities.PMS
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<BehavioralAppraise> ListOfBehavioralAppraise { get; set; }
+		[JsonIgnore]		public List<BehavioralAppraise> ListOfBehavioralAppraise { get; set; }
 
 		#endregion
 

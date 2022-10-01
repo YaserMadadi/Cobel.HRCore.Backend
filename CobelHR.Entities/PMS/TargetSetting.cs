@@ -66,16 +66,11 @@ namespace CobelHR.Entities.PMS
         #region    List Of Related Entities
 
         public List<AppraiseResult> ListOfAppraiseResult { get; set; }
-
-		public List<BehavioralObjective> ListOfBehavioralObjective { get; set; }
-
-		public List<FinalAppraise> ListOfFinalAppraise { get; set; }
-
-		public List<FunctionalObjective> ListOfFunctionalObjective { get; set; }
-
-		public List<QualitativeObjective> ListOfQualitativeObjective { get; set; }
-
-		public List<QuantitativeAppraise> ListOfQuantitativeAppraise { get; set; }
+		[JsonIgnore]		public List<BehavioralObjective> ListOfBehavioralObjective { get; set; }
+		[JsonIgnore]		public List<FinalAppraise> ListOfFinalAppraise { get; set; }
+		[JsonIgnore]		public List<FunctionalObjective> ListOfFunctionalObjective { get; set; }
+		[JsonIgnore]		public List<QualitativeObjective> ListOfQualitativeObjective { get; set; }
+		[JsonIgnore]		public List<QuantitativeAppraise> ListOfQuantitativeAppraise { get; set; }
 
 		#endregion
 

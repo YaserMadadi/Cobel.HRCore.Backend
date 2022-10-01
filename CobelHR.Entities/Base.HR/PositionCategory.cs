@@ -43,10 +43,8 @@ namespace CobelHR.Entities.Base.HR
         public List<ConfigTargetSetting> ListOfConfigTargetSetting { get; set; }
 
         public List<AppraisalApproverConfig> ListOfDepartmentCategory_AppraisalApproverConfig { get; set; }
-
-		public List<Position> ListOfPosition { get; set; }
-
-		public List<Unit> ListOfUnit { get; set; }
+		[JsonIgnore]		public List<Position> ListOfPosition { get; set; }
+		[JsonIgnore]		public List<Unit> ListOfUnit { get; set; }
 
 		#endregion
 

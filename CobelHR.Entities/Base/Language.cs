@@ -38,8 +38,7 @@ namespace CobelHR.Entities.Base
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<LanguageAbility> ListOfLanguageAbility { get; set; }
+		[JsonIgnore]		public List<LanguageAbility> ListOfLanguageAbility { get; set; }
 
 		#endregion
 

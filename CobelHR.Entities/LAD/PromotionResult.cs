@@ -38,8 +38,7 @@ namespace CobelHR.Entities.LAD
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<PromotionAssessment> ListOfPromotionAssessment { get; set; }
+		[JsonIgnore]		public List<PromotionAssessment> ListOfPromotionAssessment { get; set; }
 
 		#endregion
 

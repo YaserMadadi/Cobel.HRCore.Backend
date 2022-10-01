@@ -38,8 +38,7 @@ namespace CobelHR.Entities.LAD
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<Conclusion> ListOfConclusion { get; set; }
+		[JsonIgnore]		public List<Conclusion> ListOfConclusion { get; set; }
 
 		#endregion
 

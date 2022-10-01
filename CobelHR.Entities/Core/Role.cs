@@ -38,10 +38,8 @@ namespace CobelHR.Entities.Core
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<RoleMember> ListOfRoleMember { get; set; }
-
-		public List<RolePermission> ListOfRolePermission { get; set; }
+		[JsonIgnore]		public List<RoleMember> ListOfRoleMember { get; set; }
+		[JsonIgnore]		public List<RolePermission> ListOfRolePermission { get; set; }
 
 		#endregion
 

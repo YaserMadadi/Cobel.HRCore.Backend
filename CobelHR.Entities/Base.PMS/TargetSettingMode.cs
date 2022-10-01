@@ -38,8 +38,7 @@ namespace CobelHR.Entities.Base.PMS
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<TargetSetting> ListOfTargetSetting { get; set; }
+		[JsonIgnore]		public List<TargetSetting> ListOfTargetSetting { get; set; }
 
 		#endregion
 

@@ -34,6 +34,8 @@ namespace CobelHR.Entities.PMS
         public HR.Employee Employee { get; set; }
 		
         public HR.Position Position { get; set; }
+        
+        public Base.Year Year { get; set; }
 		
 		public string Title { get; set; }
 		
@@ -48,12 +50,9 @@ namespace CobelHR.Entities.PMS
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<IndividualDevelopmentPlan> ListOfIndividualDevelopmentPlan { get; set; }
-
-		public List<VisionApproved> ListOfVisionApproved { get; set; }
-
-		public List<VisionComment> ListOfVisionComment { get; set; }
+		[JsonIgnore]		public List<IndividualDevelopmentPlan> ListOfIndividualDevelopmentPlan { get; set; }
+		[JsonIgnore]		public List<VisionApproved> ListOfVisionApproved { get; set; }
+		[JsonIgnore]		public List<VisionComment> ListOfVisionComment { get; set; }
 
 		#endregion
 

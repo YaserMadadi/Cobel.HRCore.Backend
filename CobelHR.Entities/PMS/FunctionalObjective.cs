@@ -51,10 +51,13 @@ namespace CobelHR.Entities.PMS
 
         #region    List Of Related Entities
 
+		[JsonIgnore]
 		public List<FunctionalKPI> ListOfFunctionalKPI { get; set; }
 
+	    [JsonIgnore]
 		public List<FunctionalObjective> ListOfChildFunctionalObjective { get; set; }
 
+		[JsonIgnore]
 		public List<FunctionalObjectiveComment> ListOfFunctionalObjectiveComment { get; set; }
 
 		#endregion

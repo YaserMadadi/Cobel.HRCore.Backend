@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using EssentialCore.Tools.Serializer;
 using System.Data.SqlClient;
 using EssentialCore.Entities;
+using CobelHR.Entities.Partial.HR;
 
 namespace CobelHR.Services.Partial.HR
 {
@@ -32,6 +33,25 @@ namespace CobelHR.Services.Partial.HR
                                                 new SqlParameter("@Employee_Id", employee_id),
                                                 new SqlParameter("@jsonValue", targetSetting.ToJson()))
                                                         .ExecuteDataResult<List<TargetSetting>>(JsonType.Collection);
+
+            return dataResult;
+        }
+
+        public DataResult<List<AppraiseResult>> LoadAppraiseResult(int employee_id)
+        {
+            var dataResult = UserClass.CreateCommand("[HR].[Employee.CollectionOfAppraiseResult]",
+                                                new SqlParameter("@Employee_Id", employee_id))
+                                                        .ExecuteDataResult<List<AppraiseResult>>(JsonType.Collection);
+
+            return dataResult;
+        }
+
+        public DataResult<List<ChartPeople>> LoadChart(int employee_id, int position_id)
+        {
+            var dataResult = UserClass.CreateCommand("[HR].[Employee.LoadChart]",
+                                                new SqlParameter("@Employee_Id", employee_id),
+                                                new SqlParameter("@Position_Id", position_id))
+                                                        .ExecuteDataResult<List<ChartPeople>>(JsonType.Collection);
 
             return dataResult;
         }

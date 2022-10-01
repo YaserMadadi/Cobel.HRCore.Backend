@@ -40,8 +40,7 @@ namespace CobelHR.Entities.Base
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<AssessmentTraining> ListOfDeadLine_AssessmentTraining { get; set; }
+		[JsonIgnore]		public List<AssessmentTraining> ListOfDeadLine_AssessmentTraining { get; set; }
 
 		#endregion
 

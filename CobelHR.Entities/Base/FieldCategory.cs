@@ -38,8 +38,7 @@ namespace CobelHR.Entities.Base
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<PersonCertificate> ListOfPersonCertificate { get; set; }
+		[JsonIgnore]		public List<PersonCertificate> ListOfPersonCertificate { get; set; }
 
 		#endregion
 

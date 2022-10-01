@@ -36,8 +36,7 @@ namespace CobelHR.Entities.Base
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<MilitaryService> ListOfMilitaryService { get; set; }
+		[JsonIgnore]		public List<MilitaryService> ListOfMilitaryService { get; set; }
 
 		#endregion
 

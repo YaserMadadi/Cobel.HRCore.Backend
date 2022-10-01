@@ -1,4 +1,5 @@
 ﻿using EssentialCore.Tools.Pagination;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,12 +47,13 @@ namespace EssentialCore.Entities
 
         public string Descriptor { get; set; }
 
-
+        [JsonIgnore]
         public Info Info { get; init; }
 
-
+        
         public Paginate Paginate { get; set; }
 
+        [JsonIgnore]
         public bool IsNew
         {
             get

@@ -56,22 +56,14 @@ namespace CobelHR.Entities.HR
         #region    List Of Related Entities
 
 		
-
-		public List<Position> ListOfChildPosition { get; set; }
-
-		public List<PositionAssignment> ListOfPositionAssignment { get; set; }
-
-		public List<PromotionAssessment> ListOfProposedPosition_PromotionAssessment { get; set; }
-
-		public List<PromotionAssessment> ListOfCurrentPosition_PromotionAssessment { get; set; }
-
-		public List<RotationAssessment> ListOfProposedPosition_RotationAssessment { get; set; }
-
-		public List<RotationAssessment> ListOfCurrentPosition_RotationAssessment { get; set; }
-
-		public List<TargetSetting> ListOfTargetSetting { get; set; }
-
-		public List<Vision> ListOfVision { get; set; }
+		[JsonIgnore]		public List<Position> ListOfChildPosition { get; set; }
+		[JsonIgnore]		public List<PositionAssignment> ListOfPositionAssignment { get; set; }
+		[JsonIgnore]		public List<PromotionAssessment> ListOfProposedPosition_PromotionAssessment { get; set; }
+		[JsonIgnore]		public List<PromotionAssessment> ListOfCurrentPosition_PromotionAssessment { get; set; }
+		[JsonIgnore]		public List<RotationAssessment> ListOfProposedPosition_RotationAssessment { get; set; }
+		[JsonIgnore]		public List<RotationAssessment> ListOfCurrentPosition_RotationAssessment { get; set; }
+		[JsonIgnore]		public List<TargetSetting> ListOfTargetSetting { get; set; }
+		[JsonIgnore]		public List<Vision> ListOfVision { get; set; }
 
 		#endregion
 

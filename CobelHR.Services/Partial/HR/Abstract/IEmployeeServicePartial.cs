@@ -1,4 +1,5 @@
 ﻿using CobelHR.Entities.Core;
+using CobelHR.Entities.Partial.HR;
 using CobelHR.Entities.PMS;
 using CobelHR.Services.HR.Abstract;
 using EssentialCore.Tools.Result;
@@ -15,6 +16,10 @@ namespace CobelHR.Services.Partial.HR.Abstract
         public DataResult<List<RolePermission>> LoadRolePermission(int employee_id);
 
         public DataResult<List<TargetSetting>> LoadTargetSetting(int employee_id, TargetSetting targetSetting);
+
+        public DataResult<List<AppraiseResult>> LoadAppraiseResult(int employee_id);
+        
+        public DataResult<List<ChartPeople>> LoadChart(int employee_id, int position_id);
 
     }
 }

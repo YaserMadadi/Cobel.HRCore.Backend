@@ -38,8 +38,7 @@ namespace CobelHR.Entities.Base.PMS
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<AppraisalApproverConfig> ListOfAppraisalApproverConfig { get; set; }
+		[JsonIgnore]		public List<AppraisalApproverConfig> ListOfAppraisalApproverConfig { get; set; }
 
 		#endregion
 

@@ -43,12 +43,9 @@ namespace CobelHR.Entities.Base
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<Assessor> ListOfAssessor { get; set; }
-
-		public List<Coach> ListOfCoach { get; set; }
-
-		public List<Person> ListOfPerson { get; set; }
+		[JsonIgnore]		public List<Assessor> ListOfAssessor { get; set; }
+		[JsonIgnore]		public List<Coach> ListOfCoach { get; set; }
+		[JsonIgnore]		public List<Person> ListOfPerson { get; set; }
 
 		#endregion
 

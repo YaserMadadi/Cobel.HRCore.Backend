@@ -39,10 +39,8 @@ namespace CobelHR.Entities.HR
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<ObjectiveWeightNonOperational> ListOfObjectiveWeightNonOperational { get; set; }
-
-		public List<Position> ListOfPosition { get; set; }
+		[JsonIgnore]		public List<ObjectiveWeightNonOperational> ListOfObjectiveWeightNonOperational { get; set; }
+		[JsonIgnore]		public List<Position> ListOfPosition { get; set; }
 
 		#endregion
 

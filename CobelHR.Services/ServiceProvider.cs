@@ -26,6 +26,8 @@ using CobelHR.Services.Partial.PMS.Abstract;
 using CobelHR.Services.Partial.PMS;
 using CobelHR.Services.Partial.Core.Abstract;
 using CobelHR.Services.Partial.Core;
+using CobelHR.Services.Partial.Dashboard.LAD.Abstract;
+using CobelHR.Services.Partial.Dashboard.LAD;
 
 namespace CobelHR.Services
 {
@@ -49,6 +51,7 @@ namespace CobelHR.Services
             services.AddScoped<IUserClass, UserClass>();
 
             services.AddScoped<IOrgChartService, OrgChartService>();
+            services.AddScoped<ILADDashboardService, LADDashboardService>();
 
             #region Base
 
@@ -92,6 +95,7 @@ namespace CobelHR.Services
             services.AddScoped<IPositionCategoryService, PositionCategoryService>();
             services.AddScoped<IPositionDivisionService, PositionDivisionService>();
             services.AddScoped<IRelativeTypeService, RelativeTypeService>();
+            services.AddScoped<ITerminationTypeService, TerminationTypeService>();
 
             #endregion
 
@@ -104,6 +108,7 @@ namespace CobelHR.Services
             services.AddScoped<ICurrentSituationService, CurrentSituationService>();
             services.AddScoped<IDesirableSituationService, DesirableSituationService>();
             services.AddScoped<IDevelopmentPlanPriorityService, DevelopmentPlanPriorityService>();
+            services.AddScoped<IIndividualDevelopmentPlanActionService, IndividualDevelopmentPlanActionService>();
             services.AddScoped<IExpectedLevelService, ExpectedLevelService>();
             services.AddScoped<IMeasurementUnitService, MeasurementUnitService>();
             services.AddScoped<ISubjectService, SubjectService>();
@@ -140,6 +145,7 @@ namespace CobelHR.Services
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IEmployeeDetailService, EmployeeDetailService>();
+            services.AddScoped<IEmployeeDetailTerminationService, EmployeeDetailTerminationService>();
             services.AddScoped<IEmployeeEventService, EmployeeEventService>();
             services.AddScoped<IEmployeeNotificationService, EmployeeNotificationService>();
             services.AddScoped<IHabitancyService, HabitancyService>();
@@ -177,6 +183,7 @@ namespace CobelHR.Services
             #region LAD
 
             // LAD Services
+            services.AddScoped<IActionPlanService, ActionPlanService>();
             services.AddScoped<IAnswerTypeService, AnswerTypeService>();
             services.AddScoped<IAnswerTypeItemService, AnswerTypeItemService>();
             services.AddScoped<IAssessmentService, AssessmentService>();

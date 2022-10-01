@@ -40,8 +40,7 @@ namespace CobelHR.Entities.Base
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<Person> ListOfNationality_Person { get; set; }
+		[JsonIgnore]		public List<Person> ListOfNationality_Person { get; set; }
 
 		#endregion
 

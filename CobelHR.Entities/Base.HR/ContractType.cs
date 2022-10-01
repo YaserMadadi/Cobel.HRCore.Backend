@@ -39,7 +39,7 @@ namespace CobelHR.Entities.Base.HR
 
         #region    List Of Related Entities
 
-		public List<Contract> ListOfContract { get; set; }
+		[JsonIgnore]		public List<Contract> ListOfContract { get; set; }
 
 		#endregion
 

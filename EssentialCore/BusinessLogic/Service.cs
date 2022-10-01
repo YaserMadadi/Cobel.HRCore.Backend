@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EssentialCore.BusinessLogic
 {
-    public class Service<T> : IService<T> where T : IEntityBase
+    public class Service<T> : IService<T> where T : IEntityBase, new()
     {
 
         public Service()
@@ -72,6 +72,10 @@ namespace EssentialCore.BusinessLogic
 
         public async Task<DataResult<T>> Save(T entity, UserCredit userCredit)
         {
+            if (entity == null)
+
+                return new ErrorDataResult<T>(0, "Entity is Null");
+
             //TODO: CheckPermission
             var permissionType = entity.IsNew ? PermissionType.Add : PermissionType.Edit;
 
@@ -129,7 +133,7 @@ namespace EssentialCore.BusinessLogic
 
             transaction.Commit();
 
-            
+
 
             return new Result(true);
 
@@ -142,6 +146,10 @@ namespace EssentialCore.BusinessLogic
 
         public DataResult<List<T>> Seek(T entity)
         {
+            if (entity == null)
+
+                return new ErrorDataResult<List<T>>(-1, "The submitted parameters are probably wrong!");
+
             var paginate = entity.Paginate == null || entity.Paginate == default ? new Paginate(80, 1, 1) : entity.Paginate;
 
             //TODO: CheckPermission

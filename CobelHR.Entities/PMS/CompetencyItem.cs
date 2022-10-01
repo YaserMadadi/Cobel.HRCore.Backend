@@ -39,14 +39,10 @@ namespace CobelHR.Entities.PMS
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<AssessmentScore> ListOfAssessmentScore { get; set; }
-
-		public List<BehavioralObjective> ListOfBehavioralObjective { get; set; }
-
-		public List<CompetencyItemKPI> ListOfCompetencyItemKPI { get; set; }
-
-		public List<DevelopmentPlanCompetency> ListOfDevelopmentPlanCompetency { get; set; }
+		[JsonIgnore]		public List<AssessmentScore> ListOfAssessmentScore { get; set; }
+		[JsonIgnore]		public List<BehavioralObjective> ListOfBehavioralObjective { get; set; }
+		[JsonIgnore]		public List<CompetencyItemKPI> ListOfCompetencyItemKPI { get; set; }
+		[JsonIgnore]		public List<DevelopmentPlanCompetency> ListOfDevelopmentPlanCompetency { get; set; }
 
 		#endregion
 

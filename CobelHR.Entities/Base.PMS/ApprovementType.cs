@@ -38,8 +38,7 @@ namespace CobelHR.Entities.Base.PMS
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<VisionApproved> ListOfVisionApproved { get; set; }
+		[JsonIgnore]		public List<VisionApproved> ListOfVisionApproved { get; set; }
 
 		#endregion
 

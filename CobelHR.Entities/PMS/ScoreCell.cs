@@ -48,12 +48,9 @@ namespace CobelHR.Entities.PMS
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<AppraiseResult> ListOfAppraiseResult { get; set; }
-
-		public List<CellAction> ListOfCellAction { get; set; }
-
-		public List<FinalAppraise> ListOfFinalAppraise { get; set; }
+		[JsonIgnore]		public List<AppraiseResult> ListOfAppraiseResult { get; set; }
+		[JsonIgnore]		public List<CellAction> ListOfCellAction { get; set; }
+		[JsonIgnore]		public List<FinalAppraise> ListOfFinalAppraise { get; set; }
 
 		#endregion
 

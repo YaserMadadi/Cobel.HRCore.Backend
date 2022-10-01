@@ -38,8 +38,7 @@ namespace CobelHR.Entities.IDEA
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<Training> ListOfTraining { get; set; }
+		[JsonIgnore]		public List<Training> ListOfTraining { get; set; }
 
 		#endregion
 

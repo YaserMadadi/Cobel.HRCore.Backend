@@ -42,24 +42,15 @@ namespace CobelHR.Entities.LAD
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<AssessmentCoaching> ListOfAssessmentCoaching { get; set; }
-
-		public List<AssessmentScore> ListOfAssessmentScore { get; set; }
-
-		public List<AssessmentTraining> ListOfAssessmentTraining { get; set; }
-
-		public List<CoachingQuestionary> ListOfCoachingQuestionary { get; set; }
-
-		public List<Conclusion> ListOfConclusion { get; set; }
-
-		public List<DevelopmentGoal> ListOfDevelopmentGoal { get; set; }
-
-		public List<FeedbackSession> ListOfFeedbackSession { get; set; }
-
-		public List<PromotionAssessment> ListOfPromotionAssessment { get; set; }
-
-		public List<RotationAssessment> ListOfRotationAssessment { get; set; }
+		[JsonIgnore]		public List<AssessmentCoaching> ListOfAssessmentCoaching { get; set; }
+		[JsonIgnore]		public List<AssessmentScore> ListOfAssessmentScore { get; set; }
+		[JsonIgnore]		public List<AssessmentTraining> ListOfAssessmentTraining { get; set; }
+		[JsonIgnore]		public List<CoachingQuestionary> ListOfCoachingQuestionary { get; set; }
+		[JsonIgnore]		public List<Conclusion> ListOfConclusion { get; set; }
+		[JsonIgnore]		public List<DevelopmentGoal> ListOfDevelopmentGoal { get; set; }
+		[JsonIgnore]		public List<FeedbackSession> ListOfFeedbackSession { get; set; }
+		[JsonIgnore]		public List<PromotionAssessment> ListOfPromotionAssessment { get; set; }
+		[JsonIgnore]		public List<RotationAssessment> ListOfRotationAssessment { get; set; }
 
 		#endregion
 

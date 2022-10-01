@@ -38,8 +38,7 @@ namespace CobelHR.Entities.Base
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<SchoolHistory> ListOfSchoolHistory { get; set; }
+		[JsonIgnore]		public List<SchoolHistory> ListOfSchoolHistory { get; set; }
 
 		#endregion
 

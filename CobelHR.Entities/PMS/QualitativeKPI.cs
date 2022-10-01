@@ -50,8 +50,7 @@ namespace CobelHR.Entities.PMS
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<QualitativeAppraise> ListOfQualitativeAppraise { get; set; }
+		[JsonIgnore]		public List<QualitativeAppraise> ListOfQualitativeAppraise { get; set; }
 
 		#endregion
 

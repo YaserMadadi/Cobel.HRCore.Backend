@@ -50,8 +50,7 @@ namespace CobelHR.Entities.HR
 		#endregion
 
         #region    List Of Related Entities
-
-		public List<UniversityTerminate> ListOfUniversityTerminate { get; set; }
+		[JsonIgnore]		public List<UniversityTerminate> ListOfUniversityTerminate { get; set; }
 
 		#endregion
 

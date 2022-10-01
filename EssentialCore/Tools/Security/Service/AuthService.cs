@@ -97,10 +97,10 @@ namespace EssentialCore.Tools.Security.Service
             }
             catch (Exception ex)
             {
-                return new ErrorResult(-1, "Error in CheckInDomain Exception : " + ex.Message);
+                return new ErrorResult(-1, $"CheckInDomain Exception : " + ex.Message);
             }
 
-            return new ErrorResult(-1, "end of CheckInDomain and not returned.");
+            return new ErrorResult(-1, "CheckInDomain returned nothing.");
         }
 
 

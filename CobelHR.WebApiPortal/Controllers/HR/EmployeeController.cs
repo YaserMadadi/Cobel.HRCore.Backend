@@ -82,13 +82,16 @@ namespace CobelHR.ApiServices.Controllers.HR
             return this.employeeService.Delete(employee, id, this.UserCredit).ToActionResult();
         }
 
-        // CollectionOfAssessment
-        //[HttpPost]
-        //[Route("Employee/{employee_id:int}/Assessment")]
-        //public IActionResult CollectionOfAssessment([FromRoute(Name = "employee_id")] int id, Assessment assessment)
-        //{
-        //    return this.employeeService.CollectionOfAssessment(id, assessment).ToActionResult();
-        //}
+        #region CollectionOf Methods
+
+
+        //CollectionOfAssessment
+        [HttpPost]
+        [Route("Employee/{employee_id:int}/Assessment")]
+        public IActionResult CollectionOfAssessment([FromRoute(Name = "employee_id")] int id, Assessment assessment)
+        {
+            return this.employeeService.CollectionOfAssessment(id, assessment).ToActionResult();
+        }
 
         // CollectionOfBehavioralAppraise_Appraiser
         [HttpPost]
@@ -99,12 +102,12 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         // CollectionOfCoaching
-        //[HttpPost]
-        //[Route("Employee/{employee_id:int}/Coaching")]
-        //public IActionResult CollectionOfCoaching([FromRoute(Name = "employee_id")] int id, Coaching coaching)
-        //{
-        //    return this.employeeService.CollectionOfCoaching(id, coaching).ToActionResult();
-        //}
+        [HttpPost]
+        [Route("Employee/{employee_id:int}/Coaching")]
+        public IActionResult CollectionOfCoaching([FromRoute(Name = "employee_id")] int id, Coaching coaching)
+        {
+            return this.employeeService.CollectionOfCoaching(id, coaching).ToActionResult();
+        }
 
         // CollectionOfContract
         [HttpPost]
@@ -249,5 +252,9 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             return this.employeeService.CollectionOfVisionComment_Commentator(id, visionComment).ToActionResult();
         }
+
+
+
+        #endregion
     }
 }

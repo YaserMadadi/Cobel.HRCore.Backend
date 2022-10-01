@@ -16,34 +16,61 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace EssentialCore.Controllers
 {
-    [Authorize()]
-    public class BaseController : Controller
+    //[Authorize()]
+    public class BaseController : ControllerBase
     {
         public BaseController()
         {
-            this.userService = new UserService();
+            //this.userService = new UserService();
+
+
+
+            //this.UserCredit = this.HttpContext.Items["UserCredit"] as UserCredit;
         }
 
-        public IUserService userService { get; set; }
 
-        public UserCredit UserCredit { get; set; }
 
-        public override void OnActionExecuting(ActionExecutingContext context)
+        //public IUserService userService { get; set; }
+
+        private UserCredit userCredit;
+
+        public UserCredit UserCredit
         {
-            //var identity = context.HttpContext.User.Identity as ClaimsIdentity;
+            get
+            {
+                if (userCredit == null)
 
-            //var userName = identity.FindFirst(ClaimTypes.Name);
+                    userCredit = this.HttpContext.Items["UserCredit"] as UserCredit;
 
-            var userName = context.HttpContext.User.Identity.Name;
-
-            var userCreditResult = this.userService.RetrieveByUserName(userName);
-
-            this.UserCredit = userCreditResult.IsSucceeded ? userCreditResult.Data : null;
-
-
-
-            base.OnActionExecuting(context);
+                return userCredit;
+            }
         }
+
+
+
+        //public override void OnActionExecuting(ActionExecutingContext context)
+        //{
+        //    //var identity = context.HttpContext.User.Identity as ClaimsIdentity;
+
+        //    ////var userName = identity.FindFirst(ClaimTypes.Name);
+
+        //    //var userName = context.HttpContext.User.Identity.Name;
+
+        //    //var userCreditResult = this.userService.RetrieveByUserName(userName);
+
+        //    //this.UserCredit = userCreditResult.IsSucceeded ? userCreditResult.Data : null;
+        //    this.UserCredit = new UserCredit()
+        //    {
+        //        Employee_Id = 1,
+        //        UserAccount_Id = 2,
+        //        Person_Id = 1,
+        //        UserName = "",
+        //        DisplayName = "User"
+        //    };
+
+
+        //    base.OnActionExecuting(context);
+        //}
 
         private void updateToken()
         {
