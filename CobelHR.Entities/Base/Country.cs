@@ -6,6 +6,9 @@ using CobelHR.Entities.HR;
 
 namespace CobelHR.Entities.Base
 {
+    /// <summary>
+    /// test
+    /// </summary>
     public class Country : EntityBase, IEntityBase
     {
         public static Info Informer { get; } = new Info("Base", "Country", "Country");
