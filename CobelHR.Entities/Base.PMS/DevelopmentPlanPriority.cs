@@ -38,7 +38,9 @@ namespace CobelHR.Entities.Base.PMS
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<IndividualDevelopmentPlan> ListOfPriority_IndividualDevelopmentPlan { get; set; }
+
+		[JsonIgnore]
+		public List<IndividualDevelopmentPlan> ListOfPriority_IndividualDevelopmentPlan { get; set; }
 
 		#endregion
 

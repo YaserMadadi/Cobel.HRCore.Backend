@@ -7,6 +7,8 @@ using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("Religion/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.religionService.RetrieveById(id, Religion.Informer, this.UserCredit).ToActionResult<Religion>();
+            var result = await this.religionService.RetrieveById(id, Religion.Informer, this.UserCredit);
+
+			return result.ToActionResult<Religion>();
         }
 
         [HttpPost]
         [Route("Religion/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.religionService.RetrieveAll(Religion.Informer, paginate, this.UserCredit).ToActionResult<Religion>();
+            var result = await this.religionService.RetrieveAll(Religion.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Religion>();
         }
             
 
         
         [HttpPost]
         [Route("Religion/Save")]
-        public IActionResult Save([FromBody] Religion religion)
+        public async Task<IActionResult> Save([FromBody] Religion religion)
         {
-            return this.religionService.Save(religion, this.UserCredit).ToActionResult<Religion>();
+            var result = await this.religionService.Save(religion, this.UserCredit);
+
+			return result.ToActionResult<Religion>();
         }
 
         
         [HttpPost]
         [Route("Religion/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Religion religion)
+        public async Task<IActionResult> SaveAttached([FromBody] Religion religion)
         {
-            return this.religionService.SaveAttached(religion, this.UserCredit).ToActionResult();
+            var result = await this.religionService.SaveAttached(religion, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Religion/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Religion> religionList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Religion> religionList)
         {
-            return this.religionService.SaveBulk(religionList, this.UserCredit).ToActionResult();
+            var result = await this.religionService.SaveBulk(religionList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Religion/Seek")]
-        public IActionResult Seek([FromBody] Religion religion)
+        public async Task<IActionResult> Seek([FromBody] Religion religion)
         {
-            return this.religionService.Seek(religion).ToActionResult<Religion>();
+            var result = await this.religionService.Seek(religion);
+
+			return result.ToActionResult<Religion>();
         }
 
         [HttpGet]
         [Route("Religion/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.religionService.SeekByValue(seekValue, Religion.Informer).ToActionResult<Religion>();
+            var result = await this.religionService.SeekByValue(seekValue, Religion.Informer);
+
+			return result.ToActionResult<Religion>();
         }
 
         [HttpPost]
         [Route("Religion/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Religion religion)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Religion religion)
         {
-            return this.religionService.Delete(religion, id, this.UserCredit).ToActionResult();
+            var result = await this.religionService.Delete(religion, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfPerson

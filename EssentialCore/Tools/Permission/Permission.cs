@@ -97,30 +97,34 @@ namespace EssentialCore.Tools.Permission
             return true;
         }
 
-        private static void ReloadRoleMember()
+        private static async Task<bool> ReloadRoleMember()
         {
             var service = new Service<RoleMember>();
 
-            var dataResult = service.RetrieveAll(RoleMember.Informer, new Pagination.Paginate(int.MaxValue, 1, 1));
+            var dataResult = await service.RetrieveAll(RoleMember.Informer, new Pagination.Paginate(int.MaxValue, 1, 1));
 
             if (!dataResult.IsSucceeded)
 
-                return;
+                return false;
 
             Permission.RoleMemberList = dataResult.Data.ToList();
+
+            return true;
         }
 
-        private static void ReloadRolePermission()
+        private static async Task<bool> ReloadRolePermission()
         {
             var service = new Service<RolePermission>();
 
-            var dataResult = service.RetrieveAll(RolePermission.Informer, new Pagination.Paginate(int.MaxValue, 1, 1));
+            var dataResult = await service.RetrieveAll(RolePermission.Informer, new Pagination.Paginate(int.MaxValue, 1, 1));
 
             if (!dataResult.IsSucceeded)
 
-                return;
+                return false;
 
             Permission.RolePermissionList = dataResult.Data.ToList();
+
+            return true;
         }
     }
 }

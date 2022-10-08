@@ -59,7 +59,7 @@ namespace CobelHR.Services.PMS.Actions
 
             transaction.Commit();
 
-            result = individualDevelopmentPlanService.RetrieveById(result.Id, IndividualDevelopmentPlan.Informer, userCredit);
+            result = await individualDevelopmentPlanService.RetrieveById(result.Id, IndividualDevelopmentPlan.Informer, userCredit);
 
             return result;
         }

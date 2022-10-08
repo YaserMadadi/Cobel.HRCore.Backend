@@ -27,7 +27,7 @@ namespace CobelHR.Services.Partial.HR
                                                         new SqlParameter("@Parent_Id",id))
                                                         .ExecuteDataResult<List<OrgChart>>(JsonType.Collection);
 
-            return dataResult;
+            return dataResult.Result;
         }
     }
 }

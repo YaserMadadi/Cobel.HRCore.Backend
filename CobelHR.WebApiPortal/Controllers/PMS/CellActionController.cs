@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("CellAction/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.cellActionService.RetrieveById(id, CellAction.Informer, this.UserCredit).ToActionResult<CellAction>();
+            var result = await this.cellActionService.RetrieveById(id, CellAction.Informer, this.UserCredit);
+
+			return result.ToActionResult<CellAction>();
         }
 
         [HttpPost]
         [Route("CellAction/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.cellActionService.RetrieveAll(CellAction.Informer, paginate, this.UserCredit).ToActionResult<CellAction>();
+            var result = await this.cellActionService.RetrieveAll(CellAction.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<CellAction>();
         }
             
 
         
         [HttpPost]
         [Route("CellAction/Save")]
-        public IActionResult Save([FromBody] CellAction cellAction)
+        public async Task<IActionResult> Save([FromBody] CellAction cellAction)
         {
-            return this.cellActionService.Save(cellAction, this.UserCredit).ToActionResult<CellAction>();
+            var result = await this.cellActionService.Save(cellAction, this.UserCredit);
+
+			return result.ToActionResult<CellAction>();
         }
 
         
         [HttpPost]
         [Route("CellAction/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] CellAction cellAction)
+        public async Task<IActionResult> SaveAttached([FromBody] CellAction cellAction)
         {
-            return this.cellActionService.SaveAttached(cellAction, this.UserCredit).ToActionResult();
+            var result = await this.cellActionService.SaveAttached(cellAction, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("CellAction/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<CellAction> cellActionList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<CellAction> cellActionList)
         {
-            return this.cellActionService.SaveBulk(cellActionList, this.UserCredit).ToActionResult();
+            var result = await this.cellActionService.SaveBulk(cellActionList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("CellAction/Seek")]
-        public IActionResult Seek([FromBody] CellAction cellAction)
+        public async Task<IActionResult> Seek([FromBody] CellAction cellAction)
         {
-            return this.cellActionService.Seek(cellAction).ToActionResult<CellAction>();
+            var result = await this.cellActionService.Seek(cellAction);
+
+			return result.ToActionResult<CellAction>();
         }
 
         [HttpGet]
         [Route("CellAction/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.cellActionService.SeekByValue(seekValue, CellAction.Informer).ToActionResult<CellAction>();
+            var result = await this.cellActionService.SeekByValue(seekValue, CellAction.Informer);
+
+			return result.ToActionResult<CellAction>();
         }
 
         [HttpPost]
         [Route("CellAction/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] CellAction cellAction)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] CellAction cellAction)
         {
-            return this.cellActionService.Delete(cellAction, id, this.UserCredit).ToActionResult();
+            var result = await this.cellActionService.Delete(cellAction, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

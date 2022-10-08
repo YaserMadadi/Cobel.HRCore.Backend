@@ -1,6 +1,7 @@
 ﻿using EssentialCore.Tools.Security.Entities;
 using EssentialCore.Tools.Security.Service;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace CobelHR.WebApiPortal.Partial.Controller
 {
@@ -18,9 +19,9 @@ namespace CobelHR.WebApiPortal.Partial.Controller
 
         [HttpPost]
         [Route("Login")]
-        public ActionResult Login(LoginUser loginUser)
+        public async Task<ActionResult> Login(LoginUser loginUser)
         {
-            var dataResult = this.authService.Login(loginUser);
+            var dataResult = await this.authService.Login(loginUser);
 
             if (!dataResult.IsSucceeded)
 

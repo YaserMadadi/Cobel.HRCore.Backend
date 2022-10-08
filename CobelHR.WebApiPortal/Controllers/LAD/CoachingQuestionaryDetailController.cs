@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.LAD.Abstract;
 using CobelHR.Entities.LAD;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.LAD
 {
     [Route("api/LAD")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.LAD
 
         [HttpGet]
         [Route("CoachingQuestionaryDetail/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.coachingQuestionaryDetailService.RetrieveById(id, CoachingQuestionaryDetail.Informer, this.UserCredit).ToActionResult<CoachingQuestionaryDetail>();
+            var result = await this.coachingQuestionaryDetailService.RetrieveById(id, CoachingQuestionaryDetail.Informer, this.UserCredit);
+
+			return result.ToActionResult<CoachingQuestionaryDetail>();
         }
 
         [HttpPost]
         [Route("CoachingQuestionaryDetail/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.coachingQuestionaryDetailService.RetrieveAll(CoachingQuestionaryDetail.Informer, paginate, this.UserCredit).ToActionResult<CoachingQuestionaryDetail>();
+            var result = await this.coachingQuestionaryDetailService.RetrieveAll(CoachingQuestionaryDetail.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<CoachingQuestionaryDetail>();
         }
             
 
         
         [HttpPost]
         [Route("CoachingQuestionaryDetail/Save")]
-        public IActionResult Save([FromBody] CoachingQuestionaryDetail coachingQuestionaryDetail)
+        public async Task<IActionResult> Save([FromBody] CoachingQuestionaryDetail coachingQuestionaryDetail)
         {
-            return this.coachingQuestionaryDetailService.Save(coachingQuestionaryDetail, this.UserCredit).ToActionResult<CoachingQuestionaryDetail>();
+            var result = await this.coachingQuestionaryDetailService.Save(coachingQuestionaryDetail, this.UserCredit);
+
+			return result.ToActionResult<CoachingQuestionaryDetail>();
         }
 
         
         [HttpPost]
         [Route("CoachingQuestionaryDetail/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] CoachingQuestionaryDetail coachingQuestionaryDetail)
+        public async Task<IActionResult> SaveAttached([FromBody] CoachingQuestionaryDetail coachingQuestionaryDetail)
         {
-            return this.coachingQuestionaryDetailService.SaveAttached(coachingQuestionaryDetail, this.UserCredit).ToActionResult();
+            var result = await this.coachingQuestionaryDetailService.SaveAttached(coachingQuestionaryDetail, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("CoachingQuestionaryDetail/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<CoachingQuestionaryDetail> coachingQuestionaryDetailList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<CoachingQuestionaryDetail> coachingQuestionaryDetailList)
         {
-            return this.coachingQuestionaryDetailService.SaveBulk(coachingQuestionaryDetailList, this.UserCredit).ToActionResult();
+            var result = await this.coachingQuestionaryDetailService.SaveBulk(coachingQuestionaryDetailList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("CoachingQuestionaryDetail/Seek")]
-        public IActionResult Seek([FromBody] CoachingQuestionaryDetail coachingQuestionaryDetail)
+        public async Task<IActionResult> Seek([FromBody] CoachingQuestionaryDetail coachingQuestionaryDetail)
         {
-            return this.coachingQuestionaryDetailService.Seek(coachingQuestionaryDetail).ToActionResult<CoachingQuestionaryDetail>();
+            var result = await this.coachingQuestionaryDetailService.Seek(coachingQuestionaryDetail);
+
+			return result.ToActionResult<CoachingQuestionaryDetail>();
         }
 
         [HttpGet]
         [Route("CoachingQuestionaryDetail/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.coachingQuestionaryDetailService.SeekByValue(seekValue, CoachingQuestionaryDetail.Informer).ToActionResult<CoachingQuestionaryDetail>();
+            var result = await this.coachingQuestionaryDetailService.SeekByValue(seekValue, CoachingQuestionaryDetail.Informer);
+
+			return result.ToActionResult<CoachingQuestionaryDetail>();
         }
 
         [HttpPost]
         [Route("CoachingQuestionaryDetail/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] CoachingQuestionaryDetail coachingQuestionaryDetail)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] CoachingQuestionaryDetail coachingQuestionaryDetail)
         {
-            return this.coachingQuestionaryDetailService.Delete(coachingQuestionaryDetail, id, this.UserCredit).ToActionResult();
+            var result = await this.coachingQuestionaryDetailService.Delete(coachingQuestionaryDetail, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

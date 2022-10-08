@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.LAD.Abstract;
 using CobelHR.Entities.LAD;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.LAD
 {
     [Route("api/LAD")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.LAD
 
         [HttpGet]
         [Route("Coach/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.coachService.RetrieveById(id, Coach.Informer, this.UserCredit).ToActionResult<Coach>();
+            var result = await this.coachService.RetrieveById(id, Coach.Informer, this.UserCredit);
+
+			return result.ToActionResult<Coach>();
         }
 
         [HttpPost]
         [Route("Coach/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.coachService.RetrieveAll(Coach.Informer, paginate, this.UserCredit).ToActionResult<Coach>();
+            var result = await this.coachService.RetrieveAll(Coach.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Coach>();
         }
             
 
         
         [HttpPost]
         [Route("Coach/Save")]
-        public IActionResult Save([FromBody] Coach coach)
+        public async Task<IActionResult> Save([FromBody] Coach coach)
         {
-            return this.coachService.Save(coach, this.UserCredit).ToActionResult<Coach>();
+            var result = await this.coachService.Save(coach, this.UserCredit);
+
+			return result.ToActionResult<Coach>();
         }
 
         
         [HttpPost]
         [Route("Coach/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Coach coach)
+        public async Task<IActionResult> SaveAttached([FromBody] Coach coach)
         {
-            return this.coachService.SaveAttached(coach, this.UserCredit).ToActionResult();
+            var result = await this.coachService.SaveAttached(coach, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Coach/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Coach> coachList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Coach> coachList)
         {
-            return this.coachService.SaveBulk(coachList, this.UserCredit).ToActionResult();
+            var result = await this.coachService.SaveBulk(coachList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Coach/Seek")]
-        public IActionResult Seek([FromBody] Coach coach)
+        public async Task<IActionResult> Seek([FromBody] Coach coach)
         {
-            return this.coachService.Seek(coach).ToActionResult<Coach>();
+            var result = await this.coachService.Seek(coach);
+
+			return result.ToActionResult<Coach>();
         }
 
         [HttpGet]
         [Route("Coach/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.coachService.SeekByValue(seekValue, Coach.Informer).ToActionResult<Coach>();
+            var result = await this.coachService.SeekByValue(seekValue, Coach.Informer);
+
+			return result.ToActionResult<Coach>();
         }
 
         [HttpPost]
         [Route("Coach/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Coach coach)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Coach coach)
         {
-            return this.coachService.Delete(coach, id, this.UserCredit).ToActionResult();
+            var result = await this.coachService.Delete(coach, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfCoachConnectionLine

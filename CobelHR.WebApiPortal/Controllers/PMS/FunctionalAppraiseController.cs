@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("FunctionalAppraise/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.functionalAppraiseService.RetrieveById(id, FunctionalAppraise.Informer, this.UserCredit).ToActionResult<FunctionalAppraise>();
+            var result = await this.functionalAppraiseService.RetrieveById(id, FunctionalAppraise.Informer, this.UserCredit);
+
+			return result.ToActionResult<FunctionalAppraise>();
         }
 
         [HttpPost]
         [Route("FunctionalAppraise/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.functionalAppraiseService.RetrieveAll(FunctionalAppraise.Informer, paginate, this.UserCredit).ToActionResult<FunctionalAppraise>();
+            var result = await this.functionalAppraiseService.RetrieveAll(FunctionalAppraise.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<FunctionalAppraise>();
         }
             
 
         
         [HttpPost]
         [Route("FunctionalAppraise/Save")]
-        public IActionResult Save([FromBody] FunctionalAppraise functionalAppraise)
+        public async Task<IActionResult> Save([FromBody] FunctionalAppraise functionalAppraise)
         {
-            return this.functionalAppraiseService.Save(functionalAppraise, this.UserCredit).ToActionResult<FunctionalAppraise>();
+            var result = await this.functionalAppraiseService.Save(functionalAppraise, this.UserCredit);
+
+			return result.ToActionResult<FunctionalAppraise>();
         }
 
         
         [HttpPost]
         [Route("FunctionalAppraise/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] FunctionalAppraise functionalAppraise)
+        public async Task<IActionResult> SaveAttached([FromBody] FunctionalAppraise functionalAppraise)
         {
-            return this.functionalAppraiseService.SaveAttached(functionalAppraise, this.UserCredit).ToActionResult();
+            var result = await this.functionalAppraiseService.SaveAttached(functionalAppraise, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("FunctionalAppraise/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<FunctionalAppraise> functionalAppraiseList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<FunctionalAppraise> functionalAppraiseList)
         {
-            return this.functionalAppraiseService.SaveBulk(functionalAppraiseList, this.UserCredit).ToActionResult();
+            var result = await this.functionalAppraiseService.SaveBulk(functionalAppraiseList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("FunctionalAppraise/Seek")]
-        public IActionResult Seek([FromBody] FunctionalAppraise functionalAppraise)
+        public async Task<IActionResult> Seek([FromBody] FunctionalAppraise functionalAppraise)
         {
-            return this.functionalAppraiseService.Seek(functionalAppraise).ToActionResult<FunctionalAppraise>();
+            var result = await this.functionalAppraiseService.Seek(functionalAppraise);
+
+			return result.ToActionResult<FunctionalAppraise>();
         }
 
         [HttpGet]
         [Route("FunctionalAppraise/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.functionalAppraiseService.SeekByValue(seekValue, FunctionalAppraise.Informer).ToActionResult<FunctionalAppraise>();
+            var result = await this.functionalAppraiseService.SeekByValue(seekValue, FunctionalAppraise.Informer);
+
+			return result.ToActionResult<FunctionalAppraise>();
         }
 
         [HttpPost]
         [Route("FunctionalAppraise/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] FunctionalAppraise functionalAppraise)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] FunctionalAppraise functionalAppraise)
         {
-            return this.functionalAppraiseService.Delete(functionalAppraise, id, this.UserCredit).ToActionResult();
+            var result = await this.functionalAppraiseService.Delete(functionalAppraise, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

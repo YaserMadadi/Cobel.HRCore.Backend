@@ -30,47 +30,46 @@ namespace CobelHR.Entities.PMS
 
         #region Properties
 
-
+		
         public PMS.Vision Vision { get; set; }
-
+		
         public Base.PMS.DevelopmentPlanPriority Priority { get; set; }
-
+		
         public Base.PMS.Subject Subject { get; set; }
-
-        public string Title { get; set; }
-
+		
+		public string Title { get; set; }
+		
         public Base.PMS.CurrentSituation CurrentSituation { get; set; }
-
+		
         public Base.PMS.DesirableSituation DesirableSituation { get; set; }
+		
+		public DateTime? FromDate { get; set; }
+		
+		public DateTime? ToDate { get; set; }
+		
+		public string EffectiveNessIndex { get; set; }
 
-        public DateTime? FromDate { get; set; }
-
-        public DateTime? ToDate { get; set; }
-
-        public Base.PMS.IndividualDevelopmentPlanAction IndividualDevelopmentPlanAction { get; set; }
-
-        public string EffectiveNessIndex { get; set; }
-
-        #endregion
+		#endregion
 
         #region    List Of Related Entities
 
-        public List<DevelopmentPlanCompetency> ListOfDevelopmentPlanCompetency { get; set; }
+		[JsonIgnore]
+		public List<DevelopmentPlanCompetency> ListOfDevelopmentPlanCompetency { get; set; }
 
-        #endregion
+		#endregion
 
-
+        
         public override bool Validate()
         {
             return Vision.Validate() &&
-                    Priority.Validate() &&
-                    Subject.Validate() &&
-                    Title.Validate() &&
-                    CurrentSituation.Validate() &&
-                    DesirableSituation.Validate() &&
-                    FromDate.Validate() &&
-                    ToDate.Validate() &&
-                    EffectiveNessIndex.Validate();
+					Priority.Validate() &&
+					Subject.Validate() &&
+					Title.Validate() &&
+					CurrentSituation.Validate() &&
+					DesirableSituation.Validate() &&
+					FromDate.Validate() &&
+					ToDate.Validate() &&
+					EffectiveNessIndex.Validate();
         }
     }
 }

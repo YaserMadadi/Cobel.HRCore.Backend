@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.LAD.Abstract;
 using CobelHR.Entities.LAD;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.LAD
 {
     [Route("api/LAD")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.LAD
 
         [HttpGet]
         [Route("AssessmentType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.assessmentTypeService.RetrieveById(id, AssessmentType.Informer, this.UserCredit).ToActionResult<AssessmentType>();
+            var result = await this.assessmentTypeService.RetrieveById(id, AssessmentType.Informer, this.UserCredit);
+
+			return result.ToActionResult<AssessmentType>();
         }
 
         [HttpPost]
         [Route("AssessmentType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.assessmentTypeService.RetrieveAll(AssessmentType.Informer, paginate, this.UserCredit).ToActionResult<AssessmentType>();
+            var result = await this.assessmentTypeService.RetrieveAll(AssessmentType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<AssessmentType>();
         }
             
 
         
         [HttpPost]
         [Route("AssessmentType/Save")]
-        public IActionResult Save([FromBody] AssessmentType assessmentType)
+        public async Task<IActionResult> Save([FromBody] AssessmentType assessmentType)
         {
-            return this.assessmentTypeService.Save(assessmentType, this.UserCredit).ToActionResult<AssessmentType>();
+            var result = await this.assessmentTypeService.Save(assessmentType, this.UserCredit);
+
+			return result.ToActionResult<AssessmentType>();
         }
 
         
         [HttpPost]
         [Route("AssessmentType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] AssessmentType assessmentType)
+        public async Task<IActionResult> SaveAttached([FromBody] AssessmentType assessmentType)
         {
-            return this.assessmentTypeService.SaveAttached(assessmentType, this.UserCredit).ToActionResult();
+            var result = await this.assessmentTypeService.SaveAttached(assessmentType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("AssessmentType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<AssessmentType> assessmentTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<AssessmentType> assessmentTypeList)
         {
-            return this.assessmentTypeService.SaveBulk(assessmentTypeList, this.UserCredit).ToActionResult();
+            var result = await this.assessmentTypeService.SaveBulk(assessmentTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("AssessmentType/Seek")]
-        public IActionResult Seek([FromBody] AssessmentType assessmentType)
+        public async Task<IActionResult> Seek([FromBody] AssessmentType assessmentType)
         {
-            return this.assessmentTypeService.Seek(assessmentType).ToActionResult<AssessmentType>();
+            var result = await this.assessmentTypeService.Seek(assessmentType);
+
+			return result.ToActionResult<AssessmentType>();
         }
 
         [HttpGet]
         [Route("AssessmentType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.assessmentTypeService.SeekByValue(seekValue, AssessmentType.Informer).ToActionResult<AssessmentType>();
+            var result = await this.assessmentTypeService.SeekByValue(seekValue, AssessmentType.Informer);
+
+			return result.ToActionResult<AssessmentType>();
         }
 
         [HttpPost]
         [Route("AssessmentType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] AssessmentType assessmentType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] AssessmentType assessmentType)
         {
-            return this.assessmentTypeService.Delete(assessmentType, id, this.UserCredit).ToActionResult();
+            var result = await this.assessmentTypeService.Delete(assessmentType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfAssessment

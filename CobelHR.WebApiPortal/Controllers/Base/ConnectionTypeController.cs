@@ -8,6 +8,8 @@ using CobelHR.Entities.Base;
 using CobelHR.Entities.LAD;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -22,62 +24,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("ConnectionType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.connectionTypeService.RetrieveById(id, ConnectionType.Informer, this.UserCredit).ToActionResult<ConnectionType>();
+            var result = await this.connectionTypeService.RetrieveById(id, ConnectionType.Informer, this.UserCredit);
+
+			return result.ToActionResult<ConnectionType>();
         }
 
         [HttpPost]
         [Route("ConnectionType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.connectionTypeService.RetrieveAll(ConnectionType.Informer, paginate, this.UserCredit).ToActionResult<ConnectionType>();
+            var result = await this.connectionTypeService.RetrieveAll(ConnectionType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<ConnectionType>();
         }
             
 
         
         [HttpPost]
         [Route("ConnectionType/Save")]
-        public IActionResult Save([FromBody] ConnectionType connectionType)
+        public async Task<IActionResult> Save([FromBody] ConnectionType connectionType)
         {
-            return this.connectionTypeService.Save(connectionType, this.UserCredit).ToActionResult<ConnectionType>();
+            var result = await this.connectionTypeService.Save(connectionType, this.UserCredit);
+
+			return result.ToActionResult<ConnectionType>();
         }
 
         
         [HttpPost]
         [Route("ConnectionType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] ConnectionType connectionType)
+        public async Task<IActionResult> SaveAttached([FromBody] ConnectionType connectionType)
         {
-            return this.connectionTypeService.SaveAttached(connectionType, this.UserCredit).ToActionResult();
+            var result = await this.connectionTypeService.SaveAttached(connectionType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("ConnectionType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<ConnectionType> connectionTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<ConnectionType> connectionTypeList)
         {
-            return this.connectionTypeService.SaveBulk(connectionTypeList, this.UserCredit).ToActionResult();
+            var result = await this.connectionTypeService.SaveBulk(connectionTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("ConnectionType/Seek")]
-        public IActionResult Seek([FromBody] ConnectionType connectionType)
+        public async Task<IActionResult> Seek([FromBody] ConnectionType connectionType)
         {
-            return this.connectionTypeService.Seek(connectionType).ToActionResult<ConnectionType>();
+            var result = await this.connectionTypeService.Seek(connectionType);
+
+			return result.ToActionResult<ConnectionType>();
         }
 
         [HttpGet]
         [Route("ConnectionType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.connectionTypeService.SeekByValue(seekValue, ConnectionType.Informer).ToActionResult<ConnectionType>();
+            var result = await this.connectionTypeService.SeekByValue(seekValue, ConnectionType.Informer);
+
+			return result.ToActionResult<ConnectionType>();
         }
 
         [HttpPost]
         [Route("ConnectionType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] ConnectionType connectionType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] ConnectionType connectionType)
         {
-            return this.connectionTypeService.Delete(connectionType, id, this.UserCredit).ToActionResult();
+            var result = await this.connectionTypeService.Delete(connectionType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfAssessorConnectionLine

@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using EssentialCore.Controllers;
 using EssentialCore.Tools.Pagination;
 using EssentialCore.Tools.Result;
 using CobelHR.Services.Base.HR.Abstract;
 using CobelHR.Entities.Base.HR;
 using CobelHR.Entities.HR;
+
+using System.Threading.Tasks;
 
 namespace CobelHR.ApiServices.Controllers.Base.HR
 {
@@ -21,62 +24,78 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
 
         [HttpGet]
         [Route("ContractType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.contractTypeService.RetrieveById(id, ContractType.Informer, this.UserCredit).ToActionResult<ContractType>();
+            var result = await this.contractTypeService.RetrieveById(id, ContractType.Informer, this.UserCredit);
+
+			return result.ToActionResult<ContractType>();
         }
 
         [HttpPost]
         [Route("ContractType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.contractTypeService.RetrieveAll(ContractType.Informer, paginate, this.UserCredit).ToActionResult<ContractType>();
+            var result = await this.contractTypeService.RetrieveAll(ContractType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<ContractType>();
         }
             
 
         
         [HttpPost]
         [Route("ContractType/Save")]
-        public IActionResult Save([FromBody] ContractType contractType)
+        public async Task<IActionResult> Save([FromBody] ContractType contractType)
         {
-            return this.contractTypeService.Save(contractType, this.UserCredit).ToActionResult<ContractType>();
+            var result = await this.contractTypeService.Save(contractType, this.UserCredit);
+
+			return result.ToActionResult<ContractType>();
         }
 
         
         [HttpPost]
         [Route("ContractType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] ContractType contractType)
+        public async Task<IActionResult> SaveAttached([FromBody] ContractType contractType)
         {
-            return this.contractTypeService.SaveAttached(contractType, this.UserCredit).ToActionResult();
+            var result = await this.contractTypeService.SaveAttached(contractType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("ContractType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<ContractType> contractTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<ContractType> contractTypeList)
         {
-            return this.contractTypeService.SaveBulk(contractTypeList, this.UserCredit).ToActionResult();
+            var result = await this.contractTypeService.SaveBulk(contractTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("ContractType/Seek")]
-        public IActionResult Seek([FromBody] ContractType contractType)
+        public async Task<IActionResult> Seek([FromBody] ContractType contractType)
         {
-            return this.contractTypeService.Seek(contractType).ToActionResult<ContractType>();
+            var result = await this.contractTypeService.Seek(contractType);
+
+			return result.ToActionResult<ContractType>();
         }
 
         [HttpGet]
         [Route("ContractType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.contractTypeService.SeekByValue(seekValue, ContractType.Informer).ToActionResult<ContractType>();
+            var result = await this.contractTypeService.SeekByValue(seekValue, ContractType.Informer);
+
+			return result.ToActionResult<ContractType>();
         }
 
         [HttpPost]
         [Route("ContractType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] ContractType contractType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] ContractType contractType)
         {
-            return this.contractTypeService.Delete(contractType, id, this.UserCredit).ToActionResult();
+            var result = await this.contractTypeService.Delete(contractType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfContract

@@ -6,6 +6,9 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 using CobelHR.Entities.HR;
+using System.Threading.Tasks;
+
+using System.Threading.Tasks;
 
 namespace CobelHR.ApiServices.Controllers.Base
 {
@@ -21,62 +24,76 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("CertificationType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.certificationTypeService.RetrieveById(id, CertificationType.Informer, this.UserCredit).ToActionResult<CertificationType>();
+            var result = await this.certificationTypeService.RetrieveById(id, CertificationType.Informer, this.UserCredit);
+
+			return result.ToActionResult<CertificationType>();
         }
 
         [HttpPost]
         [Route("CertificationType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.certificationTypeService.RetrieveAll(CertificationType.Informer, paginate, this.UserCredit).ToActionResult<CertificationType>();
-        }
-            
+            var result = await this.certificationTypeService.RetrieveAll(CertificationType.Informer, paginate, this.UserCredit);
 
-        
+			return result.ToActionResult<CertificationType>();
+        }
+
         [HttpPost]
         [Route("CertificationType/Save")]
-        public IActionResult Save([FromBody] CertificationType certificationType)
+        public async Task<IActionResult> Save([FromBody] CertificationType certificationType)
         {
-            return this.certificationTypeService.Save(certificationType, this.UserCredit).ToActionResult<CertificationType>();
+            var result = await this.certificationTypeService.Save(certificationType, this.UserCredit);
+
+			return result.ToActionResult<CertificationType>();
         }
 
-        
+
         [HttpPost]
         [Route("CertificationType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] CertificationType certificationType)
+        public async Task<IActionResult> SaveAttached([FromBody] CertificationType certificationType)
         {
-            return this.certificationTypeService.SaveAttached(certificationType, this.UserCredit).ToActionResult();
+            var result = await this.certificationTypeService.SaveAttached(certificationType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
-        
+
         [HttpPost]
         [Route("CertificationType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<CertificationType> certificationTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<CertificationType> certificationTypeList)
         {
-            return this.certificationTypeService.SaveBulk(certificationTypeList, this.UserCredit).ToActionResult();
+            var result = await this.certificationTypeService.SaveBulk(certificationTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("CertificationType/Seek")]
-        public IActionResult Seek([FromBody] CertificationType certificationType)
+        public async Task<IActionResult> Seek([FromBody] CertificationType certificationType)
         {
-            return this.certificationTypeService.Seek(certificationType).ToActionResult<CertificationType>();
+            var result = await this.certificationTypeService.Seek(certificationType);
+
+			return result.ToActionResult<CertificationType>();
         }
 
         [HttpGet]
         [Route("CertificationType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.certificationTypeService.SeekByValue(seekValue, CertificationType.Informer).ToActionResult<CertificationType>();
+            var result = await this.certificationTypeService.SeekByValue(seekValue, CertificationType.Informer);
+
+			return result.ToActionResult<CertificationType>();
         }
 
         [HttpPost]
         [Route("CertificationType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] CertificationType certificationType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] CertificationType certificationType)
         {
-            return this.certificationTypeService.Delete(certificationType, id, this.UserCredit).ToActionResult();
+            var result = await this.certificationTypeService.Delete(certificationType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfUniversityHistory

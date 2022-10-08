@@ -7,6 +7,8 @@ using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("ExcemptionType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.excemptionTypeService.RetrieveById(id, ExcemptionType.Informer, this.UserCredit).ToActionResult<ExcemptionType>();
+            var result = await this.excemptionTypeService.RetrieveById(id, ExcemptionType.Informer, this.UserCredit);
+
+			return result.ToActionResult<ExcemptionType>();
         }
 
         [HttpPost]
         [Route("ExcemptionType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.excemptionTypeService.RetrieveAll(ExcemptionType.Informer, paginate, this.UserCredit).ToActionResult<ExcemptionType>();
+            var result = await this.excemptionTypeService.RetrieveAll(ExcemptionType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<ExcemptionType>();
         }
             
 
         
         [HttpPost]
         [Route("ExcemptionType/Save")]
-        public IActionResult Save([FromBody] ExcemptionType excemptionType)
+        public async Task<IActionResult> Save([FromBody] ExcemptionType excemptionType)
         {
-            return this.excemptionTypeService.Save(excemptionType, this.UserCredit).ToActionResult<ExcemptionType>();
+            var result = await this.excemptionTypeService.Save(excemptionType, this.UserCredit);
+
+			return result.ToActionResult<ExcemptionType>();
         }
 
         
         [HttpPost]
         [Route("ExcemptionType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] ExcemptionType excemptionType)
+        public async Task<IActionResult> SaveAttached([FromBody] ExcemptionType excemptionType)
         {
-            return this.excemptionTypeService.SaveAttached(excemptionType, this.UserCredit).ToActionResult();
+            var result = await this.excemptionTypeService.SaveAttached(excemptionType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("ExcemptionType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<ExcemptionType> excemptionTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<ExcemptionType> excemptionTypeList)
         {
-            return this.excemptionTypeService.SaveBulk(excemptionTypeList, this.UserCredit).ToActionResult();
+            var result = await this.excemptionTypeService.SaveBulk(excemptionTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("ExcemptionType/Seek")]
-        public IActionResult Seek([FromBody] ExcemptionType excemptionType)
+        public async Task<IActionResult> Seek([FromBody] ExcemptionType excemptionType)
         {
-            return this.excemptionTypeService.Seek(excemptionType).ToActionResult<ExcemptionType>();
+            var result = await this.excemptionTypeService.Seek(excemptionType);
+
+			return result.ToActionResult<ExcemptionType>();
         }
 
         [HttpGet]
         [Route("ExcemptionType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.excemptionTypeService.SeekByValue(seekValue, ExcemptionType.Informer).ToActionResult<ExcemptionType>();
+            var result = await this.excemptionTypeService.SeekByValue(seekValue, ExcemptionType.Informer);
+
+			return result.ToActionResult<ExcemptionType>();
         }
 
         [HttpPost]
         [Route("ExcemptionType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] ExcemptionType excemptionType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] ExcemptionType excemptionType)
         {
-            return this.excemptionTypeService.Delete(excemptionType, id, this.UserCredit).ToActionResult();
+            var result = await this.excemptionTypeService.Delete(excemptionType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfMilitaryServiceExcemption

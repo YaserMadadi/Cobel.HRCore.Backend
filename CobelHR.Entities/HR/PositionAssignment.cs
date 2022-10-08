@@ -44,7 +44,9 @@ namespace CobelHR.Entities.HR
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<PositionAssignmentRepeal> ListOfPositionAssignmentRepeal { get; set; }
+
+		[JsonIgnore]
+		public List<PositionAssignmentRepeal> ListOfPositionAssignmentRepeal { get; set; }
 
 		#endregion
 

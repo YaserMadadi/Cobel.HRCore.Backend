@@ -40,8 +40,12 @@ namespace CobelHR.Entities.LAD
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<CoachConnectionLine> ListOfCoachConnectionLine { get; set; }
-		[JsonIgnore]		public List<Coaching> ListOfCoaching { get; set; }
+
+		[JsonIgnore]
+		public List<CoachConnectionLine> ListOfCoachConnectionLine { get; set; }
+
+		[JsonIgnore]
+		public List<Coaching> ListOfCoaching { get; set; }
 
 		#endregion
 

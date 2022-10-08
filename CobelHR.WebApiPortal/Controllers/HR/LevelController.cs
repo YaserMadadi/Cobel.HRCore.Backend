@@ -7,6 +7,8 @@ using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("Level/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.levelService.RetrieveById(id, Level.Informer, this.UserCredit).ToActionResult<Level>();
+            var result = await this.levelService.RetrieveById(id, Level.Informer, this.UserCredit);
+
+			return result.ToActionResult<Level>();
         }
 
         [HttpPost]
         [Route("Level/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.levelService.RetrieveAll(Level.Informer, paginate, this.UserCredit).ToActionResult<Level>();
+            var result = await this.levelService.RetrieveAll(Level.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Level>();
         }
             
 
         
         [HttpPost]
         [Route("Level/Save")]
-        public IActionResult Save([FromBody] Level level)
+        public async Task<IActionResult> Save([FromBody] Level level)
         {
-            return this.levelService.Save(level, this.UserCredit).ToActionResult<Level>();
+            var result = await this.levelService.Save(level, this.UserCredit);
+
+			return result.ToActionResult<Level>();
         }
 
         
         [HttpPost]
         [Route("Level/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Level level)
+        public async Task<IActionResult> SaveAttached([FromBody] Level level)
         {
-            return this.levelService.SaveAttached(level, this.UserCredit).ToActionResult();
+            var result = await this.levelService.SaveAttached(level, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Level/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Level> levelList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Level> levelList)
         {
-            return this.levelService.SaveBulk(levelList, this.UserCredit).ToActionResult();
+            var result = await this.levelService.SaveBulk(levelList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Level/Seek")]
-        public IActionResult Seek([FromBody] Level level)
+        public async Task<IActionResult> Seek([FromBody] Level level)
         {
-            return this.levelService.Seek(level).ToActionResult<Level>();
+            var result = await this.levelService.Seek(level);
+
+			return result.ToActionResult<Level>();
         }
 
         [HttpGet]
         [Route("Level/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.levelService.SeekByValue(seekValue, Level.Informer).ToActionResult<Level>();
+            var result = await this.levelService.SeekByValue(seekValue, Level.Informer);
+
+			return result.ToActionResult<Level>();
         }
 
         [HttpPost]
         [Route("Level/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Level level)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Level level)
         {
-            return this.levelService.Delete(level, id, this.UserCredit).ToActionResult();
+            var result = await this.levelService.Delete(level, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfObjectiveWeightNonOperational

@@ -40,7 +40,9 @@ namespace CobelHR.Entities.Base
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<FieldOfStudy> ListOfFieldOfStudy { get; set; }
+
+		[JsonIgnore]
+		public List<FieldOfStudy> ListOfFieldOfStudy { get; set; }
 
 		#endregion
 

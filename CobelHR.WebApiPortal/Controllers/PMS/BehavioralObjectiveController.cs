@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("BehavioralObjective/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.behavioralObjectiveService.RetrieveById(id, BehavioralObjective.Informer, this.UserCredit).ToActionResult<BehavioralObjective>();
+            var result = await this.behavioralObjectiveService.RetrieveById(id, BehavioralObjective.Informer, this.UserCredit);
+
+			return result.ToActionResult<BehavioralObjective>();
         }
 
         [HttpPost]
         [Route("BehavioralObjective/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.behavioralObjectiveService.RetrieveAll(BehavioralObjective.Informer, paginate, this.UserCredit).ToActionResult<BehavioralObjective>();
+            var result = await this.behavioralObjectiveService.RetrieveAll(BehavioralObjective.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<BehavioralObjective>();
         }
             
 
         
         [HttpPost]
         [Route("BehavioralObjective/Save")]
-        public IActionResult Save([FromBody] BehavioralObjective behavioralObjective)
+        public async Task<IActionResult> Save([FromBody] BehavioralObjective behavioralObjective)
         {
-            return this.behavioralObjectiveService.Save(behavioralObjective, this.UserCredit).ToActionResult<BehavioralObjective>();
+            var result = await this.behavioralObjectiveService.Save(behavioralObjective, this.UserCredit);
+
+			return result.ToActionResult<BehavioralObjective>();
         }
 
         
         [HttpPost]
         [Route("BehavioralObjective/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] BehavioralObjective behavioralObjective)
+        public async Task<IActionResult> SaveAttached([FromBody] BehavioralObjective behavioralObjective)
         {
-            return this.behavioralObjectiveService.SaveAttached(behavioralObjective, this.UserCredit).ToActionResult();
+            var result = await this.behavioralObjectiveService.SaveAttached(behavioralObjective, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("BehavioralObjective/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<BehavioralObjective> behavioralObjectiveList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<BehavioralObjective> behavioralObjectiveList)
         {
-            return this.behavioralObjectiveService.SaveBulk(behavioralObjectiveList, this.UserCredit).ToActionResult();
+            var result = await this.behavioralObjectiveService.SaveBulk(behavioralObjectiveList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("BehavioralObjective/Seek")]
-        public IActionResult Seek([FromBody] BehavioralObjective behavioralObjective)
+        public async Task<IActionResult> Seek([FromBody] BehavioralObjective behavioralObjective)
         {
-            return this.behavioralObjectiveService.Seek(behavioralObjective).ToActionResult<BehavioralObjective>();
+            var result = await this.behavioralObjectiveService.Seek(behavioralObjective);
+
+			return result.ToActionResult<BehavioralObjective>();
         }
 
         [HttpGet]
         [Route("BehavioralObjective/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.behavioralObjectiveService.SeekByValue(seekValue, BehavioralObjective.Informer).ToActionResult<BehavioralObjective>();
+            var result = await this.behavioralObjectiveService.SeekByValue(seekValue, BehavioralObjective.Informer);
+
+			return result.ToActionResult<BehavioralObjective>();
         }
 
         [HttpPost]
         [Route("BehavioralObjective/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] BehavioralObjective behavioralObjective)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] BehavioralObjective behavioralObjective)
         {
-            return this.behavioralObjectiveService.Delete(behavioralObjective, id, this.UserCredit).ToActionResult();
+            var result = await this.behavioralObjectiveService.Delete(behavioralObjective, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfBehavioralKPI

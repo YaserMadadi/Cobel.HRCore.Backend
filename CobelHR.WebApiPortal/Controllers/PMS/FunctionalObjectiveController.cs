@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("FunctionalObjective/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.functionalObjectiveService.RetrieveById(id, FunctionalObjective.Informer, this.UserCredit).ToActionResult<FunctionalObjective>();
+            var result = await this.functionalObjectiveService.RetrieveById(id, FunctionalObjective.Informer, this.UserCredit);
+
+			return result.ToActionResult<FunctionalObjective>();
         }
 
         [HttpPost]
         [Route("FunctionalObjective/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.functionalObjectiveService.RetrieveAll(FunctionalObjective.Informer, paginate, this.UserCredit).ToActionResult<FunctionalObjective>();
+            var result = await this.functionalObjectiveService.RetrieveAll(FunctionalObjective.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<FunctionalObjective>();
         }
             
 
         
         [HttpPost]
         [Route("FunctionalObjective/Save")]
-        public IActionResult Save([FromBody] FunctionalObjective functionalObjective)
+        public async Task<IActionResult> Save([FromBody] FunctionalObjective functionalObjective)
         {
-            return this.functionalObjectiveService.Save(functionalObjective, this.UserCredit).ToActionResult<FunctionalObjective>();
+            var result = await this.functionalObjectiveService.Save(functionalObjective, this.UserCredit);
+
+			return result.ToActionResult<FunctionalObjective>();
         }
 
         
         [HttpPost]
         [Route("FunctionalObjective/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] FunctionalObjective functionalObjective)
+        public async Task<IActionResult> SaveAttached([FromBody] FunctionalObjective functionalObjective)
         {
-            return this.functionalObjectiveService.SaveAttached(functionalObjective, this.UserCredit).ToActionResult();
+            var result = await this.functionalObjectiveService.SaveAttached(functionalObjective, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("FunctionalObjective/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<FunctionalObjective> functionalObjectiveList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<FunctionalObjective> functionalObjectiveList)
         {
-            return this.functionalObjectiveService.SaveBulk(functionalObjectiveList, this.UserCredit).ToActionResult();
+            var result = await this.functionalObjectiveService.SaveBulk(functionalObjectiveList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("FunctionalObjective/Seek")]
-        public IActionResult Seek([FromBody] FunctionalObjective functionalObjective)
+        public async Task<IActionResult> Seek([FromBody] FunctionalObjective functionalObjective)
         {
-            return this.functionalObjectiveService.Seek(functionalObjective).ToActionResult<FunctionalObjective>();
+            var result = await this.functionalObjectiveService.Seek(functionalObjective);
+
+			return result.ToActionResult<FunctionalObjective>();
         }
 
         [HttpGet]
         [Route("FunctionalObjective/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.functionalObjectiveService.SeekByValue(seekValue, FunctionalObjective.Informer).ToActionResult<FunctionalObjective>();
+            var result = await this.functionalObjectiveService.SeekByValue(seekValue, FunctionalObjective.Informer);
+
+			return result.ToActionResult<FunctionalObjective>();
         }
 
         [HttpPost]
         [Route("FunctionalObjective/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] FunctionalObjective functionalObjective)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] FunctionalObjective functionalObjective)
         {
-            return this.functionalObjectiveService.Delete(functionalObjective, id, this.UserCredit).ToActionResult();
+            var result = await this.functionalObjectiveService.Delete(functionalObjective, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfFunctionalKPI

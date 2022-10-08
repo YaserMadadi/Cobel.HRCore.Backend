@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("AppraisalApproverConfig/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.appraisalApproverConfigService.RetrieveById(id, AppraisalApproverConfig.Informer, this.UserCredit).ToActionResult<AppraisalApproverConfig>();
+            var result = await this.appraisalApproverConfigService.RetrieveById(id, AppraisalApproverConfig.Informer, this.UserCredit);
+
+			return result.ToActionResult<AppraisalApproverConfig>();
         }
 
         [HttpPost]
         [Route("AppraisalApproverConfig/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.appraisalApproverConfigService.RetrieveAll(AppraisalApproverConfig.Informer, paginate, this.UserCredit).ToActionResult<AppraisalApproverConfig>();
+            var result = await this.appraisalApproverConfigService.RetrieveAll(AppraisalApproverConfig.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<AppraisalApproverConfig>();
         }
             
 
         
         [HttpPost]
         [Route("AppraisalApproverConfig/Save")]
-        public IActionResult Save([FromBody] AppraisalApproverConfig appraisalApproverConfig)
+        public async Task<IActionResult> Save([FromBody] AppraisalApproverConfig appraisalApproverConfig)
         {
-            return this.appraisalApproverConfigService.Save(appraisalApproverConfig, this.UserCredit).ToActionResult<AppraisalApproverConfig>();
+            var result = await this.appraisalApproverConfigService.Save(appraisalApproverConfig, this.UserCredit);
+
+			return result.ToActionResult<AppraisalApproverConfig>();
         }
 
         
         [HttpPost]
         [Route("AppraisalApproverConfig/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] AppraisalApproverConfig appraisalApproverConfig)
+        public async Task<IActionResult> SaveAttached([FromBody] AppraisalApproverConfig appraisalApproverConfig)
         {
-            return this.appraisalApproverConfigService.SaveAttached(appraisalApproverConfig, this.UserCredit).ToActionResult();
+            var result = await this.appraisalApproverConfigService.SaveAttached(appraisalApproverConfig, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("AppraisalApproverConfig/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<AppraisalApproverConfig> appraisalApproverConfigList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<AppraisalApproverConfig> appraisalApproverConfigList)
         {
-            return this.appraisalApproverConfigService.SaveBulk(appraisalApproverConfigList, this.UserCredit).ToActionResult();
+            var result = await this.appraisalApproverConfigService.SaveBulk(appraisalApproverConfigList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("AppraisalApproverConfig/Seek")]
-        public IActionResult Seek([FromBody] AppraisalApproverConfig appraisalApproverConfig)
+        public async Task<IActionResult> Seek([FromBody] AppraisalApproverConfig appraisalApproverConfig)
         {
-            return this.appraisalApproverConfigService.Seek(appraisalApproverConfig).ToActionResult<AppraisalApproverConfig>();
+            var result = await this.appraisalApproverConfigService.Seek(appraisalApproverConfig);
+
+			return result.ToActionResult<AppraisalApproverConfig>();
         }
 
         [HttpGet]
         [Route("AppraisalApproverConfig/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.appraisalApproverConfigService.SeekByValue(seekValue, AppraisalApproverConfig.Informer).ToActionResult<AppraisalApproverConfig>();
+            var result = await this.appraisalApproverConfigService.SeekByValue(seekValue, AppraisalApproverConfig.Informer);
+
+			return result.ToActionResult<AppraisalApproverConfig>();
         }
 
         [HttpPost]
         [Route("AppraisalApproverConfig/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] AppraisalApproverConfig appraisalApproverConfig)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] AppraisalApproverConfig appraisalApproverConfig)
         {
-            return this.appraisalApproverConfigService.Delete(appraisalApproverConfig, id, this.UserCredit).ToActionResult();
+            var result = await this.appraisalApproverConfigService.Delete(appraisalApproverConfig, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

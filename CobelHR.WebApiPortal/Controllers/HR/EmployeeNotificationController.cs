@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("EmployeeNotification/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.employeeNotificationService.RetrieveById(id, EmployeeNotification.Informer, this.UserCredit).ToActionResult<EmployeeNotification>();
+            var result = await this.employeeNotificationService.RetrieveById(id, EmployeeNotification.Informer, this.UserCredit);
+
+			return result.ToActionResult<EmployeeNotification>();
         }
 
         [HttpPost]
         [Route("EmployeeNotification/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.employeeNotificationService.RetrieveAll(EmployeeNotification.Informer, paginate, this.UserCredit).ToActionResult<EmployeeNotification>();
+            var result = await this.employeeNotificationService.RetrieveAll(EmployeeNotification.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<EmployeeNotification>();
         }
             
 
         
         [HttpPost]
         [Route("EmployeeNotification/Save")]
-        public IActionResult Save([FromBody] EmployeeNotification employeeNotification)
+        public async Task<IActionResult> Save([FromBody] EmployeeNotification employeeNotification)
         {
-            return this.employeeNotificationService.Save(employeeNotification, this.UserCredit).ToActionResult<EmployeeNotification>();
+            var result = await this.employeeNotificationService.Save(employeeNotification, this.UserCredit);
+
+			return result.ToActionResult<EmployeeNotification>();
         }
 
         
         [HttpPost]
         [Route("EmployeeNotification/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] EmployeeNotification employeeNotification)
+        public async Task<IActionResult> SaveAttached([FromBody] EmployeeNotification employeeNotification)
         {
-            return this.employeeNotificationService.SaveAttached(employeeNotification, this.UserCredit).ToActionResult();
+            var result = await this.employeeNotificationService.SaveAttached(employeeNotification, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("EmployeeNotification/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<EmployeeNotification> employeeNotificationList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<EmployeeNotification> employeeNotificationList)
         {
-            return this.employeeNotificationService.SaveBulk(employeeNotificationList, this.UserCredit).ToActionResult();
+            var result = await this.employeeNotificationService.SaveBulk(employeeNotificationList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("EmployeeNotification/Seek")]
-        public IActionResult Seek([FromBody] EmployeeNotification employeeNotification)
+        public async Task<IActionResult> Seek([FromBody] EmployeeNotification employeeNotification)
         {
-            return this.employeeNotificationService.Seek(employeeNotification).ToActionResult<EmployeeNotification>();
+            var result = await this.employeeNotificationService.Seek(employeeNotification);
+
+			return result.ToActionResult<EmployeeNotification>();
         }
 
         [HttpGet]
         [Route("EmployeeNotification/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.employeeNotificationService.SeekByValue(seekValue, EmployeeNotification.Informer).ToActionResult<EmployeeNotification>();
+            var result = await this.employeeNotificationService.SeekByValue(seekValue, EmployeeNotification.Informer);
+
+			return result.ToActionResult<EmployeeNotification>();
         }
 
         [HttpPost]
         [Route("EmployeeNotification/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] EmployeeNotification employeeNotification)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] EmployeeNotification employeeNotification)
         {
-            return this.employeeNotificationService.Delete(employeeNotification, id, this.UserCredit).ToActionResult();
+            var result = await this.employeeNotificationService.Delete(employeeNotification, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("UniversityHistory/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.universityHistoryService.RetrieveById(id, UniversityHistory.Informer, this.UserCredit).ToActionResult<UniversityHistory>();
+            var result = await this.universityHistoryService.RetrieveById(id, UniversityHistory.Informer, this.UserCredit);
+
+			return result.ToActionResult<UniversityHistory>();
         }
 
         [HttpPost]
         [Route("UniversityHistory/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.universityHistoryService.RetrieveAll(UniversityHistory.Informer, paginate, this.UserCredit).ToActionResult<UniversityHistory>();
+            var result = await this.universityHistoryService.RetrieveAll(UniversityHistory.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<UniversityHistory>();
         }
             
 
         
         [HttpPost]
         [Route("UniversityHistory/Save")]
-        public IActionResult Save([FromBody] UniversityHistory universityHistory)
+        public async Task<IActionResult> Save([FromBody] UniversityHistory universityHistory)
         {
-            return this.universityHistoryService.Save(universityHistory, this.UserCredit).ToActionResult<UniversityHistory>();
+            var result = await this.universityHistoryService.Save(universityHistory, this.UserCredit);
+
+			return result.ToActionResult<UniversityHistory>();
         }
 
         
         [HttpPost]
         [Route("UniversityHistory/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] UniversityHistory universityHistory)
+        public async Task<IActionResult> SaveAttached([FromBody] UniversityHistory universityHistory)
         {
-            return this.universityHistoryService.SaveAttached(universityHistory, this.UserCredit).ToActionResult();
+            var result = await this.universityHistoryService.SaveAttached(universityHistory, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("UniversityHistory/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<UniversityHistory> universityHistoryList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<UniversityHistory> universityHistoryList)
         {
-            return this.universityHistoryService.SaveBulk(universityHistoryList, this.UserCredit).ToActionResult();
+            var result = await this.universityHistoryService.SaveBulk(universityHistoryList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("UniversityHistory/Seek")]
-        public IActionResult Seek([FromBody] UniversityHistory universityHistory)
+        public async Task<IActionResult> Seek([FromBody] UniversityHistory universityHistory)
         {
-            return this.universityHistoryService.Seek(universityHistory).ToActionResult<UniversityHistory>();
+            var result = await this.universityHistoryService.Seek(universityHistory);
+
+			return result.ToActionResult<UniversityHistory>();
         }
 
         [HttpGet]
         [Route("UniversityHistory/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.universityHistoryService.SeekByValue(seekValue, UniversityHistory.Informer).ToActionResult<UniversityHistory>();
+            var result = await this.universityHistoryService.SeekByValue(seekValue, UniversityHistory.Informer);
+
+			return result.ToActionResult<UniversityHistory>();
         }
 
         [HttpPost]
         [Route("UniversityHistory/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] UniversityHistory universityHistory)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] UniversityHistory universityHistory)
         {
-            return this.universityHistoryService.Delete(universityHistory, id, this.UserCredit).ToActionResult();
+            var result = await this.universityHistoryService.Delete(universityHistory, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfUniversityTerminate

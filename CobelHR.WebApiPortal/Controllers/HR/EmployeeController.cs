@@ -10,6 +10,8 @@ using CobelHR.Entities.PMS;
 using CobelHR.Entities.Core;
 using CobelHR.Entities.IDEA;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -24,74 +26,87 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("Employee/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.employeeService.RetrieveById(id, Employee.Informer, this.UserCredit).ToActionResult<Employee>();
+            var result = await this.employeeService.RetrieveById(id, Employee.Informer, this.UserCredit);
+
+			return result.ToActionResult<Employee>();
         }
 
         [HttpPost]
         [Route("Employee/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.employeeService.RetrieveAll(Employee.Informer, paginate, this.UserCredit).ToActionResult<Employee>();
+            var result = await this.employeeService.RetrieveAll(Employee.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Employee>();
         }
 
 
 
         [HttpPost]
         [Route("Employee/Save")]
-        public IActionResult Save([FromBody] Employee employee)
+        public async Task<IActionResult> Save([FromBody] Employee employee)
         {
-            return this.employeeService.Save(employee, this.UserCredit).ToActionResult<Employee>();
+            var result = await this.employeeService.Save(employee, this.UserCredit);
+
+			return result.ToActionResult<Employee>();
         }
 
 
         [HttpPost]
         [Route("Employee/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Employee employee)
+        public async Task<IActionResult> SaveAttached([FromBody] Employee employee)
         {
-            return this.employeeService.SaveAttached(employee, this.UserCredit).ToActionResult();
+            var result = await this.employeeService.SaveAttached(employee, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
 
         [HttpPost]
         [Route("Employee/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Employee> employeeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Employee> employeeList)
         {
-            return this.employeeService.SaveBulk(employeeList, this.UserCredit).ToActionResult();
+            var result = await this.employeeService.SaveBulk(employeeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Employee/Seek")]
-        public IActionResult Seek([FromBody] Employee employee)
+        public async Task<IActionResult> Seek([FromBody] Employee employee)
         {
-            return this.employeeService.Seek(employee).ToActionResult<Employee>();
+            var result = await this.employeeService.Seek(employee);
+
+			return result.ToActionResult<Employee>();
         }
 
         [HttpGet]
         [Route("Employee/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.employeeService.SeekByValue(seekValue, Employee.Informer).ToActionResult<Employee>();
+            var result = await this.employeeService.SeekByValue(seekValue, Employee.Informer);
+
+			return result.ToActionResult<Employee>();
         }
 
         [HttpPost]
         [Route("Employee/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Employee employee)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Employee employee)
         {
-            return this.employeeService.Delete(employee, id, this.UserCredit).ToActionResult();
+            var result = await this.employeeService.Delete(employee, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
-        #region CollectionOf Methods
-
-
-        //CollectionOfAssessment
-        [HttpPost]
-        [Route("Employee/{employee_id:int}/Assessment")]
-        public IActionResult CollectionOfAssessment([FromRoute(Name = "employee_id")] int id, Assessment assessment)
-        {
-            return this.employeeService.CollectionOfAssessment(id, assessment).ToActionResult();
-        }
+        // CollectionOfAssessment
+        //[HttpPost]
+        //[Route("Employee/{employee_id:int}/Assessment")]
+        //public IActionResult CollectionOfAssessment([FromRoute(Name = "employee_id")] int id, Assessment assessment)
+        //{
+        //    return this.employeeService.CollectionOfAssessment(id, assessment).ToActionResult();
+        //}
 
         // CollectionOfBehavioralAppraise_Appraiser
         [HttpPost]
@@ -102,12 +117,12 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         // CollectionOfCoaching
-        [HttpPost]
-        [Route("Employee/{employee_id:int}/Coaching")]
-        public IActionResult CollectionOfCoaching([FromRoute(Name = "employee_id")] int id, Coaching coaching)
-        {
-            return this.employeeService.CollectionOfCoaching(id, coaching).ToActionResult();
-        }
+        //[HttpPost]
+        //[Route("Employee/{employee_id:int}/Coaching")]
+        //public IActionResult CollectionOfCoaching([FromRoute(Name = "employee_id")] int id, Coaching coaching)
+        //{
+        //    return this.employeeService.CollectionOfCoaching(id, coaching).ToActionResult();
+        //}
 
         // CollectionOfContract
         [HttpPost]
@@ -252,9 +267,5 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             return this.employeeService.CollectionOfVisionComment_Commentator(id, visionComment).ToActionResult();
         }
-
-
-
-        #endregion
     }
 }

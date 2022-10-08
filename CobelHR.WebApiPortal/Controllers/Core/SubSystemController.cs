@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Core.Abstract;
 using CobelHR.Entities.Core;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Core
 {
     [Route("api/Core")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.Core
 
         [HttpGet]
         [Route("SubSystem/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.subSystemService.RetrieveById(id, SubSystem.Informer, this.UserCredit).ToActionResult<SubSystem>();
+            var result = await this.subSystemService.RetrieveById(id, SubSystem.Informer, this.UserCredit);
+
+			return result.ToActionResult<SubSystem>();
         }
 
         [HttpPost]
         [Route("SubSystem/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.subSystemService.RetrieveAll(SubSystem.Informer, paginate, this.UserCredit).ToActionResult<SubSystem>();
+            var result = await this.subSystemService.RetrieveAll(SubSystem.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<SubSystem>();
         }
             
 
         
         [HttpPost]
         [Route("SubSystem/Save")]
-        public IActionResult Save([FromBody] SubSystem subSystem)
+        public async Task<IActionResult> Save([FromBody] SubSystem subSystem)
         {
-            return this.subSystemService.Save(subSystem, this.UserCredit).ToActionResult<SubSystem>();
+            var result = await this.subSystemService.Save(subSystem, this.UserCredit);
+
+			return result.ToActionResult<SubSystem>();
         }
 
         
         [HttpPost]
         [Route("SubSystem/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] SubSystem subSystem)
+        public async Task<IActionResult> SaveAttached([FromBody] SubSystem subSystem)
         {
-            return this.subSystemService.SaveAttached(subSystem, this.UserCredit).ToActionResult();
+            var result = await this.subSystemService.SaveAttached(subSystem, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("SubSystem/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<SubSystem> subSystemList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<SubSystem> subSystemList)
         {
-            return this.subSystemService.SaveBulk(subSystemList, this.UserCredit).ToActionResult();
+            var result = await this.subSystemService.SaveBulk(subSystemList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("SubSystem/Seek")]
-        public IActionResult Seek([FromBody] SubSystem subSystem)
+        public async Task<IActionResult> Seek([FromBody] SubSystem subSystem)
         {
-            return this.subSystemService.Seek(subSystem).ToActionResult<SubSystem>();
+            var result = await this.subSystemService.Seek(subSystem);
+
+			return result.ToActionResult<SubSystem>();
         }
 
         [HttpGet]
         [Route("SubSystem/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.subSystemService.SeekByValue(seekValue, SubSystem.Informer).ToActionResult<SubSystem>();
+            var result = await this.subSystemService.SeekByValue(seekValue, SubSystem.Informer);
+
+			return result.ToActionResult<SubSystem>();
         }
 
         [HttpPost]
         [Route("SubSystem/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] SubSystem subSystem)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] SubSystem subSystem)
         {
-            return this.subSystemService.Delete(subSystem, id, this.UserCredit).ToActionResult();
+            var result = await this.subSystemService.Delete(subSystem, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfMenu

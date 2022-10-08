@@ -38,7 +38,9 @@ namespace CobelHR.Entities.PMS
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<CriticalIncident> ListOfCriticalIncident { get; set; }
+
+		[JsonIgnore]
+		public List<CriticalIncident> ListOfCriticalIncident { get; set; }
 
 		#endregion
 

@@ -38,7 +38,9 @@ namespace CobelHR.Entities.Base
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<YearQuarter> ListOfYearQuarter { get; set; }
+
+		[JsonIgnore]
+		public List<YearQuarter> ListOfYearQuarter { get; set; }
 
 		#endregion
 

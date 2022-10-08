@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("QualitativeAppraise/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.qualitativeAppraiseService.RetrieveById(id, QualitativeAppraise.Informer, this.UserCredit).ToActionResult<QualitativeAppraise>();
+            var result = await this.qualitativeAppraiseService.RetrieveById(id, QualitativeAppraise.Informer, this.UserCredit);
+
+			return result.ToActionResult<QualitativeAppraise>();
         }
 
         [HttpPost]
         [Route("QualitativeAppraise/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.qualitativeAppraiseService.RetrieveAll(QualitativeAppraise.Informer, paginate, this.UserCredit).ToActionResult<QualitativeAppraise>();
+            var result = await this.qualitativeAppraiseService.RetrieveAll(QualitativeAppraise.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<QualitativeAppraise>();
         }
             
 
         
         [HttpPost]
         [Route("QualitativeAppraise/Save")]
-        public IActionResult Save([FromBody] QualitativeAppraise qualitativeAppraise)
+        public async Task<IActionResult> Save([FromBody] QualitativeAppraise qualitativeAppraise)
         {
-            return this.qualitativeAppraiseService.Save(qualitativeAppraise, this.UserCredit).ToActionResult<QualitativeAppraise>();
+            var result = await this.qualitativeAppraiseService.Save(qualitativeAppraise, this.UserCredit);
+
+			return result.ToActionResult<QualitativeAppraise>();
         }
 
         
         [HttpPost]
         [Route("QualitativeAppraise/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] QualitativeAppraise qualitativeAppraise)
+        public async Task<IActionResult> SaveAttached([FromBody] QualitativeAppraise qualitativeAppraise)
         {
-            return this.qualitativeAppraiseService.SaveAttached(qualitativeAppraise, this.UserCredit).ToActionResult();
+            var result = await this.qualitativeAppraiseService.SaveAttached(qualitativeAppraise, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("QualitativeAppraise/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<QualitativeAppraise> qualitativeAppraiseList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<QualitativeAppraise> qualitativeAppraiseList)
         {
-            return this.qualitativeAppraiseService.SaveBulk(qualitativeAppraiseList, this.UserCredit).ToActionResult();
+            var result = await this.qualitativeAppraiseService.SaveBulk(qualitativeAppraiseList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("QualitativeAppraise/Seek")]
-        public IActionResult Seek([FromBody] QualitativeAppraise qualitativeAppraise)
+        public async Task<IActionResult> Seek([FromBody] QualitativeAppraise qualitativeAppraise)
         {
-            return this.qualitativeAppraiseService.Seek(qualitativeAppraise).ToActionResult<QualitativeAppraise>();
+            var result = await this.qualitativeAppraiseService.Seek(qualitativeAppraise);
+
+			return result.ToActionResult<QualitativeAppraise>();
         }
 
         [HttpGet]
         [Route("QualitativeAppraise/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.qualitativeAppraiseService.SeekByValue(seekValue, QualitativeAppraise.Informer).ToActionResult<QualitativeAppraise>();
+            var result = await this.qualitativeAppraiseService.SeekByValue(seekValue, QualitativeAppraise.Informer);
+
+			return result.ToActionResult<QualitativeAppraise>();
         }
 
         [HttpPost]
         [Route("QualitativeAppraise/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] QualitativeAppraise qualitativeAppraise)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] QualitativeAppraise qualitativeAppraise)
         {
-            return this.qualitativeAppraiseService.Delete(qualitativeAppraise, id, this.UserCredit).ToActionResult();
+            var result = await this.qualitativeAppraiseService.Delete(qualitativeAppraise, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

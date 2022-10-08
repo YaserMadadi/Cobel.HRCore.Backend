@@ -38,10 +38,18 @@ namespace CobelHR.Entities.HR
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<LanguageAbility> ListOfListeningLevel_LanguageAbility { get; set; }
-		[JsonIgnore]		public List<LanguageAbility> ListOfSpeackingLevel_LanguageAbility { get; set; }
-		[JsonIgnore]		public List<LanguageAbility> ListOfReadingLevel_LanguageAbility { get; set; }
-		[JsonIgnore]		public List<LanguageAbility> ListOfWritingLevel_LanguageAbility { get; set; }
+
+		[JsonIgnore]
+		public List<LanguageAbility> ListOfListeningLevel_LanguageAbility { get; set; }
+
+		[JsonIgnore]
+		public List<LanguageAbility> ListOfSpeackingLevel_LanguageAbility { get; set; }
+
+		[JsonIgnore]
+		public List<LanguageAbility> ListOfReadingLevel_LanguageAbility { get; set; }
+
+		[JsonIgnore]
+		public List<LanguageAbility> ListOfWritingLevel_LanguageAbility { get; set; }
 
 		#endregion
 

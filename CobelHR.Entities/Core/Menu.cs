@@ -42,7 +42,9 @@ namespace CobelHR.Entities.Core
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<MenuItem> ListOfMenuItem { get; set; }
+
+		[JsonIgnore]
+		public List<MenuItem> ListOfMenuItem { get; set; }
 
 		#endregion
 

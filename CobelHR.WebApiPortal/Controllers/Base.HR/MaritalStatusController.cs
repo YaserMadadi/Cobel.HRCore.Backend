@@ -7,6 +7,8 @@ using CobelHR.Services.Base.HR.Abstract;
 using CobelHR.Entities.Base.HR;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base.HR
 {
     [Route("api/Base.HR")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
 
         [HttpGet]
         [Route("MaritalStatus/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.maritalStatusService.RetrieveById(id, MaritalStatus.Informer, this.UserCredit).ToActionResult<MaritalStatus>();
+            var result = await this.maritalStatusService.RetrieveById(id, MaritalStatus.Informer, this.UserCredit);
+
+			return result.ToActionResult<MaritalStatus>();
         }
 
         [HttpPost]
         [Route("MaritalStatus/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.maritalStatusService.RetrieveAll(MaritalStatus.Informer, paginate, this.UserCredit).ToActionResult<MaritalStatus>();
+            var result = await this.maritalStatusService.RetrieveAll(MaritalStatus.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<MaritalStatus>();
         }
             
 
         
         [HttpPost]
         [Route("MaritalStatus/Save")]
-        public IActionResult Save([FromBody] MaritalStatus maritalStatus)
+        public async Task<IActionResult> Save([FromBody] MaritalStatus maritalStatus)
         {
-            return this.maritalStatusService.Save(maritalStatus, this.UserCredit).ToActionResult<MaritalStatus>();
+            var result = await this.maritalStatusService.Save(maritalStatus, this.UserCredit);
+
+			return result.ToActionResult<MaritalStatus>();
         }
 
         
         [HttpPost]
         [Route("MaritalStatus/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] MaritalStatus maritalStatus)
+        public async Task<IActionResult> SaveAttached([FromBody] MaritalStatus maritalStatus)
         {
-            return this.maritalStatusService.SaveAttached(maritalStatus, this.UserCredit).ToActionResult();
+            var result = await this.maritalStatusService.SaveAttached(maritalStatus, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("MaritalStatus/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<MaritalStatus> maritalStatusList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<MaritalStatus> maritalStatusList)
         {
-            return this.maritalStatusService.SaveBulk(maritalStatusList, this.UserCredit).ToActionResult();
+            var result = await this.maritalStatusService.SaveBulk(maritalStatusList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("MaritalStatus/Seek")]
-        public IActionResult Seek([FromBody] MaritalStatus maritalStatus)
+        public async Task<IActionResult> Seek([FromBody] MaritalStatus maritalStatus)
         {
-            return this.maritalStatusService.Seek(maritalStatus).ToActionResult<MaritalStatus>();
+            var result = await this.maritalStatusService.Seek(maritalStatus);
+
+			return result.ToActionResult<MaritalStatus>();
         }
 
         [HttpGet]
         [Route("MaritalStatus/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.maritalStatusService.SeekByValue(seekValue, MaritalStatus.Informer).ToActionResult<MaritalStatus>();
+            var result = await this.maritalStatusService.SeekByValue(seekValue, MaritalStatus.Informer);
+
+			return result.ToActionResult<MaritalStatus>();
         }
 
         [HttpPost]
         [Route("MaritalStatus/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] MaritalStatus maritalStatus)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] MaritalStatus maritalStatus)
         {
-            return this.maritalStatusService.Delete(maritalStatus, id, this.UserCredit).ToActionResult();
+            var result = await this.maritalStatusService.Delete(maritalStatus, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfPerson

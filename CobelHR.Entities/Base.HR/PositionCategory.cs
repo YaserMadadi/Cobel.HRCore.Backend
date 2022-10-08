@@ -40,11 +40,17 @@ namespace CobelHR.Entities.Base.HR
 
         #region    List Of Related Entities
 
-        public List<ConfigTargetSetting> ListOfConfigTargetSetting { get; set; }
+        [JsonIgnore]
+		public List<ConfigTargetSetting> ListOfConfigTargetSetting { get; set; }
 
-        public List<AppraisalApproverConfig> ListOfDepartmentCategory_AppraisalApproverConfig { get; set; }
-		[JsonIgnore]		public List<Position> ListOfPosition { get; set; }
-		[JsonIgnore]		public List<Unit> ListOfUnit { get; set; }
+        [JsonIgnore]
+		public List<AppraisalApproverConfig> ListOfDepartmentCategory_AppraisalApproverConfig { get; set; }
+
+		[JsonIgnore]
+		public List<Position> ListOfPosition { get; set; }
+
+		[JsonIgnore]
+		public List<Unit> ListOfUnit { get; set; }
 
 		#endregion
 

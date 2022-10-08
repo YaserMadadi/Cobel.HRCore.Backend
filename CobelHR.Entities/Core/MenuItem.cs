@@ -46,7 +46,9 @@ namespace CobelHR.Entities.Core
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<Badge> ListOfBadge { get; set; }
+
+		[JsonIgnore]
+		public List<Badge> ListOfBadge { get; set; }
 
 		#endregion
 

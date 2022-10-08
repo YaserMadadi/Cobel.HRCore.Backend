@@ -7,6 +7,8 @@ using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("HoldingSection/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.holdingSectionService.RetrieveById(id, HoldingSection.Informer, this.UserCredit).ToActionResult<HoldingSection>();
+            var result = await this.holdingSectionService.RetrieveById(id, HoldingSection.Informer, this.UserCredit);
+
+			return result.ToActionResult<HoldingSection>();
         }
 
         [HttpPost]
         [Route("HoldingSection/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.holdingSectionService.RetrieveAll(HoldingSection.Informer, paginate, this.UserCredit).ToActionResult<HoldingSection>();
+            var result = await this.holdingSectionService.RetrieveAll(HoldingSection.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<HoldingSection>();
         }
             
 
         
         [HttpPost]
         [Route("HoldingSection/Save")]
-        public IActionResult Save([FromBody] HoldingSection holdingSection)
+        public async Task<IActionResult> Save([FromBody] HoldingSection holdingSection)
         {
-            return this.holdingSectionService.Save(holdingSection, this.UserCredit).ToActionResult<HoldingSection>();
+            var result = await this.holdingSectionService.Save(holdingSection, this.UserCredit);
+
+			return result.ToActionResult<HoldingSection>();
         }
 
         
         [HttpPost]
         [Route("HoldingSection/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] HoldingSection holdingSection)
+        public async Task<IActionResult> SaveAttached([FromBody] HoldingSection holdingSection)
         {
-            return this.holdingSectionService.SaveAttached(holdingSection, this.UserCredit).ToActionResult();
+            var result = await this.holdingSectionService.SaveAttached(holdingSection, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("HoldingSection/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<HoldingSection> holdingSectionList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<HoldingSection> holdingSectionList)
         {
-            return this.holdingSectionService.SaveBulk(holdingSectionList, this.UserCredit).ToActionResult();
+            var result = await this.holdingSectionService.SaveBulk(holdingSectionList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("HoldingSection/Seek")]
-        public IActionResult Seek([FromBody] HoldingSection holdingSection)
+        public async Task<IActionResult> Seek([FromBody] HoldingSection holdingSection)
         {
-            return this.holdingSectionService.Seek(holdingSection).ToActionResult<HoldingSection>();
+            var result = await this.holdingSectionService.Seek(holdingSection);
+
+			return result.ToActionResult<HoldingSection>();
         }
 
         [HttpGet]
         [Route("HoldingSection/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.holdingSectionService.SeekByValue(seekValue, HoldingSection.Informer).ToActionResult<HoldingSection>();
+            var result = await this.holdingSectionService.SeekByValue(seekValue, HoldingSection.Informer);
+
+			return result.ToActionResult<HoldingSection>();
         }
 
         [HttpPost]
         [Route("HoldingSection/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] HoldingSection holdingSection)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] HoldingSection holdingSection)
         {
-            return this.holdingSectionService.Delete(holdingSection, id, this.UserCredit).ToActionResult();
+            var result = await this.holdingSectionService.Delete(holdingSection, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfEmployee_LastHoldingSection

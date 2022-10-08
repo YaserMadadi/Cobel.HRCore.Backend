@@ -13,7 +13,7 @@ namespace EssentialCore.DataAccess
 {
     public static class UserClassExtension
     {
-        public static IResult ExecuteResult(this SqlCommand command)
+        public async static Task<IResult> ExecuteResult(this SqlCommand command)
         {
             SqlDataReader reader = null;
 
@@ -23,7 +23,7 @@ namespace EssentialCore.DataAccess
 
                     command.Connection.Open();
 
-                reader = command.ExecuteReader();
+                reader = await command.ExecuteReaderAsync();
 
                 int id = 0;
 
@@ -47,15 +47,13 @@ namespace EssentialCore.DataAccess
             }
             catch (SqlException ex)
             {
-                //Task.WaitAll(new LogManager<SqlException>(ex, command).Save());
-
-                Task.WaitAll(new LogManager<SqlException>(ex, command).Save());
+                await LogManager.Save(ex, command);
 
                 return new ErrorResult(ex.Number, ex.Message, ex.Message);
             }
             catch (Exception ex)
             {
-                //Task.WaitAll(new LogManager<Exception>(ex, command).Save());
+                await LogManager.Save(ex, command);
 
                 return new ErrorResult(-1, ex.Message, ex.Message);
             }
@@ -65,9 +63,8 @@ namespace EssentialCore.DataAccess
                 {
                     reader.Close();
 
-                    reader.DisposeAsync();
+                    await reader.DisposeAsync();
                 }
-
 
                 if (command.Connection.State == System.Data.ConnectionState.Open)
 
@@ -78,9 +75,9 @@ namespace EssentialCore.DataAccess
         }
 
 
-        public static DataResult<T> ExecuteDataResult<T>(this SqlCommand command, JsonType jsonType)
+        public async static Task<DataResult<T>> ExecuteDataResult<T>(this SqlCommand command, JsonType jsonType)
         {
-            var dataResult = ExecuteDataResult(command);
+            var dataResult = await ExecuteDataResult(command);
 
             if (!dataResult.IsSucceeded)
 
@@ -93,7 +90,7 @@ namespace EssentialCore.DataAccess
 
 
 
-        public static DataResult<string> ExecuteDataResult(this SqlCommand command)
+        public async static Task<DataResult<string>> ExecuteDataResult(this SqlCommand command)
         {
             SqlDataReader reader = null;
 
@@ -120,13 +117,13 @@ namespace EssentialCore.DataAccess
             }
             catch (SqlException ex)
             {
-                //Task.WaitAll(new LogManager<SqlException>(ex, command).Save());
+                await LogManager.Save(ex, command);
 
                 return new ErrorDataResult<string>(ex.Number, "Sql Exception ( Related to DataBase )", ex.Message, string.Empty);
             }
             catch (Exception ex)
             {
-                //Task.WaitAll(new LogManager<Exception>(ex, command).Save());
+                await LogManager.Save(ex, command);
 
                 return new ErrorDataResult<string>(-1, "Exception", ex.Message, string.Empty);
             }

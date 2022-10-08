@@ -29,7 +29,7 @@ namespace EssentialCore.Tools.Serializer
 
         public static string Serialize(this object entity)
         {
-            return JsonConvert.SerializeObject(entity, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore } );
+            return JsonConvert.SerializeObject(entity);
         }
 
         private const string listName = "List`1";

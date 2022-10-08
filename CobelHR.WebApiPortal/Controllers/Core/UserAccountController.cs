@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Core.Abstract;
 using CobelHR.Entities.Core;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Core
 {
     [Route("api/Core")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.Core
 
         [HttpGet]
         [Route("UserAccount/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.userAccountService.RetrieveById(id, UserAccount.Informer, this.UserCredit).ToActionResult<UserAccount>();
+            var result = await this.userAccountService.RetrieveById(id, UserAccount.Informer, this.UserCredit);
+
+			return result.ToActionResult<UserAccount>();
         }
 
         [HttpPost]
         [Route("UserAccount/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.userAccountService.RetrieveAll(UserAccount.Informer, paginate, this.UserCredit).ToActionResult<UserAccount>();
+            var result = await this.userAccountService.RetrieveAll(UserAccount.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<UserAccount>();
         }
             
 
         
         [HttpPost]
         [Route("UserAccount/Save")]
-        public IActionResult Save([FromBody] UserAccount userAccount)
+        public async Task<IActionResult> Save([FromBody] UserAccount userAccount)
         {
-            return this.userAccountService.Save(userAccount, this.UserCredit).ToActionResult<UserAccount>();
+            var result = await this.userAccountService.Save(userAccount, this.UserCredit);
+
+			return result.ToActionResult<UserAccount>();
         }
 
         
         [HttpPost]
         [Route("UserAccount/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] UserAccount userAccount)
+        public async Task<IActionResult> SaveAttached([FromBody] UserAccount userAccount)
         {
-            return this.userAccountService.SaveAttached(userAccount, this.UserCredit).ToActionResult();
+            var result = await this.userAccountService.SaveAttached(userAccount, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("UserAccount/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<UserAccount> userAccountList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<UserAccount> userAccountList)
         {
-            return this.userAccountService.SaveBulk(userAccountList, this.UserCredit).ToActionResult();
+            var result = await this.userAccountService.SaveBulk(userAccountList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("UserAccount/Seek")]
-        public IActionResult Seek([FromBody] UserAccount userAccount)
+        public async Task<IActionResult> Seek([FromBody] UserAccount userAccount)
         {
-            return this.userAccountService.Seek(userAccount).ToActionResult<UserAccount>();
+            var result = await this.userAccountService.Seek(userAccount);
+
+			return result.ToActionResult<UserAccount>();
         }
 
         [HttpGet]
         [Route("UserAccount/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.userAccountService.SeekByValue(seekValue, UserAccount.Informer).ToActionResult<UserAccount>();
+            var result = await this.userAccountService.SeekByValue(seekValue, UserAccount.Informer);
+
+			return result.ToActionResult<UserAccount>();
         }
 
         [HttpPost]
         [Route("UserAccount/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] UserAccount userAccount)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] UserAccount userAccount)
         {
-            return this.userAccountService.Delete(userAccount, id, this.UserCredit).ToActionResult();
+            var result = await this.userAccountService.Delete(userAccount, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

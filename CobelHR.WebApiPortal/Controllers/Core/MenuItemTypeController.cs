@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Core.Abstract;
 using CobelHR.Entities.Core;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Core
 {
     [Route("api/Core")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.Core
 
         [HttpGet]
         [Route("MenuItemType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.menuItemTypeService.RetrieveById(id, MenuItemType.Informer, this.UserCredit).ToActionResult<MenuItemType>();
+            var result = await this.menuItemTypeService.RetrieveById(id, MenuItemType.Informer, this.UserCredit);
+
+			return result.ToActionResult<MenuItemType>();
         }
 
         [HttpPost]
         [Route("MenuItemType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.menuItemTypeService.RetrieveAll(MenuItemType.Informer, paginate, this.UserCredit).ToActionResult<MenuItemType>();
+            var result = await this.menuItemTypeService.RetrieveAll(MenuItemType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<MenuItemType>();
         }
             
 
         
         [HttpPost]
         [Route("MenuItemType/Save")]
-        public IActionResult Save([FromBody] MenuItemType menuItemType)
+        public async Task<IActionResult> Save([FromBody] MenuItemType menuItemType)
         {
-            return this.menuItemTypeService.Save(menuItemType, this.UserCredit).ToActionResult<MenuItemType>();
+            var result = await this.menuItemTypeService.Save(menuItemType, this.UserCredit);
+
+			return result.ToActionResult<MenuItemType>();
         }
 
         
         [HttpPost]
         [Route("MenuItemType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] MenuItemType menuItemType)
+        public async Task<IActionResult> SaveAttached([FromBody] MenuItemType menuItemType)
         {
-            return this.menuItemTypeService.SaveAttached(menuItemType, this.UserCredit).ToActionResult();
+            var result = await this.menuItemTypeService.SaveAttached(menuItemType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("MenuItemType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<MenuItemType> menuItemTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<MenuItemType> menuItemTypeList)
         {
-            return this.menuItemTypeService.SaveBulk(menuItemTypeList, this.UserCredit).ToActionResult();
+            var result = await this.menuItemTypeService.SaveBulk(menuItemTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("MenuItemType/Seek")]
-        public IActionResult Seek([FromBody] MenuItemType menuItemType)
+        public async Task<IActionResult> Seek([FromBody] MenuItemType menuItemType)
         {
-            return this.menuItemTypeService.Seek(menuItemType).ToActionResult<MenuItemType>();
+            var result = await this.menuItemTypeService.Seek(menuItemType);
+
+			return result.ToActionResult<MenuItemType>();
         }
 
         [HttpGet]
         [Route("MenuItemType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.menuItemTypeService.SeekByValue(seekValue, MenuItemType.Informer).ToActionResult<MenuItemType>();
+            var result = await this.menuItemTypeService.SeekByValue(seekValue, MenuItemType.Informer);
+
+			return result.ToActionResult<MenuItemType>();
         }
 
         [HttpPost]
         [Route("MenuItemType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] MenuItemType menuItemType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] MenuItemType menuItemType)
         {
-            return this.menuItemTypeService.Delete(menuItemType, id, this.UserCredit).ToActionResult();
+            var result = await this.menuItemTypeService.Delete(menuItemType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfMenuItem

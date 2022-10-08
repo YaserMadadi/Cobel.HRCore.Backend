@@ -7,6 +7,8 @@ using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("SchoolLevel/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.schoolLevelService.RetrieveById(id, SchoolLevel.Informer, this.UserCredit).ToActionResult<SchoolLevel>();
+            var result = await this.schoolLevelService.RetrieveById(id, SchoolLevel.Informer, this.UserCredit);
+
+			return result.ToActionResult<SchoolLevel>();
         }
 
         [HttpPost]
         [Route("SchoolLevel/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.schoolLevelService.RetrieveAll(SchoolLevel.Informer, paginate, this.UserCredit).ToActionResult<SchoolLevel>();
+            var result = await this.schoolLevelService.RetrieveAll(SchoolLevel.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<SchoolLevel>();
         }
             
 
         
         [HttpPost]
         [Route("SchoolLevel/Save")]
-        public IActionResult Save([FromBody] SchoolLevel schoolLevel)
+        public async Task<IActionResult> Save([FromBody] SchoolLevel schoolLevel)
         {
-            return this.schoolLevelService.Save(schoolLevel, this.UserCredit).ToActionResult<SchoolLevel>();
-        }
+            var result = await this.schoolLevelService.Save(schoolLevel, this.UserCredit);
+
+			return result.ToActionResult<SchoolLevel>();
+        }   
 
         
         [HttpPost]
         [Route("SchoolLevel/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] SchoolLevel schoolLevel)
+        public async Task<IActionResult> SaveAttached([FromBody] SchoolLevel schoolLevel)
         {
-            return this.schoolLevelService.SaveAttached(schoolLevel, this.UserCredit).ToActionResult();
+            var result = await this.schoolLevelService.SaveAttached(schoolLevel, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("SchoolLevel/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<SchoolLevel> schoolLevelList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<SchoolLevel> schoolLevelList)
         {
-            return this.schoolLevelService.SaveBulk(schoolLevelList, this.UserCredit).ToActionResult();
+            var result = await this.schoolLevelService.SaveBulk(schoolLevelList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("SchoolLevel/Seek")]
-        public IActionResult Seek([FromBody] SchoolLevel schoolLevel)
+        public async Task<IActionResult> Seek([FromBody] SchoolLevel schoolLevel)
         {
-            return this.schoolLevelService.Seek(schoolLevel).ToActionResult<SchoolLevel>();
+            var result = await this.schoolLevelService.Seek(schoolLevel);
+
+			return result.ToActionResult<SchoolLevel>();
         }
 
         [HttpGet]
         [Route("SchoolLevel/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.schoolLevelService.SeekByValue(seekValue, SchoolLevel.Informer).ToActionResult<SchoolLevel>();
+            var result = await this.schoolLevelService.SeekByValue(seekValue, SchoolLevel.Informer);
+
+			return result.ToActionResult<SchoolLevel>();
         }
 
         [HttpPost]
         [Route("SchoolLevel/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] SchoolLevel schoolLevel)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] SchoolLevel schoolLevel)
         {
-            return this.schoolLevelService.Delete(schoolLevel, id, this.UserCredit).ToActionResult();
+            var result = await this.schoolLevelService.Delete(schoolLevel, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfSchoolHistory

@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Core.Abstract;
 using CobelHR.Entities.Core;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Core
 {
     [Route("api/Core")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.Core
 
         [HttpGet]
         [Route("Role/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.roleService.RetrieveById(id, Role.Informer, this.UserCredit).ToActionResult<Role>();
+            var result = await this.roleService.RetrieveById(id, Role.Informer, this.UserCredit);
+
+			return result.ToActionResult<Role>();
         }
 
         [HttpPost]
         [Route("Role/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.roleService.RetrieveAll(Role.Informer, paginate, this.UserCredit).ToActionResult<Role>();
+            var result = await this.roleService.RetrieveAll(Role.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Role>();
         }
             
 
         
         [HttpPost]
         [Route("Role/Save")]
-        public IActionResult Save([FromBody] Role role)
+        public async Task<IActionResult> Save([FromBody] Role role)
         {
-            return this.roleService.Save(role, this.UserCredit).ToActionResult<Role>();
+            var result = await this.roleService.Save(role, this.UserCredit);
+
+			return result.ToActionResult<Role>();
         }
 
         
         [HttpPost]
         [Route("Role/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Role role)
+        public async Task<IActionResult> SaveAttached([FromBody] Role role)
         {
-            return this.roleService.SaveAttached(role, this.UserCredit).ToActionResult();
+            var result = await this.roleService.SaveAttached(role, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Role/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Role> roleList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Role> roleList)
         {
-            return this.roleService.SaveBulk(roleList, this.UserCredit).ToActionResult();
+            var result = await this.roleService.SaveBulk(roleList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Role/Seek")]
-        public IActionResult Seek([FromBody] Role role)
+        public async Task<IActionResult> Seek([FromBody] Role role)
         {
-            return this.roleService.Seek(role).ToActionResult<Role>();
+            var result = await this.roleService.Seek(role);
+
+			return result.ToActionResult<Role>();
         }
 
         [HttpGet]
         [Route("Role/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.roleService.SeekByValue(seekValue, Role.Informer).ToActionResult<Role>();
+            var result = await this.roleService.SeekByValue(seekValue, Role.Informer);
+
+			return result.ToActionResult<Role>();
         }
 
         [HttpPost]
         [Route("Role/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Role role)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Role role)
         {
-            return this.roleService.Delete(role, id, this.UserCredit).ToActionResult();
+            var result = await this.roleService.Delete(role, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfRoleMember

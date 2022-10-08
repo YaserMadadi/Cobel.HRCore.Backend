@@ -7,6 +7,8 @@ using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("InclusiveType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.inclusiveTypeService.RetrieveById(id, InclusiveType.Informer, this.UserCredit).ToActionResult<InclusiveType>();
+            var result = await this.inclusiveTypeService.RetrieveById(id, InclusiveType.Informer, this.UserCredit);
+
+			return result.ToActionResult<InclusiveType>();
         }
 
         [HttpPost]
         [Route("InclusiveType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.inclusiveTypeService.RetrieveAll(InclusiveType.Informer, paginate, this.UserCredit).ToActionResult<InclusiveType>();
+            var result = await this.inclusiveTypeService.RetrieveAll(InclusiveType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<InclusiveType>();
         }
             
 
         
         [HttpPost]
         [Route("InclusiveType/Save")]
-        public IActionResult Save([FromBody] InclusiveType inclusiveType)
+        public async Task<IActionResult> Save([FromBody] InclusiveType inclusiveType)
         {
-            return this.inclusiveTypeService.Save(inclusiveType, this.UserCredit).ToActionResult<InclusiveType>();
+            var result = await this.inclusiveTypeService.Save(inclusiveType, this.UserCredit);
+
+			return result.ToActionResult<InclusiveType>();
         }
 
         
         [HttpPost]
         [Route("InclusiveType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] InclusiveType inclusiveType)
+        public async Task<IActionResult> SaveAttached([FromBody] InclusiveType inclusiveType)
         {
-            return this.inclusiveTypeService.SaveAttached(inclusiveType, this.UserCredit).ToActionResult();
+            var result = await this.inclusiveTypeService.SaveAttached(inclusiveType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("InclusiveType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<InclusiveType> inclusiveTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<InclusiveType> inclusiveTypeList)
         {
-            return this.inclusiveTypeService.SaveBulk(inclusiveTypeList, this.UserCredit).ToActionResult();
+            var result = await this.inclusiveTypeService.SaveBulk(inclusiveTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("InclusiveType/Seek")]
-        public IActionResult Seek([FromBody] InclusiveType inclusiveType)
+        public async Task<IActionResult> Seek([FromBody] InclusiveType inclusiveType)
         {
-            return this.inclusiveTypeService.Seek(inclusiveType).ToActionResult<InclusiveType>();
+            var result = await this.inclusiveTypeService.Seek(inclusiveType);
+
+			return result.ToActionResult<InclusiveType>();
         }
 
         [HttpGet]
         [Route("InclusiveType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.inclusiveTypeService.SeekByValue(seekValue, InclusiveType.Informer).ToActionResult<InclusiveType>();
+            var result = await this.inclusiveTypeService.SeekByValue(seekValue, InclusiveType.Informer);
+
+			return result.ToActionResult<InclusiveType>();
         }
 
         [HttpPost]
         [Route("InclusiveType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] InclusiveType inclusiveType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] InclusiveType inclusiveType)
         {
-            return this.inclusiveTypeService.Delete(inclusiveType, id, this.UserCredit).ToActionResult();
+            var result = await this.inclusiveTypeService.Delete(inclusiveType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfMilitaryServiceInclusive

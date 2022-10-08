@@ -7,6 +7,8 @@ using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("HealthStatus/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.healthStatusService.RetrieveById(id, HealthStatus.Informer, this.UserCredit).ToActionResult<HealthStatus>();
+            var result = await this.healthStatusService.RetrieveById(id, HealthStatus.Informer, this.UserCredit);
+
+			return result.ToActionResult<HealthStatus>();
         }
 
         [HttpPost]
         [Route("HealthStatus/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.healthStatusService.RetrieveAll(HealthStatus.Informer, paginate, this.UserCredit).ToActionResult<HealthStatus>();
+            var result = await this.healthStatusService.RetrieveAll(HealthStatus.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<HealthStatus>();
         }
             
 
         
         [HttpPost]
         [Route("HealthStatus/Save")]
-        public IActionResult Save([FromBody] HealthStatus healthStatus)
+        public async Task<IActionResult> Save([FromBody] HealthStatus healthStatus)
         {
-            return this.healthStatusService.Save(healthStatus, this.UserCredit).ToActionResult<HealthStatus>();
+            var result = await this.healthStatusService.Save(healthStatus, this.UserCredit);
+
+			return result.ToActionResult<HealthStatus>();
         }
 
         
         [HttpPost]
         [Route("HealthStatus/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] HealthStatus healthStatus)
+        public async Task<IActionResult> SaveAttached([FromBody] HealthStatus healthStatus)
         {
-            return this.healthStatusService.SaveAttached(healthStatus, this.UserCredit).ToActionResult();
+            var result = await this.healthStatusService.SaveAttached(healthStatus, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("HealthStatus/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<HealthStatus> healthStatusList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<HealthStatus> healthStatusList)
         {
-            return this.healthStatusService.SaveBulk(healthStatusList, this.UserCredit).ToActionResult();
+            var result = await this.healthStatusService.SaveBulk(healthStatusList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("HealthStatus/Seek")]
-        public IActionResult Seek([FromBody] HealthStatus healthStatus)
+        public async Task<IActionResult> Seek([FromBody] HealthStatus healthStatus)
         {
-            return this.healthStatusService.Seek(healthStatus).ToActionResult<HealthStatus>();
+            var result = await this.healthStatusService.Seek(healthStatus);
+
+			return result.ToActionResult<HealthStatus>();
         }
 
         [HttpGet]
         [Route("HealthStatus/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.healthStatusService.SeekByValue(seekValue, HealthStatus.Informer).ToActionResult<HealthStatus>();
+            var result = await this.healthStatusService.SeekByValue(seekValue, HealthStatus.Informer);
+
+			return result.ToActionResult<HealthStatus>();
         }
 
         [HttpPost]
         [Route("HealthStatus/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] HealthStatus healthStatus)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] HealthStatus healthStatus)
         {
-            return this.healthStatusService.Delete(healthStatus, id, this.UserCredit).ToActionResult();
+            var result = await this.healthStatusService.Delete(healthStatus, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfPerson

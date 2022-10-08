@@ -48,7 +48,9 @@ namespace CobelHR.Entities.PMS
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<QualitativeKPI> ListOfQualitativeKPI { get; set; }
+
+		[JsonIgnore]
+		public List<QualitativeKPI> ListOfQualitativeKPI { get; set; }
 
 		#endregion
 

@@ -28,7 +28,7 @@ namespace EssentialCore.Entities
 
                 return new BadRequestObjectResult(new ErrorResult(-1, "Collection is Empty", string.Empty));
 
-            var result = UserClass.CreateCommand($"[{info.Schema}].[{info.Name}.SaveCollection]",
+            var result = await UserClass.CreateCommand($"[{info.Schema}].[{info.Name}.SaveCollection]",
                                                         new SqlParameter("@JsonValue", entityCollection.ToJson()))
                                                                 .ExecuteResult();
 

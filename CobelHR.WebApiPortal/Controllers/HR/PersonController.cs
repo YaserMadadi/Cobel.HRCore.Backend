@@ -8,6 +8,8 @@ using CobelHR.Entities.HR;
 using CobelHR.Entities.LAD;
 using CobelHR.Entities.Core;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -22,62 +24,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("Person/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.personService.RetrieveById(id, Person.Informer, this.UserCredit).ToActionResult<Person>();
+            var result = await this.personService.RetrieveById(id, Person.Informer, this.UserCredit);
+
+			return result.ToActionResult<Person>();
         }
 
         [HttpPost]
         [Route("Person/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.personService.RetrieveAll(Person.Informer, paginate, this.UserCredit).ToActionResult<Person>();
+            var result = await this.personService.RetrieveAll(Person.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Person>();
         }
             
 
         
         [HttpPost]
         [Route("Person/Save")]
-        public IActionResult Save([FromBody] Person person)
+        public async Task<IActionResult> Save([FromBody] Person person)
         {
-            return this.personService.Save(person, this.UserCredit).ToActionResult<Person>();
+            var result = await this.personService.Save(person, this.UserCredit);
+
+			return result.ToActionResult<Person>();
         }
 
         
         [HttpPost]
         [Route("Person/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Person person)
+        public async Task<IActionResult> SaveAttached([FromBody] Person person)
         {
-            return this.personService.SaveAttached(person, this.UserCredit).ToActionResult();
+            var result = await this.personService.SaveAttached(person, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Person/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Person> personList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Person> personList)
         {
-            return this.personService.SaveBulk(personList, this.UserCredit).ToActionResult();
+            var result = await this.personService.SaveBulk(personList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Person/Seek")]
-        public IActionResult Seek([FromBody] Person person)
+        public async Task<IActionResult> Seek([FromBody] Person person)
         {
-            return this.personService.Seek(person).ToActionResult<Person>();
+            var result = await this.personService.Seek(person);
+
+			return result.ToActionResult<Person>();
         }
 
         [HttpGet]
         [Route("Person/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.personService.SeekByValue(seekValue, Person.Informer).ToActionResult<Person>();
+            var result = await this.personService.SeekByValue(seekValue, Person.Informer);
+
+			return result.ToActionResult<Person>();
         }
 
         [HttpPost]
         [Route("Person/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Person person)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Person person)
         {
-            return this.personService.Delete(person, id, this.UserCredit).ToActionResult();
+            var result = await this.personService.Delete(person, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfCoachingQuestionary_ResponsiblePerson

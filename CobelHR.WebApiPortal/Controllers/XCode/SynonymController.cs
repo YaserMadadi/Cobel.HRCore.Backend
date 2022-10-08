@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.XCode.Abstract;
 using CobelHR.Entities.XCode;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.XCode
 {
     [Route("api/XCode")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.XCode
 
         [HttpGet]
         [Route("Synonym/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.synonymService.RetrieveById(id, Synonym.Informer, this.UserCredit).ToActionResult<Synonym>();
+            var result = await this.synonymService.RetrieveById(id, Synonym.Informer, this.UserCredit);
+
+			return result.ToActionResult<Synonym>();
         }
 
         [HttpPost]
         [Route("Synonym/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.synonymService.RetrieveAll(Synonym.Informer, paginate, this.UserCredit).ToActionResult<Synonym>();
+            var result = await this.synonymService.RetrieveAll(Synonym.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Synonym>();
         }
             
 
         
         [HttpPost]
         [Route("Synonym/Save")]
-        public IActionResult Save([FromBody] Synonym synonym)
+        public async Task<IActionResult> Save([FromBody] Synonym synonym)
         {
-            return this.synonymService.Save(synonym, this.UserCredit).ToActionResult<Synonym>();
+            var result = await this.synonymService.Save(synonym, this.UserCredit);
+
+			return result.ToActionResult<Synonym>();
         }
 
         
         [HttpPost]
         [Route("Synonym/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Synonym synonym)
+        public async Task<IActionResult> SaveAttached([FromBody] Synonym synonym)
         {
-            return this.synonymService.SaveAttached(synonym, this.UserCredit).ToActionResult();
+            var result = await this.synonymService.SaveAttached(synonym, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Synonym/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Synonym> synonymList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Synonym> synonymList)
         {
-            return this.synonymService.SaveBulk(synonymList, this.UserCredit).ToActionResult();
+            var result = await this.synonymService.SaveBulk(synonymList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Synonym/Seek")]
-        public IActionResult Seek([FromBody] Synonym synonym)
+        public async Task<IActionResult> Seek([FromBody] Synonym synonym)
         {
-            return this.synonymService.Seek(synonym).ToActionResult<Synonym>();
+            var result = await this.synonymService.Seek(synonym);
+
+			return result.ToActionResult<Synonym>();
         }
 
         [HttpGet]
         [Route("Synonym/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.synonymService.SeekByValue(seekValue, Synonym.Informer).ToActionResult<Synonym>();
+            var result = await this.synonymService.SeekByValue(seekValue, Synonym.Informer);
+
+			return result.ToActionResult<Synonym>();
         }
 
         [HttpPost]
         [Route("Synonym/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Synonym synonym)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Synonym synonym)
         {
-            return this.synonymService.Delete(synonym, id, this.UserCredit).ToActionResult();
+            var result = await this.synonymService.Delete(synonym, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

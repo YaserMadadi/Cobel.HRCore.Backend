@@ -5,6 +5,9 @@ using EssentialCore.Tools.Pagination;
 using EssentialCore.Tools.Result;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using System.Threading.Tasks;
 
 namespace CobelHR.ApiServices.Controllers.Base.HR
 {
@@ -20,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
 
         [HttpGet]
         [Route("DevelopmentPlanType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.developmentPlanTypeService.RetrieveById(id, DevelopmentPlanType.Informer, this.UserCredit).ToActionResult<DevelopmentPlanType>();
+            var result = await this.developmentPlanTypeService.RetrieveById(id, DevelopmentPlanType.Informer, this.UserCredit);
+
+			return result.ToActionResult<DevelopmentPlanType>();
         }
 
         [HttpPost]
         [Route("DevelopmentPlanType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.developmentPlanTypeService.RetrieveAll(DevelopmentPlanType.Informer, paginate, this.UserCredit).ToActionResult<DevelopmentPlanType>();
+            var result = await this.developmentPlanTypeService.RetrieveAll(DevelopmentPlanType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<DevelopmentPlanType>();
         }
 
 
 
         [HttpPost]
         [Route("DevelopmentPlanType/Save")]
-        public IActionResult Save([FromBody] DevelopmentPlanType developmentPlanType)
+        public async Task<IActionResult> Save([FromBody] DevelopmentPlanType developmentPlanType)
         {
-            return this.developmentPlanTypeService.Save(developmentPlanType, this.UserCredit).ToActionResult<DevelopmentPlanType>();
+            var result = await this.developmentPlanTypeService.Save(developmentPlanType, this.UserCredit);
+
+			return result.ToActionResult<DevelopmentPlanType>();
         }
 
 
         [HttpPost]
         [Route("DevelopmentPlanType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] DevelopmentPlanType developmentPlanType)
+        public async Task<IActionResult> SaveAttached([FromBody] DevelopmentPlanType developmentPlanType)
         {
-            return this.developmentPlanTypeService.SaveAttached(developmentPlanType, this.UserCredit).ToActionResult();
+            var result = await this.developmentPlanTypeService.SaveAttached(developmentPlanType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
 
         [HttpPost]
         [Route("DevelopmentPlanType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<DevelopmentPlanType> developmentPlanTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<DevelopmentPlanType> developmentPlanTypeList)
         {
-            return this.developmentPlanTypeService.SaveBulk(developmentPlanTypeList, this.UserCredit).ToActionResult();
+            var result = await this.developmentPlanTypeService.SaveBulk(developmentPlanTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("DevelopmentPlanType/Seek")]
-        public IActionResult Seek([FromBody] DevelopmentPlanType developmentPlanType)
+        public async Task<IActionResult> Seek([FromBody] DevelopmentPlanType developmentPlanType)
         {
-            return this.developmentPlanTypeService.Seek(developmentPlanType).ToActionResult<DevelopmentPlanType>();
+            var result = await this.developmentPlanTypeService.Seek(developmentPlanType);
+
+			return result.ToActionResult<DevelopmentPlanType>();
         }
 
         [HttpGet]
         [Route("DevelopmentPlanType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.developmentPlanTypeService.SeekByValue(seekValue, DevelopmentPlanType.Informer).ToActionResult<DevelopmentPlanType>();
+            var result = await this.developmentPlanTypeService.SeekByValue(seekValue, DevelopmentPlanType.Informer);
+
+			return result.ToActionResult<DevelopmentPlanType>();
         }
 
         [HttpPost]
         [Route("DevelopmentPlanType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] DevelopmentPlanType developmentPlanType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] DevelopmentPlanType developmentPlanType)
         {
-            return this.developmentPlanTypeService.Delete(developmentPlanType, id, this.UserCredit).ToActionResult();
+            var result = await this.developmentPlanTypeService.Delete(developmentPlanType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
 

@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.LAD.Abstract;
 using CobelHR.Entities.LAD;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.LAD
 {
     [Route("api/LAD")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.LAD
 
         [HttpGet]
         [Route("ConclusionType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.conclusionTypeService.RetrieveById(id, ConclusionType.Informer, this.UserCredit).ToActionResult<ConclusionType>();
+            var result = await this.conclusionTypeService.RetrieveById(id, ConclusionType.Informer, this.UserCredit);
+
+			return result.ToActionResult<ConclusionType>();
         }
 
         [HttpPost]
         [Route("ConclusionType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.conclusionTypeService.RetrieveAll(ConclusionType.Informer, paginate, this.UserCredit).ToActionResult<ConclusionType>();
+            var result = await this.conclusionTypeService.RetrieveAll(ConclusionType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<ConclusionType>();
         }
             
 
         
         [HttpPost]
         [Route("ConclusionType/Save")]
-        public IActionResult Save([FromBody] ConclusionType conclusionType)
+        public async Task<IActionResult> Save([FromBody] ConclusionType conclusionType)
         {
-            return this.conclusionTypeService.Save(conclusionType, this.UserCredit).ToActionResult<ConclusionType>();
+            var result = await this.conclusionTypeService.Save(conclusionType, this.UserCredit);
+
+			return result.ToActionResult<ConclusionType>();
         }
 
         
         [HttpPost]
         [Route("ConclusionType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] ConclusionType conclusionType)
+        public async Task<IActionResult> SaveAttached([FromBody] ConclusionType conclusionType)
         {
-            return this.conclusionTypeService.SaveAttached(conclusionType, this.UserCredit).ToActionResult();
+            var result = await this.conclusionTypeService.SaveAttached(conclusionType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("ConclusionType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<ConclusionType> conclusionTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<ConclusionType> conclusionTypeList)
         {
-            return this.conclusionTypeService.SaveBulk(conclusionTypeList, this.UserCredit).ToActionResult();
+            var result = await this.conclusionTypeService.SaveBulk(conclusionTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("ConclusionType/Seek")]
-        public IActionResult Seek([FromBody] ConclusionType conclusionType)
+        public async Task<IActionResult> Seek([FromBody] ConclusionType conclusionType)
         {
-            return this.conclusionTypeService.Seek(conclusionType).ToActionResult<ConclusionType>();
+            var result = await this.conclusionTypeService.Seek(conclusionType);
+
+			return result.ToActionResult<ConclusionType>();
         }
 
         [HttpGet]
         [Route("ConclusionType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.conclusionTypeService.SeekByValue(seekValue, ConclusionType.Informer).ToActionResult<ConclusionType>();
+            var result = await this.conclusionTypeService.SeekByValue(seekValue, ConclusionType.Informer);
+
+			return result.ToActionResult<ConclusionType>();
         }
 
         [HttpPost]
         [Route("ConclusionType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] ConclusionType conclusionType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] ConclusionType conclusionType)
         {
-            return this.conclusionTypeService.Delete(conclusionType, id, this.UserCredit).ToActionResult();
+            var result = await this.conclusionTypeService.Delete(conclusionType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfConclusion

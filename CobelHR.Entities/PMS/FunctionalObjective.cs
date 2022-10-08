@@ -54,7 +54,7 @@ namespace CobelHR.Entities.PMS
 		[JsonIgnore]
 		public List<FunctionalKPI> ListOfFunctionalKPI { get; set; }
 
-	    [JsonIgnore]
+		[JsonIgnore]
 		public List<FunctionalObjective> ListOfChildFunctionalObjective { get; set; }
 
 		[JsonIgnore]

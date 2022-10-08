@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.LAD.Abstract;
 using CobelHR.Entities.LAD;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.LAD
 {
     [Route("api/LAD")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.LAD
 
         [HttpGet]
         [Route("AnswerType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.answerTypeService.RetrieveById(id, AnswerType.Informer, this.UserCredit).ToActionResult<AnswerType>();
+            var result = await this.answerTypeService.RetrieveById(id, AnswerType.Informer, this.UserCredit);
+
+			return result.ToActionResult<AnswerType>();
         }
 
         [HttpPost]
         [Route("AnswerType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.answerTypeService.RetrieveAll(AnswerType.Informer, paginate, this.UserCredit).ToActionResult<AnswerType>();
+            var result = await this.answerTypeService.RetrieveAll(AnswerType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<AnswerType>();
         }
             
 
         
         [HttpPost]
         [Route("AnswerType/Save")]
-        public IActionResult Save([FromBody] AnswerType answerType)
+        public async Task<IActionResult> Save([FromBody] AnswerType answerType)
         {
-            return this.answerTypeService.Save(answerType, this.UserCredit).ToActionResult<AnswerType>();
+            var result = await this.answerTypeService.Save(answerType, this.UserCredit);
+
+			return result.ToActionResult<AnswerType>();
         }
 
         
         [HttpPost]
         [Route("AnswerType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] AnswerType answerType)
+        public async Task<IActionResult> SaveAttached([FromBody] AnswerType answerType)
         {
-            return this.answerTypeService.SaveAttached(answerType, this.UserCredit).ToActionResult();
+            var result = await this.answerTypeService.SaveAttached(answerType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("AnswerType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<AnswerType> answerTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<AnswerType> answerTypeList)
         {
-            return this.answerTypeService.SaveBulk(answerTypeList, this.UserCredit).ToActionResult();
+            var result = await this.answerTypeService.SaveBulk(answerTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("AnswerType/Seek")]
-        public IActionResult Seek([FromBody] AnswerType answerType)
+        public async Task<IActionResult> Seek([FromBody] AnswerType answerType)
         {
-            return this.answerTypeService.Seek(answerType).ToActionResult<AnswerType>();
+            var result = await this.answerTypeService.Seek(answerType);
+
+			return result.ToActionResult<AnswerType>();
         }
 
         [HttpGet]
         [Route("AnswerType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.answerTypeService.SeekByValue(seekValue, AnswerType.Informer).ToActionResult<AnswerType>();
+            var result = await this.answerTypeService.SeekByValue(seekValue, AnswerType.Informer);
+
+			return result.ToActionResult<AnswerType>();
         }
 
         [HttpPost]
         [Route("AnswerType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] AnswerType answerType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] AnswerType answerType)
         {
-            return this.answerTypeService.Delete(answerType, id, this.UserCredit).ToActionResult();
+            var result = await this.answerTypeService.Delete(answerType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfAnswerTypeItem

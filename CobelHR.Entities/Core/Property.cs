@@ -44,7 +44,9 @@ namespace CobelHR.Entities.Core
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<PropertyOption> ListOfPropertyOption { get; set; }
+
+		[JsonIgnore]
+		public List<PropertyOption> ListOfPropertyOption { get; set; }
 
 		#endregion
 

@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("PositionAssignment/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.positionAssignmentService.RetrieveById(id, PositionAssignment.Informer, this.UserCredit).ToActionResult<PositionAssignment>();
+            var result = await this.positionAssignmentService.RetrieveById(id, PositionAssignment.Informer, this.UserCredit);
+
+			return result.ToActionResult<PositionAssignment>();
         }
 
         [HttpPost]
         [Route("PositionAssignment/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.positionAssignmentService.RetrieveAll(PositionAssignment.Informer, paginate, this.UserCredit).ToActionResult<PositionAssignment>();
+            var result = await this.positionAssignmentService.RetrieveAll(PositionAssignment.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<PositionAssignment>();
         }
             
 
         
         [HttpPost]
         [Route("PositionAssignment/Save")]
-        public IActionResult Save([FromBody] PositionAssignment positionAssignment)
+        public async Task<IActionResult> Save([FromBody] PositionAssignment positionAssignment)
         {
-            return this.positionAssignmentService.Save(positionAssignment, this.UserCredit).ToActionResult<PositionAssignment>();
+            var result = await this.positionAssignmentService.Save(positionAssignment, this.UserCredit);
+
+			return result.ToActionResult<PositionAssignment>();
         }
 
         
         [HttpPost]
         [Route("PositionAssignment/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] PositionAssignment positionAssignment)
+        public async Task<IActionResult> SaveAttached([FromBody] PositionAssignment positionAssignment)
         {
-            return this.positionAssignmentService.SaveAttached(positionAssignment, this.UserCredit).ToActionResult();
+            var result = await this.positionAssignmentService.SaveAttached(positionAssignment, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("PositionAssignment/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<PositionAssignment> positionAssignmentList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<PositionAssignment> positionAssignmentList)
         {
-            return this.positionAssignmentService.SaveBulk(positionAssignmentList, this.UserCredit).ToActionResult();
+            var result = await this.positionAssignmentService.SaveBulk(positionAssignmentList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("PositionAssignment/Seek")]
-        public IActionResult Seek([FromBody] PositionAssignment positionAssignment)
+        public async Task<IActionResult> Seek([FromBody] PositionAssignment positionAssignment)
         {
-            return this.positionAssignmentService.Seek(positionAssignment).ToActionResult<PositionAssignment>();
+            var result = await this.positionAssignmentService.Seek(positionAssignment);
+
+			return result.ToActionResult<PositionAssignment>();
         }
 
         [HttpGet]
         [Route("PositionAssignment/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.positionAssignmentService.SeekByValue(seekValue, PositionAssignment.Informer).ToActionResult<PositionAssignment>();
+            var result = await this.positionAssignmentService.SeekByValue(seekValue, PositionAssignment.Informer);
+
+			return result.ToActionResult<PositionAssignment>();
         }
 
         [HttpPost]
         [Route("PositionAssignment/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] PositionAssignment positionAssignment)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] PositionAssignment positionAssignment)
         {
-            return this.positionAssignmentService.Delete(positionAssignment, id, this.UserCredit).ToActionResult();
+            var result = await this.positionAssignmentService.Delete(positionAssignment, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfPositionAssignmentRepeal

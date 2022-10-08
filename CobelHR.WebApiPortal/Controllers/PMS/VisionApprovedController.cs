@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("VisionApproved/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.visionApprovedService.RetrieveById(id, VisionApproved.Informer, this.UserCredit).ToActionResult<VisionApproved>();
+            var result = await this.visionApprovedService.RetrieveById(id, VisionApproved.Informer, this.UserCredit);
+
+			return result.ToActionResult<VisionApproved>();
         }
 
         [HttpPost]
         [Route("VisionApproved/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.visionApprovedService.RetrieveAll(VisionApproved.Informer, paginate, this.UserCredit).ToActionResult<VisionApproved>();
+            var result = await this.visionApprovedService.RetrieveAll(VisionApproved.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<VisionApproved>();
         }
             
 
         
         [HttpPost]
         [Route("VisionApproved/Save")]
-        public IActionResult Save([FromBody] VisionApproved visionApproved)
+        public async Task<IActionResult> Save([FromBody] VisionApproved visionApproved)
         {
-            return this.visionApprovedService.Save(visionApproved, this.UserCredit).ToActionResult<VisionApproved>();
+            var result = await this.visionApprovedService.Save(visionApproved, this.UserCredit);
+
+			return result.ToActionResult<VisionApproved>();
         }
 
         
         [HttpPost]
         [Route("VisionApproved/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] VisionApproved visionApproved)
+        public async Task<IActionResult> SaveAttached([FromBody] VisionApproved visionApproved)
         {
-            return this.visionApprovedService.SaveAttached(visionApproved, this.UserCredit).ToActionResult();
+            var result = await this.visionApprovedService.SaveAttached(visionApproved, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("VisionApproved/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<VisionApproved> visionApprovedList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<VisionApproved> visionApprovedList)
         {
-            return this.visionApprovedService.SaveBulk(visionApprovedList, this.UserCredit).ToActionResult();
+            var result = await this.visionApprovedService.SaveBulk(visionApprovedList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("VisionApproved/Seek")]
-        public IActionResult Seek([FromBody] VisionApproved visionApproved)
+        public async Task<IActionResult> Seek([FromBody] VisionApproved visionApproved)
         {
-            return this.visionApprovedService.Seek(visionApproved).ToActionResult<VisionApproved>();
+            var result = await this.visionApprovedService.Seek(visionApproved);
+
+			return result.ToActionResult<VisionApproved>();
         }
 
         [HttpGet]
         [Route("VisionApproved/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.visionApprovedService.SeekByValue(seekValue, VisionApproved.Informer).ToActionResult<VisionApproved>();
+            var result = await this.visionApprovedService.SeekByValue(seekValue, VisionApproved.Informer);
+
+			return result.ToActionResult<VisionApproved>();
         }
 
         [HttpPost]
         [Route("VisionApproved/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] VisionApproved visionApproved)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] VisionApproved visionApproved)
         {
-            return this.visionApprovedService.Delete(visionApproved, id, this.UserCredit).ToActionResult();
+            var result = await this.visionApprovedService.Delete(visionApproved, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

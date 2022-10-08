@@ -51,7 +51,8 @@ namespace CobelHR.Entities.Core
 
         #region    List Of Related Entities
 
-        public List<CommandParameter> ListOfCommandParameter { get; set; }
+        [JsonIgnore]
+		public List<CommandParameter> ListOfCommandParameter { get; set; }
 
         #endregion
 

@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("Relative/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.relativeService.RetrieveById(id, Relative.Informer, this.UserCredit).ToActionResult<Relative>();
+            var result = await this.relativeService.RetrieveById(id, Relative.Informer, this.UserCredit);
+
+			return result.ToActionResult<Relative>();
         }
 
         [HttpPost]
         [Route("Relative/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.relativeService.RetrieveAll(Relative.Informer, paginate, this.UserCredit).ToActionResult<Relative>();
+            var result = await this.relativeService.RetrieveAll(Relative.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Relative>();
         }
             
 
         
         [HttpPost]
         [Route("Relative/Save")]
-        public IActionResult Save([FromBody] Relative relative)
+        public async Task<IActionResult> Save([FromBody] Relative relative)
         {
-            return this.relativeService.Save(relative, this.UserCredit).ToActionResult<Relative>();
+            var result = await this.relativeService.Save(relative, this.UserCredit);
+
+			return result.ToActionResult<Relative>();
         }
 
         
         [HttpPost]
         [Route("Relative/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Relative relative)
+        public async Task<IActionResult> SaveAttached([FromBody] Relative relative)
         {
-            return this.relativeService.SaveAttached(relative, this.UserCredit).ToActionResult();
+            var result = await this.relativeService.SaveAttached(relative, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Relative/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Relative> relativeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Relative> relativeList)
         {
-            return this.relativeService.SaveBulk(relativeList, this.UserCredit).ToActionResult();
+            var result = await this.relativeService.SaveBulk(relativeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Relative/Seek")]
-        public IActionResult Seek([FromBody] Relative relative)
+        public async Task<IActionResult> Seek([FromBody] Relative relative)
         {
-            return this.relativeService.Seek(relative).ToActionResult<Relative>();
+            var result = await this.relativeService.Seek(relative);
+
+			return result.ToActionResult<Relative>();
         }
 
         [HttpGet]
         [Route("Relative/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.relativeService.SeekByValue(seekValue, Relative.Informer).ToActionResult<Relative>();
+            var result = await this.relativeService.SeekByValue(seekValue, Relative.Informer);
+
+			return result.ToActionResult<Relative>();
         }
 
         [HttpPost]
         [Route("Relative/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Relative relative)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Relative relative)
         {
-            return this.relativeService.Delete(relative, id, this.UserCredit).ToActionResult();
+            var result = await this.relativeService.Delete(relative, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

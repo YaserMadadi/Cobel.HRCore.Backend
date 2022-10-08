@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("EmployeeDetail/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.employeeDetailService.RetrieveById(id, EmployeeDetail.Informer, this.UserCredit).ToActionResult<EmployeeDetail>();
+            var result = await this.employeeDetailService.RetrieveById(id, EmployeeDetail.Informer, this.UserCredit);
+
+			return result.ToActionResult<EmployeeDetail>();
         }
 
         [HttpPost]
         [Route("EmployeeDetail/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.employeeDetailService.RetrieveAll(EmployeeDetail.Informer, paginate, this.UserCredit).ToActionResult<EmployeeDetail>();
+            var result = await this.employeeDetailService.RetrieveAll(EmployeeDetail.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<EmployeeDetail>();
         }
             
 
         
         [HttpPost]
         [Route("EmployeeDetail/Save")]
-        public IActionResult Save([FromBody] EmployeeDetail employeeDetail)
+        public async Task<IActionResult> Save([FromBody] EmployeeDetail employeeDetail)
         {
-            return this.employeeDetailService.Save(employeeDetail, this.UserCredit).ToActionResult<EmployeeDetail>();
+            var result = await this.employeeDetailService.Save(employeeDetail, this.UserCredit);
+
+			return result.ToActionResult<EmployeeDetail>();
         }
 
         
         [HttpPost]
         [Route("EmployeeDetail/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] EmployeeDetail employeeDetail)
+        public async Task<IActionResult> SaveAttached([FromBody] EmployeeDetail employeeDetail)
         {
-            return this.employeeDetailService.SaveAttached(employeeDetail, this.UserCredit).ToActionResult();
+            var result = await this.employeeDetailService.SaveAttached(employeeDetail, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("EmployeeDetail/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<EmployeeDetail> employeeDetailList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<EmployeeDetail> employeeDetailList)
         {
-            return this.employeeDetailService.SaveBulk(employeeDetailList, this.UserCredit).ToActionResult();
+            var result = await this.employeeDetailService.SaveBulk(employeeDetailList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("EmployeeDetail/Seek")]
-        public IActionResult Seek([FromBody] EmployeeDetail employeeDetail)
+        public async Task<IActionResult> Seek([FromBody] EmployeeDetail employeeDetail)
         {
-            return this.employeeDetailService.Seek(employeeDetail).ToActionResult<EmployeeDetail>();
+            var result = await this.employeeDetailService.Seek(employeeDetail);
+
+			return result.ToActionResult<EmployeeDetail>();
         }
 
         [HttpGet]
         [Route("EmployeeDetail/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.employeeDetailService.SeekByValue(seekValue, EmployeeDetail.Informer).ToActionResult<EmployeeDetail>();
+            var result = await this.employeeDetailService.SeekByValue(seekValue, EmployeeDetail.Informer);
+
+			return result.ToActionResult<EmployeeDetail>();
         }
 
         [HttpPost]
         [Route("EmployeeDetail/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] EmployeeDetail employeeDetail)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] EmployeeDetail employeeDetail)
         {
-            return this.employeeDetailService.Delete(employeeDetail, id, this.UserCredit).ToActionResult();
+            var result = await this.employeeDetailService.Delete(employeeDetail, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

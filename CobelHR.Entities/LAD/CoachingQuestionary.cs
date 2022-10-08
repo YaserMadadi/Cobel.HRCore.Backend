@@ -46,8 +46,12 @@ namespace CobelHR.Entities.LAD
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<CoachingQuestionaryAnswered> ListOfCoachingQuestionaryAnswered { get; set; }
-		[JsonIgnore]		public List<CoachingQuestionaryDetail> ListOfCoachingQuestionaryDetail { get; set; }
+
+		[JsonIgnore]
+		public List<CoachingQuestionaryAnswered> ListOfCoachingQuestionaryAnswered { get; set; }
+
+		[JsonIgnore]
+		public List<CoachingQuestionaryDetail> ListOfCoachingQuestionaryDetail { get; set; }
 
 		#endregion
 

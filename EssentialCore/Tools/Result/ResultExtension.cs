@@ -76,6 +76,15 @@ namespace EssentialCore.Tools.Result
             return new OkObjectResult(dataResult); //OkObjectResult(new SuccessfulDataResult<T>(dataResult.Data));
         }
 
+        public static IActionResult ToActionResult<T>(this Task<DataResult<T>> dataResult) where T : IEntityBase
+        {
+           if(dataResult == null || dataResult.Result == null)
+
+                return new BadRequestObjectResult(new ErrorResult(-1,"The result is not Valid!",string.Empty));
+
+            return dataResult.Result.ToActionResult();
+        }
+
 
         /// <summary>
         /// Return Data Result to the Client
@@ -92,13 +101,14 @@ namespace EssentialCore.Tools.Result
             return new OkObjectResult(dataResult);
         }
 
-        public static IActionResult ToActionResult<T>(this Task<DataResult<T>> dataResult) where T : IEntityBase
-        {
-           if(dataResult == null || dataResult.Result == null)
+        //public static IActionResult ToActionResult<T>(this Task<DataResult<List<T>>> dataResult) where T : IEntityBase
+        //{
+        //    if (!dataResult.Result.IsSucceeded || dataResult.Result.Data == null)
 
-                return new BadRequestObjectResult(new ErrorResult(-1,"The result is not Valid!",string.Empty));
+        //        return new BadRequestObjectResult(dataResult);
 
-            return dataResult.Result.ToActionResult();
-        }
+        //    return new OkObjectResult(dataResult);
+        //}
+
     }
 }

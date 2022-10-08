@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.Core.Abstract;
 using CobelHR.Entities.Core;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Core
 {
     [Route("api/Core")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.Core
 
         [HttpGet]
         [Route("RoleMember/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.roleMemberService.RetrieveById(id, RoleMember.Informer, this.UserCredit).ToActionResult<RoleMember>();
+            var result = await this.roleMemberService.RetrieveById(id, RoleMember.Informer, this.UserCredit);
+
+			return result.ToActionResult<RoleMember>();
         }
 
         [HttpPost]
         [Route("RoleMember/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.roleMemberService.RetrieveAll(RoleMember.Informer, paginate, this.UserCredit).ToActionResult<RoleMember>();
+            var result = await this.roleMemberService.RetrieveAll(RoleMember.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<RoleMember>();
         }
             
 
         
         [HttpPost]
         [Route("RoleMember/Save")]
-        public IActionResult Save([FromBody] RoleMember roleMember)
+        public async Task<IActionResult> Save([FromBody] RoleMember roleMember)
         {
-            return this.roleMemberService.Save(roleMember, this.UserCredit).ToActionResult<RoleMember>();
+            var result = await this.roleMemberService.Save(roleMember, this.UserCredit);
+
+			return result.ToActionResult<RoleMember>();
         }
 
         
         [HttpPost]
         [Route("RoleMember/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] RoleMember roleMember)
+        public async Task<IActionResult> SaveAttached([FromBody] RoleMember roleMember)
         {
-            return this.roleMemberService.SaveAttached(roleMember, this.UserCredit).ToActionResult();
+            var result = await this.roleMemberService.SaveAttached(roleMember, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("RoleMember/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<RoleMember> roleMemberList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<RoleMember> roleMemberList)
         {
-            return this.roleMemberService.SaveBulk(roleMemberList, this.UserCredit).ToActionResult();
+            var result = await this.roleMemberService.SaveBulk(roleMemberList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("RoleMember/Seek")]
-        public IActionResult Seek([FromBody] RoleMember roleMember)
+        public async Task<IActionResult> Seek([FromBody] RoleMember roleMember)
         {
-            return this.roleMemberService.Seek(roleMember).ToActionResult<RoleMember>();
+            var result = await this.roleMemberService.Seek(roleMember);
+
+			return result.ToActionResult<RoleMember>();
         }
 
         [HttpGet]
         [Route("RoleMember/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.roleMemberService.SeekByValue(seekValue, RoleMember.Informer).ToActionResult<RoleMember>();
+            var result = await this.roleMemberService.SeekByValue(seekValue, RoleMember.Informer);
+
+			return result.ToActionResult<RoleMember>();
         }
 
         [HttpPost]
         [Route("RoleMember/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] RoleMember roleMember)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] RoleMember roleMember)
         {
-            return this.roleMemberService.Delete(roleMember, id, this.UserCredit).ToActionResult();
+            var result = await this.roleMemberService.Delete(roleMember, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

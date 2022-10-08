@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.LAD.Abstract;
 using CobelHR.Entities.LAD;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.LAD
 {
     [Route("api/LAD")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.LAD
 
         [HttpGet]
         [Route("CoachConnectionLine/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.coachConnectionLineService.RetrieveById(id, CoachConnectionLine.Informer, this.UserCredit).ToActionResult<CoachConnectionLine>();
+            var result = await this.coachConnectionLineService.RetrieveById(id, CoachConnectionLine.Informer, this.UserCredit);
+
+			return result.ToActionResult<CoachConnectionLine>();
         }
 
         [HttpPost]
         [Route("CoachConnectionLine/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.coachConnectionLineService.RetrieveAll(CoachConnectionLine.Informer, paginate, this.UserCredit).ToActionResult<CoachConnectionLine>();
+            var result = await this.coachConnectionLineService.RetrieveAll(CoachConnectionLine.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<CoachConnectionLine>();
         }
             
 
         
         [HttpPost]
         [Route("CoachConnectionLine/Save")]
-        public IActionResult Save([FromBody] CoachConnectionLine coachConnectionLine)
+        public async Task<IActionResult> Save([FromBody] CoachConnectionLine coachConnectionLine)
         {
-            return this.coachConnectionLineService.Save(coachConnectionLine, this.UserCredit).ToActionResult<CoachConnectionLine>();
+            var result = await this.coachConnectionLineService.Save(coachConnectionLine, this.UserCredit);
+
+			return result.ToActionResult<CoachConnectionLine>();
         }
 
         
         [HttpPost]
         [Route("CoachConnectionLine/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] CoachConnectionLine coachConnectionLine)
+        public async Task<IActionResult> SaveAttached([FromBody] CoachConnectionLine coachConnectionLine)
         {
-            return this.coachConnectionLineService.SaveAttached(coachConnectionLine, this.UserCredit).ToActionResult();
+            var result = await this.coachConnectionLineService.SaveAttached(coachConnectionLine, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("CoachConnectionLine/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<CoachConnectionLine> coachConnectionLineList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<CoachConnectionLine> coachConnectionLineList)
         {
-            return this.coachConnectionLineService.SaveBulk(coachConnectionLineList, this.UserCredit).ToActionResult();
+            var result = await this.coachConnectionLineService.SaveBulk(coachConnectionLineList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("CoachConnectionLine/Seek")]
-        public IActionResult Seek([FromBody] CoachConnectionLine coachConnectionLine)
+        public async Task<IActionResult> Seek([FromBody] CoachConnectionLine coachConnectionLine)
         {
-            return this.coachConnectionLineService.Seek(coachConnectionLine).ToActionResult<CoachConnectionLine>();
+            var result = await this.coachConnectionLineService.Seek(coachConnectionLine);
+
+			return result.ToActionResult<CoachConnectionLine>();
         }
 
         [HttpGet]
         [Route("CoachConnectionLine/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.coachConnectionLineService.SeekByValue(seekValue, CoachConnectionLine.Informer).ToActionResult<CoachConnectionLine>();
+            var result = await this.coachConnectionLineService.SeekByValue(seekValue, CoachConnectionLine.Informer);
+
+			return result.ToActionResult<CoachConnectionLine>();
         }
 
         [HttpPost]
         [Route("CoachConnectionLine/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] CoachConnectionLine coachConnectionLine)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] CoachConnectionLine coachConnectionLine)
         {
-            return this.coachConnectionLineService.Delete(coachConnectionLine, id, this.UserCredit).ToActionResult();
+            var result = await this.coachConnectionLineService.Delete(coachConnectionLine, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

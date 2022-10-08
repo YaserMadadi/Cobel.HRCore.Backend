@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("BehavioralKPI/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.behavioralKPIService.RetrieveById(id, BehavioralKPI.Informer, this.UserCredit).ToActionResult<BehavioralKPI>();
+            var result = await this.behavioralKPIService.RetrieveById(id, BehavioralKPI.Informer, this.UserCredit);
+
+			return result.ToActionResult<BehavioralKPI>();
         }
 
         [HttpPost]
         [Route("BehavioralKPI/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.behavioralKPIService.RetrieveAll(BehavioralKPI.Informer, paginate, this.UserCredit).ToActionResult<BehavioralKPI>();
+            var result = await this.behavioralKPIService.RetrieveAll(BehavioralKPI.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<BehavioralKPI>();
         }
             
 
         
         [HttpPost]
         [Route("BehavioralKPI/Save")]
-        public IActionResult Save([FromBody] BehavioralKPI behavioralKPI)
+        public async Task<IActionResult> Save([FromBody] BehavioralKPI behavioralKPI)
         {
-            return this.behavioralKPIService.Save(behavioralKPI, this.UserCredit).ToActionResult<BehavioralKPI>();
+            var result = await this.behavioralKPIService.Save(behavioralKPI, this.UserCredit);
+
+			return result.ToActionResult<BehavioralKPI>();
         }
 
         
         [HttpPost]
         [Route("BehavioralKPI/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] BehavioralKPI behavioralKPI)
+        public async Task<IActionResult> SaveAttached([FromBody] BehavioralKPI behavioralKPI)
         {
-            return this.behavioralKPIService.SaveAttached(behavioralKPI, this.UserCredit).ToActionResult();
+            var result = await this.behavioralKPIService.SaveAttached(behavioralKPI, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("BehavioralKPI/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<BehavioralKPI> behavioralKPIList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<BehavioralKPI> behavioralKPIList)
         {
-            return this.behavioralKPIService.SaveBulk(behavioralKPIList, this.UserCredit).ToActionResult();
+            var result = await this.behavioralKPIService.SaveBulk(behavioralKPIList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("BehavioralKPI/Seek")]
-        public IActionResult Seek([FromBody] BehavioralKPI behavioralKPI)
+        public async Task<IActionResult> Seek([FromBody] BehavioralKPI behavioralKPI)
         {
-            return this.behavioralKPIService.Seek(behavioralKPI).ToActionResult<BehavioralKPI>();
+            var result = await this.behavioralKPIService.Seek(behavioralKPI);
+
+			return result.ToActionResult<BehavioralKPI>();
         }
 
         [HttpGet]
         [Route("BehavioralKPI/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.behavioralKPIService.SeekByValue(seekValue, BehavioralKPI.Informer).ToActionResult<BehavioralKPI>();
+            var result = await this.behavioralKPIService.SeekByValue(seekValue, BehavioralKPI.Informer);
+
+			return result.ToActionResult<BehavioralKPI>();
         }
 
         [HttpPost]
         [Route("BehavioralKPI/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] BehavioralKPI behavioralKPI)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] BehavioralKPI behavioralKPI)
         {
-            return this.behavioralKPIService.Delete(behavioralKPI, id, this.UserCredit).ToActionResult();
+            var result = await this.behavioralKPIService.Delete(behavioralKPI, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfBehavioralAppraise

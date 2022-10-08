@@ -40,8 +40,12 @@ namespace CobelHR.Entities.Base.HR
 		#endregion
 
         #region    List Of Related Entities
-		//[JsonIgnore]		public List<Employee> ListOfEmployee { get; set; }
-		//[JsonIgnore]		public List<EmployeeDetail> ListOfEmployeeDetail { get; set; }
+
+		[JsonIgnore]
+		public List<Employee> ListOfEmployee { get; set; }
+
+		[JsonIgnore]
+		public List<EmployeeDetail> ListOfEmployeeDetail { get; set; }
 
 		#endregion
 

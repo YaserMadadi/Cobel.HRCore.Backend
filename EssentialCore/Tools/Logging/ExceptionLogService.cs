@@ -25,7 +25,7 @@ namespace EssentialCore.Tools.Logging
 
                 return result.ToDataResult(exceptionLog);
 
-            Result.Result childResult = null;
+            //Result.Result childResult = null;
 
             //if (exceptionLog.Parameters.CheckList())
             //{

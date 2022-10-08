@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,11 +31,13 @@ namespace EssentialCore.Tools.Pagination
             this.PageCount = pageCount;
         }
 
+
         public int CurrentPage { get; set; }
 
         [JsonIgnore]
         public int PageCount { get; set; }
 
+        [JsonIgnore]
         public int RecordPerPage { get; set; }
 
     }

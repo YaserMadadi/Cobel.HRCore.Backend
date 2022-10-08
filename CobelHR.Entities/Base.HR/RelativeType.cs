@@ -38,7 +38,9 @@ namespace CobelHR.Entities.Base.HR
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<Relative> ListOfRelationType_Relative { get; set; }
+
+		[JsonIgnore]
+		public List<Relative> ListOfRelationType_Relative { get; set; }
 
 		#endregion
 

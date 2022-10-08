@@ -52,7 +52,9 @@ namespace CobelHR.Entities.PMS
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<BehavioralKPI> ListOfBehavioralKPI { get; set; }
+
+		[JsonIgnore]
+		public List<BehavioralKPI> ListOfBehavioralKPI { get; set; }
 
 		#endregion
 

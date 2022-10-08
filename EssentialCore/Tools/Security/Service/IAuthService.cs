@@ -11,9 +11,9 @@ namespace EssentialCore.Tools.Security.Service
 {
     public interface IAuthService
     {
-        public IDataResult<AccessToken> Login(LoginUser loginUser);
+        public Task<IDataResult<AccessToken>> Login(LoginUser loginUser);
 
-        public IDataResult<UserCredit> CheckInDataBase(string userName);
+        public Task<IDataResult<UserCredit>> CheckInDataBase(string userName);
 
         //public IDataResult<UserCredit> Register(RegisterUser registerUser);
     }

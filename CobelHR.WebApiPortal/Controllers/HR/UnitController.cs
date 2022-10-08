@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("Unit/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.unitService.RetrieveById(id, Unit.Informer, this.UserCredit).ToActionResult<Unit>();
+            var result = await this.unitService.RetrieveById(id, Unit.Informer, this.UserCredit);
+
+			return result.ToActionResult<Unit>();
         }
 
         [HttpPost]
         [Route("Unit/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.unitService.RetrieveAll(Unit.Informer, paginate, this.UserCredit).ToActionResult<Unit>();
+            var result = await this.unitService.RetrieveAll(Unit.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Unit>();
         }
             
 
         
         [HttpPost]
         [Route("Unit/Save")]
-        public IActionResult Save([FromBody] Unit unit)
+        public async Task<IActionResult> Save([FromBody] Unit unit)
         {
-            return this.unitService.Save(unit, this.UserCredit).ToActionResult<Unit>();
+            var result = await this.unitService.Save(unit, this.UserCredit);
+
+			return result.ToActionResult<Unit>();
         }
 
         
         [HttpPost]
         [Route("Unit/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Unit unit)
+        public async Task<IActionResult> SaveAttached([FromBody] Unit unit)
         {
-            return this.unitService.SaveAttached(unit, this.UserCredit).ToActionResult();
+            var result = await this.unitService.SaveAttached(unit, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Unit/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Unit> unitList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Unit> unitList)
         {
-            return this.unitService.SaveBulk(unitList, this.UserCredit).ToActionResult();
+            var result = await this.unitService.SaveBulk(unitList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Unit/Seek")]
-        public IActionResult Seek([FromBody] Unit unit)
+        public async Task<IActionResult> Seek([FromBody] Unit unit)
         {
-            return this.unitService.Seek(unit).ToActionResult<Unit>();
+            var result = await this.unitService.Seek(unit);
+
+			return result.ToActionResult<Unit>();
         }
 
         [HttpGet]
         [Route("Unit/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.unitService.SeekByValue(seekValue, Unit.Informer).ToActionResult<Unit>();
+            var result = await this.unitService.SeekByValue(seekValue, Unit.Informer);
+
+			return result.ToActionResult<Unit>();
         }
 
         [HttpPost]
         [Route("Unit/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Unit unit)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Unit unit)
         {
-            return this.unitService.Delete(unit, id, this.UserCredit).ToActionResult();
+            var result = await this.unitService.Delete(unit, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfPosition

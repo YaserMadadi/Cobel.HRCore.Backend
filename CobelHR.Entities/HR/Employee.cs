@@ -61,32 +61,70 @@ namespace CobelHR.Entities.HR
 
 		#endregion
 
-		#region    List Of Related Entities
+        #region    List Of Related Entities
 
-		//[JsonIgnore]		public List<Assessment> ListOfAssessment { get; set; }
+		[JsonIgnore]
+		public List<Assessment> ListOfAssessment { get; set; }
 
-		//[JsonIgnore]		public List<BehavioralAppraise> ListOfAppraiser_BehavioralAppraise { get; set; }
+		[JsonIgnore]
+		public List<BehavioralAppraise> ListOfAppraiser_BehavioralAppraise { get; set; }
 
-		//[JsonIgnore]		public List<Coaching> ListOfCoaching { get; set; }
+		[JsonIgnore]
+		public List<Coaching> ListOfCoaching { get; set; }
 
-		//[JsonIgnore]		public List<Contract> ListOfContract { get; set; }
-		//[JsonIgnore]		public List<CriticalIncident> ListOfCriticalIncident { get; set; }
-		//[JsonIgnore]		public List<CriticalIncidentRecognition> ListOfWriter_CriticalIncidentRecognition { get; set; }
-		//[JsonIgnore]		public List<EmployeeDetail> ListOfEmployeeDetail { get; set; }
-		//[JsonIgnore]		public List<EmployeeEvent> ListOfEmployeeEvent { get; set; }
-		//[JsonIgnore]		public List<EmployeeNotification> ListOfEmployeeNotification { get; set; }
-		//[JsonIgnore]		public List<FunctionalAppraise> ListOfAppraiser_FunctionalAppraise { get; set; }
-		//[JsonIgnore]		public List<FunctionalKPIComment> ListOfCommenter_FunctionalKPIComment { get; set; }
-		//[JsonIgnore]		public List<FunctionalObjectiveComment> ListOfCommenter_FunctionalObjectiveComment { get; set; }
-		//[JsonIgnore]		public List<Impersonate> ListOfImpersonate { get; set; }
-		//[JsonIgnore]		public List<PositionAssignment> ListOfPositionAssignment { get; set; }
-		//[JsonIgnore]		public List<QualitativeAppraise> ListOfAppraiser_QualitativeAppraise { get; set; }
-		//[JsonIgnore]		public List<RoleMember> ListOfRoleMember { get; set; }
-		//[JsonIgnore]		public List<TargetSetting> ListOfTargetSetting { get; set; }
-		//[JsonIgnore]		public List<Training> ListOfTraining { get; set; }
-		//[JsonIgnore]		public List<Vision> ListOfVision { get; set; }
-		//[JsonIgnore]		public List<VisionApproved> ListOfByEmployee_VisionApproved { get; set; }
-		//[JsonIgnore]		public List<VisionComment> ListOfCommentator_VisionComment { get; set; }
+		[JsonIgnore]
+		public List<Contract> ListOfContract { get; set; }
+
+		[JsonIgnore]
+		public List<CriticalIncident> ListOfCriticalIncident { get; set; }
+
+		[JsonIgnore]
+		public List<CriticalIncidentRecognition> ListOfWriter_CriticalIncidentRecognition { get; set; }
+
+		[JsonIgnore]
+		public List<EmployeeDetail> ListOfEmployeeDetail { get; set; }
+
+		[JsonIgnore]
+		public List<EmployeeEvent> ListOfEmployeeEvent { get; set; }
+
+		[JsonIgnore]
+		public List<EmployeeNotification> ListOfEmployeeNotification { get; set; }
+
+		[JsonIgnore]
+		public List<FunctionalAppraise> ListOfAppraiser_FunctionalAppraise { get; set; }
+
+		[JsonIgnore]
+		public List<FunctionalKPIComment> ListOfCommenter_FunctionalKPIComment { get; set; }
+
+		[JsonIgnore]
+		public List<FunctionalObjectiveComment> ListOfCommenter_FunctionalObjectiveComment { get; set; }
+
+		[JsonIgnore]
+		public List<Impersonate> ListOfImpersonate { get; set; }
+
+		[JsonIgnore]
+		public List<PositionAssignment> ListOfPositionAssignment { get; set; }
+
+		[JsonIgnore]
+		public List<QualitativeAppraise> ListOfAppraiser_QualitativeAppraise { get; set; }
+
+		[JsonIgnore]
+		public List<RoleMember> ListOfRoleMember { get; set; }
+
+		[JsonIgnore]
+		public List<TargetSetting> ListOfTargetSetting { get; set; }
+
+		[JsonIgnore]
+		public List<Training> ListOfTraining { get; set; }
+
+		[JsonIgnore]
+		public List<Vision> ListOfVision { get; set; }
+
+		[JsonIgnore]
+		public List<VisionApproved> ListOfByEmployee_VisionApproved { get; set; }
+
+		[JsonIgnore]
+		public List<VisionComment> ListOfCommentator_VisionComment { get; set; }
 
 		#endregion
 

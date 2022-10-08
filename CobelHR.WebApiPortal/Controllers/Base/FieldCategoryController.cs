@@ -7,6 +7,8 @@ using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("FieldCategory/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.fieldCategoryService.RetrieveById(id, FieldCategory.Informer, this.UserCredit).ToActionResult<FieldCategory>();
+            var result = await this.fieldCategoryService.RetrieveById(id, FieldCategory.Informer, this.UserCredit);
+
+			return result.ToActionResult<FieldCategory>();
         }
 
         [HttpPost]
         [Route("FieldCategory/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.fieldCategoryService.RetrieveAll(FieldCategory.Informer, paginate, this.UserCredit).ToActionResult<FieldCategory>();
+            var result = await this.fieldCategoryService.RetrieveAll(FieldCategory.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<FieldCategory>();
         }
             
 
         
         [HttpPost]
         [Route("FieldCategory/Save")]
-        public IActionResult Save([FromBody] FieldCategory fieldCategory)
+        public async Task<IActionResult> Save([FromBody] FieldCategory fieldCategory)
         {
-            return this.fieldCategoryService.Save(fieldCategory, this.UserCredit).ToActionResult<FieldCategory>();
+            var result = await this.fieldCategoryService.Save(fieldCategory, this.UserCredit);
+
+			return result.ToActionResult<FieldCategory>();
         }
 
         
         [HttpPost]
         [Route("FieldCategory/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] FieldCategory fieldCategory)
+        public async Task<IActionResult> SaveAttached([FromBody] FieldCategory fieldCategory)
         {
-            return this.fieldCategoryService.SaveAttached(fieldCategory, this.UserCredit).ToActionResult();
+            var result = await this.fieldCategoryService.SaveAttached(fieldCategory, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("FieldCategory/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<FieldCategory> fieldCategoryList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<FieldCategory> fieldCategoryList)
         {
-            return this.fieldCategoryService.SaveBulk(fieldCategoryList, this.UserCredit).ToActionResult();
+            var result = await this.fieldCategoryService.SaveBulk(fieldCategoryList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("FieldCategory/Seek")]
-        public IActionResult Seek([FromBody] FieldCategory fieldCategory)
+        public async Task<IActionResult> Seek([FromBody] FieldCategory fieldCategory)
         {
-            return this.fieldCategoryService.Seek(fieldCategory).ToActionResult<FieldCategory>();
+            var result = await this.fieldCategoryService.Seek(fieldCategory);
+
+			return result.ToActionResult<FieldCategory>();
         }
 
         [HttpGet]
         [Route("FieldCategory/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.fieldCategoryService.SeekByValue(seekValue, FieldCategory.Informer).ToActionResult<FieldCategory>();
+            var result = await this.fieldCategoryService.SeekByValue(seekValue, FieldCategory.Informer);
+
+			return result.ToActionResult<FieldCategory>();
         }
 
         [HttpPost]
         [Route("FieldCategory/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] FieldCategory fieldCategory)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] FieldCategory fieldCategory)
         {
-            return this.fieldCategoryService.Delete(fieldCategory, id, this.UserCredit).ToActionResult();
+            var result = await this.fieldCategoryService.Delete(fieldCategory, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfPersonCertificate

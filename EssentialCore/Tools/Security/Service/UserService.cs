@@ -13,9 +13,9 @@ namespace EssentialCore.Tools.Security.Service
 {
     public class UserService : IUserService
     {
-        public DataResult<UserCredit> RetrieveByUserName(string userName)
+        public async Task<DataResult<UserCredit>> RetrieveByUserName(string userName)
         {
-            var dataResult = UserClass.CreateCommand("[Core].[User.RetrieveByUserName]",
+            var dataResult = await UserClass.CreateCommand("[Core].[User.RetrieveByUserName]",
                                                        new SqlParameter("@UserName", userName))
                                                             .ExecuteDataResult();
 

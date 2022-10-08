@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("FunctionalObjectiveComment/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.functionalObjectiveCommentService.RetrieveById(id, FunctionalObjectiveComment.Informer, this.UserCredit).ToActionResult<FunctionalObjectiveComment>();
+            var result = await this.functionalObjectiveCommentService.RetrieveById(id, FunctionalObjectiveComment.Informer, this.UserCredit);
+
+			return result.ToActionResult<FunctionalObjectiveComment>();
         }
 
         [HttpPost]
         [Route("FunctionalObjectiveComment/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.functionalObjectiveCommentService.RetrieveAll(FunctionalObjectiveComment.Informer, paginate, this.UserCredit).ToActionResult<FunctionalObjectiveComment>();
+            var result = await this.functionalObjectiveCommentService.RetrieveAll(FunctionalObjectiveComment.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<FunctionalObjectiveComment>();
         }
             
 
         
         [HttpPost]
         [Route("FunctionalObjectiveComment/Save")]
-        public IActionResult Save([FromBody] FunctionalObjectiveComment functionalObjectiveComment)
+        public async Task<IActionResult> Save([FromBody] FunctionalObjectiveComment functionalObjectiveComment)
         {
-            return this.functionalObjectiveCommentService.Save(functionalObjectiveComment, this.UserCredit).ToActionResult<FunctionalObjectiveComment>();
+            var result = await this.functionalObjectiveCommentService.Save(functionalObjectiveComment, this.UserCredit);
+
+			return result.ToActionResult<FunctionalObjectiveComment>();
         }
 
         
         [HttpPost]
         [Route("FunctionalObjectiveComment/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] FunctionalObjectiveComment functionalObjectiveComment)
+        public async Task<IActionResult> SaveAttached([FromBody] FunctionalObjectiveComment functionalObjectiveComment)
         {
-            return this.functionalObjectiveCommentService.SaveAttached(functionalObjectiveComment, this.UserCredit).ToActionResult();
+            var result = await this.functionalObjectiveCommentService.SaveAttached(functionalObjectiveComment, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("FunctionalObjectiveComment/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<FunctionalObjectiveComment> functionalObjectiveCommentList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<FunctionalObjectiveComment> functionalObjectiveCommentList)
         {
-            return this.functionalObjectiveCommentService.SaveBulk(functionalObjectiveCommentList, this.UserCredit).ToActionResult();
+            var result = await this.functionalObjectiveCommentService.SaveBulk(functionalObjectiveCommentList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("FunctionalObjectiveComment/Seek")]
-        public IActionResult Seek([FromBody] FunctionalObjectiveComment functionalObjectiveComment)
+        public async Task<IActionResult> Seek([FromBody] FunctionalObjectiveComment functionalObjectiveComment)
         {
-            return this.functionalObjectiveCommentService.Seek(functionalObjectiveComment).ToActionResult<FunctionalObjectiveComment>();
+            var result = await this.functionalObjectiveCommentService.Seek(functionalObjectiveComment);
+
+			return result.ToActionResult<FunctionalObjectiveComment>();
         }
 
         [HttpGet]
         [Route("FunctionalObjectiveComment/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.functionalObjectiveCommentService.SeekByValue(seekValue, FunctionalObjectiveComment.Informer).ToActionResult<FunctionalObjectiveComment>();
+            var result = await this.functionalObjectiveCommentService.SeekByValue(seekValue, FunctionalObjectiveComment.Informer);
+
+			return result.ToActionResult<FunctionalObjectiveComment>();
         }
 
         [HttpPost]
         [Route("FunctionalObjectiveComment/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] FunctionalObjectiveComment functionalObjectiveComment)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] FunctionalObjectiveComment functionalObjectiveComment)
         {
-            return this.functionalObjectiveCommentService.Delete(functionalObjectiveComment, id, this.UserCredit).ToActionResult();
+            var result = await this.functionalObjectiveCommentService.Delete(functionalObjectiveComment, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

@@ -40,8 +40,12 @@ namespace CobelHR.Entities.LAD
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<Assessment> ListOfAssessment { get; set; }
-		[JsonIgnore]		public List<AssessorConnectionLine> ListOfAssessorConnectionLine { get; set; }
+
+		[JsonIgnore]
+		public List<Assessment> ListOfAssessment { get; set; }
+
+		[JsonIgnore]
+		public List<AssessorConnectionLine> ListOfAssessorConnectionLine { get; set; }
 
 		#endregion
 

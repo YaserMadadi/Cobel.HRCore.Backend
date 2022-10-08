@@ -7,6 +7,8 @@ using CobelHR.Services.Base.PMS.Abstract;
 using CobelHR.Entities.Base.PMS;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base.PMS
 {
     [Route("api/Base.PMS")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
 
         [HttpGet]
         [Route("AppraiseType/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.appraiseTypeService.RetrieveById(id, AppraiseType.Informer, this.UserCredit).ToActionResult<AppraiseType>();
+            var result = await this.appraiseTypeService.RetrieveById(id, AppraiseType.Informer, this.UserCredit);
+
+			return result.ToActionResult<AppraiseType>();
         }
 
         [HttpPost]
         [Route("AppraiseType/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.appraiseTypeService.RetrieveAll(AppraiseType.Informer, paginate, this.UserCredit).ToActionResult<AppraiseType>();
+            var result = await this.appraiseTypeService.RetrieveAll(AppraiseType.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<AppraiseType>();
         }
             
 
         
         [HttpPost]
         [Route("AppraiseType/Save")]
-        public IActionResult Save([FromBody] AppraiseType appraiseType)
+        public async Task<IActionResult> Save([FromBody] AppraiseType appraiseType)
         {
-            return this.appraiseTypeService.Save(appraiseType, this.UserCredit).ToActionResult<AppraiseType>();
+            var result = await this.appraiseTypeService.Save(appraiseType, this.UserCredit);
+
+			return result.ToActionResult<AppraiseType>();
         }
 
         
         [HttpPost]
         [Route("AppraiseType/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] AppraiseType appraiseType)
+        public async Task<IActionResult> SaveAttached([FromBody] AppraiseType appraiseType)
         {
-            return this.appraiseTypeService.SaveAttached(appraiseType, this.UserCredit).ToActionResult();
+            var result = await this.appraiseTypeService.SaveAttached(appraiseType, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("AppraiseType/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<AppraiseType> appraiseTypeList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<AppraiseType> appraiseTypeList)
         {
-            return this.appraiseTypeService.SaveBulk(appraiseTypeList, this.UserCredit).ToActionResult();
+            var result = await this.appraiseTypeService.SaveBulk(appraiseTypeList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("AppraiseType/Seek")]
-        public IActionResult Seek([FromBody] AppraiseType appraiseType)
+        public async Task<IActionResult> Seek([FromBody] AppraiseType appraiseType)
         {
-            return this.appraiseTypeService.Seek(appraiseType).ToActionResult<AppraiseType>();
+            var result = await this.appraiseTypeService.Seek(appraiseType);
+
+			return result.ToActionResult<AppraiseType>();
         }
 
         [HttpGet]
         [Route("AppraiseType/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.appraiseTypeService.SeekByValue(seekValue, AppraiseType.Informer).ToActionResult<AppraiseType>();
+            var result = await this.appraiseTypeService.SeekByValue(seekValue, AppraiseType.Informer);
+
+			return result.ToActionResult<AppraiseType>();
         }
 
         [HttpPost]
         [Route("AppraiseType/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] AppraiseType appraiseType)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] AppraiseType appraiseType)
         {
-            return this.appraiseTypeService.Delete(appraiseType, id, this.UserCredit).ToActionResult();
+            var result = await this.appraiseTypeService.Delete(appraiseType, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfAppraiseResult

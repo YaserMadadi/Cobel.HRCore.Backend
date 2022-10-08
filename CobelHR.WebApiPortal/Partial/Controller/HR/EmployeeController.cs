@@ -9,7 +9,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using EssentialCore.Controllers;
 using CobelHR.Entities.PMS;
-using CobelHR.Entities.Partial.HR;
 
 namespace CobelHR.WebApiPortal.Partial.Controller.HR
 {
@@ -36,20 +35,6 @@ namespace CobelHR.WebApiPortal.Partial.Controller.HR
         public IActionResult LoadPermission(int employee_id)
         {
             return this.employeeService.LoadRolePermission(employee_id).ToActionResult<RolePermission>();
-        }
-
-        [HttpGet]
-        [Route("Employee/{employee_id:int}/CollectionOfAppraiseResult")]
-        public IActionResult CollectionOfAppraisalResult(int employee_id)
-        {
-            return this.employeeService.LoadAppraiseResult(employee_id).ToActionResult<AppraiseResult>();
-        }
-
-        [HttpGet]
-        [Route("Employee/{employee_id:int}/{position_Id:int}/LoadChartPeople")]
-        public IActionResult LoadOfChartPeople(int employee_id, int position_Id)
-        {
-            return this.employeeService.LoadChart(employee_id,position_Id).ToActionResult<ChartPeople>();
         }
 
     }

@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.HR.Abstract;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.HR
 {
     [Route("api/HR")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.HR
 
         [HttpGet]
         [Route("UniversityTerminate/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.universityTerminateService.RetrieveById(id, UniversityTerminate.Informer, this.UserCredit).ToActionResult<UniversityTerminate>();
+            var result = await this.universityTerminateService.RetrieveById(id, UniversityTerminate.Informer, this.UserCredit);
+
+			return result.ToActionResult<UniversityTerminate>();
         }
 
         [HttpPost]
         [Route("UniversityTerminate/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.universityTerminateService.RetrieveAll(UniversityTerminate.Informer, paginate, this.UserCredit).ToActionResult<UniversityTerminate>();
+            var result = await this.universityTerminateService.RetrieveAll(UniversityTerminate.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<UniversityTerminate>();
         }
             
 
         
         [HttpPost]
         [Route("UniversityTerminate/Save")]
-        public IActionResult Save([FromBody] UniversityTerminate universityTerminate)
+        public async Task<IActionResult> Save([FromBody] UniversityTerminate universityTerminate)
         {
-            return this.universityTerminateService.Save(universityTerminate, this.UserCredit).ToActionResult<UniversityTerminate>();
+            var result = await this.universityTerminateService.Save(universityTerminate, this.UserCredit);
+
+			return result.ToActionResult<UniversityTerminate>();
         }
 
         
         [HttpPost]
         [Route("UniversityTerminate/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] UniversityTerminate universityTerminate)
+        public async Task<IActionResult> SaveAttached([FromBody] UniversityTerminate universityTerminate)
         {
-            return this.universityTerminateService.SaveAttached(universityTerminate, this.UserCredit).ToActionResult();
+            var result = await this.universityTerminateService.SaveAttached(universityTerminate, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("UniversityTerminate/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<UniversityTerminate> universityTerminateList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<UniversityTerminate> universityTerminateList)
         {
-            return this.universityTerminateService.SaveBulk(universityTerminateList, this.UserCredit).ToActionResult();
+            var result = await this.universityTerminateService.SaveBulk(universityTerminateList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("UniversityTerminate/Seek")]
-        public IActionResult Seek([FromBody] UniversityTerminate universityTerminate)
+        public async Task<IActionResult> Seek([FromBody] UniversityTerminate universityTerminate)
         {
-            return this.universityTerminateService.Seek(universityTerminate).ToActionResult<UniversityTerminate>();
+            var result = await this.universityTerminateService.Seek(universityTerminate);
+
+			return result.ToActionResult<UniversityTerminate>();
         }
 
         [HttpGet]
         [Route("UniversityTerminate/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.universityTerminateService.SeekByValue(seekValue, UniversityTerminate.Informer).ToActionResult<UniversityTerminate>();
+            var result = await this.universityTerminateService.SeekByValue(seekValue, UniversityTerminate.Informer);
+
+			return result.ToActionResult<UniversityTerminate>();
         }
 
         [HttpPost]
         [Route("UniversityTerminate/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] UniversityTerminate universityTerminate)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] UniversityTerminate universityTerminate)
         {
-            return this.universityTerminateService.Delete(universityTerminate, id, this.UserCredit).ToActionResult();
+            var result = await this.universityTerminateService.Delete(universityTerminate, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,6 +29,7 @@ namespace EssentialCore.Entities
 
         public string Name { get; init; }
 
+        [JsonIgnore]
         public string Title { get; set; }
 
         public string FullName

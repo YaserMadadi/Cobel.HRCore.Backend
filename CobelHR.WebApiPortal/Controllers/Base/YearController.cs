@@ -7,6 +7,8 @@ using CobelHR.Services.Base.Abstract;
 using CobelHR.Entities.Base;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base
 
         [HttpGet]
         [Route("Year/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.yearService.RetrieveById(id, Year.Informer, this.UserCredit).ToActionResult<Year>();
+            var result = await this.yearService.RetrieveById(id, Year.Informer, this.UserCredit);
+
+			return result.ToActionResult<Year>();
         }
 
         [HttpPost]
         [Route("Year/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.yearService.RetrieveAll(Year.Informer, paginate, this.UserCredit).ToActionResult<Year>();
+            var result = await this.yearService.RetrieveAll(Year.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Year>();
         }
             
 
         
         [HttpPost]
         [Route("Year/Save")]
-        public IActionResult Save([FromBody] Year year)
+        public async Task<IActionResult> Save([FromBody] Year year)
         {
-            return this.yearService.Save(year, this.UserCredit).ToActionResult<Year>();
+            var result = await this.yearService.Save(year, this.UserCredit);
+
+			return result.ToActionResult<Year>();
         }
 
         
         [HttpPost]
         [Route("Year/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Year year)
+        public async Task<IActionResult> SaveAttached([FromBody] Year year)
         {
-            return this.yearService.SaveAttached(year, this.UserCredit).ToActionResult();
+            var result = await this.yearService.SaveAttached(year, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Year/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Year> yearList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Year> yearList)
         {
-            return this.yearService.SaveBulk(yearList, this.UserCredit).ToActionResult();
+            var result = await this.yearService.SaveBulk(yearList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Year/Seek")]
-        public IActionResult Seek([FromBody] Year year)
+        public async Task<IActionResult> Seek([FromBody] Year year)
         {
-            return this.yearService.Seek(year).ToActionResult<Year>();
+            var result = await this.yearService.Seek(year);
+
+			return result.ToActionResult<Year>();
         }
 
         [HttpGet]
         [Route("Year/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.yearService.SeekByValue(seekValue, Year.Informer).ToActionResult<Year>();
+            var result = await this.yearService.SeekByValue(seekValue, Year.Informer);
+
+			return result.ToActionResult<Year>();
         }
 
         [HttpPost]
         [Route("Year/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Year year)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Year year)
         {
-            return this.yearService.Delete(year, id, this.UserCredit).ToActionResult();
+            var result = await this.yearService.Delete(year, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfTargetSetting

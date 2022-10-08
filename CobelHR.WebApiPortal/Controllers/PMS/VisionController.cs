@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.PMS
 {
     [Route("api/PMS")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         [HttpGet]
         [Route("Vision/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.visionService.RetrieveById(id, Vision.Informer, this.UserCredit).ToActionResult<Vision>();
+            var result = await this.visionService.RetrieveById(id, Vision.Informer, this.UserCredit);
+
+			return result.ToActionResult<Vision>();
         }
 
         [HttpPost]
         [Route("Vision/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.visionService.RetrieveAll(Vision.Informer, paginate, this.UserCredit).ToActionResult<Vision>();
+            var result = await this.visionService.RetrieveAll(Vision.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Vision>();
         }
             
 
         
         [HttpPost]
         [Route("Vision/Save")]
-        public IActionResult Save([FromBody] Vision vision)
+        public async Task<IActionResult> Save([FromBody] Vision vision)
         {
-            return this.visionService.Save(vision, this.UserCredit).ToActionResult<Vision>();
+            var result = await this.visionService.Save(vision, this.UserCredit);
+
+			return result.ToActionResult<Vision>();
         }
 
         
         [HttpPost]
         [Route("Vision/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Vision vision)
+        public async Task<IActionResult> SaveAttached([FromBody] Vision vision)
         {
-            return this.visionService.SaveAttached(vision, this.UserCredit).ToActionResult();
+            var result = await this.visionService.SaveAttached(vision, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Vision/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Vision> visionList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Vision> visionList)
         {
-            return this.visionService.SaveBulk(visionList, this.UserCredit).ToActionResult();
+            var result = await this.visionService.SaveBulk(visionList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Vision/Seek")]
-        public IActionResult Seek([FromBody] Vision vision)
+        public async Task<IActionResult> Seek([FromBody] Vision vision)
         {
-            return this.visionService.Seek(vision).ToActionResult<Vision>();
+            var result = await this.visionService.Seek(vision);
+
+			return result.ToActionResult<Vision>();
         }
 
         [HttpGet]
         [Route("Vision/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.visionService.SeekByValue(seekValue, Vision.Informer).ToActionResult<Vision>();
+            var result = await this.visionService.SeekByValue(seekValue, Vision.Informer);
+
+			return result.ToActionResult<Vision>();
         }
 
         [HttpPost]
         [Route("Vision/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Vision vision)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Vision vision)
         {
-            return this.visionService.Delete(vision, id, this.UserCredit).ToActionResult();
+            var result = await this.visionService.Delete(vision, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfIndividualDevelopmentPlan

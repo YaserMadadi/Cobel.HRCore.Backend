@@ -6,6 +6,8 @@ using EssentialCore.Tools.Result;
 using CobelHR.Services.XCode.Abstract;
 using CobelHR.Entities.XCode;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.XCode
 {
     [Route("api/XCode")]
@@ -20,62 +22,78 @@ namespace CobelHR.ApiServices.Controllers.XCode
 
         [HttpGet]
         [Route("Message/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.messageService.RetrieveById(id, Message.Informer, this.UserCredit).ToActionResult<Message>();
+            var result = await this.messageService.RetrieveById(id, Message.Informer, this.UserCredit);
+
+			return result.ToActionResult<Message>();
         }
 
         [HttpPost]
         [Route("Message/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.messageService.RetrieveAll(Message.Informer, paginate, this.UserCredit).ToActionResult<Message>();
+            var result = await this.messageService.RetrieveAll(Message.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<Message>();
         }
             
 
         
         [HttpPost]
         [Route("Message/Save")]
-        public IActionResult Save([FromBody] Message message)
+        public async Task<IActionResult> Save([FromBody] Message message)
         {
-            return this.messageService.Save(message, this.UserCredit).ToActionResult<Message>();
+            var result = await this.messageService.Save(message, this.UserCredit);
+
+			return result.ToActionResult<Message>();
         }
 
         
         [HttpPost]
         [Route("Message/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] Message message)
+        public async Task<IActionResult> SaveAttached([FromBody] Message message)
         {
-            return this.messageService.SaveAttached(message, this.UserCredit).ToActionResult();
+            var result = await this.messageService.SaveAttached(message, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("Message/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<Message> messageList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<Message> messageList)
         {
-            return this.messageService.SaveBulk(messageList, this.UserCredit).ToActionResult();
+            var result = await this.messageService.SaveBulk(messageList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("Message/Seek")]
-        public IActionResult Seek([FromBody] Message message)
+        public async Task<IActionResult> Seek([FromBody] Message message)
         {
-            return this.messageService.Seek(message).ToActionResult<Message>();
+            var result = await this.messageService.Seek(message);
+
+			return result.ToActionResult<Message>();
         }
 
         [HttpGet]
         [Route("Message/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.messageService.SeekByValue(seekValue, Message.Informer).ToActionResult<Message>();
+            var result = await this.messageService.SeekByValue(seekValue, Message.Informer);
+
+			return result.ToActionResult<Message>();
         }
 
         [HttpPost]
         [Route("Message/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] Message message)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] Message message)
         {
-            return this.messageService.Delete(message, id, this.UserCredit).ToActionResult();
+            var result = await this.messageService.Delete(message, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         

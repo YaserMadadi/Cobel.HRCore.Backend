@@ -7,6 +7,8 @@ using CobelHR.Services.Base.HR.Abstract;
 using CobelHR.Entities.Base.HR;
 using CobelHR.Entities.HR;
 
+using System.Threading.Tasks;
+
 namespace CobelHR.ApiServices.Controllers.Base.HR
 {
     [Route("api/Base.HR")]
@@ -21,62 +23,78 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
 
         [HttpGet]
         [Route("PositionDivision/RetrieveById/{id:int}")]
-        public IActionResult RetrieveById(int id)
+        public async Task<IActionResult> RetrieveById(int id)
         {
-            return this.positionDivisionService.RetrieveById(id, PositionDivision.Informer, this.UserCredit).ToActionResult<PositionDivision>();
+            var result = await this.positionDivisionService.RetrieveById(id, PositionDivision.Informer, this.UserCredit);
+
+			return result.ToActionResult<PositionDivision>();
         }
 
         [HttpPost]
         [Route("PositionDivision/RetrieveAll")]
-        public IActionResult RetrieveAll([FromBody] Paginate paginate)
+        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
         {
-            return this.positionDivisionService.RetrieveAll(PositionDivision.Informer, paginate, this.UserCredit).ToActionResult<PositionDivision>();
+            var result = await this.positionDivisionService.RetrieveAll(PositionDivision.Informer, paginate, this.UserCredit);
+
+			return result.ToActionResult<PositionDivision>();
         }
             
 
         
         [HttpPost]
         [Route("PositionDivision/Save")]
-        public IActionResult Save([FromBody] PositionDivision positionDivision)
+        public async Task<IActionResult> Save([FromBody] PositionDivision positionDivision)
         {
-            return this.positionDivisionService.Save(positionDivision, this.UserCredit).ToActionResult<PositionDivision>();
+            var result = await this.positionDivisionService.Save(positionDivision, this.UserCredit);
+
+			return result.ToActionResult<PositionDivision>();
         }
 
         
         [HttpPost]
         [Route("PositionDivision/SaveAttached")]
-        public IActionResult SaveAttached([FromBody] PositionDivision positionDivision)
+        public async Task<IActionResult> SaveAttached([FromBody] PositionDivision positionDivision)
         {
-            return this.positionDivisionService.SaveAttached(positionDivision, this.UserCredit).ToActionResult();
+            var result = await this.positionDivisionService.SaveAttached(positionDivision, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         
         [HttpPost]
         [Route("PositionDivision/SaveBulk")]
-        public IActionResult SaveBulk([FromBody] IList<PositionDivision> positionDivisionList)
+        public async Task<IActionResult> SaveBulk([FromBody] IList<PositionDivision> positionDivisionList)
         {
-            return this.positionDivisionService.SaveBulk(positionDivisionList, this.UserCredit).ToActionResult();
+            var result = await this.positionDivisionService.SaveBulk(positionDivisionList, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         [HttpPost]
         [Route("PositionDivision/Seek")]
-        public IActionResult Seek([FromBody] PositionDivision positionDivision)
+        public async Task<IActionResult> Seek([FromBody] PositionDivision positionDivision)
         {
-            return this.positionDivisionService.Seek(positionDivision).ToActionResult<PositionDivision>();
+            var result = await this.positionDivisionService.Seek(positionDivision);
+
+			return result.ToActionResult<PositionDivision>();
         }
 
         [HttpGet]
         [Route("PositionDivision/SeekByValue/{seekValue}")]
-        public IActionResult SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
+        public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            return this.positionDivisionService.SeekByValue(seekValue, PositionDivision.Informer).ToActionResult<PositionDivision>();
+            var result = await this.positionDivisionService.SeekByValue(seekValue, PositionDivision.Informer);
+
+			return result.ToActionResult<PositionDivision>();
         }
 
         [HttpPost]
         [Route("PositionDivision/Delete/{id:int}")]
-        public IActionResult Delete([FromRoute(Name = "id")] int id, [FromBody] PositionDivision positionDivision)
+        public async Task<IActionResult> Delete([FromRoute(Name = "id")] int id, [FromBody] PositionDivision positionDivision)
         {
-            return this.positionDivisionService.Delete(positionDivision, id, this.UserCredit).ToActionResult();
+            var result = await this.positionDivisionService.Delete(positionDivision, id, this.UserCredit);
+
+			return result.ToActionResult();
         }
 
         // CollectionOfPosition

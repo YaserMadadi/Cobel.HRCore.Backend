@@ -76,22 +76,54 @@ namespace CobelHR.Entities.HR
 		#endregion
 
         #region    List Of Related Entities
-		[JsonIgnore]		public List<CoachingQuestionary> ListOfResponsiblePerson_CoachingQuestionary { get; set; }
-		[JsonIgnore]		public List<Employee> ListOfEmployee { get; set; }
-		[JsonIgnore]		public List<Habitancy> ListOfHabitancy { get; set; }
-		[JsonIgnore]		public List<LanguageAbility> ListOfLanguageAbility { get; set; }
-		[JsonIgnore]		public List<Log> ListOfLog { get; set; }
-		[JsonIgnore]		public List<MaritalInfo> ListOfMaritalInfo { get; set; }
-		[JsonIgnore]		public List<MilitaryService> ListOfMilitaryService { get; set; }
-		[JsonIgnore]		public List<Passport> ListOfPassport { get; set; }
-		[JsonIgnore]		public List<PersonCertificate> ListOfPersonCertificate { get; set; }
-		[JsonIgnore]		public List<PersonConnection> ListOfPersonConnection { get; set; }
-		[JsonIgnore]		public List<PersonDrivingLicense> ListOfPersonDrivingLicense { get; set; }
-		[JsonIgnore]		public List<Relative> ListOfPeson_Relative { get; set; }
-		[JsonIgnore]		public List<SchoolHistory> ListOfSchoolHistory { get; set; }
-		[JsonIgnore]		public List<UniversityHistory> ListOfUniversityHistory { get; set; }
-		[JsonIgnore]		public List<UserAccount> ListOfUserAccount { get; set; }
-		[JsonIgnore]		public List<WorkExperience> ListOfWorkExperience { get; set; }
+
+		[JsonIgnore]
+		public List<CoachingQuestionary> ListOfResponsiblePerson_CoachingQuestionary { get; set; }
+
+		[JsonIgnore]
+		public List<Employee> ListOfEmployee { get; set; }
+
+		[JsonIgnore]
+		public List<Habitancy> ListOfHabitancy { get; set; }
+
+		[JsonIgnore]
+		public List<LanguageAbility> ListOfLanguageAbility { get; set; }
+
+		[JsonIgnore]
+		public List<Log> ListOfLog { get; set; }
+
+		[JsonIgnore]
+		public List<MaritalInfo> ListOfMaritalInfo { get; set; }
+
+		[JsonIgnore]
+		public List<MilitaryService> ListOfMilitaryService { get; set; }
+
+		[JsonIgnore]
+		public List<Passport> ListOfPassport { get; set; }
+
+		[JsonIgnore]
+		public List<PersonCertificate> ListOfPersonCertificate { get; set; }
+
+		[JsonIgnore]
+		public List<PersonConnection> ListOfPersonConnection { get; set; }
+
+		[JsonIgnore]
+		public List<PersonDrivingLicense> ListOfPersonDrivingLicense { get; set; }
+
+		[JsonIgnore]
+		public List<Relative> ListOfPeson_Relative { get; set; }
+
+		[JsonIgnore]
+		public List<SchoolHistory> ListOfSchoolHistory { get; set; }
+
+		[JsonIgnore]
+		public List<UniversityHistory> ListOfUniversityHistory { get; set; }
+
+		[JsonIgnore]
+		public List<UserAccount> ListOfUserAccount { get; set; }
+
+		[JsonIgnore]
+		public List<WorkExperience> ListOfWorkExperience { get; set; }
 
 		#endregion
 
