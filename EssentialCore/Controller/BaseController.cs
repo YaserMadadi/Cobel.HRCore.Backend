@@ -17,33 +17,45 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace EssentialCore.Controllers
 {
     [Authorize()]
-    public class BaseController : Controller
+    public class BaseController : ControllerBase
     {
         public BaseController()
         {
-            this.userService = new UserService();
+            //this.userService = new UserService();
         }
 
-        public IUserService userService { get; set; }
+        //public IUserService userService { get; set; }
 
-        public UserCredit UserCredit { get; set; }
+        private UserCredit userCredit;
 
-        public override void OnActionExecuting(ActionExecutingContext context)
+        public UserCredit UserCredit
         {
-            //var identity = context.HttpContext.User.Identity as ClaimsIdentity;
+            get
+            {
+                if (this.userCredit == null)
 
-            //var userName = identity.FindFirst(ClaimTypes.Name);
+                    this.userCredit = this.HttpContext.Items["userCredit"] as UserCredit;
 
-            var userName = context.HttpContext.User.Identity.Name;
-
-            var userCreditResult = this.userService.RetrieveByUserName(userName);
-
-            this.UserCredit = userCreditResult.Result.IsSucceeded ? userCreditResult.Result.Data : null;
-
-
-
-            base.OnActionExecuting(context);
+                return this.userCredit;
+            }
         }
+
+        //public override void OnActionExecuting(ActionExecutingContext context)
+        //{
+        //    //var identity = context.HttpContext.User.Identity as ClaimsIdentity;
+
+        //    //var userName = identity.FindFirst(ClaimTypes.Name);
+
+        //    var userName = context.HttpContext.User.Identity.Name;
+
+        //    var userCreditResult = this.userService.RetrieveByUserName(userName);
+
+        //    this.UserCredit = userCreditResult.Result.IsSucceeded ? userCreditResult.Result.Data : null;
+
+
+
+        //    base.OnActionExecuting(context);
+        //}
 
         private void updateToken()
         {

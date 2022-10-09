@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EssentialCore.ExtenssionMethod;
+using EssentialCore.Tools.Middleware;
 
 namespace CobelHR.WebApiPortal
 {
@@ -92,9 +93,12 @@ namespace CobelHR.WebApiPortal
 
             app.UseCors(corsName);
 
+
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseXCoreAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
