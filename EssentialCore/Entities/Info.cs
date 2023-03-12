@@ -22,7 +22,7 @@ namespace EssentialCore.Entities
 
         public Info(string schema, string name, string title) : this(schema, name)
         {
-            this.Title = title;
+            this.Title = title ?? $"{schema}.{name }";// string.IsNullOrWhiteSpace(title) ? $"{schema}.{name}" : title.Trim();
         }
 
         public string Schema { get; init; }
