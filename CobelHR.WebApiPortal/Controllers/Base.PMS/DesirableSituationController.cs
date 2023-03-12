@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         }
 
         [HttpPost]
-        [Route("DesirableSituation/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("DesirableSituation/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.desirableSituationService.RetrieveAll(DesirableSituation.Informer, paginate, this.UserCredit);
+            var result = await this.desirableSituationService.RetrieveAll(DesirableSituation.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<DesirableSituation>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("DesirableSituation/Seek")]
         public async Task<IActionResult> Seek([FromBody] DesirableSituation desirableSituation)
         {
-            var result = await this.desirableSituationService.Seek(desirableSituation);
+            var result = await this.desirableSituationService.Seek(desirableSituation, this.UserCredit);
 
 			return result.ToActionResult<DesirableSituation>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("DesirableSituation/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.desirableSituationService.SeekByValue(seekValue, DesirableSituation.Informer);
+            var result = await this.desirableSituationService.SeekByValue(seekValue, DesirableSituation.Informer, this.UserCredit);
 
 			return result.ToActionResult<DesirableSituation>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("DesirableSituation/{desirableSituation_id:int}/IndividualDevelopmentPlan")]
         public IActionResult CollectionOfIndividualDevelopmentPlan([FromRoute(Name = "desirableSituation_id")] int id, IndividualDevelopmentPlan individualDevelopmentPlan)
         {
-            return this.desirableSituationService.CollectionOfIndividualDevelopmentPlan(id, individualDevelopmentPlan).ToActionResult();
+            return this.desirableSituationService.CollectionOfIndividualDevelopmentPlan(id, individualDevelopmentPlan, this.UserCredit).ToActionResult();
         }
     }
 }

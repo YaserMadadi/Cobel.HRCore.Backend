@@ -22,30 +22,33 @@ namespace CobelHR.Services.PMS
             return await vision.SaveAttached(userCredit);
         }
 
-        public DataResult<List<IndividualDevelopmentPlan>> CollectionOfIndividualDevelopmentPlan(int vision_Id, IndividualDevelopmentPlan individualDevelopmentPlan)
+        public DataResult<List<IndividualDevelopmentPlan>> CollectionOfIndividualDevelopmentPlan(int vision_Id, IndividualDevelopmentPlan individualDevelopmentPlan, UserCredit userCredit)
         {
             var procedureName = "[PMS].[Vision.CollectionOfIndividualDevelopmentPlan]";
 
             return this.CollectionOf<IndividualDevelopmentPlan>(procedureName,
-                                                    new SqlParameter("@Id",vision_Id), 
+                                                    new SqlParameter("@Id",vision_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", individualDevelopmentPlan.ToJson()));
         }
 
-		public DataResult<List<VisionApproved>> CollectionOfVisionApproved(int vision_Id, VisionApproved visionApproved)
+		public DataResult<List<VisionApproved>> CollectionOfVisionApproved(int vision_Id, VisionApproved visionApproved, UserCredit userCredit)
         {
             var procedureName = "[PMS].[Vision.CollectionOfVisionApproved]";
 
             return this.CollectionOf<VisionApproved>(procedureName,
-                                                    new SqlParameter("@Id",vision_Id), 
+                                                    new SqlParameter("@Id",vision_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", visionApproved.ToJson()));
         }
 
-		public DataResult<List<VisionComment>> CollectionOfVisionComment(int vision_Id, VisionComment visionComment)
+		public DataResult<List<VisionComment>> CollectionOfVisionComment(int vision_Id, VisionComment visionComment, UserCredit userCredit)
         {
             var procedureName = "[PMS].[Vision.CollectionOfVisionComment]";
 
             return this.CollectionOf<VisionComment>(procedureName,
-                                                    new SqlParameter("@Id",vision_Id), 
+                                                    new SqlParameter("@Id",vision_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", visionComment.ToJson()));
         }
     }

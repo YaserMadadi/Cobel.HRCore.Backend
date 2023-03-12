@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base.HR
             return await relativeType.SaveAttached(userCredit);
         }
 
-        public DataResult<List<Relative>> CollectionOfRelative_RelationType(int relativeType_Id, Relative relative)
+        public DataResult<List<Relative>> CollectionOfRelative_RelationType(int relativeType_Id, Relative relative, UserCredit userCredit)
         {
             var procedureName = "[Base.HR].[RelativeType(RelationType).CollectionOfRelative]";
 
             return this.CollectionOf<Relative>(procedureName,
-                                                    new SqlParameter("@Id",relativeType_Id), 
+                                                    new SqlParameter("@Id",relativeType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", relative.ToJson()));
         }
     }

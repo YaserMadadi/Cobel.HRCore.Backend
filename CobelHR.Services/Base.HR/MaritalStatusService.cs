@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base.HR
             return await maritalStatus.SaveAttached(userCredit);
         }
 
-        public DataResult<List<Person>> CollectionOfPerson(int maritalStatus_Id, Person person)
+        public DataResult<List<Person>> CollectionOfPerson(int maritalStatus_Id, Person person, UserCredit userCredit)
         {
             var procedureName = "[Base.HR].[MaritalStatus.CollectionOfPerson]";
 
             return this.CollectionOf<Person>(procedureName,
-                                                    new SqlParameter("@Id",maritalStatus_Id), 
+                                                    new SqlParameter("@Id",maritalStatus_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", person.ToJson()));
         }
     }

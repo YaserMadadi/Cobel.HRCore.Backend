@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         }
 
         [HttpPost]
-        [Route("EmploymentStatus/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("EmploymentStatus/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.employmentStatusService.RetrieveAll(EmploymentStatus.Informer, paginate, this.UserCredit);
+            var result = await this.employmentStatusService.RetrieveAll(EmploymentStatus.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<EmploymentStatus>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("EmploymentStatus/Seek")]
         public async Task<IActionResult> Seek([FromBody] EmploymentStatus employmentStatus)
         {
-            var result = await this.employmentStatusService.Seek(employmentStatus);
+            var result = await this.employmentStatusService.Seek(employmentStatus, this.UserCredit);
 
 			return result.ToActionResult<EmploymentStatus>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("EmploymentStatus/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.employmentStatusService.SeekByValue(seekValue, EmploymentStatus.Informer);
+            var result = await this.employmentStatusService.SeekByValue(seekValue, EmploymentStatus.Informer, this.UserCredit);
 
 			return result.ToActionResult<EmploymentStatus>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("EmploymentStatus/{employmentStatus_id:int}/Employee")]
         public IActionResult CollectionOfEmployee([FromRoute(Name = "employmentStatus_id")] int id, Employee employee)
         {
-            return this.employmentStatusService.CollectionOfEmployee(id, employee).ToActionResult();
+            return this.employmentStatusService.CollectionOfEmployee(id, employee, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfEmployeeDetail
@@ -110,7 +110,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("EmploymentStatus/{employmentStatus_id:int}/EmployeeDetail")]
         public IActionResult CollectionOfEmployeeDetail([FromRoute(Name = "employmentStatus_id")] int id, EmployeeDetail employeeDetail)
         {
-            return this.employmentStatusService.CollectionOfEmployeeDetail(id, employeeDetail).ToActionResult();
+            return this.employmentStatusService.CollectionOfEmployeeDetail(id, employeeDetail, this.UserCredit).ToActionResult();
         }
     }
 }

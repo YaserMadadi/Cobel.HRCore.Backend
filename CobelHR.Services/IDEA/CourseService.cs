@@ -22,12 +22,13 @@ namespace CobelHR.Services.IDEA
             return await course.SaveAttached(userCredit);
         }
 
-        public DataResult<List<Training>> CollectionOfTraining(int course_Id, Training training)
+        public DataResult<List<Training>> CollectionOfTraining(int course_Id, Training training, UserCredit userCredit)
         {
             var procedureName = "[IDEA].[Course.CollectionOfTraining]";
 
             return this.CollectionOf<Training>(procedureName,
-                                                    new SqlParameter("@Id",course_Id), 
+                                                    new SqlParameter("@Id",course_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", training.ToJson()));
         }
     }

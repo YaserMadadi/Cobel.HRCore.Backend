@@ -8,6 +8,6 @@ namespace CobelHR.Services.PMS.Abstract
 {
     public interface ICompetencyItemKPIService : IService<CompetencyItemKPI>
     {
-        DataResult<List<BehavioralKPI>> CollectionOfBehavioralKPI(int competencyItemKPI_Id, BehavioralKPI behavioralKPI);
+        DataResult<List<BehavioralKPI>> CollectionOfBehavioralKPI(int competencyItemKPI_Id, BehavioralKPI behavioralKPI, UserCredit userCredit);
     }
 }

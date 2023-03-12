@@ -23,21 +23,23 @@ namespace CobelHR.Services.Base.HR
             return await positionDivision.SaveAttached(userCredit);
         }
 
-        public DataResult<List<Position>> CollectionOfPosition(int positionDivision_Id, Position position)
+        public DataResult<List<Position>> CollectionOfPosition(int positionDivision_Id, Position position, UserCredit userCredit)
         {
             var procedureName = "[Base.HR].[PositionDivision.CollectionOfPosition]";
 
             return this.CollectionOf<Position>(procedureName,
-                                                    new SqlParameter("@Id",positionDivision_Id), 
+                                                    new SqlParameter("@Id",positionDivision_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", position.ToJson()));
         }
 
-		public DataResult<List<Unit>> CollectionOfUnit(int positionDivision_Id, Unit unit)
+		public DataResult<List<Unit>> CollectionOfUnit(int positionDivision_Id, Unit unit, UserCredit userCredit)
         {
             var procedureName = "[Base.HR].[PositionDivision.CollectionOfUnit]";
 
             return this.CollectionOf<Unit>(procedureName,
-                                                    new SqlParameter("@Id",positionDivision_Id), 
+                                                    new SqlParameter("@Id",positionDivision_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", unit.ToJson()));
         }
     }

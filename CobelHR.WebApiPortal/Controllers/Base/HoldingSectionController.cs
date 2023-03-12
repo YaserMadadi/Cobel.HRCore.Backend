@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("HoldingSection/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("HoldingSection/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.holdingSectionService.RetrieveAll(HoldingSection.Informer, paginate, this.UserCredit);
+            var result = await this.holdingSectionService.RetrieveAll(HoldingSection.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<HoldingSection>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("HoldingSection/Seek")]
         public async Task<IActionResult> Seek([FromBody] HoldingSection holdingSection)
         {
-            var result = await this.holdingSectionService.Seek(holdingSection);
+            var result = await this.holdingSectionService.Seek(holdingSection, this.UserCredit);
 
 			return result.ToActionResult<HoldingSection>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("HoldingSection/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.holdingSectionService.SeekByValue(seekValue, HoldingSection.Informer);
+            var result = await this.holdingSectionService.SeekByValue(seekValue, HoldingSection.Informer, this.UserCredit);
 
 			return result.ToActionResult<HoldingSection>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("LastHoldingSection/{holdingSection_id:int}/Employee")]
         public IActionResult CollectionOfEmployee_LastHoldingSection([FromRoute(Name = "holdingSection_id")] int id, Employee employee)
         {
-            return this.holdingSectionService.CollectionOfEmployee_LastHoldingSection(id, employee).ToActionResult();
+            return this.holdingSectionService.CollectionOfEmployee_LastHoldingSection(id, employee, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfEmployeeDetail
@@ -110,7 +110,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("HoldingSection/{holdingSection_id:int}/EmployeeDetail")]
         public IActionResult CollectionOfEmployeeDetail([FromRoute(Name = "holdingSection_id")] int id, EmployeeDetail employeeDetail)
         {
-            return this.holdingSectionService.CollectionOfEmployeeDetail(id, employeeDetail).ToActionResult();
+            return this.holdingSectionService.CollectionOfEmployeeDetail(id, employeeDetail, this.UserCredit).ToActionResult();
         }
     }
 }

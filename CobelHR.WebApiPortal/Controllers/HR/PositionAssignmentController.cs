@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("PositionAssignment/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("PositionAssignment/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.positionAssignmentService.RetrieveAll(PositionAssignment.Informer, paginate, this.UserCredit);
+            var result = await this.positionAssignmentService.RetrieveAll(PositionAssignment.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<PositionAssignment>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("PositionAssignment/Seek")]
         public async Task<IActionResult> Seek([FromBody] PositionAssignment positionAssignment)
         {
-            var result = await this.positionAssignmentService.Seek(positionAssignment);
+            var result = await this.positionAssignmentService.Seek(positionAssignment, this.UserCredit);
 
 			return result.ToActionResult<PositionAssignment>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("PositionAssignment/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.positionAssignmentService.SeekByValue(seekValue, PositionAssignment.Informer);
+            var result = await this.positionAssignmentService.SeekByValue(seekValue, PositionAssignment.Informer, this.UserCredit);
 
 			return result.ToActionResult<PositionAssignment>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("PositionAssignment/{positionAssignment_id:int}/PositionAssignmentRepeal")]
         public IActionResult CollectionOfPositionAssignmentRepeal([FromRoute(Name = "positionAssignment_id")] int id, PositionAssignmentRepeal positionAssignmentRepeal)
         {
-            return this.positionAssignmentService.CollectionOfPositionAssignmentRepeal(id, positionAssignmentRepeal).ToActionResult();
+            return this.positionAssignmentService.CollectionOfPositionAssignmentRepeal(id, positionAssignmentRepeal, this.UserCredit).ToActionResult();
         }
     }
 }

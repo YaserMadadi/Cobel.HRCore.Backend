@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base.HR
             return await contractType.SaveAttached(userCredit);
         }
 
-        public DataResult<List<Contract>> CollectionOfContract(int contractType_Id, Contract contract)
+        public DataResult<List<Contract>> CollectionOfContract(int contractType_Id, Contract contract, UserCredit userCredit)
         {
             var procedureName = "[Base.HR].[ContractType.CollectionOfContract]";
 
             return this.CollectionOf<Contract>(procedureName,
-                                                    new SqlParameter("@Id",contractType_Id), 
+                                                    new SqlParameter("@Id",contractType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", contract.ToJson()));
         }
     }

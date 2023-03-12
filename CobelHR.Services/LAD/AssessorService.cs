@@ -22,21 +22,23 @@ namespace CobelHR.Services.LAD
             return await assessor.SaveAttached(userCredit);
         }
 
-        public DataResult<List<Assessment>> CollectionOfAssessment(int assessor_Id, Assessment assessment)
+        public DataResult<List<Assessment>> CollectionOfAssessment(int assessor_Id, Assessment assessment, UserCredit userCredit)
         {
             var procedureName = "[LAD].[Assessor.CollectionOfAssessment]";
 
             return this.CollectionOf<Assessment>(procedureName,
-                                                    new SqlParameter("@Id",assessor_Id), 
+                                                    new SqlParameter("@Id",assessor_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", assessment.ToJson()));
         }
 
-		public DataResult<List<AssessorConnectionLine>> CollectionOfAssessorConnectionLine(int assessor_Id, AssessorConnectionLine assessorConnectionLine)
+		public DataResult<List<AssessorConnectionLine>> CollectionOfAssessorConnectionLine(int assessor_Id, AssessorConnectionLine assessorConnectionLine, UserCredit userCredit)
         {
             var procedureName = "[LAD].[Assessor.CollectionOfAssessorConnectionLine]";
 
             return this.CollectionOf<AssessorConnectionLine>(procedureName,
-                                                    new SqlParameter("@Id",assessor_Id), 
+                                                    new SqlParameter("@Id",assessor_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", assessorConnectionLine.ToJson()));
         }
     }

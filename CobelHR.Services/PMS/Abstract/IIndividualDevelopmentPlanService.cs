@@ -8,6 +8,6 @@ namespace CobelHR.Services.PMS.Abstract
 {
     public interface IIndividualDevelopmentPlanService : IService<IndividualDevelopmentPlan>
     {
-        DataResult<List<DevelopmentPlanCompetency>> CollectionOfDevelopmentPlanCompetency(int individualDevelopmentPlan_Id, DevelopmentPlanCompetency developmentPlanCompetency);
+        DataResult<List<DevelopmentPlanCompetency>> CollectionOfDevelopmentPlanCompetency(int individualDevelopmentPlan_Id, DevelopmentPlanCompetency developmentPlanCompetency, UserCredit userCredit);
     }
 }

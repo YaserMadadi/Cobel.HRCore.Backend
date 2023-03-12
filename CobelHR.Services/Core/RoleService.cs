@@ -22,16 +22,17 @@ namespace CobelHR.Services.Core
             return await role.SaveAttached(userCredit);
         }
 
-        public DataResult<List<RoleMember>> CollectionOfRoleMember(int role_Id, RoleMember roleMember)
+        public DataResult<List<RoleMember>> CollectionOfRoleMember(int role_Id, RoleMember roleMember, UserCredit userCredit)
         {
             var procedureName = "[Core].[Role.CollectionOfRoleMember]";
 
             return this.CollectionOf<RoleMember>(procedureName,
-                                                    new SqlParameter("@Id",role_Id), 
+                                                    new SqlParameter("@Id",role_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", roleMember.ToJson()));
         }
 
-		//public DataResult<List<RoleMenuItem>> CollectionOfRoleMenuItem(int role_Id, RoleMenuItem roleMenuItem)
+		//public DataResult<List<RoleMenuItem>> CollectionOfRoleMenuItem(int role_Id, RoleMenuItem roleMenuItem, UserCredit userCredit)
   //      {
   //          var procedureName = "[Core].[Role.CollectionOfRoleMenuItem]";
 
@@ -40,12 +41,13 @@ namespace CobelHR.Services.Core
   //                                                  new SqlParameter("@jsonValue", roleMenuItem.ToJson()));
   //      }
 
-		public DataResult<List<RolePermission>> CollectionOfRolePermission(int role_Id, RolePermission rolePermission)
+		public DataResult<List<RolePermission>> CollectionOfRolePermission(int role_Id, RolePermission rolePermission, UserCredit userCredit)
         {
             var procedureName = "[Core].[Role.CollectionOfRolePermission]";
 
             return this.CollectionOf<RolePermission>(procedureName,
-                                                    new SqlParameter("@Id",role_Id), 
+                                                    new SqlParameter("@Id",role_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", rolePermission.ToJson()));
         }
     }

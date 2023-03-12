@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("TargetSetting/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("TargetSetting/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.targetSettingService.RetrieveAll(TargetSetting.Informer, paginate, this.UserCredit);
+            var result = await this.targetSettingService.RetrieveAll(TargetSetting.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<TargetSetting>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("TargetSetting/Seek")]
         public async Task<IActionResult> Seek([FromBody] TargetSetting targetSetting)
         {
-            var result = await this.targetSettingService.Seek(targetSetting);
+            var result = await this.targetSettingService.Seek(targetSetting, this.UserCredit);
 
 			return result.ToActionResult<TargetSetting>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("TargetSetting/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.targetSettingService.SeekByValue(seekValue, TargetSetting.Informer);
+            var result = await this.targetSettingService.SeekByValue(seekValue, TargetSetting.Informer, this.UserCredit);
 
 			return result.ToActionResult<TargetSetting>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("TargetSetting/{targetSetting_id:int}/AppraiseResult")]
         public IActionResult CollectionOfAppraiseResult([FromRoute(Name = "targetSetting_id")] int id, AppraiseResult appraiseResult)
         {
-            return this.targetSettingService.CollectionOfAppraiseResult(id, appraiseResult).ToActionResult();
+            return this.targetSettingService.CollectionOfAppraiseResult(id, appraiseResult, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfBehavioralObjective
@@ -109,7 +109,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("TargetSetting/{targetSetting_id:int}/BehavioralObjective")]
         public IActionResult CollectionOfBehavioralObjective([FromRoute(Name = "targetSetting_id")] int id, BehavioralObjective behavioralObjective)
         {
-            return this.targetSettingService.CollectionOfBehavioralObjective(id, behavioralObjective).ToActionResult();
+            return this.targetSettingService.CollectionOfBehavioralObjective(id, behavioralObjective, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfFinalAppraise
@@ -117,7 +117,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("TargetSetting/{targetSetting_id:int}/FinalAppraise")]
         public IActionResult CollectionOfFinalAppraise([FromRoute(Name = "targetSetting_id")] int id, FinalAppraise finalAppraise)
         {
-            return this.targetSettingService.CollectionOfFinalAppraise(id, finalAppraise).ToActionResult();
+            return this.targetSettingService.CollectionOfFinalAppraise(id, finalAppraise, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfFunctionalObjective
@@ -125,7 +125,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("TargetSetting/{targetSetting_id:int}/FunctionalObjective")]
         public IActionResult CollectionOfFunctionalObjective([FromRoute(Name = "targetSetting_id")] int id, FunctionalObjective functionalObjective)
         {
-            return this.targetSettingService.CollectionOfFunctionalObjective(id, functionalObjective).ToActionResult();
+            return this.targetSettingService.CollectionOfFunctionalObjective(id, functionalObjective, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfQualitativeObjective
@@ -133,7 +133,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("TargetSetting/{targetSetting_id:int}/QualitativeObjective")]
         public IActionResult CollectionOfQualitativeObjective([FromRoute(Name = "targetSetting_id")] int id, QualitativeObjective qualitativeObjective)
         {
-            return this.targetSettingService.CollectionOfQualitativeObjective(id, qualitativeObjective).ToActionResult();
+            return this.targetSettingService.CollectionOfQualitativeObjective(id, qualitativeObjective, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfQuantitativeAppraise
@@ -141,7 +141,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("TargetSetting/{targetSetting_id:int}/QuantitativeAppraise")]
         public IActionResult CollectionOfQuantitativeAppraise([FromRoute(Name = "targetSetting_id")] int id, QuantitativeAppraise quantitativeAppraise)
         {
-            return this.targetSettingService.CollectionOfQuantitativeAppraise(id, quantitativeAppraise).ToActionResult();
+            return this.targetSettingService.CollectionOfQuantitativeAppraise(id, quantitativeAppraise, this.UserCredit).ToActionResult();
         }
     }
 }

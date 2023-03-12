@@ -12,12 +12,12 @@ namespace EssentialCore.Entities
     {
         private EntityBase()
         {
-            this.Info = new Info("test", "test");
+            this.Info = new Info(string.Empty, string.Empty);
 
             this.TimeStamp = new byte[1] { 0x0 };
         }
 
-        public EntityBase(int id):this()
+        public EntityBase(int id) : this()
         {
             this.Id = id;
         }
@@ -47,8 +47,8 @@ namespace EssentialCore.Entities
 
         public string Descriptor { get; set; }
 
-        [JsonIgnore]
-        public Info Info { get; init; }
+        //[JsonIgnore]
+        public virtual Info Info { get; init; }
 
 
         public Paginate Paginate { get; set; }
@@ -63,7 +63,7 @@ namespace EssentialCore.Entities
 
         }
 
-        
+
 
         public static bool Confirm(IEntityBase enttiy)
         {

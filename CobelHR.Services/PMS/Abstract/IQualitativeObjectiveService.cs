@@ -8,6 +8,6 @@ namespace CobelHR.Services.PMS.Abstract
 {
     public interface IQualitativeObjectiveService : IService<QualitativeObjective>
     {
-        DataResult<List<QualitativeKPI>> CollectionOfQualitativeKPI(int qualitativeObjective_Id, QualitativeKPI qualitativeKPI);
+        DataResult<List<QualitativeKPI>> CollectionOfQualitativeKPI(int qualitativeObjective_Id, QualitativeKPI qualitativeKPI, UserCredit userCredit);
     }
 }

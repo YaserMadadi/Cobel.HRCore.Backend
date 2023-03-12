@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.Core
         }
 
         [HttpPost]
-        [Route("RoleMember/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("RoleMember/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.roleMemberService.RetrieveAll(RoleMember.Informer, paginate, this.UserCredit);
+            var result = await this.roleMemberService.RetrieveAll(RoleMember.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<RoleMember>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("RoleMember/Seek")]
         public async Task<IActionResult> Seek([FromBody] RoleMember roleMember)
         {
-            var result = await this.roleMemberService.Seek(roleMember);
+            var result = await this.roleMemberService.Seek(roleMember, this.UserCredit);
 
 			return result.ToActionResult<RoleMember>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("RoleMember/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.roleMemberService.SeekByValue(seekValue, RoleMember.Informer);
+            var result = await this.roleMemberService.SeekByValue(seekValue, RoleMember.Informer, this.UserCredit);
 
 			return result.ToActionResult<RoleMember>();
         }

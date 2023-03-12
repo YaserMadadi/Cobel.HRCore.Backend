@@ -8,6 +8,6 @@ namespace CobelHR.Services.Base.Abstract
 {
     public interface IQuarterService : IService<Quarter>
     {
-        DataResult<List<YearQuarter>> CollectionOfYearQuarter(int quarter_Id, YearQuarter yearQuarter);
+        DataResult<List<YearQuarter>> CollectionOfYearQuarter(int quarter_Id, YearQuarter yearQuarter, UserCredit userCredit);
     }
 }

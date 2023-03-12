@@ -23,21 +23,23 @@ namespace CobelHR.Services.Base.HR
             return await employmentStatus.SaveAttached(userCredit);
         }
 
-        public DataResult<List<Employee>> CollectionOfEmployee(int employmentStatus_Id, Employee employee)
+        public DataResult<List<Employee>> CollectionOfEmployee(int employmentStatus_Id, Employee employee, UserCredit userCredit)
         {
             var procedureName = "[Base.HR].[EmploymentStatus.CollectionOfEmployee]";
 
             return this.CollectionOf<Employee>(procedureName,
-                                                    new SqlParameter("@Id",employmentStatus_Id), 
+                                                    new SqlParameter("@Id",employmentStatus_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", employee.ToJson()));
         }
 
-		public DataResult<List<EmployeeDetail>> CollectionOfEmployeeDetail(int employmentStatus_Id, EmployeeDetail employeeDetail)
+		public DataResult<List<EmployeeDetail>> CollectionOfEmployeeDetail(int employmentStatus_Id, EmployeeDetail employeeDetail, UserCredit userCredit)
         {
             var procedureName = "[Base.HR].[EmploymentStatus.CollectionOfEmployeeDetail]";
 
             return this.CollectionOf<EmployeeDetail>(procedureName,
-                                                    new SqlParameter("@Id",employmentStatus_Id), 
+                                                    new SqlParameter("@Id",employmentStatus_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", employeeDetail.ToJson()));
         }
     }

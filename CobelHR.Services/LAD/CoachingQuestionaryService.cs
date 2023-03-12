@@ -22,21 +22,23 @@ namespace CobelHR.Services.LAD
             return await coachingQuestionary.SaveAttached(userCredit);
         }
 
-        public DataResult<List<CoachingQuestionaryAnswered>> CollectionOfCoachingQuestionaryAnswered(int coachingQuestionary_Id, CoachingQuestionaryAnswered coachingQuestionaryAnswered)
+        public DataResult<List<CoachingQuestionaryAnswered>> CollectionOfCoachingQuestionaryAnswered(int coachingQuestionary_Id, CoachingQuestionaryAnswered coachingQuestionaryAnswered, UserCredit userCredit)
         {
             var procedureName = "[LAD].[CoachingQuestionary.CollectionOfCoachingQuestionaryAnswered]";
 
             return this.CollectionOf<CoachingQuestionaryAnswered>(procedureName,
-                                                    new SqlParameter("@Id",coachingQuestionary_Id), 
+                                                    new SqlParameter("@Id",coachingQuestionary_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", coachingQuestionaryAnswered.ToJson()));
         }
 
-		public DataResult<List<CoachingQuestionaryDetail>> CollectionOfCoachingQuestionaryDetail(int coachingQuestionary_Id, CoachingQuestionaryDetail coachingQuestionaryDetail)
+		public DataResult<List<CoachingQuestionaryDetail>> CollectionOfCoachingQuestionaryDetail(int coachingQuestionary_Id, CoachingQuestionaryDetail coachingQuestionaryDetail, UserCredit userCredit)
         {
             var procedureName = "[LAD].[CoachingQuestionary.CollectionOfCoachingQuestionaryDetail]";
 
             return this.CollectionOf<CoachingQuestionaryDetail>(procedureName,
-                                                    new SqlParameter("@Id",coachingQuestionary_Id), 
+                                                    new SqlParameter("@Id",coachingQuestionary_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", coachingQuestionaryDetail.ToJson()));
         }
     }

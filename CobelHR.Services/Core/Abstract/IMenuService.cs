@@ -8,6 +8,6 @@ namespace CobelHR.Services.Core.Abstract
 {
     public interface IMenuService : IService<Menu>
     {
-        DataResult<List<MenuItem>> CollectionOfMenuItem(int menu_Id, MenuItem menuItem);
+        DataResult<List<MenuItem>> CollectionOfMenuItem(int menu_Id, MenuItem menuItem, UserCredit userCredit);
     }
 }

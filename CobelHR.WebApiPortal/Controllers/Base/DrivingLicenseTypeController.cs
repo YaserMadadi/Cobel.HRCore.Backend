@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("DrivingLicenseType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("DrivingLicenseType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.drivingLicenseTypeService.RetrieveAll(DrivingLicenseType.Informer, paginate, this.UserCredit);
+            var result = await this.drivingLicenseTypeService.RetrieveAll(DrivingLicenseType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<DrivingLicenseType>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("DrivingLicenseType/Seek")]
         public async Task<IActionResult> Seek([FromBody] DrivingLicenseType drivingLicenseType)
         {
-            var result = await this.drivingLicenseTypeService.Seek(drivingLicenseType);
+            var result = await this.drivingLicenseTypeService.Seek(drivingLicenseType, this.UserCredit);
 
 			return result.ToActionResult<DrivingLicenseType>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("DrivingLicenseType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.drivingLicenseTypeService.SeekByValue(seekValue, DrivingLicenseType.Informer);
+            var result = await this.drivingLicenseTypeService.SeekByValue(seekValue, DrivingLicenseType.Informer, this.UserCredit);
 
 			return result.ToActionResult<DrivingLicenseType>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("DrivingLicenseType/{drivingLicenseType_id:int}/PersonDrivingLicense")]
         public IActionResult CollectionOfPersonDrivingLicense([FromRoute(Name = "drivingLicenseType_id")] int id, PersonDrivingLicense personDrivingLicense)
         {
-            return this.drivingLicenseTypeService.CollectionOfPersonDrivingLicense(id, personDrivingLicense).ToActionResult();
+            return this.drivingLicenseTypeService.CollectionOfPersonDrivingLicense(id, personDrivingLicense, this.UserCredit).ToActionResult();
         }
     }
 }

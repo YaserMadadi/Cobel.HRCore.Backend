@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("MilitaryServiceExcemption/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("MilitaryServiceExcemption/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.militaryServiceExcemptionService.RetrieveAll(MilitaryServiceExcemption.Informer, paginate, this.UserCredit);
+            var result = await this.militaryServiceExcemptionService.RetrieveAll(MilitaryServiceExcemption.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<MilitaryServiceExcemption>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("MilitaryServiceExcemption/Seek")]
         public async Task<IActionResult> Seek([FromBody] MilitaryServiceExcemption militaryServiceExcemption)
         {
-            var result = await this.militaryServiceExcemptionService.Seek(militaryServiceExcemption);
+            var result = await this.militaryServiceExcemptionService.Seek(militaryServiceExcemption, this.UserCredit);
 
 			return result.ToActionResult<MilitaryServiceExcemption>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("MilitaryServiceExcemption/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.militaryServiceExcemptionService.SeekByValue(seekValue, MilitaryServiceExcemption.Informer);
+            var result = await this.militaryServiceExcemptionService.SeekByValue(seekValue, MilitaryServiceExcemption.Informer, this.UserCredit);
 
 			return result.ToActionResult<MilitaryServiceExcemption>();
         }

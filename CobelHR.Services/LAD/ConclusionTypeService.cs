@@ -22,12 +22,13 @@ namespace CobelHR.Services.LAD
             return await conclusionType.SaveAttached(userCredit);
         }
 
-        public DataResult<List<Conclusion>> CollectionOfConclusion(int conclusionType_Id, Conclusion conclusion)
+        public DataResult<List<Conclusion>> CollectionOfConclusion(int conclusionType_Id, Conclusion conclusion, UserCredit userCredit)
         {
             var procedureName = "[LAD].[ConclusionType.CollectionOfConclusion]";
 
             return this.CollectionOf<Conclusion>(procedureName,
-                                                    new SqlParameter("@Id",conclusionType_Id), 
+                                                    new SqlParameter("@Id",conclusionType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", conclusion.ToJson()));
         }
     }

@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.LAD
         }
 
         [HttpPost]
-        [Route("RotationAssessment/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("RotationAssessment/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.rotationAssessmentService.RetrieveAll(RotationAssessment.Informer, paginate, this.UserCredit);
+            var result = await this.rotationAssessmentService.RetrieveAll(RotationAssessment.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<RotationAssessment>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("RotationAssessment/Seek")]
         public async Task<IActionResult> Seek([FromBody] RotationAssessment rotationAssessment)
         {
-            var result = await this.rotationAssessmentService.Seek(rotationAssessment);
+            var result = await this.rotationAssessmentService.Seek(rotationAssessment, this.UserCredit);
 
 			return result.ToActionResult<RotationAssessment>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("RotationAssessment/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.rotationAssessmentService.SeekByValue(seekValue, RotationAssessment.Informer);
+            var result = await this.rotationAssessmentService.SeekByValue(seekValue, RotationAssessment.Informer, this.UserCredit);
 
 			return result.ToActionResult<RotationAssessment>();
         }

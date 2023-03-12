@@ -10,10 +10,10 @@ namespace CobelHR.Services.Base.HR.Abstract
 {
     public interface IPositionCategoryService : IService<PositionCategory>
     {
-        DataResult<List<AppraisalApproverConfig>> CollectionOfAppraisalApproverConfig(int positionCategory_Id, AppraisalApproverConfig appraisalApproverConfig);
+        DataResult<List<AppraisalApproverConfig>> CollectionOfAppraisalApproverConfig(int positionCategory_Id, AppraisalApproverConfig appraisalApproverConfig, UserCredit userCredit);
 
-		DataResult<List<ConfigTargetSetting>> CollectionOfConfigTargetSetting(int positionCategory_Id, ConfigTargetSetting configTargetSetting);
+		DataResult<List<ConfigTargetSetting>> CollectionOfConfigTargetSetting(int positionCategory_Id, ConfigTargetSetting configTargetSetting, UserCredit userCredit);
 
-		DataResult<List<Position>> CollectionOfPosition(int positionCategory_Id, Position position);
+		DataResult<List<Position>> CollectionOfPosition(int positionCategory_Id, Position position, UserCredit userCredit);
     }
 }

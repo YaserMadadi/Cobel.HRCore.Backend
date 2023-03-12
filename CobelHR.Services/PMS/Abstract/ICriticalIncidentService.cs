@@ -8,6 +8,6 @@ namespace CobelHR.Services.PMS.Abstract
 {
     public interface ICriticalIncidentService : IService<CriticalIncident>
     {
-        DataResult<List<CriticalIncidentRecognition>> CollectionOfCriticalIncidentRecognition(int criticalIncident_Id, CriticalIncidentRecognition criticalIncidentRecognition);
+        DataResult<List<CriticalIncidentRecognition>> CollectionOfCriticalIncidentRecognition(int criticalIncident_Id, CriticalIncidentRecognition criticalIncidentRecognition, UserCredit userCredit);
     }
 }

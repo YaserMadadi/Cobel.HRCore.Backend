@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base.PMS
             return await currentSituation.SaveAttached(userCredit);
         }
 
-        public DataResult<List<IndividualDevelopmentPlan>> CollectionOfIndividualDevelopmentPlan(int currentSituation_Id, IndividualDevelopmentPlan individualDevelopmentPlan)
+        public DataResult<List<IndividualDevelopmentPlan>> CollectionOfIndividualDevelopmentPlan(int currentSituation_Id, IndividualDevelopmentPlan individualDevelopmentPlan, UserCredit userCredit)
         {
             var procedureName = "[Base.PMS].[CurrentSituation.CollectionOfIndividualDevelopmentPlan]";
 
             return this.CollectionOf<IndividualDevelopmentPlan>(procedureName,
-                                                    new SqlParameter("@Id",currentSituation_Id), 
+                                                    new SqlParameter("@Id",currentSituation_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", individualDevelopmentPlan.ToJson()));
         }
     }

@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("Department/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Department/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.departmentService.RetrieveAll(Department.Informer, paginate, this.UserCredit);
+            var result = await this.departmentService.RetrieveAll(Department.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Department>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Department/Seek")]
         public async Task<IActionResult> Seek([FromBody] Department department)
         {
-            var result = await this.departmentService.Seek(department);
+            var result = await this.departmentService.Seek(department, this.UserCredit);
 
 			return result.ToActionResult<Department>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Department/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.departmentService.SeekByValue(seekValue, Department.Informer);
+            var result = await this.departmentService.SeekByValue(seekValue, Department.Informer, this.UserCredit);
 
 			return result.ToActionResult<Department>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Department/{department_id:int}/Unit")]
         public IActionResult CollectionOfUnit([FromRoute(Name = "department_id")] int id, Unit unit)
         {
-            return this.departmentService.CollectionOfUnit(id, unit).ToActionResult();
+            return this.departmentService.CollectionOfUnit(id, unit, this.UserCredit).ToActionResult();
         }
     }
 }

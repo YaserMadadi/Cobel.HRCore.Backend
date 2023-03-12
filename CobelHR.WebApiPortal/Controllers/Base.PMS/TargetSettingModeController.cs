@@ -32,10 +32,10 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         }
 
         [HttpPost]
-        [Route("TargetSettingMode/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("TargetSettingMode/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.targetSettingModeService.RetrieveAll(TargetSettingMode.Informer, paginate, this.UserCredit);
+            var result = await this.targetSettingModeService.RetrieveAll(TargetSettingMode.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<TargetSettingMode>();
         }
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("TargetSettingMode/Seek")]
         public async Task<IActionResult> Seek([FromBody] TargetSettingMode TargetSettingMode)
         {
-            var result = await this.targetSettingModeService.Seek(TargetSettingMode);
+            var result = await this.targetSettingModeService.Seek(TargetSettingMode, this.UserCredit);
 
 			return result.ToActionResult<TargetSettingMode>();
         }
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("TargetSettingMode/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.targetSettingModeService.SeekByValue(seekValue, TargetSettingMode.Informer);
+            var result = await this.targetSettingModeService.SeekByValue(seekValue, TargetSettingMode.Informer, this.UserCredit);
 
 			return result.ToActionResult<TargetSettingMode>();
         }
@@ -103,7 +103,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("TargetSettingMode/{TargetSettingMode_id:int}/TargetSetting")]
         public IActionResult CollectionOfTargetSetting([FromRoute(Name = "TargetSettingMode_id")] int id, TargetSetting targetSetting)
         {
-            return this.targetSettingModeService.CollectionOfTargetSetting(id, targetSetting).ToActionResult();
+            return this.targetSettingModeService.CollectionOfTargetSetting(id, targetSetting, this.UserCredit).ToActionResult();
         }
     }
 }

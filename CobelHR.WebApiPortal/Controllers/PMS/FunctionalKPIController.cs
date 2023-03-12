@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("FunctionalKPI/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("FunctionalKPI/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.functionalKPIService.RetrieveAll(FunctionalKPI.Informer, paginate, this.UserCredit);
+            var result = await this.functionalKPIService.RetrieveAll(FunctionalKPI.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<FunctionalKPI>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("FunctionalKPI/Seek")]
         public async Task<IActionResult> Seek([FromBody] FunctionalKPI functionalKPI)
         {
-            var result = await this.functionalKPIService.Seek(functionalKPI);
+            var result = await this.functionalKPIService.Seek(functionalKPI, this.UserCredit);
 
 			return result.ToActionResult<FunctionalKPI>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("FunctionalKPI/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.functionalKPIService.SeekByValue(seekValue, FunctionalKPI.Informer);
+            var result = await this.functionalKPIService.SeekByValue(seekValue, FunctionalKPI.Informer, this.UserCredit);
 
 			return result.ToActionResult<FunctionalKPI>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("FunctionalKPI/{functionalKPI_id:int}/FunctionalAppraise")]
         public IActionResult CollectionOfFunctionalAppraise([FromRoute(Name = "functionalKPI_id")] int id, FunctionalAppraise functionalAppraise)
         {
-            return this.functionalKPIService.CollectionOfFunctionalAppraise(id, functionalAppraise).ToActionResult();
+            return this.functionalKPIService.CollectionOfFunctionalAppraise(id, functionalAppraise, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfFunctionalKPIComment
@@ -109,7 +109,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("FunctionalKPI/{functionalKPI_id:int}/FunctionalKPIComment")]
         public IActionResult CollectionOfFunctionalKPIComment([FromRoute(Name = "functionalKPI_id")] int id, FunctionalKPIComment functionalKPIComment)
         {
-            return this.functionalKPIService.CollectionOfFunctionalKPIComment(id, functionalKPIComment).ToActionResult();
+            return this.functionalKPIService.CollectionOfFunctionalKPIComment(id, functionalKPIComment, this.UserCredit).ToActionResult();
         }
     }
 }

@@ -8,6 +8,6 @@ namespace CobelHR.Services.Base.Abstract
 {
     public interface IProvinceService : IService<Province>
     {
-        DataResult<List<City>> CollectionOfCity(int province_Id, City city);
+        DataResult<List<City>> CollectionOfCity(int province_Id, City city, UserCredit userCredit);
     }
 }

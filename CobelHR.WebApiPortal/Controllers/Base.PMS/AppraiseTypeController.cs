@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         }
 
         [HttpPost]
-        [Route("AppraiseType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("AppraiseType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.appraiseTypeService.RetrieveAll(AppraiseType.Informer, paginate, this.UserCredit);
+            var result = await this.appraiseTypeService.RetrieveAll(AppraiseType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<AppraiseType>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("AppraiseType/Seek")]
         public async Task<IActionResult> Seek([FromBody] AppraiseType appraiseType)
         {
-            var result = await this.appraiseTypeService.Seek(appraiseType);
+            var result = await this.appraiseTypeService.Seek(appraiseType, this.UserCredit);
 
 			return result.ToActionResult<AppraiseType>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("AppraiseType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.appraiseTypeService.SeekByValue(seekValue, AppraiseType.Informer);
+            var result = await this.appraiseTypeService.SeekByValue(seekValue, AppraiseType.Informer, this.UserCredit);
 
 			return result.ToActionResult<AppraiseType>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("AppraiseType/{appraiseType_id:int}/AppraiseResult")]
         public IActionResult CollectionOfAppraiseResult([FromRoute(Name = "appraiseType_id")] int id, AppraiseResult appraiseResult)
         {
-            return this.appraiseTypeService.CollectionOfAppraiseResult(id, appraiseResult).ToActionResult();
+            return this.appraiseTypeService.CollectionOfAppraiseResult(id, appraiseResult, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfBehavioralAppraise
@@ -110,7 +110,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("AppraiseType/{appraiseType_id:int}/BehavioralAppraise")]
         public IActionResult CollectionOfBehavioralAppraise([FromRoute(Name = "appraiseType_id")] int id, BehavioralAppraise behavioralAppraise)
         {
-            return this.appraiseTypeService.CollectionOfBehavioralAppraise(id, behavioralAppraise).ToActionResult();
+            return this.appraiseTypeService.CollectionOfBehavioralAppraise(id, behavioralAppraise, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfFunctionalAppraise
@@ -118,7 +118,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("AppraiseType/{appraiseType_id:int}/FunctionalAppraise")]
         public IActionResult CollectionOfFunctionalAppraise([FromRoute(Name = "appraiseType_id")] int id, FunctionalAppraise functionalAppraise)
         {
-            return this.appraiseTypeService.CollectionOfFunctionalAppraise(id, functionalAppraise).ToActionResult();
+            return this.appraiseTypeService.CollectionOfFunctionalAppraise(id, functionalAppraise, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfQualitativeAppraise
@@ -126,7 +126,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("AppraiseType/{appraiseType_id:int}/QualitativeAppraise")]
         public IActionResult CollectionOfQualitativeAppraise([FromRoute(Name = "appraiseType_id")] int id, QualitativeAppraise qualitativeAppraise)
         {
-            return this.appraiseTypeService.CollectionOfQualitativeAppraise(id, qualitativeAppraise).ToActionResult();
+            return this.appraiseTypeService.CollectionOfQualitativeAppraise(id, qualitativeAppraise, this.UserCredit).ToActionResult();
         }
     }
 }

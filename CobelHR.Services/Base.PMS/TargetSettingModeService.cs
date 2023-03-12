@@ -23,7 +23,7 @@ namespace CobelHR.Services.Base.PMS
         //    return await targetSettingMode.SaveAttached(userCredit);
         //}
 
-        public DataResult<List<TargetSetting>> CollectionOfTargetSetting(int targetSettingMode_Id, TargetSetting targetSetting)
+        public DataResult<List<TargetSetting>> CollectionOfTargetSetting(int targetSettingMode_Id, TargetSetting targetSetting, UserCredit userCredit)
         {
             var procedureName = "[Base.PMS].[TargetSettingMode.CollectionOfTargetSetting]";
 

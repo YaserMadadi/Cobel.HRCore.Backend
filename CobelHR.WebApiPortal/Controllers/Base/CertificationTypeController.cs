@@ -32,10 +32,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("CertificationType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("CertificationType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.certificationTypeService.RetrieveAll(CertificationType.Informer, paginate, this.UserCredit);
+            var result = await this.certificationTypeService.RetrieveAll(CertificationType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<CertificationType>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("CertificationType/Seek")]
         public async Task<IActionResult> Seek([FromBody] CertificationType certificationType)
         {
-            var result = await this.certificationTypeService.Seek(certificationType);
+            var result = await this.certificationTypeService.Seek(certificationType, this.UserCredit);
 
 			return result.ToActionResult<CertificationType>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("CertificationType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.certificationTypeService.SeekByValue(seekValue, CertificationType.Informer);
+            var result = await this.certificationTypeService.SeekByValue(seekValue, CertificationType.Informer, this.UserCredit);
 
 			return result.ToActionResult<CertificationType>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("CertificationType/{certificationType_id:int}/UniversityHistory")]
         public IActionResult CollectionOfUniversityHistory([FromRoute(Name = "certificationType_id")] int id, UniversityHistory universityHistory)
         {
-            return this.certificationTypeService.CollectionOfUniversityHistory(id, universityHistory).ToActionResult();
+            return this.certificationTypeService.CollectionOfUniversityHistory(id, universityHistory, this.UserCredit).ToActionResult();
         }
     }
 }

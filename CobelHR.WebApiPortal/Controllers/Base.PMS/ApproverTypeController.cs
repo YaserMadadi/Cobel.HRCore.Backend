@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         }
 
         [HttpPost]
-        [Route("ApproverType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("ApproverType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.approverTypeService.RetrieveAll(ApproverType.Informer, paginate, this.UserCredit);
+            var result = await this.approverTypeService.RetrieveAll(ApproverType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<ApproverType>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("ApproverType/Seek")]
         public async Task<IActionResult> Seek([FromBody] ApproverType approverType)
         {
-            var result = await this.approverTypeService.Seek(approverType);
+            var result = await this.approverTypeService.Seek(approverType, this.UserCredit);
 
 			return result.ToActionResult<ApproverType>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("ApproverType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.approverTypeService.SeekByValue(seekValue, ApproverType.Informer);
+            var result = await this.approverTypeService.SeekByValue(seekValue, ApproverType.Informer, this.UserCredit);
 
 			return result.ToActionResult<ApproverType>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("ApproverType/{approverType_id:int}/AppraisalApproverConfig")]
         public IActionResult CollectionOfAppraisalApproverConfig([FromRoute(Name = "approverType_id")] int id, AppraisalApproverConfig appraisalApproverConfig)
         {
-            return this.approverTypeService.CollectionOfAppraisalApproverConfig(id, appraisalApproverConfig).ToActionResult();
+            return this.approverTypeService.CollectionOfAppraisalApproverConfig(id, appraisalApproverConfig, this.UserCredit).ToActionResult();
         }
     }
 }

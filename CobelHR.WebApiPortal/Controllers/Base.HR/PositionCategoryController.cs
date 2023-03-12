@@ -32,10 +32,10 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         }
 
         [HttpPost]
-        [Route("PositionCategory/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("PositionCategory/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.positionCategoryService.RetrieveAll(PositionCategory.Informer, paginate, this.UserCredit);
+            var result = await this.positionCategoryService.RetrieveAll(PositionCategory.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<PositionCategory>();
         }
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("PositionCategory/Seek")]
         public async Task<IActionResult> Seek([FromBody] PositionCategory positionCategory)
         {
-            var result = await this.positionCategoryService.Seek(positionCategory);
+            var result = await this.positionCategoryService.Seek(positionCategory, this.UserCredit);
 
 			return result.ToActionResult<PositionCategory>();
         }
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("PositionCategory/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.positionCategoryService.SeekByValue(seekValue, PositionCategory.Informer);
+            var result = await this.positionCategoryService.SeekByValue(seekValue, PositionCategory.Informer, this.UserCredit);
 
 			return result.ToActionResult<PositionCategory>();
         }
@@ -103,7 +103,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("PositionCategory/{positionCategory_id:int}/AppraisalApproverConfig")]
         public IActionResult CollectionOfAppraisalApproverConfig([FromRoute(Name = "positionCategory_id")] int id, AppraisalApproverConfig appraisalApproverConfig)
         {
-            return this.positionCategoryService.CollectionOfAppraisalApproverConfig(id, appraisalApproverConfig).ToActionResult();
+            return this.positionCategoryService.CollectionOfAppraisalApproverConfig(id, appraisalApproverConfig, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfPosition
@@ -111,7 +111,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("PositionCategory/{positionCategory_id:int}/Position")]
         public IActionResult CollectionOfPosition([FromRoute(Name = "positionCategory_id")] int id, Position position)
         {
-            return this.positionCategoryService.CollectionOfPosition(id, position).ToActionResult();
+            return this.positionCategoryService.CollectionOfPosition(id, position, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfUnit
@@ -119,7 +119,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("PositionCategory/{positionCategory_id:int}/ConfigTargetSetting")]
         public IActionResult CollectionOfUnit([FromRoute(Name = "positionCategory_id")] int id, ConfigTargetSetting configTargetSetting)
         {
-            return this.positionCategoryService.CollectionOfConfigTargetSetting(id, configTargetSetting).ToActionResult();
+            return this.positionCategoryService.CollectionOfConfigTargetSetting(id, configTargetSetting, this.UserCredit).ToActionResult();
         }
     }
 }

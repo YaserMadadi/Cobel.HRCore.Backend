@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base
             return await militaryServiceStatus.SaveAttached(userCredit);
         }
 
-        public DataResult<List<MilitaryService>> CollectionOfMilitaryService(int militaryServiceStatus_Id, MilitaryService militaryService)
+        public DataResult<List<MilitaryService>> CollectionOfMilitaryService(int militaryServiceStatus_Id, MilitaryService militaryService, UserCredit userCredit)
         {
             var procedureName = "[Base].[MilitaryServiceStatus.CollectionOfMilitaryService]";
 
             return this.CollectionOf<MilitaryService>(procedureName,
-                                                    new SqlParameter("@Id",militaryServiceStatus_Id), 
+                                                    new SqlParameter("@Id",militaryServiceStatus_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", militaryService.ToJson()));
         }
     }

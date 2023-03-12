@@ -22,12 +22,13 @@ namespace CobelHR.Services.HR
             return await unit.SaveAttached(userCredit);
         }
 
-        public DataResult<List<Position>> CollectionOfPosition(int unit_Id, Position position)
+        public DataResult<List<Position>> CollectionOfPosition(int unit_Id, Position position, UserCredit userCredit)
         {
             var procedureName = "[HR].[Unit.CollectionOfPosition]";
 
             return this.CollectionOf<Position>(procedureName,
-                                                    new SqlParameter("@Id",unit_Id), 
+                                                    new SqlParameter("@Id",unit_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", position.ToJson()));
         }
     }

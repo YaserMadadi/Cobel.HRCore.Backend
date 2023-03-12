@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.Core
         }
 
         [HttpPost]
-        [Route("UserAccount/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("UserAccount/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.userAccountService.RetrieveAll(UserAccount.Informer, paginate, this.UserCredit);
+            var result = await this.userAccountService.RetrieveAll(UserAccount.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<UserAccount>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("UserAccount/Seek")]
         public async Task<IActionResult> Seek([FromBody] UserAccount userAccount)
         {
-            var result = await this.userAccountService.Seek(userAccount);
+            var result = await this.userAccountService.Seek(userAccount, this.UserCredit);
 
 			return result.ToActionResult<UserAccount>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("UserAccount/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.userAccountService.SeekByValue(seekValue, UserAccount.Informer);
+            var result = await this.userAccountService.SeekByValue(seekValue, UserAccount.Informer, this.UserCredit);
 
 			return result.ToActionResult<UserAccount>();
         }

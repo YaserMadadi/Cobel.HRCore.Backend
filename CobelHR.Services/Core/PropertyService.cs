@@ -22,12 +22,13 @@ namespace CobelHR.Services.Core
             return await property.SaveAttached(userCredit);
         }
 
-        public DataResult<List<PropertyOption>> CollectionOfPropertyOption(int property_Id, PropertyOption propertyOption)
+        public DataResult<List<PropertyOption>> CollectionOfPropertyOption(int property_Id, PropertyOption propertyOption, UserCredit userCredit)
         {
             var procedureName = "[Core].[Property.CollectionOfPropertyOption]";
 
             return this.CollectionOf<PropertyOption>(procedureName,
-                                                    new SqlParameter("@Id",property_Id), 
+                                                    new SqlParameter("@Id",property_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", propertyOption.ToJson()));
         }
     }

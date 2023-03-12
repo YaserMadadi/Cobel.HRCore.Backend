@@ -19,7 +19,7 @@ namespace EssentialCore.Tools.Security.Service
                                                        new SqlParameter("@UserName", userName))
                                                             .ExecuteDataResult();
 
-            var userCredit = dataResult.Data.Deserialize<UserCredit>(JsonType.Single);
+            var userCredit = dataResult.Data.Deserialize<UserCredit>(JsonType.Collection);
 
             if (userCredit == null ||
                 userCredit.Impersonation_Id <= 0)

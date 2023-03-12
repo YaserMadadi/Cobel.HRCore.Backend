@@ -9,6 +9,6 @@ namespace CobelHR.Services.Base.Abstract
 {
     public interface ISchoolLevelService : IService<SchoolLevel>
     {
-        DataResult<List<SchoolHistory>> CollectionOfSchoolHistory(int schoolLevel_Id, SchoolHistory schoolHistory);
+        DataResult<List<SchoolHistory>> CollectionOfSchoolHistory(int schoolLevel_Id, SchoolHistory schoolHistory, UserCredit userCredit);
     }
 }

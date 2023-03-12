@@ -22,12 +22,13 @@ namespace CobelHR.Services.PMS
             return await behavioralObjective.SaveAttached(userCredit);
         }
 
-        public DataResult<List<BehavioralKPI>> CollectionOfBehavioralKPI(int behavioralObjective_Id, BehavioralKPI behavioralKPI)
+        public DataResult<List<BehavioralKPI>> CollectionOfBehavioralKPI(int behavioralObjective_Id, BehavioralKPI behavioralKPI, UserCredit userCredit)
         {
             var procedureName = "[PMS].[BehavioralObjective.CollectionOfBehavioralKPI]";
 
             return this.CollectionOf<BehavioralKPI>(procedureName,
-                                                    new SqlParameter("@Id",behavioralObjective_Id), 
+                                                    new SqlParameter("@Id",behavioralObjective_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", behavioralKPI.ToJson()));
         }
     }

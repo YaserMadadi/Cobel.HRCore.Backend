@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.XCode
         }
 
         [HttpPost]
-        [Route("Message/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Message/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.messageService.RetrieveAll(Message.Informer, paginate, this.UserCredit);
+            var result = await this.messageService.RetrieveAll(Message.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Message>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.XCode
         [Route("Message/Seek")]
         public async Task<IActionResult> Seek([FromBody] Message message)
         {
-            var result = await this.messageService.Seek(message);
+            var result = await this.messageService.Seek(message, this.UserCredit);
 
 			return result.ToActionResult<Message>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.XCode
         [Route("Message/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.messageService.SeekByValue(seekValue, Message.Informer);
+            var result = await this.messageService.SeekByValue(seekValue, Message.Informer, this.UserCredit);
 
 			return result.ToActionResult<Message>();
         }

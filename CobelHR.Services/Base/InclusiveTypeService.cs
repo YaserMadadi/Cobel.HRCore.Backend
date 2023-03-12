@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base
             return await inclusiveType.SaveAttached(userCredit);
         }
 
-        public DataResult<List<MilitaryServiceInclusive>> CollectionOfMilitaryServiceInclusive(int inclusiveType_Id, MilitaryServiceInclusive militaryServiceInclusive)
+        public DataResult<List<MilitaryServiceInclusive>> CollectionOfMilitaryServiceInclusive(int inclusiveType_Id, MilitaryServiceInclusive militaryServiceInclusive, UserCredit userCredit)
         {
             var procedureName = "[Base].[InclusiveType.CollectionOfMilitaryServiceInclusive]";
 
             return this.CollectionOf<MilitaryServiceInclusive>(procedureName,
-                                                    new SqlParameter("@Id",inclusiveType_Id), 
+                                                    new SqlParameter("@Id",inclusiveType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", militaryServiceInclusive.ToJson()));
         }
     }

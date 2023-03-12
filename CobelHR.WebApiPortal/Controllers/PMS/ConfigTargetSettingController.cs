@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("ConfigTargetSetting/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("ConfigTargetSetting/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.configTargetSettingService.RetrieveAll(ConfigTargetSetting.Informer, paginate, this.UserCredit);
+            var result = await this.configTargetSettingService.RetrieveAll(ConfigTargetSetting.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<ConfigTargetSetting>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("ConfigTargetSetting/Seek")]
         public async Task<IActionResult> Seek([FromBody] ConfigTargetSetting configTargetSetting)
         {
-            var result = await this.configTargetSettingService.Seek(configTargetSetting);
+            var result = await this.configTargetSettingService.Seek(configTargetSetting, this.UserCredit);
 
 			return result.ToActionResult<ConfigTargetSetting>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("ConfigTargetSetting/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.configTargetSettingService.SeekByValue(seekValue, ConfigTargetSetting.Informer);
+            var result = await this.configTargetSettingService.SeekByValue(seekValue, ConfigTargetSetting.Informer, this.UserCredit);
 
 			return result.ToActionResult<ConfigTargetSetting>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("ConfigTargetSetting/{configTargetSetting_id:int}/ConfigQualitativeObjective")]
         public IActionResult CollectionOfConfigQualitativeObjective([FromRoute(Name = "configTargetSetting_id")] int id, ConfigQualitativeObjective configQualitativeObjective)
         {
-            return this.configTargetSettingService.CollectionOfConfigQualitativeObjective(id, configQualitativeObjective).ToActionResult();
+            return this.configTargetSettingService.CollectionOfConfigQualitativeObjective(id, configQualitativeObjective, this.UserCredit).ToActionResult();
         }
     }
 }

@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("UniversityFieldCategory/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("UniversityFieldCategory/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.universityFieldCategoryService.RetrieveAll(UniversityFieldCategory.Informer, paginate, this.UserCredit);
+            var result = await this.universityFieldCategoryService.RetrieveAll(UniversityFieldCategory.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<UniversityFieldCategory>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("UniversityFieldCategory/Seek")]
         public async Task<IActionResult> Seek([FromBody] UniversityFieldCategory universityFieldCategory)
         {
-            var result = await this.universityFieldCategoryService.Seek(universityFieldCategory);
+            var result = await this.universityFieldCategoryService.Seek(universityFieldCategory, this.UserCredit);
 
 			return result.ToActionResult<UniversityFieldCategory>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("UniversityFieldCategory/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.universityFieldCategoryService.SeekByValue(seekValue, UniversityFieldCategory.Informer);
+            var result = await this.universityFieldCategoryService.SeekByValue(seekValue, UniversityFieldCategory.Informer, this.UserCredit);
 
 			return result.ToActionResult<UniversityFieldCategory>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("UniversityFieldCategory/{universityFieldCategory_id:int}/FieldOfStudy")]
         public IActionResult CollectionOfFieldOfStudy([FromRoute(Name = "universityFieldCategory_id")] int id, FieldOfStudy fieldOfStudy)
         {
-            return this.universityFieldCategoryService.CollectionOfFieldOfStudy(id, fieldOfStudy).ToActionResult();
+            return this.universityFieldCategoryService.CollectionOfFieldOfStudy(id, fieldOfStudy, this.UserCredit).ToActionResult();
         }
     }
 }

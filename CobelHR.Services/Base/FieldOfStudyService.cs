@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base
             return await fieldOfStudy.SaveAttached(userCredit);
         }
 
-        public DataResult<List<UniversityHistory>> CollectionOfUniversityHistory(int fieldOfStudy_Id, UniversityHistory universityHistory)
+        public DataResult<List<UniversityHistory>> CollectionOfUniversityHistory(int fieldOfStudy_Id, UniversityHistory universityHistory, UserCredit userCredit)
         {
             var procedureName = "[Base].[FieldOfStudy.CollectionOfUniversityHistory]";
 
             return this.CollectionOf<UniversityHistory>(procedureName,
-                                                    new SqlParameter("@Id",fieldOfStudy_Id), 
+                                                    new SqlParameter("@Id",fieldOfStudy_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", universityHistory.ToJson()));
         }
     }

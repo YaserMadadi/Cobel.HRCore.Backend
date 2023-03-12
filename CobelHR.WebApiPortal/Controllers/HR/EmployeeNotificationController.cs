@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("EmployeeNotification/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("EmployeeNotification/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.employeeNotificationService.RetrieveAll(EmployeeNotification.Informer, paginate, this.UserCredit);
+            var result = await this.employeeNotificationService.RetrieveAll(EmployeeNotification.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<EmployeeNotification>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("EmployeeNotification/Seek")]
         public async Task<IActionResult> Seek([FromBody] EmployeeNotification employeeNotification)
         {
-            var result = await this.employeeNotificationService.Seek(employeeNotification);
+            var result = await this.employeeNotificationService.Seek(employeeNotification, this.UserCredit);
 
 			return result.ToActionResult<EmployeeNotification>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("EmployeeNotification/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.employeeNotificationService.SeekByValue(seekValue, EmployeeNotification.Informer);
+            var result = await this.employeeNotificationService.SeekByValue(seekValue, EmployeeNotification.Informer, this.UserCredit);
 
 			return result.ToActionResult<EmployeeNotification>();
         }

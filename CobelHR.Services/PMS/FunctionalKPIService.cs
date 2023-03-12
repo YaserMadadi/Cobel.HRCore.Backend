@@ -22,21 +22,23 @@ namespace CobelHR.Services.PMS
             return await functionalKPI.SaveAttached(userCredit);
         }
 
-        public DataResult<List<FunctionalAppraise>> CollectionOfFunctionalAppraise(int functionalKPI_Id, FunctionalAppraise functionalAppraise)
+        public DataResult<List<FunctionalAppraise>> CollectionOfFunctionalAppraise(int functionalKPI_Id, FunctionalAppraise functionalAppraise, UserCredit userCredit)
         {
             var procedureName = "[PMS].[FunctionalKPI.CollectionOfFunctionalAppraise]";
 
             return this.CollectionOf<FunctionalAppraise>(procedureName,
-                                                    new SqlParameter("@Id",functionalKPI_Id), 
+                                                    new SqlParameter("@Id",functionalKPI_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", functionalAppraise.ToJson()));
         }
 
-		public DataResult<List<FunctionalKPIComment>> CollectionOfFunctionalKPIComment(int functionalKPI_Id, FunctionalKPIComment functionalKPIComment)
+		public DataResult<List<FunctionalKPIComment>> CollectionOfFunctionalKPIComment(int functionalKPI_Id, FunctionalKPIComment functionalKPIComment, UserCredit userCredit)
         {
             var procedureName = "[PMS].[FunctionalKPI.CollectionOfFunctionalKPIComment]";
 
             return this.CollectionOf<FunctionalKPIComment>(procedureName,
-                                                    new SqlParameter("@Id",functionalKPI_Id), 
+                                                    new SqlParameter("@Id",functionalKPI_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", functionalKPIComment.ToJson()));
         }
     }

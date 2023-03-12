@@ -9,12 +9,12 @@ namespace CobelHR.Services.PMS.Abstract
 {
     public interface ICompetencyItemService : IService<CompetencyItem>
     {
-        DataResult<List<AssessmentScore>> CollectionOfAssessmentScore(int competencyItem_Id, AssessmentScore assessmentScore);
+        DataResult<List<AssessmentScore>> CollectionOfAssessmentScore(int competencyItem_Id, AssessmentScore assessmentScore, UserCredit userCredit);
 
-		DataResult<List<BehavioralObjective>> CollectionOfBehavioralObjective(int competencyItem_Id, BehavioralObjective behavioralObjective);
+		DataResult<List<BehavioralObjective>> CollectionOfBehavioralObjective(int competencyItem_Id, BehavioralObjective behavioralObjective, UserCredit userCredit);
 
-		DataResult<List<CompetencyItemKPI>> CollectionOfCompetencyItemKPI(int competencyItem_Id, CompetencyItemKPI competencyItemKPI);
+		DataResult<List<CompetencyItemKPI>> CollectionOfCompetencyItemKPI(int competencyItem_Id, CompetencyItemKPI competencyItemKPI, UserCredit userCredit);
 
-		DataResult<List<DevelopmentPlanCompetency>> CollectionOfDevelopmentPlanCompetency(int competencyItem_Id, DevelopmentPlanCompetency developmentPlanCompetency);
+		DataResult<List<DevelopmentPlanCompetency>> CollectionOfDevelopmentPlanCompetency(int competencyItem_Id, DevelopmentPlanCompetency developmentPlanCompetency, UserCredit userCredit);
     }
 }

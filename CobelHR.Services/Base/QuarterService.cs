@@ -22,12 +22,13 @@ namespace CobelHR.Services.Base
             return await quarter.SaveAttached(userCredit);
         }
 
-        public DataResult<List<YearQuarter>> CollectionOfYearQuarter(int quarter_Id, YearQuarter yearQuarter)
+        public DataResult<List<YearQuarter>> CollectionOfYearQuarter(int quarter_Id, YearQuarter yearQuarter, UserCredit userCredit)
         {
             var procedureName = "[Base].[Quarter.CollectionOfYearQuarter]";
 
             return this.CollectionOf<YearQuarter>(procedureName,
-                                                    new SqlParameter("@Id",quarter_Id), 
+                                                    new SqlParameter("@Id",quarter_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", yearQuarter.ToJson()));
         }
     }

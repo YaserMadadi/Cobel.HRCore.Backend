@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("PositionAssignmentRepeal/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("PositionAssignmentRepeal/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.positionAssignmentRepealService.RetrieveAll(PositionAssignmentRepeal.Informer, paginate, this.UserCredit);
+            var result = await this.positionAssignmentRepealService.RetrieveAll(PositionAssignmentRepeal.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<PositionAssignmentRepeal>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("PositionAssignmentRepeal/Seek")]
         public async Task<IActionResult> Seek([FromBody] PositionAssignmentRepeal positionAssignmentRepeal)
         {
-            var result = await this.positionAssignmentRepealService.Seek(positionAssignmentRepeal);
+            var result = await this.positionAssignmentRepealService.Seek(positionAssignmentRepeal, this.UserCredit);
 
 			return result.ToActionResult<PositionAssignmentRepeal>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("PositionAssignmentRepeal/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.positionAssignmentRepealService.SeekByValue(seekValue, PositionAssignmentRepeal.Informer);
+            var result = await this.positionAssignmentRepealService.SeekByValue(seekValue, PositionAssignmentRepeal.Informer, this.UserCredit);
 
 			return result.ToActionResult<PositionAssignmentRepeal>();
         }

@@ -34,10 +34,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("Employee/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Employee/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.employeeService.RetrieveAll(Employee.Informer, paginate, this.UserCredit);
+            var result = await this.employeeService.RetrieveAll(Employee.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Employee>();
         }
@@ -77,7 +77,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Employee/Seek")]
         public async Task<IActionResult> Seek([FromBody] Employee employee)
         {
-            var result = await this.employeeService.Seek(employee);
+            var result = await this.employeeService.Seek(employee, this.UserCredit);
 
 			return result.ToActionResult<Employee>();
         }
@@ -86,7 +86,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Employee/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.employeeService.SeekByValue(seekValue, Employee.Informer);
+            var result = await this.employeeService.SeekByValue(seekValue, Employee.Informer, this.UserCredit);
 
 			return result.ToActionResult<Employee>();
         }
@@ -105,7 +105,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         //[Route("Employee/{employee_id:int}/Assessment")]
         //public IActionResult CollectionOfAssessment([FromRoute(Name = "employee_id")] int id, Assessment assessment)
         //{
-        //    return this.employeeService.CollectionOfAssessment(id, assessment).ToActionResult();
+        //    return this.employeeService.CollectionOfAssessment(id, assessment, this.UserCredit).ToActionResult();
         //}
 
         // CollectionOfBehavioralAppraise_Appraiser
@@ -113,7 +113,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Appraiser/{employee_id:int}/BehavioralAppraise")]
         public IActionResult CollectionOfBehavioralAppraise_Appraiser([FromRoute(Name = "employee_id")] int id, BehavioralAppraise behavioralAppraise)
         {
-            return this.employeeService.CollectionOfBehavioralAppraise_Appraiser(id, behavioralAppraise).ToActionResult();
+            return this.employeeService.CollectionOfBehavioralAppraise_Appraiser(id, behavioralAppraise, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfCoaching
@@ -121,7 +121,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         //[Route("Employee/{employee_id:int}/Coaching")]
         //public IActionResult CollectionOfCoaching([FromRoute(Name = "employee_id")] int id, Coaching coaching)
         //{
-        //    return this.employeeService.CollectionOfCoaching(id, coaching).ToActionResult();
+        //    return this.employeeService.CollectionOfCoaching(id, coaching, this.UserCredit).ToActionResult();
         //}
 
         // CollectionOfContract
@@ -129,7 +129,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Employee/{employee_id:int}/Contract")]
         public IActionResult CollectionOfContract([FromRoute(Name = "employee_id")] int id, Contract contract)
         {
-            return this.employeeService.CollectionOfContract(id, contract).ToActionResult();
+            return this.employeeService.CollectionOfContract(id, contract, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfCriticalIncident
@@ -137,7 +137,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Employee/{employee_id:int}/CriticalIncident")]
         public IActionResult CollectionOfCriticalIncident([FromRoute(Name = "employee_id")] int id, CriticalIncident criticalIncident)
         {
-            return this.employeeService.CollectionOfCriticalIncident(id, criticalIncident).ToActionResult();
+            return this.employeeService.CollectionOfCriticalIncident(id, criticalIncident, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfCriticalIncidentRecognition_Writer
@@ -145,7 +145,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Writer/{employee_id:int}/CriticalIncidentRecognition")]
         public IActionResult CollectionOfCriticalIncidentRecognition_Writer([FromRoute(Name = "employee_id")] int id, CriticalIncidentRecognition criticalIncidentRecognition)
         {
-            return this.employeeService.CollectionOfCriticalIncidentRecognition_Writer(id, criticalIncidentRecognition).ToActionResult();
+            return this.employeeService.CollectionOfCriticalIncidentRecognition_Writer(id, criticalIncidentRecognition, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfEmployeeDetail
@@ -153,7 +153,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Employee/{employee_id:int}/EmployeeDetail")]
         public IActionResult CollectionOfEmployeeDetail([FromRoute(Name = "employee_id")] int id, EmployeeDetail employeeDetail)
         {
-            return this.employeeService.CollectionOfEmployeeDetail(id, employeeDetail).ToActionResult();
+            return this.employeeService.CollectionOfEmployeeDetail(id, employeeDetail, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfEmployeeEvent
@@ -161,7 +161,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Employee/{employee_id:int}/EmployeeEvent")]
         public IActionResult CollectionOfEmployeeEvent([FromRoute(Name = "employee_id")] int id, EmployeeEvent employeeEvent)
         {
-            return this.employeeService.CollectionOfEmployeeEvent(id, employeeEvent).ToActionResult();
+            return this.employeeService.CollectionOfEmployeeEvent(id, employeeEvent, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfEmployeeNotification
@@ -169,7 +169,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Employee/{employee_id:int}/EmployeeNotification")]
         public IActionResult CollectionOfEmployeeNotification([FromRoute(Name = "employee_id")] int id, EmployeeNotification employeeNotification)
         {
-            return this.employeeService.CollectionOfEmployeeNotification(id, employeeNotification).ToActionResult();
+            return this.employeeService.CollectionOfEmployeeNotification(id, employeeNotification, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfFunctionalAppraise_Appraiser
@@ -177,7 +177,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Appraiser/{employee_id:int}/FunctionalAppraise")]
         public IActionResult CollectionOfFunctionalAppraise_Appraiser([FromRoute(Name = "employee_id")] int id, FunctionalAppraise functionalAppraise)
         {
-            return this.employeeService.CollectionOfFunctionalAppraise_Appraiser(id, functionalAppraise).ToActionResult();
+            return this.employeeService.CollectionOfFunctionalAppraise_Appraiser(id, functionalAppraise, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfFunctionalKPIComment_Commenter
@@ -185,7 +185,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Commenter/{employee_id:int}/FunctionalKPIComment")]
         public IActionResult CollectionOfFunctionalKPIComment_Commenter([FromRoute(Name = "employee_id")] int id, FunctionalKPIComment functionalKPIComment)
         {
-            return this.employeeService.CollectionOfFunctionalKPIComment_Commenter(id, functionalKPIComment).ToActionResult();
+            return this.employeeService.CollectionOfFunctionalKPIComment_Commenter(id, functionalKPIComment, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfFunctionalObjectiveComment_Commenter
@@ -193,7 +193,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Commenter/{employee_id:int}/FunctionalObjectiveComment")]
         public IActionResult CollectionOfFunctionalObjectiveComment_Commenter([FromRoute(Name = "employee_id")] int id, FunctionalObjectiveComment functionalObjectiveComment)
         {
-            return this.employeeService.CollectionOfFunctionalObjectiveComment_Commenter(id, functionalObjectiveComment).ToActionResult();
+            return this.employeeService.CollectionOfFunctionalObjectiveComment_Commenter(id, functionalObjectiveComment, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfImpersonate
@@ -201,7 +201,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Employee/{employee_id:int}/Impersonate")]
         public IActionResult CollectionOfImpersonate([FromRoute(Name = "employee_id")] int id, Impersonate impersonate)
         {
-            return this.employeeService.CollectionOfImpersonate(id, impersonate).ToActionResult();
+            return this.employeeService.CollectionOfImpersonate(id, impersonate, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfPositionAssignment
@@ -209,7 +209,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Employee/{employee_id:int}/PositionAssignment")]
         public IActionResult CollectionOfPositionAssignment([FromRoute(Name = "employee_id")] int id, PositionAssignment positionAssignment)
         {
-            return this.employeeService.CollectionOfPositionAssignment(id, positionAssignment).ToActionResult();
+            return this.employeeService.CollectionOfPositionAssignment(id, positionAssignment, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfQualitativeAppraise_Appraiser
@@ -217,7 +217,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Appraiser/{employee_id:int}/QualitativeAppraise")]
         public IActionResult CollectionOfQualitativeAppraise_Appraiser([FromRoute(Name = "employee_id")] int id, QualitativeAppraise qualitativeAppraise)
         {
-            return this.employeeService.CollectionOfQualitativeAppraise_Appraiser(id, qualitativeAppraise).ToActionResult();
+            return this.employeeService.CollectionOfQualitativeAppraise_Appraiser(id, qualitativeAppraise, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfRoleMember
@@ -225,7 +225,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Employee/{employee_id:int}/RoleMember")]
         public IActionResult CollectionOfRoleMember([FromRoute(Name = "employee_id")] int id, RoleMember roleMember)
         {
-            return this.employeeService.CollectionOfRoleMember(id, roleMember).ToActionResult();
+            return this.employeeService.CollectionOfRoleMember(id, roleMember, this.UserCredit).ToActionResult();
         }
 
         // Collection Of TargetSetting
@@ -233,7 +233,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Employee/{employee_id:int}/TargetSetting")]
         public IActionResult CollectionOfTargetSetting([FromRoute(Name = "employee_id")] int id, TargetSetting targetSetting)
         {
-            return this.employeeService.CollectionOfTargetSetting(id, targetSetting).ToActionResult();
+            return this.employeeService.CollectionOfTargetSetting(id, targetSetting, this.UserCredit).ToActionResult();
         }
 
         // Collection Of Training
@@ -241,7 +241,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Employee/{employee_id:int}/Training")]
         public IActionResult CollectionOfTraining([FromRoute(Name = "employee_id")] int id, Training training)
         {
-            return this.employeeService.CollectionOfTraining(id, training).ToActionResult();
+            return this.employeeService.CollectionOfTraining(id, training, this.UserCredit).ToActionResult();
         }
 
         // Collection Of Vision
@@ -249,7 +249,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Employee/{employee_id:int}/Vision")]
         public IActionResult CollectionOfVision([FromRoute(Name = "employee_id")] int id, Vision vision)
         {
-            return this.employeeService.CollectionOfVision(id, vision).ToActionResult();
+            return this.employeeService.CollectionOfVision(id, vision, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfVisionApproved_ByEmployee
@@ -257,7 +257,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("ByEmployee/{employee_id:int}/VisionApproved")]
         public IActionResult CollectionOfVisionApproved_ByEmployee([FromRoute(Name = "employee_id")] int id, VisionApproved visionApproved)
         {
-            return this.employeeService.CollectionOfVisionApproved_ByEmployee(id, visionApproved).ToActionResult();
+            return this.employeeService.CollectionOfVisionApproved_ByEmployee(id, visionApproved, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfVisionComment_Commentator
@@ -265,7 +265,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Commentator/{employee_id:int}/VisionComment")]
         public IActionResult CollectionOfVisionComment_Commentator([FromRoute(Name = "employee_id")] int id, VisionComment visionComment)
         {
-            return this.employeeService.CollectionOfVisionComment_Commentator(id, visionComment).ToActionResult();
+            return this.employeeService.CollectionOfVisionComment_Commentator(id, visionComment, this.UserCredit).ToActionResult();
         }
     }
 }

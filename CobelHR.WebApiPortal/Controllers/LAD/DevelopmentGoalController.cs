@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.LAD
         }
 
         [HttpPost]
-        [Route("DevelopmentGoal/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("DevelopmentGoal/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.developmentGoalService.RetrieveAll(DevelopmentGoal.Informer, paginate, this.UserCredit);
+            var result = await this.developmentGoalService.RetrieveAll(DevelopmentGoal.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<DevelopmentGoal>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("DevelopmentGoal/Seek")]
         public async Task<IActionResult> Seek([FromBody] DevelopmentGoal developmentGoal)
         {
-            var result = await this.developmentGoalService.Seek(developmentGoal);
+            var result = await this.developmentGoalService.Seek(developmentGoal, this.UserCredit);
 
 			return result.ToActionResult<DevelopmentGoal>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("DevelopmentGoal/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.developmentGoalService.SeekByValue(seekValue, DevelopmentGoal.Informer);
+            var result = await this.developmentGoalService.SeekByValue(seekValue, DevelopmentGoal.Informer, this.UserCredit);
 
 			return result.ToActionResult<DevelopmentGoal>();
         }

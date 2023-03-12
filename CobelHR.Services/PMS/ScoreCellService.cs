@@ -22,30 +22,33 @@ namespace CobelHR.Services.PMS
             return await scoreCell.SaveAttached(userCredit);
         }
 
-        public DataResult<List<AppraiseResult>> CollectionOfAppraiseResult(int scoreCell_Id, AppraiseResult appraiseResult)
+        public DataResult<List<AppraiseResult>> CollectionOfAppraiseResult(int scoreCell_Id, AppraiseResult appraiseResult, UserCredit userCredit)
         {
             var procedureName = "[PMS].[ScoreCell.CollectionOfAppraiseResult]";
 
             return this.CollectionOf<AppraiseResult>(procedureName,
-                                                    new SqlParameter("@Id",scoreCell_Id), 
+                                                    new SqlParameter("@Id",scoreCell_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", appraiseResult.ToJson()));
         }
 
-		public DataResult<List<CellAction>> CollectionOfCellAction(int scoreCell_Id, CellAction cellAction)
+		public DataResult<List<CellAction>> CollectionOfCellAction(int scoreCell_Id, CellAction cellAction, UserCredit userCredit)
         {
             var procedureName = "[PMS].[ScoreCell.CollectionOfCellAction]";
 
             return this.CollectionOf<CellAction>(procedureName,
-                                                    new SqlParameter("@Id",scoreCell_Id), 
+                                                    new SqlParameter("@Id",scoreCell_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", cellAction.ToJson()));
         }
 
-		public DataResult<List<FinalAppraise>> CollectionOfFinalAppraise(int scoreCell_Id, FinalAppraise finalAppraise)
+		public DataResult<List<FinalAppraise>> CollectionOfFinalAppraise(int scoreCell_Id, FinalAppraise finalAppraise, UserCredit userCredit)
         {
             var procedureName = "[PMS].[ScoreCell.CollectionOfFinalAppraise]";
 
             return this.CollectionOf<FinalAppraise>(procedureName,
-                                                    new SqlParameter("@Id",scoreCell_Id), 
+                                                    new SqlParameter("@Id",scoreCell_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", finalAppraise.ToJson()));
         }
     }

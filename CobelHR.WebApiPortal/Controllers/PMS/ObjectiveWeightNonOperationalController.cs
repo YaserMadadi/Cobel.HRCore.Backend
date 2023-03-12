@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("ObjectiveWeightNonOperational/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("ObjectiveWeightNonOperational/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.objectiveWeightNonOperationalService.RetrieveAll(ObjectiveWeightNonOperational.Informer, paginate, this.UserCredit);
+            var result = await this.objectiveWeightNonOperationalService.RetrieveAll(ObjectiveWeightNonOperational.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<ObjectiveWeightNonOperational>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("ObjectiveWeightNonOperational/Seek")]
         public async Task<IActionResult> Seek([FromBody] ObjectiveWeightNonOperational objectiveWeightNonOperational)
         {
-            var result = await this.objectiveWeightNonOperationalService.Seek(objectiveWeightNonOperational);
+            var result = await this.objectiveWeightNonOperationalService.Seek(objectiveWeightNonOperational, this.UserCredit);
 
 			return result.ToActionResult<ObjectiveWeightNonOperational>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("ObjectiveWeightNonOperational/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.objectiveWeightNonOperationalService.SeekByValue(seekValue, ObjectiveWeightNonOperational.Informer);
+            var result = await this.objectiveWeightNonOperationalService.SeekByValue(seekValue, ObjectiveWeightNonOperational.Informer, this.UserCredit);
 
 			return result.ToActionResult<ObjectiveWeightNonOperational>();
         }

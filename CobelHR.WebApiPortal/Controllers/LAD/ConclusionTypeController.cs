@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.LAD
         }
 
         [HttpPost]
-        [Route("ConclusionType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("ConclusionType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.conclusionTypeService.RetrieveAll(ConclusionType.Informer, paginate, this.UserCredit);
+            var result = await this.conclusionTypeService.RetrieveAll(ConclusionType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<ConclusionType>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("ConclusionType/Seek")]
         public async Task<IActionResult> Seek([FromBody] ConclusionType conclusionType)
         {
-            var result = await this.conclusionTypeService.Seek(conclusionType);
+            var result = await this.conclusionTypeService.Seek(conclusionType, this.UserCredit);
 
 			return result.ToActionResult<ConclusionType>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("ConclusionType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.conclusionTypeService.SeekByValue(seekValue, ConclusionType.Informer);
+            var result = await this.conclusionTypeService.SeekByValue(seekValue, ConclusionType.Informer, this.UserCredit);
 
 			return result.ToActionResult<ConclusionType>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("ConclusionType/{conclusionType_id:int}/Conclusion")]
         public IActionResult CollectionOfConclusion([FromRoute(Name = "conclusionType_id")] int id, Conclusion conclusion)
         {
-            return this.conclusionTypeService.CollectionOfConclusion(id, conclusion).ToActionResult();
+            return this.conclusionTypeService.CollectionOfConclusion(id, conclusion, this.UserCredit).ToActionResult();
         }
     }
 }

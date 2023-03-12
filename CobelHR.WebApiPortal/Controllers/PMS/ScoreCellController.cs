@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("ScoreCell/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("ScoreCell/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.scoreCellService.RetrieveAll(ScoreCell.Informer, paginate, this.UserCredit);
+            var result = await this.scoreCellService.RetrieveAll(ScoreCell.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<ScoreCell>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("ScoreCell/Seek")]
         public async Task<IActionResult> Seek([FromBody] ScoreCell scoreCell)
         {
-            var result = await this.scoreCellService.Seek(scoreCell);
+            var result = await this.scoreCellService.Seek(scoreCell, this.UserCredit);
 
 			return result.ToActionResult<ScoreCell>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("ScoreCell/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.scoreCellService.SeekByValue(seekValue, ScoreCell.Informer);
+            var result = await this.scoreCellService.SeekByValue(seekValue, ScoreCell.Informer, this.UserCredit);
 
 			return result.ToActionResult<ScoreCell>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("ScoreCell/{scoreCell_id:int}/AppraiseResult")]
         public IActionResult CollectionOfAppraiseResult([FromRoute(Name = "scoreCell_id")] int id, AppraiseResult appraiseResult)
         {
-            return this.scoreCellService.CollectionOfAppraiseResult(id, appraiseResult).ToActionResult();
+            return this.scoreCellService.CollectionOfAppraiseResult(id, appraiseResult, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfCellAction
@@ -109,7 +109,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("ScoreCell/{scoreCell_id:int}/CellAction")]
         public IActionResult CollectionOfCellAction([FromRoute(Name = "scoreCell_id")] int id, CellAction cellAction)
         {
-            return this.scoreCellService.CollectionOfCellAction(id, cellAction).ToActionResult();
+            return this.scoreCellService.CollectionOfCellAction(id, cellAction, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfFinalAppraise
@@ -117,7 +117,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("ScoreCell/{scoreCell_id:int}/FinalAppraise")]
         public IActionResult CollectionOfFinalAppraise([FromRoute(Name = "scoreCell_id")] int id, FinalAppraise finalAppraise)
         {
-            return this.scoreCellService.CollectionOfFinalAppraise(id, finalAppraise).ToActionResult();
+            return this.scoreCellService.CollectionOfFinalAppraise(id, finalAppraise, this.UserCredit).ToActionResult();
         }
     }
 }

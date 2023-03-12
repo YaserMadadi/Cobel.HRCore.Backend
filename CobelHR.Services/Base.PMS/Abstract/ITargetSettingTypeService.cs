@@ -9,6 +9,6 @@ namespace CobelHR.Services.Base.PMS.Abstract
 {
     public interface ITargetSettingTypeService : IService<TargetSettingType>
     {
-        DataResult<List<TargetSetting>> CollectionOfTargetSetting(int targetSettingType_Id, TargetSetting targetSetting);
+        DataResult<List<TargetSetting>> CollectionOfTargetSetting(int targetSettingType_Id, TargetSetting targetSetting, UserCredit userCredit);
     }
 }

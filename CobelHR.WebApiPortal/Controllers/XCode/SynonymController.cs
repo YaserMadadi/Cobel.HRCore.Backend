@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.XCode
         }
 
         [HttpPost]
-        [Route("Synonym/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Synonym/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.synonymService.RetrieveAll(Synonym.Informer, paginate, this.UserCredit);
+            var result = await this.synonymService.RetrieveAll(Synonym.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Synonym>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.XCode
         [Route("Synonym/Seek")]
         public async Task<IActionResult> Seek([FromBody] Synonym synonym)
         {
-            var result = await this.synonymService.Seek(synonym);
+            var result = await this.synonymService.Seek(synonym, this.UserCredit);
 
 			return result.ToActionResult<Synonym>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.XCode
         [Route("Synonym/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.synonymService.SeekByValue(seekValue, Synonym.Informer);
+            var result = await this.synonymService.SeekByValue(seekValue, Synonym.Informer, this.UserCredit);
 
 			return result.ToActionResult<Synonym>();
         }

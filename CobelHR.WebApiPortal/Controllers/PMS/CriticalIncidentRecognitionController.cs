@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("CriticalIncidentRecognition/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("CriticalIncidentRecognition/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.criticalIncidentRecognitionService.RetrieveAll(CriticalIncidentRecognition.Informer, paginate, this.UserCredit);
+            var result = await this.criticalIncidentRecognitionService.RetrieveAll(CriticalIncidentRecognition.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<CriticalIncidentRecognition>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CriticalIncidentRecognition/Seek")]
         public async Task<IActionResult> Seek([FromBody] CriticalIncidentRecognition criticalIncidentRecognition)
         {
-            var result = await this.criticalIncidentRecognitionService.Seek(criticalIncidentRecognition);
+            var result = await this.criticalIncidentRecognitionService.Seek(criticalIncidentRecognition, this.UserCredit);
 
 			return result.ToActionResult<CriticalIncidentRecognition>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CriticalIncidentRecognition/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.criticalIncidentRecognitionService.SeekByValue(seekValue, CriticalIncidentRecognition.Informer);
+            var result = await this.criticalIncidentRecognitionService.SeekByValue(seekValue, CriticalIncidentRecognition.Informer, this.UserCredit);
 
 			return result.ToActionResult<CriticalIncidentRecognition>();
         }

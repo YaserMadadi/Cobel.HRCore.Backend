@@ -32,10 +32,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("ConnectionType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("ConnectionType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.connectionTypeService.RetrieveAll(ConnectionType.Informer, paginate, this.UserCredit);
+            var result = await this.connectionTypeService.RetrieveAll(ConnectionType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<ConnectionType>();
         }
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("ConnectionType/Seek")]
         public async Task<IActionResult> Seek([FromBody] ConnectionType connectionType)
         {
-            var result = await this.connectionTypeService.Seek(connectionType);
+            var result = await this.connectionTypeService.Seek(connectionType, this.UserCredit);
 
 			return result.ToActionResult<ConnectionType>();
         }
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("ConnectionType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.connectionTypeService.SeekByValue(seekValue, ConnectionType.Informer);
+            var result = await this.connectionTypeService.SeekByValue(seekValue, ConnectionType.Informer, this.UserCredit);
 
 			return result.ToActionResult<ConnectionType>();
         }
@@ -103,7 +103,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("ConnectionType/{connectionType_id:int}/AssessorConnectionLine")]
         public IActionResult CollectionOfAssessorConnectionLine([FromRoute(Name = "connectionType_id")] int id, AssessorConnectionLine assessorConnectionLine)
         {
-            return this.connectionTypeService.CollectionOfAssessorConnectionLine(id, assessorConnectionLine).ToActionResult();
+            return this.connectionTypeService.CollectionOfAssessorConnectionLine(id, assessorConnectionLine, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfCoachConnectionLine
@@ -111,7 +111,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("ConnectionType/{connectionType_id:int}/CoachConnectionLine")]
         public IActionResult CollectionOfCoachConnectionLine([FromRoute(Name = "connectionType_id")] int id, CoachConnectionLine coachConnectionLine)
         {
-            return this.connectionTypeService.CollectionOfCoachConnectionLine(id, coachConnectionLine).ToActionResult();
+            return this.connectionTypeService.CollectionOfCoachConnectionLine(id, coachConnectionLine, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfPersonConnection
@@ -119,7 +119,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("ConnectionType/{connectionType_id:int}/PersonConnection")]
         public IActionResult CollectionOfPersonConnection([FromRoute(Name = "connectionType_id")] int id, PersonConnection personConnection)
         {
-            return this.connectionTypeService.CollectionOfPersonConnection(id, personConnection).ToActionResult();
+            return this.connectionTypeService.CollectionOfPersonConnection(id, personConnection, this.UserCredit).ToActionResult();
         }
     }
 }

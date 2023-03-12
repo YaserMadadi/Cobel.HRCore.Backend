@@ -9,6 +9,6 @@ namespace CobelHR.Services.Base.Abstract
 {
     public interface IReligionService : IService<Religion>
     {
-        DataResult<List<Person>> CollectionOfPerson(int religion_Id, Person person);
+        DataResult<List<Person>> CollectionOfPerson(int religion_Id, Person person, UserCredit userCredit);
     }
 }

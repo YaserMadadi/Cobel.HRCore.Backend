@@ -22,12 +22,13 @@ namespace CobelHR.Services.Base
             return await province.SaveAttached(userCredit);
         }
 
-        public DataResult<List<City>> CollectionOfCity(int province_Id, City city)
+        public DataResult<List<City>> CollectionOfCity(int province_Id, City city, UserCredit userCredit)
         {
             var procedureName = "[Base].[Province.CollectionOfCity]";
 
             return this.CollectionOf<City>(procedureName,
-                                                    new SqlParameter("@Id",province_Id), 
+                                                    new SqlParameter("@Id",province_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", city.ToJson()));
         }
     }

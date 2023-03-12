@@ -32,10 +32,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("Gender/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Gender/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.genderService.RetrieveAll(Gender.Informer, paginate, this.UserCredit);
+            var result = await this.genderService.RetrieveAll(Gender.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Gender>();
         }
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Gender/Seek")]
         public async Task<IActionResult> Seek([FromBody] Gender gender)
         {
-            var result = await this.genderService.Seek(gender);
+            var result = await this.genderService.Seek(gender, this.UserCredit);
 
 			return result.ToActionResult<Gender>();
         }
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Gender/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.genderService.SeekByValue(seekValue, Gender.Informer);
+            var result = await this.genderService.SeekByValue(seekValue, Gender.Informer, this.UserCredit);
 
 			return result.ToActionResult<Gender>();
         }
@@ -103,7 +103,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Gender/{gender_id:int}/Assessor")]
         public IActionResult CollectionOfAssessor([FromRoute(Name = "gender_id")] int id, Assessor assessor)
         {
-            return this.genderService.CollectionOfAssessor(id, assessor).ToActionResult();
+            return this.genderService.CollectionOfAssessor(id, assessor, this.UserCredit).ToActionResult();
         }
 
        // CollectionOfCoach
@@ -111,7 +111,7 @@ namespace CobelHR.ApiServices.Controllers.Base
        [Route("Gender/{gender_id:int}/Coach")]
         public IActionResult CollectionOfCoach([FromRoute(Name = "gender_id")] int id, Coach coach)
         {
-            return this.genderService.CollectionOfCoach(id, coach).ToActionResult();
+            return this.genderService.CollectionOfCoach(id, coach, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfPerson
@@ -119,7 +119,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Gender/{gender_id:int}/Person")]
         public IActionResult CollectionOfPerson([FromRoute(Name = "gender_id")] int id, Person person)
         {
-            return this.genderService.CollectionOfPerson(id, person).ToActionResult();
+            return this.genderService.CollectionOfPerson(id, person, this.UserCredit).ToActionResult();
         }
     }
 }

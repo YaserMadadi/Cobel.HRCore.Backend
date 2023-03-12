@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.Core
         }
 
         [HttpPost]
-        [Route("Badge/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Badge/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.badgeService.RetrieveAll(Badge.Informer, paginate, this.UserCredit);
+            var result = await this.badgeService.RetrieveAll(Badge.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Badge>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Badge/Seek")]
         public async Task<IActionResult> Seek([FromBody] Badge badge)
         {
-            var result = await this.badgeService.Seek(badge);
+            var result = await this.badgeService.Seek(badge, this.UserCredit);
 
 			return result.ToActionResult<Badge>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Badge/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.badgeService.SeekByValue(seekValue, Badge.Informer);
+            var result = await this.badgeService.SeekByValue(seekValue, Badge.Informer, this.UserCredit);
 
 			return result.ToActionResult<Badge>();
         }

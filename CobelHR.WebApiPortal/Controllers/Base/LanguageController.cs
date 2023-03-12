@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("Language/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Language/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.languageService.RetrieveAll(Language.Informer, paginate, this.UserCredit);
+            var result = await this.languageService.RetrieveAll(Language.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Language>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Language/Seek")]
         public async Task<IActionResult> Seek([FromBody] Language language)
         {
-            var result = await this.languageService.Seek(language);
+            var result = await this.languageService.Seek(language, this.UserCredit);
 
 			return result.ToActionResult<Language>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Language/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.languageService.SeekByValue(seekValue, Language.Informer);
+            var result = await this.languageService.SeekByValue(seekValue, Language.Informer, this.UserCredit);
 
 			return result.ToActionResult<Language>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Language/{language_id:int}/LanguageAbility")]
         public IActionResult CollectionOfLanguageAbility([FromRoute(Name = "language_id")] int id, LanguageAbility languageAbility)
         {
-            return this.languageService.CollectionOfLanguageAbility(id, languageAbility).ToActionResult();
+            return this.languageService.CollectionOfLanguageAbility(id, languageAbility, this.UserCredit).ToActionResult();
         }
     }
 }

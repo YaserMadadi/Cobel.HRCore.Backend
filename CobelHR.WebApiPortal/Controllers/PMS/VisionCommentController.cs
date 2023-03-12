@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("VisionComment/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("VisionComment/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.visionCommentService.RetrieveAll(VisionComment.Informer, paginate, this.UserCredit);
+            var result = await this.visionCommentService.RetrieveAll(VisionComment.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<VisionComment>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("VisionComment/Seek")]
         public async Task<IActionResult> Seek([FromBody] VisionComment visionComment)
         {
-            var result = await this.visionCommentService.Seek(visionComment);
+            var result = await this.visionCommentService.Seek(visionComment, this.UserCredit);
 
 			return result.ToActionResult<VisionComment>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("VisionComment/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.visionCommentService.SeekByValue(seekValue, VisionComment.Informer);
+            var result = await this.visionCommentService.SeekByValue(seekValue, VisionComment.Informer, this.UserCredit);
 
 			return result.ToActionResult<VisionComment>();
         }

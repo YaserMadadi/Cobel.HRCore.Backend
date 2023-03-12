@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         }
 
         [HttpPost]
-        [Route("DevelopmentPlanPriority/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("DevelopmentPlanPriority/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.developmentPlanPriorityService.RetrieveAll(DevelopmentPlanPriority.Informer, paginate, this.UserCredit);
+            var result = await this.developmentPlanPriorityService.RetrieveAll(DevelopmentPlanPriority.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<DevelopmentPlanPriority>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("DevelopmentPlanPriority/Seek")]
         public async Task<IActionResult> Seek([FromBody] DevelopmentPlanPriority developmentPlanPriority)
         {
-            var result = await this.developmentPlanPriorityService.Seek(developmentPlanPriority);
+            var result = await this.developmentPlanPriorityService.Seek(developmentPlanPriority, this.UserCredit);
 
 			return result.ToActionResult<DevelopmentPlanPriority>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("DevelopmentPlanPriority/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.developmentPlanPriorityService.SeekByValue(seekValue, DevelopmentPlanPriority.Informer);
+            var result = await this.developmentPlanPriorityService.SeekByValue(seekValue, DevelopmentPlanPriority.Informer, this.UserCredit);
 
 			return result.ToActionResult<DevelopmentPlanPriority>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("Priority/{developmentPlanPriority_id:int}/IndividualDevelopmentPlan")]
         public IActionResult CollectionOfIndividualDevelopmentPlan_Priority([FromRoute(Name = "developmentPlanPriority_id")] int id, IndividualDevelopmentPlan individualDevelopmentPlan)
         {
-            return this.developmentPlanPriorityService.CollectionOfIndividualDevelopmentPlan_Priority(id, individualDevelopmentPlan).ToActionResult();
+            return this.developmentPlanPriorityService.CollectionOfIndividualDevelopmentPlan_Priority(id, individualDevelopmentPlan, this.UserCredit).ToActionResult();
         }
     }
 }

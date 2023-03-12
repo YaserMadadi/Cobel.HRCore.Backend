@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.LAD
         }
 
         [HttpPost]
-        [Route("CoachingQuestionary/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("CoachingQuestionary/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.coachingQuestionaryService.RetrieveAll(CoachingQuestionary.Informer, paginate, this.UserCredit);
+            var result = await this.coachingQuestionaryService.RetrieveAll(CoachingQuestionary.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<CoachingQuestionary>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("CoachingQuestionary/Seek")]
         public async Task<IActionResult> Seek([FromBody] CoachingQuestionary coachingQuestionary)
         {
-            var result = await this.coachingQuestionaryService.Seek(coachingQuestionary);
+            var result = await this.coachingQuestionaryService.Seek(coachingQuestionary, this.UserCredit);
 
 			return result.ToActionResult<CoachingQuestionary>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("CoachingQuestionary/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.coachingQuestionaryService.SeekByValue(seekValue, CoachingQuestionary.Informer);
+            var result = await this.coachingQuestionaryService.SeekByValue(seekValue, CoachingQuestionary.Informer, this.UserCredit);
 
 			return result.ToActionResult<CoachingQuestionary>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("CoachingQuestionary/{coachingQuestionary_id:int}/CoachingQuestionaryAnswered")]
         public IActionResult CollectionOfCoachingQuestionaryAnswered([FromRoute(Name = "coachingQuestionary_id")] int id, CoachingQuestionaryAnswered coachingQuestionaryAnswered)
         {
-            return this.coachingQuestionaryService.CollectionOfCoachingQuestionaryAnswered(id, coachingQuestionaryAnswered).ToActionResult();
+            return this.coachingQuestionaryService.CollectionOfCoachingQuestionaryAnswered(id, coachingQuestionaryAnswered, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfCoachingQuestionaryDetail
@@ -109,7 +109,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("CoachingQuestionary/{coachingQuestionary_id:int}/CoachingQuestionaryDetail")]
         public IActionResult CollectionOfCoachingQuestionaryDetail([FromRoute(Name = "coachingQuestionary_id")] int id, CoachingQuestionaryDetail coachingQuestionaryDetail)
         {
-            return this.coachingQuestionaryService.CollectionOfCoachingQuestionaryDetail(id, coachingQuestionaryDetail).ToActionResult();
+            return this.coachingQuestionaryService.CollectionOfCoachingQuestionaryDetail(id, coachingQuestionaryDetail, this.UserCredit).ToActionResult();
         }
     }
 }

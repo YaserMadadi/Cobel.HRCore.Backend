@@ -22,12 +22,13 @@ namespace CobelHR.Services.HR
             return await universityHistory.SaveAttached(userCredit);
         }
 
-        public DataResult<List<UniversityTerminate>> CollectionOfUniversityTerminate(int universityHistory_Id, UniversityTerminate universityTerminate)
+        public DataResult<List<UniversityTerminate>> CollectionOfUniversityTerminate(int universityHistory_Id, UniversityTerminate universityTerminate, UserCredit userCredit)
         {
             var procedureName = "[HR].[UniversityHistory.CollectionOfUniversityTerminate]";
 
             return this.CollectionOf<UniversityTerminate>(procedureName,
-                                                    new SqlParameter("@Id",universityHistory_Id), 
+                                                    new SqlParameter("@Id",universityHistory_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", universityTerminate.ToJson()));
         }
     }

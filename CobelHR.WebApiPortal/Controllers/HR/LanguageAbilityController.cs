@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("LanguageAbility/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("LanguageAbility/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.languageAbilityService.RetrieveAll(LanguageAbility.Informer, paginate, this.UserCredit);
+            var result = await this.languageAbilityService.RetrieveAll(LanguageAbility.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<LanguageAbility>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("LanguageAbility/Seek")]
         public async Task<IActionResult> Seek([FromBody] LanguageAbility languageAbility)
         {
-            var result = await this.languageAbilityService.Seek(languageAbility);
+            var result = await this.languageAbilityService.Seek(languageAbility, this.UserCredit);
 
 			return result.ToActionResult<LanguageAbility>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("LanguageAbility/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.languageAbilityService.SeekByValue(seekValue, LanguageAbility.Informer);
+            var result = await this.languageAbilityService.SeekByValue(seekValue, LanguageAbility.Informer, this.UserCredit);
 
 			return result.ToActionResult<LanguageAbility>();
         }

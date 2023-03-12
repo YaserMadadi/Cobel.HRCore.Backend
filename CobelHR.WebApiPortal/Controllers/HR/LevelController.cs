@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("Level/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Level/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.levelService.RetrieveAll(Level.Informer, paginate, this.UserCredit);
+            var result = await this.levelService.RetrieveAll(Level.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Level>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Level/Seek")]
         public async Task<IActionResult> Seek([FromBody] Level level)
         {
-            var result = await this.levelService.Seek(level);
+            var result = await this.levelService.Seek(level, this.UserCredit);
 
 			return result.ToActionResult<Level>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Level/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.levelService.SeekByValue(seekValue, Level.Informer);
+            var result = await this.levelService.SeekByValue(seekValue, Level.Informer, this.UserCredit);
 
 			return result.ToActionResult<Level>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Level/{level_id:int}/ObjectiveWeightNonOperational")]
         public IActionResult CollectionOfObjectiveWeightNonOperational([FromRoute(Name = "level_id")] int id, ObjectiveWeightNonOperational objectiveWeightNonOperational)
         {
-            return this.levelService.CollectionOfObjectiveWeightNonOperational(id, objectiveWeightNonOperational).ToActionResult();
+            return this.levelService.CollectionOfObjectiveWeightNonOperational(id, objectiveWeightNonOperational, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfPosition
@@ -110,7 +110,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Level/{level_id:int}/Position")]
         public IActionResult CollectionOfPosition([FromRoute(Name = "level_id")] int id, Position position)
         {
-            return this.levelService.CollectionOfPosition(id, position).ToActionResult();
+            return this.levelService.CollectionOfPosition(id, position, this.UserCredit).ToActionResult();
         }
     }
 }

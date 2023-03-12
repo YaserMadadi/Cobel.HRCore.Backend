@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base.PMS
             return await targetSettingType.SaveAttached(userCredit);
         }
 
-        public DataResult<List<TargetSetting>> CollectionOfTargetSetting(int targetSettingType_Id, TargetSetting targetSetting)
+        public DataResult<List<TargetSetting>> CollectionOfTargetSetting(int targetSettingType_Id, TargetSetting targetSetting, UserCredit userCredit)
         {
             var procedureName = "[Base.PMS].[TargetSettingType.CollectionOfTargetSetting]";
 
             return this.CollectionOf<TargetSetting>(procedureName,
-                                                    new SqlParameter("@Id",targetSettingType_Id), 
+                                                    new SqlParameter("@Id",targetSettingType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", targetSetting.ToJson()));
         }
     }

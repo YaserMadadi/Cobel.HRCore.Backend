@@ -9,8 +9,8 @@ namespace CobelHR.Services.HR.Abstract
 {
     public interface ILevelService : IService<Level>
     {
-        DataResult<List<ObjectiveWeightNonOperational>> CollectionOfObjectiveWeightNonOperational(int level_Id, ObjectiveWeightNonOperational objectiveWeightNonOperational);
+        DataResult<List<ObjectiveWeightNonOperational>> CollectionOfObjectiveWeightNonOperational(int level_Id, ObjectiveWeightNonOperational objectiveWeightNonOperational, UserCredit userCredit);
 
-		DataResult<List<Position>> CollectionOfPosition(int level_Id, Position position);
+		DataResult<List<Position>> CollectionOfPosition(int level_Id, Position position, UserCredit userCredit);
     }
 }

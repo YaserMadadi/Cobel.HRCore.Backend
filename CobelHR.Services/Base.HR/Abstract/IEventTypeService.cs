@@ -9,6 +9,6 @@ namespace CobelHR.Services.Base.HR.Abstract
 {
     public interface IEventTypeService : IService<EventType>
     {
-        DataResult<List<EmployeeEvent>> CollectionOfEmployeeEvent(int eventType_Id, EmployeeEvent employeeEvent);
+        DataResult<List<EmployeeEvent>> CollectionOfEmployeeEvent(int eventType_Id, EmployeeEvent employeeEvent, UserCredit userCredit);
     }
 }

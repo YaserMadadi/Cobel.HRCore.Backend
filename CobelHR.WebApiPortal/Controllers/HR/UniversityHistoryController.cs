@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("UniversityHistory/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("UniversityHistory/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.universityHistoryService.RetrieveAll(UniversityHistory.Informer, paginate, this.UserCredit);
+            var result = await this.universityHistoryService.RetrieveAll(UniversityHistory.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<UniversityHistory>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("UniversityHistory/Seek")]
         public async Task<IActionResult> Seek([FromBody] UniversityHistory universityHistory)
         {
-            var result = await this.universityHistoryService.Seek(universityHistory);
+            var result = await this.universityHistoryService.Seek(universityHistory, this.UserCredit);
 
 			return result.ToActionResult<UniversityHistory>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("UniversityHistory/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.universityHistoryService.SeekByValue(seekValue, UniversityHistory.Informer);
+            var result = await this.universityHistoryService.SeekByValue(seekValue, UniversityHistory.Informer, this.UserCredit);
 
 			return result.ToActionResult<UniversityHistory>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("UniversityHistory/{universityHistory_id:int}/UniversityTerminate")]
         public IActionResult CollectionOfUniversityTerminate([FromRoute(Name = "universityHistory_id")] int id, UniversityTerminate universityTerminate)
         {
-            return this.universityHistoryService.CollectionOfUniversityTerminate(id, universityTerminate).ToActionResult();
+            return this.universityHistoryService.CollectionOfUniversityTerminate(id, universityTerminate, this.UserCredit).ToActionResult();
         }
     }
 }

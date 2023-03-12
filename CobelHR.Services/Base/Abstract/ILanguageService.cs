@@ -9,6 +9,6 @@ namespace CobelHR.Services.Base.Abstract
 {
     public interface ILanguageService : IService<Language>
     {
-        DataResult<List<LanguageAbility>> CollectionOfLanguageAbility(int language_Id, LanguageAbility languageAbility);
+        DataResult<List<LanguageAbility>> CollectionOfLanguageAbility(int language_Id, LanguageAbility languageAbility, UserCredit userCredit);
     }
 }

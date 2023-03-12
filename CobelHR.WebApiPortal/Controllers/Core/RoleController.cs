@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.Core
         }
 
         [HttpPost]
-        [Route("Role/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Role/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.roleService.RetrieveAll(Role.Informer, paginate, this.UserCredit);
+            var result = await this.roleService.RetrieveAll(Role.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Role>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Role/Seek")]
         public async Task<IActionResult> Seek([FromBody] Role role)
         {
-            var result = await this.roleService.Seek(role);
+            var result = await this.roleService.Seek(role, this.UserCredit);
 
 			return result.ToActionResult<Role>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Role/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.roleService.SeekByValue(seekValue, Role.Informer);
+            var result = await this.roleService.SeekByValue(seekValue, Role.Informer, this.UserCredit);
 
 			return result.ToActionResult<Role>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Role/{role_id:int}/RoleMember")]
         public IActionResult CollectionOfRoleMember([FromRoute(Name = "role_id")] int id, RoleMember roleMember)
         {
-            return this.roleService.CollectionOfRoleMember(id, roleMember).ToActionResult();
+            return this.roleService.CollectionOfRoleMember(id, roleMember, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfRolePermission
@@ -109,7 +109,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Role/{role_id:int}/RolePermission")]
         public IActionResult CollectionOfRolePermission([FromRoute(Name = "role_id")] int id, RolePermission rolePermission)
         {
-            return this.roleService.CollectionOfRolePermission(id, rolePermission).ToActionResult();
+            return this.roleService.CollectionOfRolePermission(id, rolePermission, this.UserCredit).ToActionResult();
         }
     }
 }

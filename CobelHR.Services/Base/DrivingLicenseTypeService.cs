@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base
             return await drivingLicenseType.SaveAttached(userCredit);
         }
 
-        public DataResult<List<PersonDrivingLicense>> CollectionOfPersonDrivingLicense(int drivingLicenseType_Id, PersonDrivingLicense personDrivingLicense)
+        public DataResult<List<PersonDrivingLicense>> CollectionOfPersonDrivingLicense(int drivingLicenseType_Id, PersonDrivingLicense personDrivingLicense, UserCredit userCredit)
         {
             var procedureName = "[Base].[DrivingLicenseType.CollectionOfPersonDrivingLicense]";
 
             return this.CollectionOf<PersonDrivingLicense>(procedureName,
-                                                    new SqlParameter("@Id",drivingLicenseType_Id), 
+                                                    new SqlParameter("@Id",drivingLicenseType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", personDrivingLicense.ToJson()));
         }
     }

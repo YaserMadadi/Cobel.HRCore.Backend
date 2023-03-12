@@ -24,30 +24,33 @@ namespace CobelHR.Services.Base.HR
             return await positionCategory.SaveAttached(userCredit);
         }
 
-        public DataResult<List<AppraisalApproverConfig>> CollectionOfAppraisalApproverConfig(int positionCategory_Id, AppraisalApproverConfig appraisalApproverConfig)
+        public DataResult<List<AppraisalApproverConfig>> CollectionOfAppraisalApproverConfig(int positionCategory_Id, AppraisalApproverConfig appraisalApproverConfig, UserCredit userCredit)
         {
             var procedureName = "[Base.HR].[PositionCategory.CollectionOfAppraisalApproverConfig]";
 
             return this.CollectionOf<AppraisalApproverConfig>(procedureName,
-                                                    new SqlParameter("@Id",positionCategory_Id), 
+                                                    new SqlParameter("@Id",positionCategory_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", appraisalApproverConfig.ToJson()));
         }
 
-		public DataResult<List<ConfigTargetSetting>> CollectionOfConfigTargetSetting(int positionCategory_Id, ConfigTargetSetting configTargetSetting)
+		public DataResult<List<ConfigTargetSetting>> CollectionOfConfigTargetSetting(int positionCategory_Id, ConfigTargetSetting configTargetSetting, UserCredit userCredit)
         {
             var procedureName = "[Base.HR].[PositionCategory.CollectionOfConfigTargetSetting]";
 
             return this.CollectionOf<ConfigTargetSetting>(procedureName,
-                                                    new SqlParameter("@Id",positionCategory_Id), 
+                                                    new SqlParameter("@Id",positionCategory_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", configTargetSetting.ToJson()));
         }
 
-		public DataResult<List<Position>> CollectionOfPosition(int positionCategory_Id, Position position)
+		public DataResult<List<Position>> CollectionOfPosition(int positionCategory_Id, Position position, UserCredit userCredit)
         {
             var procedureName = "[Base.HR].[PositionCategory.CollectionOfPosition]";
 
             return this.CollectionOf<Position>(procedureName,
-                                                    new SqlParameter("@Id",positionCategory_Id), 
+                                                    new SqlParameter("@Id",positionCategory_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", position.ToJson()));
         }
     }

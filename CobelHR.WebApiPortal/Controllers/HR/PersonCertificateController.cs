@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("PersonCertificate/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("PersonCertificate/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.personCertificateService.RetrieveAll(PersonCertificate.Informer, paginate, this.UserCredit);
+            var result = await this.personCertificateService.RetrieveAll(PersonCertificate.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<PersonCertificate>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("PersonCertificate/Seek")]
         public async Task<IActionResult> Seek([FromBody] PersonCertificate personCertificate)
         {
-            var result = await this.personCertificateService.Seek(personCertificate);
+            var result = await this.personCertificateService.Seek(personCertificate, this.UserCredit);
 
 			return result.ToActionResult<PersonCertificate>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("PersonCertificate/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.personCertificateService.SeekByValue(seekValue, PersonCertificate.Informer);
+            var result = await this.personCertificateService.SeekByValue(seekValue, PersonCertificate.Informer, this.UserCredit);
 
 			return result.ToActionResult<PersonCertificate>();
         }

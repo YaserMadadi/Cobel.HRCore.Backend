@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("SchoolLevel/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("SchoolLevel/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.schoolLevelService.RetrieveAll(SchoolLevel.Informer, paginate, this.UserCredit);
+            var result = await this.schoolLevelService.RetrieveAll(SchoolLevel.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<SchoolLevel>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("SchoolLevel/Seek")]
         public async Task<IActionResult> Seek([FromBody] SchoolLevel schoolLevel)
         {
-            var result = await this.schoolLevelService.Seek(schoolLevel);
+            var result = await this.schoolLevelService.Seek(schoolLevel, this.UserCredit);
 
 			return result.ToActionResult<SchoolLevel>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("SchoolLevel/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.schoolLevelService.SeekByValue(seekValue, SchoolLevel.Informer);
+            var result = await this.schoolLevelService.SeekByValue(seekValue, SchoolLevel.Informer, this.UserCredit);
 
 			return result.ToActionResult<SchoolLevel>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("SchoolLevel/{schoolLevel_id:int}/SchoolHistory")]
         public IActionResult CollectionOfSchoolHistory([FromRoute(Name = "schoolLevel_id")] int id, SchoolHistory schoolHistory)
         {
-            return this.schoolLevelService.CollectionOfSchoolHistory(id, schoolHistory).ToActionResult();
+            return this.schoolLevelService.CollectionOfSchoolHistory(id, schoolHistory, this.UserCredit).ToActionResult();
         }
     }
 }

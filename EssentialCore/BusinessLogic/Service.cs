@@ -22,8 +22,8 @@ namespace EssentialCore.BusinessLogic
             //TODO: CheckPermission
             //                                                                   RetrieveById
             var command = UserClass.CreateCommand($"[{info.Schema}].[{info.Name}.RetrieveById]",
-                                                                        new SqlParameter("@Id", id));
-
+                                                                        new SqlParameter("@Id", id),
+                                                                        new SqlParameter("@User_Id", userCredit.Person_Id));
 
             IDataResult<string> result = await command.ExecuteDataResult();
 
@@ -40,22 +40,22 @@ namespace EssentialCore.BusinessLogic
             return new SuccessfulDataResult<T>(entity);
         }
 
-        public async Task<DataResult<List<T>>> RetrieveAll(Info info, Paginate paginate, UserCredit userCredit)
+        public async Task<DataResult<List<T>>> RetrieveAll(Info info, int currentPage, UserCredit userCredit)
         {
             if (!Permission.CheckPermission(PermissionType.Retrieve, info, userCredit))
 
                 return new ErrorDataResult<List<T>>(-1, "You have no Permission to Retrieve data!", null);
 
-            return await RetrieveAll(info, paginate);
+            return await RetrieveAll(info, currentPage);
         }
 
-
-        internal async Task<DataResult<List<T>>> RetrieveAll(Info info, Paginate paginate)
+        internal async Task<DataResult<List<T>>> RetrieveAll(Info info, int user_Id, int currentPage = 1)
         {
-            IDataResult<string> result = await UserClass.CreateCommand($"[{info.Schema}].[{info.Name}.RetrieveAll]",
-                                                            new SqlParameter("@PaginateJson", paginate.ToJson()),
-                                                            new SqlParameter("@User_Id", 1))
-                                                                .ExecuteDataResult();
+            var command = UserClass.CreateCommand($"[{info.Schema}].[{info.Name}.RetrieveAll]",
+                                                                            new SqlParameter("@User_Id", user_Id),
+                                                                            new SqlParameter("@CurrentPage", currentPage));
+
+            IDataResult<string> result = await command.ExecuteDataResult();
 
             if (!result.IsSucceeded)
 
@@ -136,7 +136,7 @@ namespace EssentialCore.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public async Task<DataResult<List<T>>> Seek(T entity)
+        public async Task<DataResult<List<T>>> Seek(T entity, UserCredit userCredit)
         {
             var paginate = entity.Paginate == null || entity.Paginate == default ? new Paginate(80, 1, 1) : entity.Paginate;
 
@@ -144,7 +144,8 @@ namespace EssentialCore.BusinessLogic
 
             var command = UserClass.CreateCommand($"[{entity.Info.Schema}].[{entity.Info.Name}.Seek]",
                                                             new SqlParameter("@jsonValue", entity.ToJson()),
-                                                            new SqlParameter("@PaginateJson", paginate.ToJson()));
+                                                            new SqlParameter("@User_Id", userCredit.Person_Id),
+                                                            new SqlParameter("@Current_Page", paginate.CurrentPage));
 
             var result = await command.ExecuteDataResult();
 
@@ -155,14 +156,15 @@ namespace EssentialCore.BusinessLogic
             return new SuccessfulDataResult<List<T>>(result.Data.Deserialize<List<T>>(JsonType.Collection));
         }
 
-        public async Task<DataResult<List<T>>> SeekByValue(string value, Info info)
+        public async Task<DataResult<List<T>>> SeekByValue(string value, Info info, UserCredit userCredit)
         {
             //TODO: CheckPermission
 
             value = $"%{value}%";
 
             var command = UserClass.CreateCommand($"[{info.Schema}].[{info.Name}.SeekByValue]",
-                                                            new SqlParameter("@value", value));
+                                                            new SqlParameter("@Value", value),
+                                                            new SqlParameter("@User_Id", userCredit.Person_Id));
 
 
             IDataResult<string> result = await command.ExecuteDataResult();

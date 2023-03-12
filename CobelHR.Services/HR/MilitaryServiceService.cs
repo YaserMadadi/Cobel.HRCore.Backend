@@ -22,21 +22,23 @@ namespace CobelHR.Services.HR
             return await militaryService.SaveAttached(userCredit);
         }
 
-        public DataResult<List<MilitaryServiceExcemption>> CollectionOfMilitaryServiceExcemption(int militaryService_Id, MilitaryServiceExcemption militaryServiceExcemption)
+        public DataResult<List<MilitaryServiceExcemption>> CollectionOfMilitaryServiceExcemption(int militaryService_Id, MilitaryServiceExcemption militaryServiceExcemption, UserCredit userCredit)
         {
             var procedureName = "[HR].[MilitaryService.CollectionOfMilitaryServiceExcemption]";
 
             return this.CollectionOf<MilitaryServiceExcemption>(procedureName,
-                                                    new SqlParameter("@Id",militaryService_Id), 
+                                                    new SqlParameter("@Id",militaryService_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", militaryServiceExcemption.ToJson()));
         }
 
-		public DataResult<List<MilitaryServiceInclusive>> CollectionOfMilitaryServiceInclusive(int militaryService_Id, MilitaryServiceInclusive militaryServiceInclusive)
+		public DataResult<List<MilitaryServiceInclusive>> CollectionOfMilitaryServiceInclusive(int militaryService_Id, MilitaryServiceInclusive militaryServiceInclusive, UserCredit userCredit)
         {
             var procedureName = "[HR].[MilitaryService.CollectionOfMilitaryServiceInclusive]";
 
             return this.CollectionOf<MilitaryServiceInclusive>(procedureName,
-                                                    new SqlParameter("@Id",militaryService_Id), 
+                                                    new SqlParameter("@Id",militaryService_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", militaryServiceInclusive.ToJson()));
         }
     }

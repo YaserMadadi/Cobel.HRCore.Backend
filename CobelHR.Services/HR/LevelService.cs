@@ -23,21 +23,23 @@ namespace CobelHR.Services.HR
             return await level.SaveAttached(userCredit);
         }
 
-        public DataResult<List<ObjectiveWeightNonOperational>> CollectionOfObjectiveWeightNonOperational(int level_Id, ObjectiveWeightNonOperational objectiveWeightNonOperational)
+        public DataResult<List<ObjectiveWeightNonOperational>> CollectionOfObjectiveWeightNonOperational(int level_Id, ObjectiveWeightNonOperational objectiveWeightNonOperational, UserCredit userCredit)
         {
             var procedureName = "[HR].[Level.CollectionOfObjectiveWeightNonOperational]";
 
             return this.CollectionOf<ObjectiveWeightNonOperational>(procedureName,
-                                                    new SqlParameter("@Id",level_Id), 
+                                                    new SqlParameter("@Id",level_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", objectiveWeightNonOperational.ToJson()));
         }
 
-		public DataResult<List<Position>> CollectionOfPosition(int level_Id, Position position)
+		public DataResult<List<Position>> CollectionOfPosition(int level_Id, Position position, UserCredit userCredit)
         {
             var procedureName = "[HR].[Level.CollectionOfPosition]";
 
             return this.CollectionOf<Position>(procedureName,
-                                                    new SqlParameter("@Id",level_Id), 
+                                                    new SqlParameter("@Id",level_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", position.ToJson()));
         }
     }

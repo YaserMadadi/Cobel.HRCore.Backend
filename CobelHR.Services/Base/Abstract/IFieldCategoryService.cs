@@ -9,6 +9,6 @@ namespace CobelHR.Services.Base.Abstract
 {
     public interface IFieldCategoryService : IService<FieldCategory>
     {
-        DataResult<List<PersonCertificate>> CollectionOfPersonCertificate(int fieldCategory_Id, PersonCertificate personCertificate);
+        DataResult<List<PersonCertificate>> CollectionOfPersonCertificate(int fieldCategory_Id, PersonCertificate personCertificate, UserCredit userCredit);
     }
 }

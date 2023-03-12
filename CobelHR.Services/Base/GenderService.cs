@@ -24,30 +24,33 @@ namespace CobelHR.Services.Base
             return await gender.SaveAttached(userCredit);
         }
 
-        public DataResult<List<Assessor>> CollectionOfAssessor(int gender_Id, Assessor assessor)
+        public DataResult<List<Assessor>> CollectionOfAssessor(int gender_Id, Assessor assessor, UserCredit userCredit)
         {
             var procedureName = "[Base].[Gender.CollectionOfAssessor]";
 
             return this.CollectionOf<Assessor>(procedureName,
-                                                    new SqlParameter("@Id",gender_Id), 
+                                                    new SqlParameter("@Id",gender_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", assessor.ToJson()));
         }
 
-		public DataResult<List<Coach>> CollectionOfCoach(int gender_Id, Coach coach)
+		public DataResult<List<Coach>> CollectionOfCoach(int gender_Id, Coach coach, UserCredit userCredit)
         {
             var procedureName = "[Base].[Gender.CollectionOfCoach]";
 
             return this.CollectionOf<Coach>(procedureName,
-                                                    new SqlParameter("@Id",gender_Id), 
+                                                    new SqlParameter("@Id",gender_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", coach.ToJson()));
         }
 
-		public DataResult<List<Person>> CollectionOfPerson(int gender_Id, Person person)
+		public DataResult<List<Person>> CollectionOfPerson(int gender_Id, Person person, UserCredit userCredit)
         {
             var procedureName = "[Base].[Gender.CollectionOfPerson]";
 
             return this.CollectionOf<Person>(procedureName,
-                                                    new SqlParameter("@Id",gender_Id), 
+                                                    new SqlParameter("@Id",gender_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", person.ToJson()));
         }
     }

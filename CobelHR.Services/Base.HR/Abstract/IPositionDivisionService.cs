@@ -9,8 +9,8 @@ namespace CobelHR.Services.Base.HR.Abstract
 {
     public interface IPositionDivisionService : IService<PositionDivision>
     {
-        DataResult<List<Position>> CollectionOfPosition(int positionDivision_Id, Position position);
+        DataResult<List<Position>> CollectionOfPosition(int positionDivision_Id, Position position, UserCredit userCredit);
 
-		DataResult<List<Unit>> CollectionOfUnit(int positionDivision_Id, Unit unit);
+		DataResult<List<Unit>> CollectionOfUnit(int positionDivision_Id, Unit unit, UserCredit userCredit);
     }
 }

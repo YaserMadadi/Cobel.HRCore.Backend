@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         }
 
         [HttpPost]
-        [Route("ApprovementType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("ApprovementType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.approvementTypeService.RetrieveAll(ApprovementType.Informer, paginate, this.UserCredit);
+            var result = await this.approvementTypeService.RetrieveAll(ApprovementType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<ApprovementType>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("ApprovementType/Seek")]
         public async Task<IActionResult> Seek([FromBody] ApprovementType approvementType)
         {
-            var result = await this.approvementTypeService.Seek(approvementType);
+            var result = await this.approvementTypeService.Seek(approvementType, this.UserCredit);
 
 			return result.ToActionResult<ApprovementType>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("ApprovementType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.approvementTypeService.SeekByValue(seekValue, ApprovementType.Informer);
+            var result = await this.approvementTypeService.SeekByValue(seekValue, ApprovementType.Informer, this.UserCredit);
 
 			return result.ToActionResult<ApprovementType>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("ApprovementType/{approvementType_id:int}/VisionApproved")]
         public IActionResult CollectionOfVisionApproved([FromRoute(Name = "approvementType_id")] int id, VisionApproved visionApproved)
         {
-            return this.approvementTypeService.CollectionOfVisionApproved(id, visionApproved).ToActionResult();
+            return this.approvementTypeService.CollectionOfVisionApproved(id, visionApproved, this.UserCredit).ToActionResult();
         }
     }
 }

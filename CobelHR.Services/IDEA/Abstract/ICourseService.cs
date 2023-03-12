@@ -8,6 +8,6 @@ namespace CobelHR.Services.IDEA.Abstract
 {
     public interface ICourseService : IService<Course>
     {
-        DataResult<List<Training>> CollectionOfTraining(int course_Id, Training training);
+        DataResult<List<Training>> CollectionOfTraining(int course_Id, Training training, UserCredit userCredit);
     }
 }

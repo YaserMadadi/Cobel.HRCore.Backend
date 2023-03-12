@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("HealthStatus/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("HealthStatus/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.healthStatusService.RetrieveAll(HealthStatus.Informer, paginate, this.UserCredit);
+            var result = await this.healthStatusService.RetrieveAll(HealthStatus.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<HealthStatus>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("HealthStatus/Seek")]
         public async Task<IActionResult> Seek([FromBody] HealthStatus healthStatus)
         {
-            var result = await this.healthStatusService.Seek(healthStatus);
+            var result = await this.healthStatusService.Seek(healthStatus, this.UserCredit);
 
 			return result.ToActionResult<HealthStatus>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("HealthStatus/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.healthStatusService.SeekByValue(seekValue, HealthStatus.Informer);
+            var result = await this.healthStatusService.SeekByValue(seekValue, HealthStatus.Informer, this.UserCredit);
 
 			return result.ToActionResult<HealthStatus>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("HealthStatus/{healthStatus_id:int}/Person")]
         public IActionResult CollectionOfPerson([FromRoute(Name = "healthStatus_id")] int id, Person person)
         {
-            return this.healthStatusService.CollectionOfPerson(id, person).ToActionResult();
+            return this.healthStatusService.CollectionOfPerson(id, person, this.UserCredit).ToActionResult();
         }
     }
 }

@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         }
 
         [HttpPost]
-        [Route("MeasurementUnit/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("MeasurementUnit/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.measurementUnitService.RetrieveAll(MeasurementUnit.Informer, paginate, this.UserCredit);
+            var result = await this.measurementUnitService.RetrieveAll(MeasurementUnit.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<MeasurementUnit>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("MeasurementUnit/Seek")]
         public async Task<IActionResult> Seek([FromBody] MeasurementUnit measurementUnit)
         {
-            var result = await this.measurementUnitService.Seek(measurementUnit);
+            var result = await this.measurementUnitService.Seek(measurementUnit, this.UserCredit);
 
 			return result.ToActionResult<MeasurementUnit>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("MeasurementUnit/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.measurementUnitService.SeekByValue(seekValue, MeasurementUnit.Informer);
+            var result = await this.measurementUnitService.SeekByValue(seekValue, MeasurementUnit.Informer, this.UserCredit);
 
 			return result.ToActionResult<MeasurementUnit>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("MeasurementUnit/{measurementUnit_id:int}/FunctionalKPI")]
         public IActionResult CollectionOfFunctionalKPI([FromRoute(Name = "measurementUnit_id")] int id, FunctionalKPI functionalKPI)
         {
-            return this.measurementUnitService.CollectionOfFunctionalKPI(id, functionalKPI).ToActionResult();
+            return this.measurementUnitService.CollectionOfFunctionalKPI(id, functionalKPI, this.UserCredit).ToActionResult();
         }
     }
 }

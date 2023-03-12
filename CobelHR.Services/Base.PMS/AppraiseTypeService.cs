@@ -23,39 +23,43 @@ namespace CobelHR.Services.Base.PMS
             return await appraiseType.SaveAttached(userCredit);
         }
 
-        public DataResult<List<AppraiseResult>> CollectionOfAppraiseResult(int appraiseType_Id, AppraiseResult appraiseResult)
+        public DataResult<List<AppraiseResult>> CollectionOfAppraiseResult(int appraiseType_Id, AppraiseResult appraiseResult, UserCredit userCredit)
         {
             var procedureName = "[Base.PMS].[AppraiseType.CollectionOfAppraiseResult]";
 
             return this.CollectionOf<AppraiseResult>(procedureName,
-                                                    new SqlParameter("@Id",appraiseType_Id), 
+                                                    new SqlParameter("@Id",appraiseType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", appraiseResult.ToJson()));
         }
 
-		public DataResult<List<BehavioralAppraise>> CollectionOfBehavioralAppraise(int appraiseType_Id, BehavioralAppraise behavioralAppraise)
+		public DataResult<List<BehavioralAppraise>> CollectionOfBehavioralAppraise(int appraiseType_Id, BehavioralAppraise behavioralAppraise, UserCredit userCredit)
         {
             var procedureName = "[Base.PMS].[AppraiseType.CollectionOfBehavioralAppraise]";
 
             return this.CollectionOf<BehavioralAppraise>(procedureName,
-                                                    new SqlParameter("@Id",appraiseType_Id), 
+                                                    new SqlParameter("@Id",appraiseType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", behavioralAppraise.ToJson()));
         }
 
-		public DataResult<List<FunctionalAppraise>> CollectionOfFunctionalAppraise(int appraiseType_Id, FunctionalAppraise functionalAppraise)
+		public DataResult<List<FunctionalAppraise>> CollectionOfFunctionalAppraise(int appraiseType_Id, FunctionalAppraise functionalAppraise, UserCredit userCredit)
         {
             var procedureName = "[Base.PMS].[AppraiseType.CollectionOfFunctionalAppraise]";
 
             return this.CollectionOf<FunctionalAppraise>(procedureName,
-                                                    new SqlParameter("@Id",appraiseType_Id), 
+                                                    new SqlParameter("@Id",appraiseType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", functionalAppraise.ToJson()));
         }
 
-		public DataResult<List<QualitativeAppraise>> CollectionOfQualitativeAppraise(int appraiseType_Id, QualitativeAppraise qualitativeAppraise)
+		public DataResult<List<QualitativeAppraise>> CollectionOfQualitativeAppraise(int appraiseType_Id, QualitativeAppraise qualitativeAppraise, UserCredit userCredit)
         {
             var procedureName = "[Base.PMS].[AppraiseType.CollectionOfQualitativeAppraise]";
 
             return this.CollectionOf<QualitativeAppraise>(procedureName,
-                                                    new SqlParameter("@Id",appraiseType_Id), 
+                                                    new SqlParameter("@Id",appraiseType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", qualitativeAppraise.ToJson()));
         }
     }

@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("Vision/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Vision/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.visionService.RetrieveAll(Vision.Informer, paginate, this.UserCredit);
+            var result = await this.visionService.RetrieveAll(Vision.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Vision>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("Vision/Seek")]
         public async Task<IActionResult> Seek([FromBody] Vision vision)
         {
-            var result = await this.visionService.Seek(vision);
+            var result = await this.visionService.Seek(vision, this.UserCredit);
 
 			return result.ToActionResult<Vision>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("Vision/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.visionService.SeekByValue(seekValue, Vision.Informer);
+            var result = await this.visionService.SeekByValue(seekValue, Vision.Informer, this.UserCredit);
 
 			return result.ToActionResult<Vision>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("Vision/{vision_id:int}/IndividualDevelopmentPlan")]
         public IActionResult CollectionOfIndividualDevelopmentPlan([FromRoute(Name = "vision_id")] int id, IndividualDevelopmentPlan individualDevelopmentPlan)
         {
-            return this.visionService.CollectionOfIndividualDevelopmentPlan(id, individualDevelopmentPlan).ToActionResult();
+            return this.visionService.CollectionOfIndividualDevelopmentPlan(id, individualDevelopmentPlan, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfVisionApproved
@@ -109,7 +109,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("Vision/{vision_id:int}/VisionApproved")]
         public IActionResult CollectionOfVisionApproved([FromRoute(Name = "vision_id")] int id, VisionApproved visionApproved)
         {
-            return this.visionService.CollectionOfVisionApproved(id, visionApproved).ToActionResult();
+            return this.visionService.CollectionOfVisionApproved(id, visionApproved, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfVisionComment
@@ -117,7 +117,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("Vision/{vision_id:int}/VisionComment")]
         public IActionResult CollectionOfVisionComment([FromRoute(Name = "vision_id")] int id, VisionComment visionComment)
         {
-            return this.visionService.CollectionOfVisionComment(id, visionComment).ToActionResult();
+            return this.visionService.CollectionOfVisionComment(id, visionComment, this.UserCredit).ToActionResult();
         }
     }
 }

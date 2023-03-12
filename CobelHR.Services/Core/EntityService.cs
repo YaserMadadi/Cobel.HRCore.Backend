@@ -22,21 +22,23 @@ namespace CobelHR.Services.Core
             return await entity.SaveAttached(userCredit);
         }
 
-        public DataResult<List<Property>> CollectionOfProperty(int entity_Id, Property property)
+        public DataResult<List<Property>> CollectionOfProperty(int entity_Id, Property property, UserCredit userCredit)
         {
             var procedureName = "[Core].[Entity.CollectionOfProperty]";
 
             return this.CollectionOf<Property>(procedureName,
-                                                    new SqlParameter("@Id",entity_Id), 
+                                                    new SqlParameter("@Id",entity_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", property.ToJson()));
         }
 
-		public DataResult<List<RolePermission>> CollectionOfRolePermission(int entity_Id, RolePermission rolePermission)
+		public DataResult<List<RolePermission>> CollectionOfRolePermission(int entity_Id, RolePermission rolePermission, UserCredit userCredit)
         {
             var procedureName = "[Core].[Entity.CollectionOfRolePermission]";
 
             return this.CollectionOf<RolePermission>(procedureName,
-                                                    new SqlParameter("@Id",entity_Id), 
+                                                    new SqlParameter("@Id",entity_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", rolePermission.ToJson()));
         }
     }

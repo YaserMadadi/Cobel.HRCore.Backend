@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.IDEA
         }
 
         [HttpPost]
-        [Route("Training/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Training/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.trainingService.RetrieveAll(Training.Informer, paginate, this.UserCredit);
+            var result = await this.trainingService.RetrieveAll(Training.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Training>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.IDEA
         [Route("Training/Seek")]
         public async Task<IActionResult> Seek([FromBody] Training training)
         {
-            var result = await this.trainingService.Seek(training);
+            var result = await this.trainingService.Seek(training, this.UserCredit);
 
 			return result.ToActionResult<Training>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.IDEA
         [Route("Training/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.trainingService.SeekByValue(seekValue, Training.Informer);
+            var result = await this.trainingService.SeekByValue(seekValue, Training.Informer, this.UserCredit);
 
 			return result.ToActionResult<Training>();
         }

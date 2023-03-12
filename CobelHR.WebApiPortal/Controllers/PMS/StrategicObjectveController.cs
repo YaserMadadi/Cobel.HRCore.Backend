@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("StrategicObjectve/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("StrategicObjectve/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.strategicObjectveService.RetrieveAll(StrategicObjectve.Informer, paginate, this.UserCredit);
+            var result = await this.strategicObjectveService.RetrieveAll(StrategicObjectve.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<StrategicObjectve>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("StrategicObjectve/Seek")]
         public async Task<IActionResult> Seek([FromBody] StrategicObjectve strategicObjectve)
         {
-            var result = await this.strategicObjectveService.Seek(strategicObjectve);
+            var result = await this.strategicObjectveService.Seek(strategicObjectve, this.UserCredit);
 
 			return result.ToActionResult<StrategicObjectve>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("StrategicObjectve/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.strategicObjectveService.SeekByValue(seekValue, StrategicObjectve.Informer);
+            var result = await this.strategicObjectveService.SeekByValue(seekValue, StrategicObjectve.Informer, this.UserCredit);
 
 			return result.ToActionResult<StrategicObjectve>();
         }

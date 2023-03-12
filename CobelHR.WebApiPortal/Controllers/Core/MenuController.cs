@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.Core
         }
 
         [HttpPost]
-        [Route("Menu/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Menu/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage = 1)
         {
-            var result = await this.menuService.RetrieveAll(Menu.Informer, paginate, this.UserCredit);
+            var result = await this.menuService.RetrieveAll(Menu.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Menu>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Menu/Seek")]
         public async Task<IActionResult> Seek([FromBody] Menu menu)
         {
-            var result = await this.menuService.Seek(menu);
+            var result = await this.menuService.Seek(menu, this.UserCredit);
 
 			return result.ToActionResult<Menu>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Menu/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.menuService.SeekByValue(seekValue, Menu.Informer);
+            var result = await this.menuService.SeekByValue(seekValue, Menu.Informer, this.UserCredit);
 
 			return result.ToActionResult<Menu>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Menu/{menu_id:int}/MenuItem")]
         public IActionResult CollectionOfMenuItem([FromRoute(Name = "menu_id")] int id, MenuItem menuItem)
         {
-            return this.menuService.CollectionOfMenuItem(id, menuItem).ToActionResult();
+            return this.menuService.CollectionOfMenuItem(id, menuItem, this.UserCredit).ToActionResult();
         }
     }
 }

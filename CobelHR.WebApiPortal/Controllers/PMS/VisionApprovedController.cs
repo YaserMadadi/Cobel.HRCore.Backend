@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("VisionApproved/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("VisionApproved/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.visionApprovedService.RetrieveAll(VisionApproved.Informer, paginate, this.UserCredit);
+            var result = await this.visionApprovedService.RetrieveAll(VisionApproved.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<VisionApproved>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("VisionApproved/Seek")]
         public async Task<IActionResult> Seek([FromBody] VisionApproved visionApproved)
         {
-            var result = await this.visionApprovedService.Seek(visionApproved);
+            var result = await this.visionApprovedService.Seek(visionApproved, this.UserCredit);
 
 			return result.ToActionResult<VisionApproved>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("VisionApproved/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.visionApprovedService.SeekByValue(seekValue, VisionApproved.Informer);
+            var result = await this.visionApprovedService.SeekByValue(seekValue, VisionApproved.Informer, this.UserCredit);
 
 			return result.ToActionResult<VisionApproved>();
         }

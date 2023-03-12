@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         }
 
         [HttpPost]
-        [Route("ExpectedLevel/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("ExpectedLevel/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.expectedLevelService.RetrieveAll(ExpectedLevel.Informer, paginate, this.UserCredit);
+            var result = await this.expectedLevelService.RetrieveAll(ExpectedLevel.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<ExpectedLevel>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("ExpectedLevel/Seek")]
         public async Task<IActionResult> Seek([FromBody] ExpectedLevel expectedLevel)
         {
-            var result = await this.expectedLevelService.Seek(expectedLevel);
+            var result = await this.expectedLevelService.Seek(expectedLevel, this.UserCredit);
 
 			return result.ToActionResult<ExpectedLevel>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("ExpectedLevel/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.expectedLevelService.SeekByValue(seekValue, ExpectedLevel.Informer);
+            var result = await this.expectedLevelService.SeekByValue(seekValue, ExpectedLevel.Informer, this.UserCredit);
 
 			return result.ToActionResult<ExpectedLevel>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("ExpectedLevel/{expectedLevel_id:int}/BehavioralObjective")]
         public IActionResult CollectionOfBehavioralObjective([FromRoute(Name = "expectedLevel_id")] int id, BehavioralObjective behavioralObjective)
         {
-            return this.expectedLevelService.CollectionOfBehavioralObjective(id, behavioralObjective).ToActionResult();
+            return this.expectedLevelService.CollectionOfBehavioralObjective(id, behavioralObjective, this.UserCredit).ToActionResult();
         }
     }
 }

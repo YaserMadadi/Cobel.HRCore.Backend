@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("BehavioralKPI/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("BehavioralKPI/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.behavioralKPIService.RetrieveAll(BehavioralKPI.Informer, paginate, this.UserCredit);
+            var result = await this.behavioralKPIService.RetrieveAll(BehavioralKPI.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<BehavioralKPI>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("BehavioralKPI/Seek")]
         public async Task<IActionResult> Seek([FromBody] BehavioralKPI behavioralKPI)
         {
-            var result = await this.behavioralKPIService.Seek(behavioralKPI);
+            var result = await this.behavioralKPIService.Seek(behavioralKPI, this.UserCredit);
 
 			return result.ToActionResult<BehavioralKPI>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("BehavioralKPI/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.behavioralKPIService.SeekByValue(seekValue, BehavioralKPI.Informer);
+            var result = await this.behavioralKPIService.SeekByValue(seekValue, BehavioralKPI.Informer, this.UserCredit);
 
 			return result.ToActionResult<BehavioralKPI>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("BehavioralKPI/{behavioralKPI_id:int}/BehavioralAppraise")]
         public IActionResult CollectionOfBehavioralAppraise([FromRoute(Name = "behavioralKPI_id")] int id, BehavioralAppraise behavioralAppraise)
         {
-            return this.behavioralKPIService.CollectionOfBehavioralAppraise(id, behavioralAppraise).ToActionResult();
+            return this.behavioralKPIService.CollectionOfBehavioralAppraise(id, behavioralAppraise, this.UserCredit).ToActionResult();
         }
     }
 }

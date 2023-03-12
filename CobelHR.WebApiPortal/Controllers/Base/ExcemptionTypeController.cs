@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("ExcemptionType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("ExcemptionType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.excemptionTypeService.RetrieveAll(ExcemptionType.Informer, paginate, this.UserCredit);
+            var result = await this.excemptionTypeService.RetrieveAll(ExcemptionType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<ExcemptionType>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("ExcemptionType/Seek")]
         public async Task<IActionResult> Seek([FromBody] ExcemptionType excemptionType)
         {
-            var result = await this.excemptionTypeService.Seek(excemptionType);
+            var result = await this.excemptionTypeService.Seek(excemptionType, this.UserCredit);
 
 			return result.ToActionResult<ExcemptionType>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("ExcemptionType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.excemptionTypeService.SeekByValue(seekValue, ExcemptionType.Informer);
+            var result = await this.excemptionTypeService.SeekByValue(seekValue, ExcemptionType.Informer, this.UserCredit);
 
 			return result.ToActionResult<ExcemptionType>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("ExcemptionType/{excemptionType_id:int}/MilitaryServiceExcemption")]
         public IActionResult CollectionOfMilitaryServiceExcemption([FromRoute(Name = "excemptionType_id")] int id, MilitaryServiceExcemption militaryServiceExcemption)
         {
-            return this.excemptionTypeService.CollectionOfMilitaryServiceExcemption(id, militaryServiceExcemption).ToActionResult();
+            return this.excemptionTypeService.CollectionOfMilitaryServiceExcemption(id, militaryServiceExcemption, this.UserCredit).ToActionResult();
         }
     }
 }

@@ -8,6 +8,6 @@ namespace CobelHR.Services.HR.Abstract
 {
     public interface IPositionAssignmentService : IService<PositionAssignment>
     {
-        DataResult<List<PositionAssignmentRepeal>> CollectionOfPositionAssignmentRepeal(int positionAssignment_Id, PositionAssignmentRepeal positionAssignmentRepeal);
+        DataResult<List<PositionAssignmentRepeal>> CollectionOfPositionAssignmentRepeal(int positionAssignment_Id, PositionAssignmentRepeal positionAssignmentRepeal, UserCredit userCredit);
     }
 }

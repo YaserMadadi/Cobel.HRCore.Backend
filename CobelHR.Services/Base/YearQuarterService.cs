@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base
             return await yearQuarter.SaveAttached(userCredit);
         }
 
-        public DataResult<List<AssessmentTraining>> CollectionOfAssessmentTraining_DeadLine(int yearQuarter_Id, AssessmentTraining assessmentTraining)
+        public DataResult<List<AssessmentTraining>> CollectionOfAssessmentTraining_DeadLine(int yearQuarter_Id, AssessmentTraining assessmentTraining, UserCredit userCredit)
         {
             var procedureName = "[Base].[YearQuarter(DeadLine).CollectionOfAssessmentTraining]";
 
             return this.CollectionOf<AssessmentTraining>(procedureName,
-                                                    new SqlParameter("@Id",yearQuarter_Id), 
+                                                    new SqlParameter("@Id",yearQuarter_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", assessmentTraining.ToJson()));
         }
     }

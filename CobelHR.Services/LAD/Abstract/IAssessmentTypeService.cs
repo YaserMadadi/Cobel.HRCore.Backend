@@ -8,6 +8,6 @@ namespace CobelHR.Services.LAD.Abstract
 {
     public interface IAssessmentTypeService : IService<AssessmentType>
     {
-        DataResult<List<Assessment>> CollectionOfAssessment(int assessmentType_Id, Assessment assessment);
+        DataResult<List<Assessment>> CollectionOfAssessment(int assessmentType_Id, Assessment assessment, UserCredit userCredit);
     }
 }

@@ -22,12 +22,13 @@ namespace CobelHR.Services.LAD
             return await promotionResult.SaveAttached(userCredit);
         }
 
-        public DataResult<List<PromotionAssessment>> CollectionOfPromotionAssessment(int promotionResult_Id, PromotionAssessment promotionAssessment)
+        public DataResult<List<PromotionAssessment>> CollectionOfPromotionAssessment(int promotionResult_Id, PromotionAssessment promotionAssessment, UserCredit userCredit)
         {
             var procedureName = "[LAD].[PromotionResult.CollectionOfPromotionAssessment]";
 
             return this.CollectionOf<PromotionAssessment>(procedureName,
-                                                    new SqlParameter("@Id",promotionResult_Id), 
+                                                    new SqlParameter("@Id",promotionResult_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", promotionAssessment.ToJson()));
         }
     }

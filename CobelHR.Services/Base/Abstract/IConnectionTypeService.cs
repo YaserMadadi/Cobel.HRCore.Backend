@@ -10,10 +10,10 @@ namespace CobelHR.Services.Base.Abstract
 {
     public interface IConnectionTypeService : IService<ConnectionType>
     {
-        DataResult<List<AssessorConnectionLine>> CollectionOfAssessorConnectionLine(int connectionType_Id, AssessorConnectionLine assessorConnectionLine);
+        DataResult<List<AssessorConnectionLine>> CollectionOfAssessorConnectionLine(int connectionType_Id, AssessorConnectionLine assessorConnectionLine, UserCredit userCredit);
 
-		DataResult<List<CoachConnectionLine>> CollectionOfCoachConnectionLine(int connectionType_Id, CoachConnectionLine coachConnectionLine);
+		DataResult<List<CoachConnectionLine>> CollectionOfCoachConnectionLine(int connectionType_Id, CoachConnectionLine coachConnectionLine, UserCredit userCredit);
 
-		DataResult<List<PersonConnection>> CollectionOfPersonConnection(int connectionType_Id, PersonConnection personConnection);
+		DataResult<List<PersonConnection>> CollectionOfPersonConnection(int connectionType_Id, PersonConnection personConnection, UserCredit userCredit);
     }
 }

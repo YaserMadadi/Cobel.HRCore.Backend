@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("CompetencyItemKPI/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("CompetencyItemKPI/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.competencyItemKPIService.RetrieveAll(CompetencyItemKPI.Informer, paginate, this.UserCredit);
+            var result = await this.competencyItemKPIService.RetrieveAll(CompetencyItemKPI.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<CompetencyItemKPI>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CompetencyItemKPI/Seek")]
         public async Task<IActionResult> Seek([FromBody] CompetencyItemKPI competencyItemKPI)
         {
-            var result = await this.competencyItemKPIService.Seek(competencyItemKPI);
+            var result = await this.competencyItemKPIService.Seek(competencyItemKPI, this.UserCredit);
 
 			return result.ToActionResult<CompetencyItemKPI>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CompetencyItemKPI/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.competencyItemKPIService.SeekByValue(seekValue, CompetencyItemKPI.Informer);
+            var result = await this.competencyItemKPIService.SeekByValue(seekValue, CompetencyItemKPI.Informer, this.UserCredit);
 
 			return result.ToActionResult<CompetencyItemKPI>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CompetencyItemKPI/{competencyItemKPI_id:int}/BehavioralKPI")]
         public IActionResult CollectionOfBehavioralKPI([FromRoute(Name = "competencyItemKPI_id")] int id, BehavioralKPI behavioralKPI)
         {
-            return this.competencyItemKPIService.CollectionOfBehavioralKPI(id, behavioralKPI).ToActionResult();
+            return this.competencyItemKPIService.CollectionOfBehavioralKPI(id, behavioralKPI, this.UserCredit).ToActionResult();
         }
     }
 }

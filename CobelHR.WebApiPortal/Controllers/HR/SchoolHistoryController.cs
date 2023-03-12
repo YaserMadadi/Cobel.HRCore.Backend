@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("SchoolHistory/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("SchoolHistory/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.schoolHistoryService.RetrieveAll(SchoolHistory.Informer, paginate, this.UserCredit);
+            var result = await this.schoolHistoryService.RetrieveAll(SchoolHistory.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<SchoolHistory>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("SchoolHistory/Seek")]
         public async Task<IActionResult> Seek([FromBody] SchoolHistory schoolHistory)
         {
-            var result = await this.schoolHistoryService.Seek(schoolHistory);
+            var result = await this.schoolHistoryService.Seek(schoolHistory, this.UserCredit);
 
 			return result.ToActionResult<SchoolHistory>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("SchoolHistory/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.schoolHistoryService.SeekByValue(seekValue, SchoolHistory.Informer);
+            var result = await this.schoolHistoryService.SeekByValue(seekValue, SchoolHistory.Informer, this.UserCredit);
 
 			return result.ToActionResult<SchoolHistory>();
         }

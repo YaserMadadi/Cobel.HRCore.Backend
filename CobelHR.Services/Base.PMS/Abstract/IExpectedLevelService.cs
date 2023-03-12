@@ -9,6 +9,6 @@ namespace CobelHR.Services.Base.PMS.Abstract
 {
     public interface IExpectedLevelService : IService<ExpectedLevel>
     {
-        DataResult<List<BehavioralObjective>> CollectionOfBehavioralObjective(int expectedLevel_Id, BehavioralObjective behavioralObjective);
+        DataResult<List<BehavioralObjective>> CollectionOfBehavioralObjective(int expectedLevel_Id, BehavioralObjective behavioralObjective, UserCredit userCredit);
     }
 }

@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("Quarter/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Quarter/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.quarterService.RetrieveAll(Quarter.Informer, paginate, this.UserCredit);
+            var result = await this.quarterService.RetrieveAll(Quarter.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Quarter>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Quarter/Seek")]
         public async Task<IActionResult> Seek([FromBody] Quarter quarter)
         {
-            var result = await this.quarterService.Seek(quarter);
+            var result = await this.quarterService.Seek(quarter, this.UserCredit);
 
 			return result.ToActionResult<Quarter>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Quarter/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.quarterService.SeekByValue(seekValue, Quarter.Informer);
+            var result = await this.quarterService.SeekByValue(seekValue, Quarter.Informer, this.UserCredit);
 
 			return result.ToActionResult<Quarter>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Quarter/{quarter_id:int}/YearQuarter")]
         public IActionResult CollectionOfYearQuarter([FromRoute(Name = "quarter_id")] int id, YearQuarter yearQuarter)
         {
-            return this.quarterService.CollectionOfYearQuarter(id, yearQuarter).ToActionResult();
+            return this.quarterService.CollectionOfYearQuarter(id, yearQuarter, this.UserCredit).ToActionResult();
         }
     }
 }

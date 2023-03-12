@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base
             return await country.SaveAttached(userCredit);
         }
 
-        public DataResult<List<Person>> CollectionOfPerson_Nationality(int country_Id, Person person)
+        public DataResult<List<Person>> CollectionOfPerson_Nationality(int country_Id, Person person, UserCredit userCredit)
         {
             var procedureName = "[Base].[Country(Nationality).CollectionOfPerson]";
 
             return this.CollectionOf<Person>(procedureName,
-                                                    new SqlParameter("@Id",country_Id), 
+                                                    new SqlParameter("@Id",country_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", person.ToJson()));
         }
     }

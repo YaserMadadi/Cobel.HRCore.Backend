@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("BehavioralObjective/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("BehavioralObjective/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.behavioralObjectiveService.RetrieveAll(BehavioralObjective.Informer, paginate, this.UserCredit);
+            var result = await this.behavioralObjectiveService.RetrieveAll(BehavioralObjective.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<BehavioralObjective>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("BehavioralObjective/Seek")]
         public async Task<IActionResult> Seek([FromBody] BehavioralObjective behavioralObjective)
         {
-            var result = await this.behavioralObjectiveService.Seek(behavioralObjective);
+            var result = await this.behavioralObjectiveService.Seek(behavioralObjective, this.UserCredit);
 
 			return result.ToActionResult<BehavioralObjective>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("BehavioralObjective/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.behavioralObjectiveService.SeekByValue(seekValue, BehavioralObjective.Informer);
+            var result = await this.behavioralObjectiveService.SeekByValue(seekValue, BehavioralObjective.Informer, this.UserCredit);
 
 			return result.ToActionResult<BehavioralObjective>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("BehavioralObjective/{behavioralObjective_id:int}/BehavioralKPI")]
         public IActionResult CollectionOfBehavioralKPI([FromRoute(Name = "behavioralObjective_id")] int id, BehavioralKPI behavioralKPI)
         {
-            return this.behavioralObjectiveService.CollectionOfBehavioralKPI(id, behavioralKPI).ToActionResult();
+            return this.behavioralObjectiveService.CollectionOfBehavioralKPI(id, behavioralKPI, this.UserCredit).ToActionResult();
         }
     }
 }

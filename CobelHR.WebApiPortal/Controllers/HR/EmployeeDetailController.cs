@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("EmployeeDetail/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("EmployeeDetail/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.employeeDetailService.RetrieveAll(EmployeeDetail.Informer, paginate, this.UserCredit);
+            var result = await this.employeeDetailService.RetrieveAll(EmployeeDetail.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<EmployeeDetail>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("EmployeeDetail/Seek")]
         public async Task<IActionResult> Seek([FromBody] EmployeeDetail employeeDetail)
         {
-            var result = await this.employeeDetailService.Seek(employeeDetail);
+            var result = await this.employeeDetailService.Seek(employeeDetail, this.UserCredit);
 
 			return result.ToActionResult<EmployeeDetail>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("EmployeeDetail/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.employeeDetailService.SeekByValue(seekValue, EmployeeDetail.Informer);
+            var result = await this.employeeDetailService.SeekByValue(seekValue, EmployeeDetail.Informer, this.UserCredit);
 
 			return result.ToActionResult<EmployeeDetail>();
         }

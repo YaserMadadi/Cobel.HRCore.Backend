@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         }
 
         [HttpPost]
-        [Route("DevelopmentPlanType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("DevelopmentPlanType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.developmentPlanTypeService.RetrieveAll(DevelopmentPlanType.Informer, paginate, this.UserCredit);
+            var result = await this.developmentPlanTypeService.RetrieveAll(DevelopmentPlanType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<DevelopmentPlanType>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("DevelopmentPlanType/Seek")]
         public async Task<IActionResult> Seek([FromBody] DevelopmentPlanType developmentPlanType)
         {
-            var result = await this.developmentPlanTypeService.Seek(developmentPlanType);
+            var result = await this.developmentPlanTypeService.Seek(developmentPlanType, this.UserCredit);
 
 			return result.ToActionResult<DevelopmentPlanType>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("DevelopmentPlanType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.developmentPlanTypeService.SeekByValue(seekValue, DevelopmentPlanType.Informer);
+            var result = await this.developmentPlanTypeService.SeekByValue(seekValue, DevelopmentPlanType.Informer, this.UserCredit);
 
 			return result.ToActionResult<DevelopmentPlanType>();
         }

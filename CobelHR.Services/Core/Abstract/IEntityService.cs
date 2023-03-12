@@ -8,8 +8,8 @@ namespace CobelHR.Services.Core.Abstract
 {
     public interface IEntityService : IService<Entity>
     {
-        DataResult<List<Property>> CollectionOfProperty(int entity_Id, Property property);
+        DataResult<List<Property>> CollectionOfProperty(int entity_Id, Property property, UserCredit userCredit);
 
-		DataResult<List<RolePermission>> CollectionOfRolePermission(int entity_Id, RolePermission rolePermission);
+		DataResult<List<RolePermission>> CollectionOfRolePermission(int entity_Id, RolePermission rolePermission, UserCredit userCredit);
     }
 }

@@ -9,6 +9,6 @@ namespace CobelHR.Services.Base.PMS.Abstract
 {
     public interface IApproverTypeService : IService<ApproverType>
     {
-        DataResult<List<AppraisalApproverConfig>> CollectionOfAppraisalApproverConfig(int approverType_Id, AppraisalApproverConfig appraisalApproverConfig);
+        DataResult<List<AppraisalApproverConfig>> CollectionOfAppraisalApproverConfig(int approverType_Id, AppraisalApproverConfig appraisalApproverConfig, UserCredit userCredit);
     }
 }

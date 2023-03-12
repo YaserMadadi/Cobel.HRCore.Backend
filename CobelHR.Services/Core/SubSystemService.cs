@@ -22,12 +22,13 @@ namespace CobelHR.Services.Core
             return await subSystem.SaveAttached(userCredit);
         }
 
-        public DataResult<List<Menu>> CollectionOfMenu(int subSystem_Id, Menu menu)
+        public DataResult<List<Menu>> CollectionOfMenu(int subSystem_Id, Menu menu, UserCredit userCredit)
         {
             var procedureName = "[Core].[SubSystem.CollectionOfMenu]";
 
             return this.CollectionOf<Menu>(procedureName,
-                                                    new SqlParameter("@Id",subSystem_Id), 
+                                                    new SqlParameter("@Id",subSystem_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", menu.ToJson()));
         }
     }

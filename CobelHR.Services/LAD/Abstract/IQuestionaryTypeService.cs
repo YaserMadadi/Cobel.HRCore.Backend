@@ -8,8 +8,8 @@ namespace CobelHR.Services.LAD.Abstract
 {
     public interface IQuestionaryTypeService : IService<QuestionaryType>
     {
-        DataResult<List<CoachingQuestionary>> CollectionOfCoachingQuestionary(int questionaryType_Id, CoachingQuestionary coachingQuestionary);
+        DataResult<List<CoachingQuestionary>> CollectionOfCoachingQuestionary(int questionaryType_Id, CoachingQuestionary coachingQuestionary, UserCredit userCredit);
 
-		DataResult<List<QuestionaryItem>> CollectionOfQuestionaryItem(int questionaryType_Id, QuestionaryItem questionaryItem);
+		DataResult<List<QuestionaryItem>> CollectionOfQuestionaryItem(int questionaryType_Id, QuestionaryItem questionaryItem, UserCredit userCredit);
     }
 }

@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base.HR
             return await eventType.SaveAttached(userCredit);
         }
 
-        public DataResult<List<EmployeeEvent>> CollectionOfEmployeeEvent(int eventType_Id, EmployeeEvent employeeEvent)
+        public DataResult<List<EmployeeEvent>> CollectionOfEmployeeEvent(int eventType_Id, EmployeeEvent employeeEvent, UserCredit userCredit)
         {
             var procedureName = "[Base.HR].[EventType.CollectionOfEmployeeEvent]";
 
             return this.CollectionOf<EmployeeEvent>(procedureName,
-                                                    new SqlParameter("@Id",eventType_Id), 
+                                                    new SqlParameter("@Id",eventType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", employeeEvent.ToJson()));
         }
     }

@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.Core
         }
 
         [HttpPost]
-        [Route("Impersonate/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Impersonate/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.impersonateService.RetrieveAll(Impersonate.Informer, paginate, this.UserCredit);
+            var result = await this.impersonateService.RetrieveAll(Impersonate.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Impersonate>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Impersonate/Seek")]
         public async Task<IActionResult> Seek([FromBody] Impersonate impersonate)
         {
-            var result = await this.impersonateService.Seek(impersonate);
+            var result = await this.impersonateService.Seek(impersonate, this.UserCredit);
 
 			return result.ToActionResult<Impersonate>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Impersonate/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.impersonateService.SeekByValue(seekValue, Impersonate.Informer);
+            var result = await this.impersonateService.SeekByValue(seekValue, Impersonate.Informer, this.UserCredit);
 
 			return result.ToActionResult<Impersonate>();
         }

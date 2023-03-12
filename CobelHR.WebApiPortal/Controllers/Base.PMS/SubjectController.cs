@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         }
 
         [HttpPost]
-        [Route("Subject/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Subject/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.subjectService.RetrieveAll(Subject.Informer, paginate, this.UserCredit);
+            var result = await this.subjectService.RetrieveAll(Subject.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Subject>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("Subject/Seek")]
         public async Task<IActionResult> Seek([FromBody] Subject subject)
         {
-            var result = await this.subjectService.Seek(subject);
+            var result = await this.subjectService.Seek(subject, this.UserCredit);
 
 			return result.ToActionResult<Subject>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("Subject/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.subjectService.SeekByValue(seekValue, Subject.Informer);
+            var result = await this.subjectService.SeekByValue(seekValue, Subject.Informer, this.UserCredit);
 
 			return result.ToActionResult<Subject>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("Subject/{subject_id:int}/IndividualDevelopmentPlan")]
         public IActionResult CollectionOfIndividualDevelopmentPlan([FromRoute(Name = "subject_id")] int id, IndividualDevelopmentPlan individualDevelopmentPlan)
         {
-            return this.subjectService.CollectionOfIndividualDevelopmentPlan(id, individualDevelopmentPlan).ToActionResult();
+            return this.subjectService.CollectionOfIndividualDevelopmentPlan(id, individualDevelopmentPlan, this.UserCredit).ToActionResult();
         }
     }
 }

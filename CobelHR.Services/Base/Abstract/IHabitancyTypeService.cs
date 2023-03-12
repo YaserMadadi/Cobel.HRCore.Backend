@@ -9,6 +9,6 @@ namespace CobelHR.Services.Base.Abstract
 {
     public interface IHabitancyTypeService : IService<HabitancyType>
     {
-        DataResult<List<Habitancy>> CollectionOfHabitancy(int habitancyType_Id, Habitancy habitancy);
+        DataResult<List<Habitancy>> CollectionOfHabitancy(int habitancyType_Id, Habitancy habitancy, UserCredit userCredit);
     }
 }

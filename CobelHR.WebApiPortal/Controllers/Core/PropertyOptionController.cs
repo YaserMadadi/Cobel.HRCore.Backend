@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.Core
         }
 
         [HttpPost]
-        [Route("PropertyOption/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("PropertyOption/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.propertyOptionService.RetrieveAll(PropertyOption.Informer, paginate, this.UserCredit);
+            var result = await this.propertyOptionService.RetrieveAll(PropertyOption.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<PropertyOption>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("PropertyOption/Seek")]
         public async Task<IActionResult> Seek([FromBody] PropertyOption propertyOption)
         {
-            var result = await this.propertyOptionService.Seek(propertyOption);
+            var result = await this.propertyOptionService.Seek(propertyOption, this.UserCredit);
 
 			return result.ToActionResult<PropertyOption>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("PropertyOption/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.propertyOptionService.SeekByValue(seekValue, PropertyOption.Informer);
+            var result = await this.propertyOptionService.SeekByValue(seekValue, PropertyOption.Informer, this.UserCredit);
 
 			return result.ToActionResult<PropertyOption>();
         }

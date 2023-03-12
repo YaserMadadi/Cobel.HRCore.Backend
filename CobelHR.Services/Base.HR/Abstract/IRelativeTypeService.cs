@@ -9,6 +9,6 @@ namespace CobelHR.Services.Base.HR.Abstract
 {
     public interface IRelativeTypeService : IService<RelativeType>
     {
-        DataResult<List<Relative>> CollectionOfRelative_RelationType(int relativeType_Id, Relative relative);
+        DataResult<List<Relative>> CollectionOfRelative_RelationType(int relativeType_Id, Relative relative, UserCredit userCredit);
     }
 }

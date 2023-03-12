@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.LAD
         }
 
         [HttpPost]
-        [Route("FeedbackSession/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("FeedbackSession/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.feedbackSessionService.RetrieveAll(FeedbackSession.Informer, paginate, this.UserCredit);
+            var result = await this.feedbackSessionService.RetrieveAll(FeedbackSession.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<FeedbackSession>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("FeedbackSession/Seek")]
         public async Task<IActionResult> Seek([FromBody] FeedbackSession feedbackSession)
         {
-            var result = await this.feedbackSessionService.Seek(feedbackSession);
+            var result = await this.feedbackSessionService.Seek(feedbackSession, this.UserCredit);
 
 			return result.ToActionResult<FeedbackSession>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("FeedbackSession/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.feedbackSessionService.SeekByValue(seekValue, FeedbackSession.Informer);
+            var result = await this.feedbackSessionService.SeekByValue(seekValue, FeedbackSession.Informer, this.UserCredit);
 
 			return result.ToActionResult<FeedbackSession>();
         }

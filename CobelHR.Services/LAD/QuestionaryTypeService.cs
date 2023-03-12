@@ -22,21 +22,23 @@ namespace CobelHR.Services.LAD
             return await questionaryType.SaveAttached(userCredit);
         }
 
-        public DataResult<List<CoachingQuestionary>> CollectionOfCoachingQuestionary(int questionaryType_Id, CoachingQuestionary coachingQuestionary)
+        public DataResult<List<CoachingQuestionary>> CollectionOfCoachingQuestionary(int questionaryType_Id, CoachingQuestionary coachingQuestionary, UserCredit userCredit)
         {
             var procedureName = "[LAD].[QuestionaryType.CollectionOfCoachingQuestionary]";
 
             return this.CollectionOf<CoachingQuestionary>(procedureName,
-                                                    new SqlParameter("@Id",questionaryType_Id), 
+                                                    new SqlParameter("@Id",questionaryType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", coachingQuestionary.ToJson()));
         }
 
-		public DataResult<List<QuestionaryItem>> CollectionOfQuestionaryItem(int questionaryType_Id, QuestionaryItem questionaryItem)
+		public DataResult<List<QuestionaryItem>> CollectionOfQuestionaryItem(int questionaryType_Id, QuestionaryItem questionaryItem, UserCredit userCredit)
         {
             var procedureName = "[LAD].[QuestionaryType.CollectionOfQuestionaryItem]";
 
             return this.CollectionOf<QuestionaryItem>(procedureName,
-                                                    new SqlParameter("@Id",questionaryType_Id), 
+                                                    new SqlParameter("@Id",questionaryType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", questionaryItem.ToJson()));
         }
     }

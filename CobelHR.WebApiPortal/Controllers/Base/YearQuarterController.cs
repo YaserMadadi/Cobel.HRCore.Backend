@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("YearQuarter/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("YearQuarter/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.yearQuarterService.RetrieveAll(YearQuarter.Informer, paginate, this.UserCredit);
+            var result = await this.yearQuarterService.RetrieveAll(YearQuarter.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<YearQuarter>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("YearQuarter/Seek")]
         public async Task<IActionResult> Seek([FromBody] YearQuarter yearQuarter)
         {
-            var result = await this.yearQuarterService.Seek(yearQuarter);
+            var result = await this.yearQuarterService.Seek(yearQuarter, this.UserCredit);
 
 			return result.ToActionResult<YearQuarter>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("YearQuarter/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.yearQuarterService.SeekByValue(seekValue, YearQuarter.Informer);
+            var result = await this.yearQuarterService.SeekByValue(seekValue, YearQuarter.Informer, this.UserCredit);
 
 			return result.ToActionResult<YearQuarter>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("DeadLine/{yearQuarter_id:int}/AssessmentTraining")]
         public IActionResult CollectionOfAssessmentTraining_DeadLine([FromRoute(Name = "yearQuarter_id")] int id, AssessmentTraining assessmentTraining)
         {
-            return this.yearQuarterService.CollectionOfAssessmentTraining_DeadLine(id, assessmentTraining).ToActionResult();
+            return this.yearQuarterService.CollectionOfAssessmentTraining_DeadLine(id, assessmentTraining, this.UserCredit).ToActionResult();
         }
     }
 }

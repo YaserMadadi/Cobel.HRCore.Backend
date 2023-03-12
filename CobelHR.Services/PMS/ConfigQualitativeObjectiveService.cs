@@ -22,12 +22,13 @@ namespace CobelHR.Services.PMS
             return await configQualitativeObjective.SaveAttached(userCredit);
         }
 
-        public DataResult<List<ConfigQualitativeKPI>> CollectionOfConfigQualitativeKPI(int configQualitativeObjective_Id, ConfigQualitativeKPI configQualitativeKPI)
+        public DataResult<List<ConfigQualitativeKPI>> CollectionOfConfigQualitativeKPI(int configQualitativeObjective_Id, ConfigQualitativeKPI configQualitativeKPI, UserCredit userCredit)
         {
             var procedureName = "[PMS].[ConfigQualitativeObjective.CollectionOfConfigQualitativeKPI]";
 
             return this.CollectionOf<ConfigQualitativeKPI>(procedureName,
-                                                    new SqlParameter("@Id",configQualitativeObjective_Id), 
+                                                    new SqlParameter("@Id",configQualitativeObjective_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", configQualitativeKPI.ToJson()));
         }
     }

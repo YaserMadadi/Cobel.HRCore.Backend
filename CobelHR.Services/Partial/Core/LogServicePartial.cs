@@ -16,9 +16,9 @@ namespace CobelHR.Services.Partial.Core
 {
     public class LogServicePartial : LogService, ILogServicePartial
     {
-        public async Task<DataResult<List<Log>>> LoadLog(string entityName, int recordId)
+        public async Task<DataResult<List<Log>>> LoadLog(string entityName, int recordId, UserCredit userCredit)
         {
-            return await this.Seek(new Log() { EntityName = entityName, RecordID = recordId });
+            return await this.Seek(new Log() { EntityName = entityName, RecordID = recordId }, userCredit);
         }
     }
 }

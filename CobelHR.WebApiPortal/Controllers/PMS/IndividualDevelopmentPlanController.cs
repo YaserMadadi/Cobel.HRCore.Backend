@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("IndividualDevelopmentPlan/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("IndividualDevelopmentPlan/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.individualDevelopmentPlanService.RetrieveAll(IndividualDevelopmentPlan.Informer, paginate, this.UserCredit);
+            var result = await this.individualDevelopmentPlanService.RetrieveAll(IndividualDevelopmentPlan.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<IndividualDevelopmentPlan>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("IndividualDevelopmentPlan/Seek")]
         public async Task<IActionResult> Seek([FromBody] IndividualDevelopmentPlan individualDevelopmentPlan)
         {
-            var result = await this.individualDevelopmentPlanService.Seek(individualDevelopmentPlan);
+            var result = await this.individualDevelopmentPlanService.Seek(individualDevelopmentPlan, this.UserCredit);
 
 			return result.ToActionResult<IndividualDevelopmentPlan>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("IndividualDevelopmentPlan/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.individualDevelopmentPlanService.SeekByValue(seekValue, IndividualDevelopmentPlan.Informer);
+            var result = await this.individualDevelopmentPlanService.SeekByValue(seekValue, IndividualDevelopmentPlan.Informer, this.UserCredit);
 
 			return result.ToActionResult<IndividualDevelopmentPlan>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("IndividualDevelopmentPlan/{individualDevelopmentPlan_id:int}/DevelopmentPlanCompetency")]
         public IActionResult CollectionOfDevelopmentPlanCompetency([FromRoute(Name = "individualDevelopmentPlan_id")] int id, DevelopmentPlanCompetency developmentPlanCompetency)
         {
-            return this.individualDevelopmentPlanService.CollectionOfDevelopmentPlanCompetency(id, developmentPlanCompetency).ToActionResult();
+            return this.individualDevelopmentPlanService.CollectionOfDevelopmentPlanCompetency(id, developmentPlanCompetency, this.UserCredit).ToActionResult();
         }
     }
 }

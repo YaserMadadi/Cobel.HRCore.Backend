@@ -23,30 +23,33 @@ namespace CobelHR.Services.Base
             return await year.SaveAttached(userCredit);
         }
 
-        public DataResult<List<TargetSetting>> CollectionOfTargetSetting(int year_Id, TargetSetting targetSetting)
+        public DataResult<List<TargetSetting>> CollectionOfTargetSetting(int year_Id, TargetSetting targetSetting, UserCredit userCredit)
         {
             var procedureName = "[Base].[Year.CollectionOfTargetSetting]";
 
             return this.CollectionOf<TargetSetting>(procedureName,
-                                                    new SqlParameter("@Id",year_Id), 
+                                                    new SqlParameter("@Id",year_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", targetSetting.ToJson()));
         }
 
-		public DataResult<List<Vision>> CollectionOfVision(int year_Id, Vision vision)
+		public DataResult<List<Vision>> CollectionOfVision(int year_Id, Vision vision, UserCredit userCredit)
         {
             var procedureName = "[Base].[Year.CollectionOfVision]";
 
             return this.CollectionOf<Vision>(procedureName,
-                                                    new SqlParameter("@Id",year_Id), 
+                                                    new SqlParameter("@Id",year_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", vision.ToJson()));
         }
 
-		public DataResult<List<YearQuarter>> CollectionOfYearQuarter(int year_Id, YearQuarter yearQuarter)
+		public DataResult<List<YearQuarter>> CollectionOfYearQuarter(int year_Id, YearQuarter yearQuarter, UserCredit userCredit)
         {
             var procedureName = "[Base].[Year.CollectionOfYearQuarter]";
 
             return this.CollectionOf<YearQuarter>(procedureName,
-                                                    new SqlParameter("@Id",year_Id), 
+                                                    new SqlParameter("@Id",year_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", yearQuarter.ToJson()));
         }
     }

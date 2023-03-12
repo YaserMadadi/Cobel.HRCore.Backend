@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("FunctionalAppraise/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("FunctionalAppraise/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.functionalAppraiseService.RetrieveAll(FunctionalAppraise.Informer, paginate, this.UserCredit);
+            var result = await this.functionalAppraiseService.RetrieveAll(FunctionalAppraise.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<FunctionalAppraise>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("FunctionalAppraise/Seek")]
         public async Task<IActionResult> Seek([FromBody] FunctionalAppraise functionalAppraise)
         {
-            var result = await this.functionalAppraiseService.Seek(functionalAppraise);
+            var result = await this.functionalAppraiseService.Seek(functionalAppraise, this.UserCredit);
 
 			return result.ToActionResult<FunctionalAppraise>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("FunctionalAppraise/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.functionalAppraiseService.SeekByValue(seekValue, FunctionalAppraise.Informer);
+            var result = await this.functionalAppraiseService.SeekByValue(seekValue, FunctionalAppraise.Informer, this.UserCredit);
 
 			return result.ToActionResult<FunctionalAppraise>();
         }

@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("MilitaryServiceStatus/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("MilitaryServiceStatus/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.militaryServiceStatusService.RetrieveAll(MilitaryServiceStatus.Informer, paginate, this.UserCredit);
+            var result = await this.militaryServiceStatusService.RetrieveAll(MilitaryServiceStatus.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<MilitaryServiceStatus>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("MilitaryServiceStatus/Seek")]
         public async Task<IActionResult> Seek([FromBody] MilitaryServiceStatus militaryServiceStatus)
         {
-            var result = await this.militaryServiceStatusService.Seek(militaryServiceStatus);
+            var result = await this.militaryServiceStatusService.Seek(militaryServiceStatus, this.UserCredit);
 
 			return result.ToActionResult<MilitaryServiceStatus>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("MilitaryServiceStatus/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.militaryServiceStatusService.SeekByValue(seekValue, MilitaryServiceStatus.Informer);
+            var result = await this.militaryServiceStatusService.SeekByValue(seekValue, MilitaryServiceStatus.Informer, this.UserCredit);
 
 			return result.ToActionResult<MilitaryServiceStatus>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("MilitaryServiceStatus/{militaryServiceStatus_id:int}/MilitaryService")]
         public IActionResult CollectionOfMilitaryService([FromRoute(Name = "militaryServiceStatus_id")] int id, MilitaryService militaryService)
         {
-            return this.militaryServiceStatusService.CollectionOfMilitaryService(id, militaryService).ToActionResult();
+            return this.militaryServiceStatusService.CollectionOfMilitaryService(id, militaryService, this.UserCredit).ToActionResult();
         }
     }
 }

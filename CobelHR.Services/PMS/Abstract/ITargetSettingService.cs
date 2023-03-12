@@ -8,16 +8,16 @@ namespace CobelHR.Services.PMS.Abstract
 {
     public interface ITargetSettingService : IService<TargetSetting>
     {
-        DataResult<List<AppraiseResult>> CollectionOfAppraiseResult(int targetSetting_Id, AppraiseResult appraiseResult);
+        DataResult<List<AppraiseResult>> CollectionOfAppraiseResult(int targetSetting_Id, AppraiseResult appraiseResult, UserCredit userCredit);
 
-		DataResult<List<BehavioralObjective>> CollectionOfBehavioralObjective(int targetSetting_Id, BehavioralObjective behavioralObjective);
+		DataResult<List<BehavioralObjective>> CollectionOfBehavioralObjective(int targetSetting_Id, BehavioralObjective behavioralObjective, UserCredit userCredit);
 
-		DataResult<List<FinalAppraise>> CollectionOfFinalAppraise(int targetSetting_Id, FinalAppraise finalAppraise);
+		DataResult<List<FinalAppraise>> CollectionOfFinalAppraise(int targetSetting_Id, FinalAppraise finalAppraise, UserCredit userCredit);
 
-		DataResult<List<FunctionalObjective>> CollectionOfFunctionalObjective(int targetSetting_Id, FunctionalObjective functionalObjective);
+		DataResult<List<FunctionalObjective>> CollectionOfFunctionalObjective(int targetSetting_Id, FunctionalObjective functionalObjective, UserCredit userCredit);
 
-		DataResult<List<QualitativeObjective>> CollectionOfQualitativeObjective(int targetSetting_Id, QualitativeObjective qualitativeObjective);
+		DataResult<List<QualitativeObjective>> CollectionOfQualitativeObjective(int targetSetting_Id, QualitativeObjective qualitativeObjective, UserCredit userCredit);
 
-		DataResult<List<QuantitativeAppraise>> CollectionOfQuantitativeAppraise(int targetSetting_Id, QuantitativeAppraise quantitativeAppraise);
+		DataResult<List<QuantitativeAppraise>> CollectionOfQuantitativeAppraise(int targetSetting_Id, QuantitativeAppraise quantitativeAppraise, UserCredit userCredit);
     }
 }

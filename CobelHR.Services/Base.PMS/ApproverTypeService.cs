@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base.PMS
             return await approverType.SaveAttached(userCredit);
         }
 
-        public DataResult<List<AppraisalApproverConfig>> CollectionOfAppraisalApproverConfig(int approverType_Id, AppraisalApproverConfig appraisalApproverConfig)
+        public DataResult<List<AppraisalApproverConfig>> CollectionOfAppraisalApproverConfig(int approverType_Id, AppraisalApproverConfig appraisalApproverConfig, UserCredit userCredit)
         {
             var procedureName = "[Base.PMS].[ApproverType.CollectionOfAppraisalApproverConfig]";
 
             return this.CollectionOf<AppraisalApproverConfig>(procedureName,
-                                                    new SqlParameter("@Id",approverType_Id), 
+                                                    new SqlParameter("@Id",approverType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", appraisalApproverConfig.ToJson()));
         }
     }

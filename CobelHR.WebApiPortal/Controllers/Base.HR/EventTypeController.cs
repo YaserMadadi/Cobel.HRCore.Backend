@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         }
 
         [HttpPost]
-        [Route("EventType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("EventType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.eventTypeService.RetrieveAll(EventType.Informer, paginate, this.UserCredit);
+            var result = await this.eventTypeService.RetrieveAll(EventType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<EventType>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("EventType/Seek")]
         public async Task<IActionResult> Seek([FromBody] EventType eventType)
         {
-            var result = await this.eventTypeService.Seek(eventType);
+            var result = await this.eventTypeService.Seek(eventType, this.UserCredit);
 
 			return result.ToActionResult<EventType>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("EventType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.eventTypeService.SeekByValue(seekValue, EventType.Informer);
+            var result = await this.eventTypeService.SeekByValue(seekValue, EventType.Informer, this.UserCredit);
 
 			return result.ToActionResult<EventType>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("EventType/{eventType_id:int}/EmployeeEvent")]
         public IActionResult CollectionOfEmployeeEvent([FromRoute(Name = "eventType_id")] int id, EmployeeEvent employeeEvent)
         {
-            return this.eventTypeService.CollectionOfEmployeeEvent(id, employeeEvent).ToActionResult();
+            return this.eventTypeService.CollectionOfEmployeeEvent(id, employeeEvent, this.UserCredit).ToActionResult();
         }
     }
 }

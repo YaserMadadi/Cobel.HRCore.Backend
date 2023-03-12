@@ -22,12 +22,13 @@ namespace CobelHR.Services.PMS
             return await criticalIncidentType.SaveAttached(userCredit);
         }
 
-        public DataResult<List<CriticalIncident>> CollectionOfCriticalIncident(int criticalIncidentType_Id, CriticalIncident criticalIncident)
+        public DataResult<List<CriticalIncident>> CollectionOfCriticalIncident(int criticalIncidentType_Id, CriticalIncident criticalIncident, UserCredit userCredit)
         {
             var procedureName = "[PMS].[CriticalIncidentType.CollectionOfCriticalIncident]";
 
             return this.CollectionOf<CriticalIncident>(procedureName,
-                                                    new SqlParameter("@Id",criticalIncidentType_Id), 
+                                                    new SqlParameter("@Id",criticalIncidentType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", criticalIncident.ToJson()));
         }
     }

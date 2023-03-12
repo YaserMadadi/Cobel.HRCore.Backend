@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("MilitaryService/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("MilitaryService/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.militaryServiceService.RetrieveAll(MilitaryService.Informer, paginate, this.UserCredit);
+            var result = await this.militaryServiceService.RetrieveAll(MilitaryService.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<MilitaryService>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("MilitaryService/Seek")]
         public async Task<IActionResult> Seek([FromBody] MilitaryService militaryService)
         {
-            var result = await this.militaryServiceService.Seek(militaryService);
+            var result = await this.militaryServiceService.Seek(militaryService, this.UserCredit);
 
 			return result.ToActionResult<MilitaryService>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("MilitaryService/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.militaryServiceService.SeekByValue(seekValue, MilitaryService.Informer);
+            var result = await this.militaryServiceService.SeekByValue(seekValue, MilitaryService.Informer, this.UserCredit);
 
 			return result.ToActionResult<MilitaryService>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("MilitaryService/{militaryService_id:int}/MilitaryServiceExcemption")]
         public IActionResult CollectionOfMilitaryServiceExcemption([FromRoute(Name = "militaryService_id")] int id, MilitaryServiceExcemption militaryServiceExcemption)
         {
-            return this.militaryServiceService.CollectionOfMilitaryServiceExcemption(id, militaryServiceExcemption).ToActionResult();
+            return this.militaryServiceService.CollectionOfMilitaryServiceExcemption(id, militaryServiceExcemption, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfMilitaryServiceInclusive
@@ -109,7 +109,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("MilitaryService/{militaryService_id:int}/MilitaryServiceInclusive")]
         public IActionResult CollectionOfMilitaryServiceInclusive([FromRoute(Name = "militaryService_id")] int id, MilitaryServiceInclusive militaryServiceInclusive)
         {
-            return this.militaryServiceService.CollectionOfMilitaryServiceInclusive(id, militaryServiceInclusive).ToActionResult();
+            return this.militaryServiceService.CollectionOfMilitaryServiceInclusive(id, militaryServiceInclusive, this.UserCredit).ToActionResult();
         }
     }
 }

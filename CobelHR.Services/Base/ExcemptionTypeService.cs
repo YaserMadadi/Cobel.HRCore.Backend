@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base
             return await excemptionType.SaveAttached(userCredit);
         }
 
-        public DataResult<List<MilitaryServiceExcemption>> CollectionOfMilitaryServiceExcemption(int excemptionType_Id, MilitaryServiceExcemption militaryServiceExcemption)
+        public DataResult<List<MilitaryServiceExcemption>> CollectionOfMilitaryServiceExcemption(int excemptionType_Id, MilitaryServiceExcemption militaryServiceExcemption, UserCredit userCredit)
         {
             var procedureName = "[Base].[ExcemptionType.CollectionOfMilitaryServiceExcemption]";
 
             return this.CollectionOf<MilitaryServiceExcemption>(procedureName,
-                                                    new SqlParameter("@Id",excemptionType_Id), 
+                                                    new SqlParameter("@Id",excemptionType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", militaryServiceExcemption.ToJson()));
         }
     }

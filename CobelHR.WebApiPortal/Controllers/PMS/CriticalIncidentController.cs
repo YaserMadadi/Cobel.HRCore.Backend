@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("CriticalIncident/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("CriticalIncident/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.criticalIncidentService.RetrieveAll(CriticalIncident.Informer, paginate, this.UserCredit);
+            var result = await this.criticalIncidentService.RetrieveAll(CriticalIncident.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<CriticalIncident>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CriticalIncident/Seek")]
         public async Task<IActionResult> Seek([FromBody] CriticalIncident criticalIncident)
         {
-            var result = await this.criticalIncidentService.Seek(criticalIncident);
+            var result = await this.criticalIncidentService.Seek(criticalIncident, this.UserCredit);
 
 			return result.ToActionResult<CriticalIncident>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CriticalIncident/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.criticalIncidentService.SeekByValue(seekValue, CriticalIncident.Informer);
+            var result = await this.criticalIncidentService.SeekByValue(seekValue, CriticalIncident.Informer, this.UserCredit);
 
 			return result.ToActionResult<CriticalIncident>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CriticalIncident/{criticalIncident_id:int}/CriticalIncidentRecognition")]
         public IActionResult CollectionOfCriticalIncidentRecognition([FromRoute(Name = "criticalIncident_id")] int id, CriticalIncidentRecognition criticalIncidentRecognition)
         {
-            return this.criticalIncidentService.CollectionOfCriticalIncidentRecognition(id, criticalIncidentRecognition).ToActionResult();
+            return this.criticalIncidentService.CollectionOfCriticalIncidentRecognition(id, criticalIncidentRecognition, this.UserCredit).ToActionResult();
         }
     }
 }

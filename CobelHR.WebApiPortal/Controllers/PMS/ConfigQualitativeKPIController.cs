@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("ConfigQualitativeKPI/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("ConfigQualitativeKPI/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.configQualitativeKPIService.RetrieveAll(ConfigQualitativeKPI.Informer, paginate, this.UserCredit);
+            var result = await this.configQualitativeKPIService.RetrieveAll(ConfigQualitativeKPI.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<ConfigQualitativeKPI>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("ConfigQualitativeKPI/Seek")]
         public async Task<IActionResult> Seek([FromBody] ConfigQualitativeKPI configQualitativeKPI)
         {
-            var result = await this.configQualitativeKPIService.Seek(configQualitativeKPI);
+            var result = await this.configQualitativeKPIService.Seek(configQualitativeKPI, this.UserCredit);
 
 			return result.ToActionResult<ConfigQualitativeKPI>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("ConfigQualitativeKPI/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.configQualitativeKPIService.SeekByValue(seekValue, ConfigQualitativeKPI.Informer);
+            var result = await this.configQualitativeKPIService.SeekByValue(seekValue, ConfigQualitativeKPI.Informer, this.UserCredit);
 
 			return result.ToActionResult<ConfigQualitativeKPI>();
         }

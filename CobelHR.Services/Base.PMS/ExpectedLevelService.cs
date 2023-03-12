@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base.PMS
             return await expectedLevel.SaveAttached(userCredit);
         }
 
-        public DataResult<List<BehavioralObjective>> CollectionOfBehavioralObjective(int expectedLevel_Id, BehavioralObjective behavioralObjective)
+        public DataResult<List<BehavioralObjective>> CollectionOfBehavioralObjective(int expectedLevel_Id, BehavioralObjective behavioralObjective, UserCredit userCredit)
         {
             var procedureName = "[Base.PMS].[ExpectedLevel.CollectionOfBehavioralObjective]";
 
             return this.CollectionOf<BehavioralObjective>(procedureName,
-                                                    new SqlParameter("@Id",expectedLevel_Id), 
+                                                    new SqlParameter("@Id",expectedLevel_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", behavioralObjective.ToJson()));
         }
     }

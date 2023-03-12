@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.LAD
         }
 
         [HttpPost]
-        [Route("Assessor/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Assessor/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.assessorService.RetrieveAll(Assessor.Informer, paginate, this.UserCredit);
+            var result = await this.assessorService.RetrieveAll(Assessor.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Assessor>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Assessor/Seek")]
         public async Task<IActionResult> Seek([FromBody] Assessor assessor)
         {
-            var result = await this.assessorService.Seek(assessor);
+            var result = await this.assessorService.Seek(assessor, this.UserCredit);
 
 			return result.ToActionResult<Assessor>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Assessor/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.assessorService.SeekByValue(seekValue, Assessor.Informer);
+            var result = await this.assessorService.SeekByValue(seekValue, Assessor.Informer, this.UserCredit);
 
 			return result.ToActionResult<Assessor>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Assessor/{assessor_id:int}/Assessment")]
         public IActionResult CollectionOfAssessment([FromRoute(Name = "assessor_id")] int id, Assessment assessment)
         {
-            return this.assessorService.CollectionOfAssessment(id, assessment).ToActionResult();
+            return this.assessorService.CollectionOfAssessment(id, assessment, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfAssessorConnectionLine
@@ -109,7 +109,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Assessor/{assessor_id:int}/AssessorConnectionLine")]
         public IActionResult CollectionOfAssessorConnectionLine([FromRoute(Name = "assessor_id")] int id, AssessorConnectionLine assessorConnectionLine)
         {
-            return this.assessorService.CollectionOfAssessorConnectionLine(id, assessorConnectionLine).ToActionResult();
+            return this.assessorService.CollectionOfAssessorConnectionLine(id, assessorConnectionLine, this.UserCredit).ToActionResult();
         }
     }
 }

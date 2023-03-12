@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("CriticalIncidentType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("CriticalIncidentType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.criticalIncidentTypeService.RetrieveAll(CriticalIncidentType.Informer, paginate, this.UserCredit);
+            var result = await this.criticalIncidentTypeService.RetrieveAll(CriticalIncidentType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<CriticalIncidentType>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CriticalIncidentType/Seek")]
         public async Task<IActionResult> Seek([FromBody] CriticalIncidentType criticalIncidentType)
         {
-            var result = await this.criticalIncidentTypeService.Seek(criticalIncidentType);
+            var result = await this.criticalIncidentTypeService.Seek(criticalIncidentType, this.UserCredit);
 
 			return result.ToActionResult<CriticalIncidentType>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CriticalIncidentType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.criticalIncidentTypeService.SeekByValue(seekValue, CriticalIncidentType.Informer);
+            var result = await this.criticalIncidentTypeService.SeekByValue(seekValue, CriticalIncidentType.Informer, this.UserCredit);
 
 			return result.ToActionResult<CriticalIncidentType>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CriticalIncidentType/{criticalIncidentType_id:int}/CriticalIncident")]
         public IActionResult CollectionOfCriticalIncident([FromRoute(Name = "criticalIncidentType_id")] int id, CriticalIncident criticalIncident)
         {
-            return this.criticalIncidentTypeService.CollectionOfCriticalIncident(id, criticalIncident).ToActionResult();
+            return this.criticalIncidentTypeService.CollectionOfCriticalIncident(id, criticalIncident, this.UserCredit).ToActionResult();
         }
     }
 }

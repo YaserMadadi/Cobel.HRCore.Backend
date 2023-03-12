@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base.PMS
             return await approvementType.SaveAttached(userCredit);
         }
 
-        public DataResult<List<VisionApproved>> CollectionOfVisionApproved(int approvementType_Id, VisionApproved visionApproved)
+        public DataResult<List<VisionApproved>> CollectionOfVisionApproved(int approvementType_Id, VisionApproved visionApproved, UserCredit userCredit)
         {
             var procedureName = "[Base.PMS].[ApprovementType.CollectionOfVisionApproved]";
 
             return this.CollectionOf<VisionApproved>(procedureName,
-                                                    new SqlParameter("@Id",approvementType_Id), 
+                                                    new SqlParameter("@Id",approvementType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", visionApproved.ToJson()));
         }
     }

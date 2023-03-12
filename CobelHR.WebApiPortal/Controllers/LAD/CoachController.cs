@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.LAD
         }
 
         [HttpPost]
-        [Route("Coach/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Coach/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.coachService.RetrieveAll(Coach.Informer, paginate, this.UserCredit);
+            var result = await this.coachService.RetrieveAll(Coach.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Coach>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Coach/Seek")]
         public async Task<IActionResult> Seek([FromBody] Coach coach)
         {
-            var result = await this.coachService.Seek(coach);
+            var result = await this.coachService.Seek(coach, this.UserCredit);
 
 			return result.ToActionResult<Coach>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Coach/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.coachService.SeekByValue(seekValue, Coach.Informer);
+            var result = await this.coachService.SeekByValue(seekValue, Coach.Informer, this.UserCredit);
 
 			return result.ToActionResult<Coach>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Coach/{coach_id:int}/CoachConnectionLine")]
         public IActionResult CollectionOfCoachConnectionLine([FromRoute(Name = "coach_id")] int id, CoachConnectionLine coachConnectionLine)
         {
-            return this.coachService.CollectionOfCoachConnectionLine(id, coachConnectionLine).ToActionResult();
+            return this.coachService.CollectionOfCoachConnectionLine(id, coachConnectionLine, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfCoaching
@@ -109,7 +109,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Coach/{coach_id:int}/Coaching")]
         public IActionResult CollectionOfCoaching([FromRoute(Name = "coach_id")] int id, Coaching coaching)
         {
-            return this.coachService.CollectionOfCoaching(id, coaching).ToActionResult();
+            return this.coachService.CollectionOfCoaching(id, coaching, this.UserCredit).ToActionResult();
         }
     }
 }

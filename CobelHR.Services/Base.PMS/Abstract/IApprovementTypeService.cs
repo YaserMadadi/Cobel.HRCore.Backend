@@ -9,6 +9,6 @@ namespace CobelHR.Services.Base.PMS.Abstract
 {
     public interface IApprovementTypeService : IService<ApprovementType>
     {
-        DataResult<List<VisionApproved>> CollectionOfVisionApproved(int approvementType_Id, VisionApproved visionApproved);
+        DataResult<List<VisionApproved>> CollectionOfVisionApproved(int approvementType_Id, VisionApproved visionApproved, UserCredit userCredit);
     }
 }

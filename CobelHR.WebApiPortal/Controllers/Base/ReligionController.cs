@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("Religion/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Religion/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.religionService.RetrieveAll(Religion.Informer, paginate, this.UserCredit);
+            var result = await this.religionService.RetrieveAll(Religion.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Religion>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Religion/Seek")]
         public async Task<IActionResult> Seek([FromBody] Religion religion)
         {
-            var result = await this.religionService.Seek(religion);
+            var result = await this.religionService.Seek(religion, this.UserCredit);
 
 			return result.ToActionResult<Religion>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Religion/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.religionService.SeekByValue(seekValue, Religion.Informer);
+            var result = await this.religionService.SeekByValue(seekValue, Religion.Informer, this.UserCredit);
 
 			return result.ToActionResult<Religion>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Religion/{religion_id:int}/Person")]
         public IActionResult CollectionOfPerson([FromRoute(Name = "religion_id")] int id, Person person)
         {
-            return this.religionService.CollectionOfPerson(id, person).ToActionResult();
+            return this.religionService.CollectionOfPerson(id, person, this.UserCredit).ToActionResult();
         }
     }
 }

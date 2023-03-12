@@ -8,6 +8,6 @@ namespace CobelHR.Services.Base.Abstract
 {
     public interface IUniversityFieldCategoryService : IService<UniversityFieldCategory>
     {
-        DataResult<List<FieldOfStudy>> CollectionOfFieldOfStudy(int universityFieldCategory_Id, FieldOfStudy fieldOfStudy);
+        DataResult<List<FieldOfStudy>> CollectionOfFieldOfStudy(int universityFieldCategory_Id, FieldOfStudy fieldOfStudy, UserCredit userCredit);
     }
 }

@@ -101,7 +101,7 @@ namespace EssentialCore.Tools.Permission
         {
             var service = new Service<RoleMember>();
 
-            var dataResult = await service.RetrieveAll(RoleMember.Informer, new Pagination.Paginate(int.MaxValue, 1, 1));
+            var dataResult = await service.RetrieveAll(RoleMember.Informer, 1);
 
             if (!dataResult.IsSucceeded)
 
@@ -116,7 +116,7 @@ namespace EssentialCore.Tools.Permission
         {
             var service = new Service<RolePermission>();
 
-            var dataResult = await service.RetrieveAll(RolePermission.Informer, new Pagination.Paginate(int.MaxValue, 1, 1));
+            var dataResult = await service.RetrieveAll(RolePermission.Informer, 1);
 
             if (!dataResult.IsSucceeded)
 

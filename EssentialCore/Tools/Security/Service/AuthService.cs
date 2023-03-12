@@ -59,7 +59,7 @@ namespace EssentialCore.Tools.Security.Service
 
         private async Task<Result.Result> CheckInActiveDirectory(LoginUser loginUser)
         {
-#if DEBUG 
+#if !DEBUG 
 
             return new SuccessfulResult();
 #endif
@@ -102,6 +102,8 @@ namespace EssentialCore.Tools.Security.Service
 
                 return new ErrorResult(-1, "Error in CheckInDomain Exception : " + ex.Message);
             }
+
+            return new ErrorResult(-1, "Error : Not Return any Value");
         }
 
 

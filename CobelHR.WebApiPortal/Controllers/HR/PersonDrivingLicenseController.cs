@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("PersonDrivingLicense/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("PersonDrivingLicense/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.personDrivingLicenseService.RetrieveAll(PersonDrivingLicense.Informer, paginate, this.UserCredit);
+            var result = await this.personDrivingLicenseService.RetrieveAll(PersonDrivingLicense.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<PersonDrivingLicense>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("PersonDrivingLicense/Seek")]
         public async Task<IActionResult> Seek([FromBody] PersonDrivingLicense personDrivingLicense)
         {
-            var result = await this.personDrivingLicenseService.Seek(personDrivingLicense);
+            var result = await this.personDrivingLicenseService.Seek(personDrivingLicense, this.UserCredit);
 
 			return result.ToActionResult<PersonDrivingLicense>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("PersonDrivingLicense/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.personDrivingLicenseService.SeekByValue(seekValue, PersonDrivingLicense.Informer);
+            var result = await this.personDrivingLicenseService.SeekByValue(seekValue, PersonDrivingLicense.Informer, this.UserCredit);
 
 			return result.ToActionResult<PersonDrivingLicense>();
         }

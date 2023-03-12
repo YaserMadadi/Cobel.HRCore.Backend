@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("AbilityLevel/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("AbilityLevel/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.abilityLevelService.RetrieveAll(AbilityLevel.Informer, paginate, this.UserCredit);
+            var result = await this.abilityLevelService.RetrieveAll(AbilityLevel.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<AbilityLevel>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("AbilityLevel/Seek")]
         public async Task<IActionResult> Seek([FromBody] AbilityLevel abilityLevel)
         {
-            var result = await this.abilityLevelService.Seek(abilityLevel);
+            var result = await this.abilityLevelService.Seek(abilityLevel, this.UserCredit);
 
 			return result.ToActionResult<AbilityLevel>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("AbilityLevel/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.abilityLevelService.SeekByValue(seekValue, AbilityLevel.Informer);
+            var result = await this.abilityLevelService.SeekByValue(seekValue, AbilityLevel.Informer, this.UserCredit);
 
 			return result.ToActionResult<AbilityLevel>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("ListeningLevel/{abilityLevel_id:int}/LanguageAbility")]
         public IActionResult CollectionOfLanguageAbility_ListeningLevel([FromRoute(Name = "abilityLevel_id")] int id, LanguageAbility languageAbility)
         {
-            return this.abilityLevelService.CollectionOfLanguageAbility_ListeningLevel(id, languageAbility).ToActionResult();
+            return this.abilityLevelService.CollectionOfLanguageAbility_ListeningLevel(id, languageAbility, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfLanguageAbility_SpeackingLevel
@@ -109,7 +109,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("SpeackingLevel/{abilityLevel_id:int}/LanguageAbility")]
         public IActionResult CollectionOfLanguageAbility_SpeackingLevel([FromRoute(Name = "abilityLevel_id")] int id, LanguageAbility languageAbility)
         {
-            return this.abilityLevelService.CollectionOfLanguageAbility_SpeackingLevel(id, languageAbility).ToActionResult();
+            return this.abilityLevelService.CollectionOfLanguageAbility_SpeackingLevel(id, languageAbility, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfLanguageAbility_ReadingLevel
@@ -117,7 +117,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("ReadingLevel/{abilityLevel_id:int}/LanguageAbility")]
         public IActionResult CollectionOfLanguageAbility_ReadingLevel([FromRoute(Name = "abilityLevel_id")] int id, LanguageAbility languageAbility)
         {
-            return this.abilityLevelService.CollectionOfLanguageAbility_ReadingLevel(id, languageAbility).ToActionResult();
+            return this.abilityLevelService.CollectionOfLanguageAbility_ReadingLevel(id, languageAbility, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfLanguageAbility_WritingLevel
@@ -125,7 +125,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("WritingLevel/{abilityLevel_id:int}/LanguageAbility")]
         public IActionResult CollectionOfLanguageAbility_WritingLevel([FromRoute(Name = "abilityLevel_id")] int id, LanguageAbility languageAbility)
         {
-            return this.abilityLevelService.CollectionOfLanguageAbility_WritingLevel(id, languageAbility).ToActionResult();
+            return this.abilityLevelService.CollectionOfLanguageAbility_WritingLevel(id, languageAbility, this.UserCredit).ToActionResult();
         }
     }
 }

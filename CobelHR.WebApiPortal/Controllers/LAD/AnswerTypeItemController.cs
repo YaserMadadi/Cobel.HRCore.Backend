@@ -29,10 +29,10 @@ namespace CobelHR.ApiServices.Controllers.LAD
         }
 
         [HttpPost]
-        [Route("AnswerTypeItem/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("AnswerTypeItem/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.answerTypeItemService.RetrieveAll(AnswerTypeItem.Informer, paginate, this.UserCredit);
+            var result = await this.answerTypeItemService.RetrieveAll(AnswerTypeItem.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<AnswerTypeItem>();
         }
@@ -72,7 +72,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("AnswerTypeItem/Seek")]
         public async Task<IActionResult> Seek([FromBody] AnswerTypeItem answerTypeItem)
         {
-            var result = await this.answerTypeItemService.Seek(answerTypeItem);
+            var result = await this.answerTypeItemService.Seek(answerTypeItem, this.UserCredit);
 
 			return result.ToActionResult<AnswerTypeItem>();
         }
@@ -81,7 +81,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("AnswerTypeItem/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.answerTypeItemService.SeekByValue(seekValue, AnswerTypeItem.Informer);
+            var result = await this.answerTypeItemService.SeekByValue(seekValue, AnswerTypeItem.Informer, this.UserCredit);
 
 			return result.ToActionResult<AnswerTypeItem>();
         }

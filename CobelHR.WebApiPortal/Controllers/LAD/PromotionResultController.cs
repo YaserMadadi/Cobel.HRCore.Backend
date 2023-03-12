@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.LAD
         }
 
         [HttpPost]
-        [Route("PromotionResult/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("PromotionResult/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.promotionResultService.RetrieveAll(PromotionResult.Informer, paginate, this.UserCredit);
+            var result = await this.promotionResultService.RetrieveAll(PromotionResult.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<PromotionResult>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("PromotionResult/Seek")]
         public async Task<IActionResult> Seek([FromBody] PromotionResult promotionResult)
         {
-            var result = await this.promotionResultService.Seek(promotionResult);
+            var result = await this.promotionResultService.Seek(promotionResult, this.UserCredit);
 
 			return result.ToActionResult<PromotionResult>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("PromotionResult/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.promotionResultService.SeekByValue(seekValue, PromotionResult.Informer);
+            var result = await this.promotionResultService.SeekByValue(seekValue, PromotionResult.Informer, this.UserCredit);
 
 			return result.ToActionResult<PromotionResult>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("PromotionResult/{promotionResult_id:int}/PromotionAssessment")]
         public IActionResult CollectionOfPromotionAssessment([FromRoute(Name = "promotionResult_id")] int id, PromotionAssessment promotionAssessment)
         {
-            return this.promotionResultService.CollectionOfPromotionAssessment(id, promotionAssessment).ToActionResult();
+            return this.promotionResultService.CollectionOfPromotionAssessment(id, promotionAssessment, this.UserCredit).ToActionResult();
         }
     }
 }

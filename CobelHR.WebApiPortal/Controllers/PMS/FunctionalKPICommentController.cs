@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("FunctionalKPIComment/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("FunctionalKPIComment/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.functionalKPICommentService.RetrieveAll(FunctionalKPIComment.Informer, paginate, this.UserCredit);
+            var result = await this.functionalKPICommentService.RetrieveAll(FunctionalKPIComment.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<FunctionalKPIComment>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("FunctionalKPIComment/Seek")]
         public async Task<IActionResult> Seek([FromBody] FunctionalKPIComment functionalKPIComment)
         {
-            var result = await this.functionalKPICommentService.Seek(functionalKPIComment);
+            var result = await this.functionalKPICommentService.Seek(functionalKPIComment, this.UserCredit);
 
 			return result.ToActionResult<FunctionalKPIComment>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("FunctionalKPIComment/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.functionalKPICommentService.SeekByValue(seekValue, FunctionalKPIComment.Informer);
+            var result = await this.functionalKPICommentService.SeekByValue(seekValue, FunctionalKPIComment.Informer, this.UserCredit);
 
 			return result.ToActionResult<FunctionalKPIComment>();
         }

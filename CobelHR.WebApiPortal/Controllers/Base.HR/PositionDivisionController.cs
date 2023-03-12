@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         }
 
         [HttpPost]
-        [Route("PositionDivision/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("PositionDivision/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.positionDivisionService.RetrieveAll(PositionDivision.Informer, paginate, this.UserCredit);
+            var result = await this.positionDivisionService.RetrieveAll(PositionDivision.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<PositionDivision>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("PositionDivision/Seek")]
         public async Task<IActionResult> Seek([FromBody] PositionDivision positionDivision)
         {
-            var result = await this.positionDivisionService.Seek(positionDivision);
+            var result = await this.positionDivisionService.Seek(positionDivision, this.UserCredit);
 
 			return result.ToActionResult<PositionDivision>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("PositionDivision/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.positionDivisionService.SeekByValue(seekValue, PositionDivision.Informer);
+            var result = await this.positionDivisionService.SeekByValue(seekValue, PositionDivision.Informer, this.UserCredit);
 
 			return result.ToActionResult<PositionDivision>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("PositionDivision/{positionDivision_id:int}/Position")]
         public IActionResult CollectionOfPosition([FromRoute(Name = "positionDivision_id")] int id, Position position)
         {
-            return this.positionDivisionService.CollectionOfPosition(id, position).ToActionResult();
+            return this.positionDivisionService.CollectionOfPosition(id, position, this.UserCredit).ToActionResult();
         }
     }
 }

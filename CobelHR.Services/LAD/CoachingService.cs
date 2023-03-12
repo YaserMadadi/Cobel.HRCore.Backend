@@ -22,21 +22,23 @@ namespace CobelHR.Services.LAD
             return await coaching.SaveAttached(userCredit);
         }
 
-        public DataResult<List<AssessmentCoaching>> CollectionOfAssessmentCoaching(int coaching_Id, AssessmentCoaching assessmentCoaching)
+        public DataResult<List<AssessmentCoaching>> CollectionOfAssessmentCoaching(int coaching_Id, AssessmentCoaching assessmentCoaching, UserCredit userCredit)
         {
             var procedureName = "[LAD].[Coaching.CollectionOfAssessmentCoaching]";
 
             return this.CollectionOf<AssessmentCoaching>(procedureName,
-                                                    new SqlParameter("@Id",coaching_Id), 
+                                                    new SqlParameter("@Id",coaching_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", assessmentCoaching.ToJson()));
         }
 
-		public DataResult<List<CoachingSession>> CollectionOfCoachingSession(int coaching_Id, CoachingSession coachingSession)
+		public DataResult<List<CoachingSession>> CollectionOfCoachingSession(int coaching_Id, CoachingSession coachingSession, UserCredit userCredit)
         {
             var procedureName = "[LAD].[Coaching.CollectionOfCoachingSession]";
 
             return this.CollectionOf<CoachingSession>(procedureName,
-                                                    new SqlParameter("@Id",coaching_Id), 
+                                                    new SqlParameter("@Id",coaching_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", coachingSession.ToJson()));
         }
     }

@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.Core
         }
 
         [HttpPost]
-        [Route("Property/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Property/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.propertyService.RetrieveAll(Property.Informer, paginate, this.UserCredit);
+            var result = await this.propertyService.RetrieveAll(Property.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Property>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Property/Seek")]
         public async Task<IActionResult> Seek([FromBody] Property property)
         {
-            var result = await this.propertyService.Seek(property);
+            var result = await this.propertyService.Seek(property, this.UserCredit);
 
 			return result.ToActionResult<Property>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Property/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.propertyService.SeekByValue(seekValue, Property.Informer);
+            var result = await this.propertyService.SeekByValue(seekValue, Property.Informer, this.UserCredit);
 
 			return result.ToActionResult<Property>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Property/{property_id:int}/PropertyOption")]
         public IActionResult CollectionOfPropertyOption([FromRoute(Name = "property_id")] int id, PropertyOption propertyOption)
         {
-            return this.propertyService.CollectionOfPropertyOption(id, propertyOption).ToActionResult();
+            return this.propertyService.CollectionOfPropertyOption(id, propertyOption, this.UserCredit).ToActionResult();
         }
     }
 }

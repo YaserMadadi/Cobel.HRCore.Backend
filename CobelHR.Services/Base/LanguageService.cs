@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base
             return await language.SaveAttached(userCredit);
         }
 
-        public DataResult<List<LanguageAbility>> CollectionOfLanguageAbility(int language_Id, LanguageAbility languageAbility)
+        public DataResult<List<LanguageAbility>> CollectionOfLanguageAbility(int language_Id, LanguageAbility languageAbility, UserCredit userCredit)
         {
             var procedureName = "[Base].[Language.CollectionOfLanguageAbility]";
 
             return this.CollectionOf<LanguageAbility>(procedureName,
-                                                    new SqlParameter("@Id",language_Id), 
+                                                    new SqlParameter("@Id",language_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", languageAbility.ToJson()));
         }
     }

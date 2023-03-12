@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("Country/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Country/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.countryService.RetrieveAll(Country.Informer, paginate, this.UserCredit);
+            var result = await this.countryService.RetrieveAll(Country.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Country>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Country/Seek")]
         public async Task<IActionResult> Seek([FromBody] Country country)
         {
-            var result = await this.countryService.Seek(country);
+            var result = await this.countryService.Seek(country, this.UserCredit);
 
 			return result.ToActionResult<Country>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Country/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.countryService.SeekByValue(seekValue, Country.Informer);
+            var result = await this.countryService.SeekByValue(seekValue, Country.Informer, this.UserCredit);
 
 			return result.ToActionResult<Country>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("Nationality/{country_id:int}/Person")]
         public IActionResult CollectionOfPerson_Nationality([FromRoute(Name = "country_id")] int id, Person person)
         {
-            return this.countryService.CollectionOfPerson_Nationality(id, person).ToActionResult();
+            return this.countryService.CollectionOfPerson_Nationality(id, person, this.UserCredit).ToActionResult();
         }
     }
 }

@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.Core
         }
 
         [HttpPost]
-        [Route("MenuItemType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("MenuItemType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.menuItemTypeService.RetrieveAll(MenuItemType.Informer, paginate, this.UserCredit);
+            var result = await this.menuItemTypeService.RetrieveAll(MenuItemType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<MenuItemType>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("MenuItemType/Seek")]
         public async Task<IActionResult> Seek([FromBody] MenuItemType menuItemType)
         {
-            var result = await this.menuItemTypeService.Seek(menuItemType);
+            var result = await this.menuItemTypeService.Seek(menuItemType, this.UserCredit);
 
 			return result.ToActionResult<MenuItemType>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("MenuItemType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.menuItemTypeService.SeekByValue(seekValue, MenuItemType.Informer);
+            var result = await this.menuItemTypeService.SeekByValue(seekValue, MenuItemType.Informer, this.UserCredit);
 
 			return result.ToActionResult<MenuItemType>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("MenuItemType/{menuItemType_id:int}/MenuItem")]
         public IActionResult CollectionOfMenuItem([FromRoute(Name = "menuItemType_id")] int id, MenuItem menuItem)
         {
-            return this.menuItemTypeService.CollectionOfMenuItem(id, menuItem).ToActionResult();
+            return this.menuItemTypeService.CollectionOfMenuItem(id, menuItem, this.UserCredit).ToActionResult();
         }
     }
 }

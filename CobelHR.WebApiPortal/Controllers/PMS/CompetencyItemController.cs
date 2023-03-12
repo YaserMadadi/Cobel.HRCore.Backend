@@ -21,6 +21,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
 
         private ICompetencyItemService competencyItemService { get; set; }
 
+        #region Common Actions
+
+
+
         [HttpGet]
         [Route("CompetencyItem/RetrieveById/{id:int}")]
         public async Task<IActionResult> RetrieveById(int id)
@@ -31,10 +35,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("CompetencyItem/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("CompetencyItem/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.competencyItemService.RetrieveAll(CompetencyItem.Informer, paginate, this.UserCredit);
+            var result = await this.competencyItemService.RetrieveAll(CompetencyItem.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<CompetencyItem>();
         }
@@ -74,7 +78,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CompetencyItem/Seek")]
         public async Task<IActionResult> Seek([FromBody] CompetencyItem competencyItem)
         {
-            var result = await this.competencyItemService.Seek(competencyItem);
+            var result = await this.competencyItemService.Seek(competencyItem, this.UserCredit);
 
 			return result.ToActionResult<CompetencyItem>();
         }
@@ -83,7 +87,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CompetencyItem/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.competencyItemService.SeekByValue(seekValue, CompetencyItem.Informer);
+            var result = await this.competencyItemService.SeekByValue(seekValue, CompetencyItem.Informer, this.UserCredit);
 
 			return result.ToActionResult<CompetencyItem>();
         }
@@ -97,12 +101,16 @@ namespace CobelHR.ApiServices.Controllers.PMS
 			return result.ToActionResult();
         }
 
+        #endregion
+
+        #region       Collection Methods
+
         // CollectionOfAssessmentScore
         [HttpPost]
         [Route("CompetencyItem/{competencyItem_id:int}/AssessmentScore")]
         public IActionResult CollectionOfAssessmentScore([FromRoute(Name = "competencyItem_id")] int id, AssessmentScore assessmentScore)
         {
-            return this.competencyItemService.CollectionOfAssessmentScore(id, assessmentScore).ToActionResult();
+            return this.competencyItemService.CollectionOfAssessmentScore(id, assessmentScore, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfBehavioralObjective
@@ -110,7 +118,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CompetencyItem/{competencyItem_id:int}/BehavioralObjective")]
         public IActionResult CollectionOfBehavioralObjective([FromRoute(Name = "competencyItem_id")] int id, BehavioralObjective behavioralObjective)
         {
-            return this.competencyItemService.CollectionOfBehavioralObjective(id, behavioralObjective).ToActionResult();
+            return this.competencyItemService.CollectionOfBehavioralObjective(id, behavioralObjective, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfCompetencyItemKPI
@@ -118,7 +126,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CompetencyItem/{competencyItem_id:int}/CompetencyItemKPI")]
         public IActionResult CollectionOfCompetencyItemKPI([FromRoute(Name = "competencyItem_id")] int id, CompetencyItemKPI competencyItemKPI)
         {
-            return this.competencyItemService.CollectionOfCompetencyItemKPI(id, competencyItemKPI).ToActionResult();
+            return this.competencyItemService.CollectionOfCompetencyItemKPI(id, competencyItemKPI, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfDevelopmentPlanCompetency
@@ -126,7 +134,9 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CompetencyItem/{competencyItem_id:int}/DevelopmentPlanCompetency")]
         public IActionResult CollectionOfDevelopmentPlanCompetency([FromRoute(Name = "competencyItem_id")] int id, DevelopmentPlanCompetency developmentPlanCompetency)
         {
-            return this.competencyItemService.CollectionOfDevelopmentPlanCompetency(id, developmentPlanCompetency).ToActionResult();
+            return this.competencyItemService.CollectionOfDevelopmentPlanCompetency(id, developmentPlanCompetency, this.UserCredit).ToActionResult();
         }
+
+        #endregion
     }
 }

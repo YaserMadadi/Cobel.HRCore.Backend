@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         }
 
         [HttpPost]
-        [Route("RelativeType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("RelativeType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.relativeTypeService.RetrieveAll(RelativeType.Informer, paginate, this.UserCredit);
+            var result = await this.relativeTypeService.RetrieveAll(RelativeType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<RelativeType>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("RelativeType/Seek")]
         public async Task<IActionResult> Seek([FromBody] RelativeType relativeType)
         {
-            var result = await this.relativeTypeService.Seek(relativeType);
+            var result = await this.relativeTypeService.Seek(relativeType, this.UserCredit);
 
 			return result.ToActionResult<RelativeType>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("RelativeType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.relativeTypeService.SeekByValue(seekValue, RelativeType.Informer);
+            var result = await this.relativeTypeService.SeekByValue(seekValue, RelativeType.Informer, this.UserCredit);
 
 			return result.ToActionResult<RelativeType>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("RelationType/{relativeType_id:int}/Relative")]
         public IActionResult CollectionOfRelative_RelationType([FromRoute(Name = "relativeType_id")] int id, Relative relative)
         {
-            return this.relativeTypeService.CollectionOfRelative_RelationType(id, relative).ToActionResult();
+            return this.relativeTypeService.CollectionOfRelative_RelationType(id, relative, this.UserCredit).ToActionResult();
         }
     }
 }

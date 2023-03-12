@@ -22,12 +22,13 @@ namespace CobelHR.Services.Core
             return await badgeType.SaveAttached(userCredit);
         }
 
-        public DataResult<List<Badge>> CollectionOfBadge(int badgeType_Id, Badge badge)
+        public DataResult<List<Badge>> CollectionOfBadge(int badgeType_Id, Badge badge, UserCredit userCredit)
         {
             var procedureName = "[Core].[BadgeType.CollectionOfBadge]";
 
             return this.CollectionOf<Badge>(procedureName,
-                                                    new SqlParameter("@Id",badgeType_Id), 
+                                                    new SqlParameter("@Id",badgeType_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", badge.ToJson()));
         }
     }

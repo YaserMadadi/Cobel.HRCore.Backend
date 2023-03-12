@@ -32,10 +32,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("Position/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Position/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.positionService.RetrieveAll(Position.Informer, paginate, this.UserCredit);
+            var result = await this.positionService.RetrieveAll(Position.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Position>();
         }
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Position/Seek")]
         public async Task<IActionResult> Seek([FromBody] Position position)
         {
-            var result = await this.positionService.Seek(position);
+            var result = await this.positionService.Seek(position, this.UserCredit);
 
 			return result.ToActionResult<Position>();
         }
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Position/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.positionService.SeekByValue(seekValue, Position.Informer);
+            var result = await this.positionService.SeekByValue(seekValue, Position.Informer, this.UserCredit);
 
 			return result.ToActionResult<Position>();
         }
@@ -103,7 +103,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         //[Route("Position/{position_id:int}/ConfigTargetSetting")]
         //public IActionResult CollectionOfConfigTargetSetting([FromRoute(Name = "position_id")] int id, ConfigTargetSetting configTargetSetting)
         //{
-        //    return this.positionService.CollectionOfConfigTargetSetting(id, configTargetSetting).ToActionResult();
+        //    return this.positionService.CollectionOfConfigTargetSetting(id, configTargetSetting, this.UserCredit).ToActionResult();
         //}
 
 		// CollectionOfPosition_Parent
@@ -111,7 +111,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Parent/{position_id:int}/Position")]
         public IActionResult CollectionOfPosition_Parent([FromRoute(Name = "position_id")] int id, Position position)
         {
-            return this.positionService.CollectionOfPosition_Parent(id, position).ToActionResult();
+            return this.positionService.CollectionOfPosition_Parent(id, position, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfPositionAssignment
@@ -119,7 +119,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Position/{position_id:int}/PositionAssignment")]
         public IActionResult CollectionOfPositionAssignment([FromRoute(Name = "position_id")] int id, PositionAssignment positionAssignment)
         {
-            return this.positionService.CollectionOfPositionAssignment(id, positionAssignment).ToActionResult();
+            return this.positionService.CollectionOfPositionAssignment(id, positionAssignment, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfPromotionAssessment_ProposedPosition
@@ -127,7 +127,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         //[Route("ProposedPosition/{position_id:int}/PromotionAssessment")]
         //public IActionResult CollectionOfPromotionAssessment_ProposedPosition([FromRoute(Name = "position_id")] int id, PromotionAssessment promotionAssessment)
         //{
-        //    return this.positionService.CollectionOfPromotionAssessment_ProposedPosition(id, promotionAssessment).ToActionResult();
+        //    return this.positionService.CollectionOfPromotionAssessment_ProposedPosition(id, promotionAssessment, this.UserCredit).ToActionResult();
         //}
 
 		// CollectionOfPromotionAssessment_CurrentPosition
@@ -135,7 +135,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         //[Route("CurrentPosition/{position_id:int}/PromotionAssessment")]
         //public IActionResult CollectionOfPromotionAssessment_CurrentPosition([FromRoute(Name = "position_id")] int id, PromotionAssessment promotionAssessment)
         //{
-        //    return this.positionService.CollectionOfPromotionAssessment_CurrentPosition(id, promotionAssessment).ToActionResult();
+        //    return this.positionService.CollectionOfPromotionAssessment_CurrentPosition(id, promotionAssessment, this.UserCredit).ToActionResult();
         //}
 
 		// CollectionOfRotationAssessment_ProposedPosition
@@ -143,7 +143,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         //[Route("ProposedPosition/{position_id:int}/RotationAssessment")]
         //public IActionResult CollectionOfRotationAssessment_ProposedPosition([FromRoute(Name = "position_id")] int id, RotationAssessment rotationAssessment)
         //{
-        //    return this.positionService.CollectionOfRotationAssessment_ProposedPosition(id, rotationAssessment).ToActionResult();
+        //    return this.positionService.CollectionOfRotationAssessment_ProposedPosition(id, rotationAssessment, this.UserCredit).ToActionResult();
         //}
 
 		// CollectionOfRotationAssessment_CurrentPosition
@@ -151,7 +151,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         //[Route("CurrentPosition/{position_id:int}/RotationAssessment")]
         //public IActionResult CollectionOfRotationAssessment_CurrentPosition([FromRoute(Name = "position_id")] int id, RotationAssessment rotationAssessment)
         //{
-        //    return this.positionService.CollectionOfRotationAssessment_CurrentPosition(id, rotationAssessment).ToActionResult();
+        //    return this.positionService.CollectionOfRotationAssessment_CurrentPosition(id, rotationAssessment, this.UserCredit).ToActionResult();
         //}
 
 		// CollectionOfTargetSetting
@@ -159,7 +159,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Position/{position_id:int}/TargetSetting")]
         public IActionResult CollectionOfTargetSetting([FromRoute(Name = "position_id")] int id, TargetSetting targetSetting)
         {
-            return this.positionService.CollectionOfTargetSetting(id, targetSetting).ToActionResult();
+            return this.positionService.CollectionOfTargetSetting(id, targetSetting, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfVision
@@ -167,7 +167,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("Position/{position_id:int}/Vision")]
         public IActionResult CollectionOfVision([FromRoute(Name = "position_id")] int id, Vision vision)
         {
-            return this.positionService.CollectionOfVision(id, vision).ToActionResult();
+            return this.positionService.CollectionOfVision(id, vision, this.UserCredit).ToActionResult();
         }
     }
 }

@@ -9,6 +9,6 @@ namespace CobelHR.Services.Base.Abstract
 {
     public interface IHealthStatusService : IService<HealthStatus>
     {
-        DataResult<List<Person>> CollectionOfPerson(int healthStatus_Id, Person person);
+        DataResult<List<Person>> CollectionOfPerson(int healthStatus_Id, Person person, UserCredit userCredit);
     }
 }

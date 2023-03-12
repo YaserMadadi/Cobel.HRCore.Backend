@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("FunctionalObjectiveComment/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("FunctionalObjectiveComment/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.functionalObjectiveCommentService.RetrieveAll(FunctionalObjectiveComment.Informer, paginate, this.UserCredit);
+            var result = await this.functionalObjectiveCommentService.RetrieveAll(FunctionalObjectiveComment.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<FunctionalObjectiveComment>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("FunctionalObjectiveComment/Seek")]
         public async Task<IActionResult> Seek([FromBody] FunctionalObjectiveComment functionalObjectiveComment)
         {
-            var result = await this.functionalObjectiveCommentService.Seek(functionalObjectiveComment);
+            var result = await this.functionalObjectiveCommentService.Seek(functionalObjectiveComment, this.UserCredit);
 
 			return result.ToActionResult<FunctionalObjectiveComment>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("FunctionalObjectiveComment/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.functionalObjectiveCommentService.SeekByValue(seekValue, FunctionalObjectiveComment.Informer);
+            var result = await this.functionalObjectiveCommentService.SeekByValue(seekValue, FunctionalObjectiveComment.Informer, this.UserCredit);
 
 			return result.ToActionResult<FunctionalObjectiveComment>();
         }

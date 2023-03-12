@@ -28,30 +28,33 @@ namespace CobelHR.Services.Base
             return await city.SaveAttached(userCredit);
         }
 
-        public DataResult<List<Habitancy>> CollectionOfHabitancy(int city_Id, Habitancy habitancy)
+        public DataResult<List<Habitancy>> CollectionOfHabitancy(int city_Id, Habitancy habitancy, UserCredit userCredit)
         {
             var procedureName = "[Base].[City.CollectionOfHabitancy]";
 
             return this.CollectionOf<Habitancy>(procedureName,
-                                                    new SqlParameter("@Id",city_Id), 
+                                                    new SqlParameter("@Id",city_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", habitancy.ToJson()));
         }
 
-		public DataResult<List<Person>> CollectionOfPerson_BirthCity(int city_Id, Person person)
+		public DataResult<List<Person>> CollectionOfPerson_BirthCity(int city_Id, Person person, UserCredit userCredit)
         {
             var procedureName = "[Base].[City(BirthCity).CollectionOfPerson]";
 
             return this.CollectionOf<Person>(procedureName,
-                                                    new SqlParameter("@Id",city_Id), 
+                                                    new SqlParameter("@Id",city_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", person.ToJson()));
         }
 
-		public DataResult<List<University>> CollectionOfUniversity(int city_Id, University university)
+		public DataResult<List<University>> CollectionOfUniversity(int city_Id, University university, UserCredit userCredit)
         {
             var procedureName = "[Base].[City.CollectionOfUniversity]";
 
             return this.CollectionOf<University>(procedureName,
-                                                    new SqlParameter("@Id",city_Id), 
+                                                    new SqlParameter("@Id",city_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", university.ToJson()));
         }
     }

@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("UniversityTerminate/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("UniversityTerminate/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.universityTerminateService.RetrieveAll(UniversityTerminate.Informer, paginate, this.UserCredit);
+            var result = await this.universityTerminateService.RetrieveAll(UniversityTerminate.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<UniversityTerminate>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("UniversityTerminate/Seek")]
         public async Task<IActionResult> Seek([FromBody] UniversityTerminate universityTerminate)
         {
-            var result = await this.universityTerminateService.Seek(universityTerminate);
+            var result = await this.universityTerminateService.Seek(universityTerminate, this.UserCredit);
 
 			return result.ToActionResult<UniversityTerminate>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("UniversityTerminate/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.universityTerminateService.SeekByValue(seekValue, UniversityTerminate.Informer);
+            var result = await this.universityTerminateService.SeekByValue(seekValue, UniversityTerminate.Informer, this.UserCredit);
 
 			return result.ToActionResult<UniversityTerminate>();
         }

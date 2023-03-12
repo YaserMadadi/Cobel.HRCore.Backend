@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.LAD
         }
 
         [HttpPost]
-        [Route("AnswerType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("AnswerType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.answerTypeService.RetrieveAll(AnswerType.Informer, paginate, this.UserCredit);
+            var result = await this.answerTypeService.RetrieveAll(AnswerType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<AnswerType>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("AnswerType/Seek")]
         public async Task<IActionResult> Seek([FromBody] AnswerType answerType)
         {
-            var result = await this.answerTypeService.Seek(answerType);
+            var result = await this.answerTypeService.Seek(answerType, this.UserCredit);
 
 			return result.ToActionResult<AnswerType>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("AnswerType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.answerTypeService.SeekByValue(seekValue, AnswerType.Informer);
+            var result = await this.answerTypeService.SeekByValue(seekValue, AnswerType.Informer, this.UserCredit);
 
 			return result.ToActionResult<AnswerType>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("AnswerType/{answerType_id:int}/AnswerTypeItem")]
         public IActionResult CollectionOfAnswerTypeItem([FromRoute(Name = "answerType_id")] int id, AnswerTypeItem answerTypeItem)
         {
-            return this.answerTypeService.CollectionOfAnswerTypeItem(id, answerTypeItem).ToActionResult();
+            return this.answerTypeService.CollectionOfAnswerTypeItem(id, answerTypeItem, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfQuestionaryItem
@@ -109,7 +109,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("AnswerType/{answerType_id:int}/QuestionaryItem")]
         public IActionResult CollectionOfQuestionaryItem([FromRoute(Name = "answerType_id")] int id, QuestionaryItem questionaryItem)
         {
-            return this.answerTypeService.CollectionOfQuestionaryItem(id, questionaryItem).ToActionResult();
+            return this.answerTypeService.CollectionOfQuestionaryItem(id, questionaryItem, this.UserCredit).ToActionResult();
         }
     }
 }

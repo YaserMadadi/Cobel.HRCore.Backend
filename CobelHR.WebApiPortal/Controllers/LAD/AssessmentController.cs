@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.LAD
         }
 
         [HttpPost]
-        [Route("Assessment/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Assessment/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.assessmentService.RetrieveAll(Assessment.Informer, paginate, this.UserCredit);
+            var result = await this.assessmentService.RetrieveAll(Assessment.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Assessment>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Assessment/Seek")]
         public async Task<IActionResult> Seek([FromBody] Assessment assessment)
         {
-            var result = await this.assessmentService.Seek(assessment);
+            var result = await this.assessmentService.Seek(assessment, this.UserCredit);
 
 			return result.ToActionResult<Assessment>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Assessment/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.assessmentService.SeekByValue(seekValue, Assessment.Informer);
+            var result = await this.assessmentService.SeekByValue(seekValue, Assessment.Informer, this.UserCredit);
 
 			return result.ToActionResult<Assessment>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Assessment/{assessment_id:int}/AssessmentCoaching")]
         public IActionResult CollectionOfAssessmentCoaching([FromRoute(Name = "assessment_id")] int id, AssessmentCoaching assessmentCoaching)
         {
-            return this.assessmentService.CollectionOfAssessmentCoaching(id, assessmentCoaching).ToActionResult();
+            return this.assessmentService.CollectionOfAssessmentCoaching(id, assessmentCoaching, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfAssessmentScore
@@ -109,7 +109,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Assessment/{assessment_id:int}/AssessmentScore")]
         public IActionResult CollectionOfAssessmentScore([FromRoute(Name = "assessment_id")] int id, AssessmentScore assessmentScore)
         {
-            return this.assessmentService.CollectionOfAssessmentScore(id, assessmentScore).ToActionResult();
+            return this.assessmentService.CollectionOfAssessmentScore(id, assessmentScore, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfAssessmentTraining
@@ -117,7 +117,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Assessment/{assessment_id:int}/AssessmentTraining")]
         public IActionResult CollectionOfAssessmentTraining([FromRoute(Name = "assessment_id")] int id, AssessmentTraining assessmentTraining)
         {
-            return this.assessmentService.CollectionOfAssessmentTraining(id, assessmentTraining).ToActionResult();
+            return this.assessmentService.CollectionOfAssessmentTraining(id, assessmentTraining, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfCoachingQuestionary
@@ -125,7 +125,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Assessment/{assessment_id:int}/CoachingQuestionary")]
         public IActionResult CollectionOfCoachingQuestionary([FromRoute(Name = "assessment_id")] int id, CoachingQuestionary coachingQuestionary)
         {
-            return this.assessmentService.CollectionOfCoachingQuestionary(id, coachingQuestionary).ToActionResult();
+            return this.assessmentService.CollectionOfCoachingQuestionary(id, coachingQuestionary, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfConclusion
@@ -133,7 +133,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Assessment/{assessment_id:int}/Conclusion")]
         public IActionResult CollectionOfConclusion([FromRoute(Name = "assessment_id")] int id, Conclusion conclusion)
         {
-            return this.assessmentService.CollectionOfConclusion(id, conclusion).ToActionResult();
+            return this.assessmentService.CollectionOfConclusion(id, conclusion, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfDevelopmentGoal
@@ -141,7 +141,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Assessment/{assessment_id:int}/DevelopmentGoal")]
         public IActionResult CollectionOfDevelopmentGoal([FromRoute(Name = "assessment_id")] int id, DevelopmentGoal developmentGoal)
         {
-            return this.assessmentService.CollectionOfDevelopmentGoal(id, developmentGoal).ToActionResult();
+            return this.assessmentService.CollectionOfDevelopmentGoal(id, developmentGoal, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfFeedbackSession
@@ -149,7 +149,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Assessment/{assessment_id:int}/FeedbackSession")]
         public IActionResult CollectionOfFeedbackSession([FromRoute(Name = "assessment_id")] int id, FeedbackSession feedbackSession)
         {
-            return this.assessmentService.CollectionOfFeedbackSession(id, feedbackSession).ToActionResult();
+            return this.assessmentService.CollectionOfFeedbackSession(id, feedbackSession, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfPromotionAssessment
@@ -157,7 +157,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Assessment/{assessment_id:int}/PromotionAssessment")]
         public IActionResult CollectionOfPromotionAssessment([FromRoute(Name = "assessment_id")] int id, PromotionAssessment promotionAssessment)
         {
-            return this.assessmentService.CollectionOfPromotionAssessment(id, promotionAssessment).ToActionResult();
+            return this.assessmentService.CollectionOfPromotionAssessment(id, promotionAssessment, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfRotationAssessment
@@ -165,7 +165,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("Assessment/{assessment_id:int}/RotationAssessment")]
         public IActionResult CollectionOfRotationAssessment([FromRoute(Name = "assessment_id")] int id, RotationAssessment rotationAssessment)
         {
-            return this.assessmentService.CollectionOfRotationAssessment(id, rotationAssessment).ToActionResult();
+            return this.assessmentService.CollectionOfRotationAssessment(id, rotationAssessment, this.UserCredit).ToActionResult();
         }
     }
 }

@@ -22,12 +22,13 @@ namespace CobelHR.Services.HR
             return await positionAssignment.SaveAttached(userCredit);
         }
 
-        public DataResult<List<PositionAssignmentRepeal>> CollectionOfPositionAssignmentRepeal(int positionAssignment_Id, PositionAssignmentRepeal positionAssignmentRepeal)
+        public DataResult<List<PositionAssignmentRepeal>> CollectionOfPositionAssignmentRepeal(int positionAssignment_Id, PositionAssignmentRepeal positionAssignmentRepeal, UserCredit userCredit)
         {
             var procedureName = "[HR].[PositionAssignment.CollectionOfPositionAssignmentRepeal]";
 
             return this.CollectionOf<PositionAssignmentRepeal>(procedureName,
-                                                    new SqlParameter("@Id",positionAssignment_Id), 
+                                                    new SqlParameter("@Id",positionAssignment_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", positionAssignmentRepeal.ToJson()));
         }
     }

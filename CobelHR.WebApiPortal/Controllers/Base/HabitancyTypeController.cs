@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("HabitancyType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("HabitancyType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.habitancyTypeService.RetrieveAll(HabitancyType.Informer, paginate, this.UserCredit);
+            var result = await this.habitancyTypeService.RetrieveAll(HabitancyType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<HabitancyType>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("HabitancyType/Seek")]
         public async Task<IActionResult> Seek([FromBody] HabitancyType habitancyType)
         {
-            var result = await this.habitancyTypeService.Seek(habitancyType);
+            var result = await this.habitancyTypeService.Seek(habitancyType, this.UserCredit);
 
 			return result.ToActionResult<HabitancyType>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("HabitancyType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.habitancyTypeService.SeekByValue(seekValue, HabitancyType.Informer);
+            var result = await this.habitancyTypeService.SeekByValue(seekValue, HabitancyType.Informer, this.UserCredit);
 
 			return result.ToActionResult<HabitancyType>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("HabitancyType/{habitancyType_id:int}/Habitancy")]
         public IActionResult CollectionOfHabitancy([FromRoute(Name = "habitancyType_id")] int id, Habitancy habitancy)
         {
-            return this.habitancyTypeService.CollectionOfHabitancy(id, habitancy).ToActionResult();
+            return this.habitancyTypeService.CollectionOfHabitancy(id, habitancy, this.UserCredit).ToActionResult();
         }
     }
 }

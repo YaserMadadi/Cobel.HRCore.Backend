@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         }
 
         [HttpPost]
-        [Route("MaritalStatus/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("MaritalStatus/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.maritalStatusService.RetrieveAll(MaritalStatus.Informer, paginate, this.UserCredit);
+            var result = await this.maritalStatusService.RetrieveAll(MaritalStatus.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<MaritalStatus>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("MaritalStatus/Seek")]
         public async Task<IActionResult> Seek([FromBody] MaritalStatus maritalStatus)
         {
-            var result = await this.maritalStatusService.Seek(maritalStatus);
+            var result = await this.maritalStatusService.Seek(maritalStatus, this.UserCredit);
 
 			return result.ToActionResult<MaritalStatus>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("MaritalStatus/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.maritalStatusService.SeekByValue(seekValue, MaritalStatus.Informer);
+            var result = await this.maritalStatusService.SeekByValue(seekValue, MaritalStatus.Informer, this.UserCredit);
 
 			return result.ToActionResult<MaritalStatus>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("MaritalStatus/{maritalStatus_id:int}/Person")]
         public IActionResult CollectionOfPerson([FromRoute(Name = "maritalStatus_id")] int id, Person person)
         {
-            return this.maritalStatusService.CollectionOfPerson(id, person).ToActionResult();
+            return this.maritalStatusService.CollectionOfPerson(id, person, this.UserCredit).ToActionResult();
         }
     }
 }

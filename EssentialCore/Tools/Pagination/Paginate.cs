@@ -34,10 +34,10 @@ namespace EssentialCore.Tools.Pagination
 
         public int CurrentPage { get; set; }
 
-        [JsonIgnore]
+        //[JsonIgnore]
         public int PageCount { get; set; }
 
-        [JsonIgnore]
+        //[JsonIgnore]
         public int RecordPerPage { get; set; }
 
     }

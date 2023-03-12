@@ -8,22 +8,22 @@ namespace CobelHR.Services.LAD.Abstract
 {
     public interface IAssessmentService : IService<Assessment>
     {
-        DataResult<List<AssessmentCoaching>> CollectionOfAssessmentCoaching(int assessment_Id, AssessmentCoaching assessmentCoaching);
+        DataResult<List<AssessmentCoaching>> CollectionOfAssessmentCoaching(int assessment_Id, AssessmentCoaching assessmentCoaching, UserCredit userCredit);
 
-		DataResult<List<AssessmentScore>> CollectionOfAssessmentScore(int assessment_Id, AssessmentScore assessmentScore);
+		DataResult<List<AssessmentScore>> CollectionOfAssessmentScore(int assessment_Id, AssessmentScore assessmentScore, UserCredit userCredit);
 
-		DataResult<List<AssessmentTraining>> CollectionOfAssessmentTraining(int assessment_Id, AssessmentTraining assessmentTraining);
+		DataResult<List<AssessmentTraining>> CollectionOfAssessmentTraining(int assessment_Id, AssessmentTraining assessmentTraining, UserCredit userCredit);
 
-		DataResult<List<CoachingQuestionary>> CollectionOfCoachingQuestionary(int assessment_Id, CoachingQuestionary coachingQuestionary);
+		DataResult<List<CoachingQuestionary>> CollectionOfCoachingQuestionary(int assessment_Id, CoachingQuestionary coachingQuestionary, UserCredit userCredit);
 
-		DataResult<List<Conclusion>> CollectionOfConclusion(int assessment_Id, Conclusion conclusion);
+		DataResult<List<Conclusion>> CollectionOfConclusion(int assessment_Id, Conclusion conclusion, UserCredit userCredit);
 
-		DataResult<List<DevelopmentGoal>> CollectionOfDevelopmentGoal(int assessment_Id, DevelopmentGoal developmentGoal);
+		DataResult<List<DevelopmentGoal>> CollectionOfDevelopmentGoal(int assessment_Id, DevelopmentGoal developmentGoal, UserCredit userCredit);
 
-		DataResult<List<FeedbackSession>> CollectionOfFeedbackSession(int assessment_Id, FeedbackSession feedbackSession);
+		DataResult<List<FeedbackSession>> CollectionOfFeedbackSession(int assessment_Id, FeedbackSession feedbackSession, UserCredit userCredit);
 
-		DataResult<List<PromotionAssessment>> CollectionOfPromotionAssessment(int assessment_Id, PromotionAssessment promotionAssessment);
+		DataResult<List<PromotionAssessment>> CollectionOfPromotionAssessment(int assessment_Id, PromotionAssessment promotionAssessment, UserCredit userCredit);
 
-		DataResult<List<RotationAssessment>> CollectionOfRotationAssessment(int assessment_Id, RotationAssessment rotationAssessment);
+		DataResult<List<RotationAssessment>> CollectionOfRotationAssessment(int assessment_Id, RotationAssessment rotationAssessment, UserCredit userCredit);
     }
 }

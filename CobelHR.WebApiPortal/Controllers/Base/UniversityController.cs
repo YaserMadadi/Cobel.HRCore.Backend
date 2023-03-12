@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("University/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("University/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.universityService.RetrieveAll(University.Informer, paginate, this.UserCredit);
+            var result = await this.universityService.RetrieveAll(University.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<University>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("University/Seek")]
         public async Task<IActionResult> Seek([FromBody] University university)
         {
-            var result = await this.universityService.Seek(university);
+            var result = await this.universityService.Seek(university, this.UserCredit);
 
 			return result.ToActionResult<University>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("University/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.universityService.SeekByValue(seekValue, University.Informer);
+            var result = await this.universityService.SeekByValue(seekValue, University.Informer, this.UserCredit);
 
 			return result.ToActionResult<University>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("University/{university_id:int}/UniversityHistory")]
         public IActionResult CollectionOfUniversityHistory([FromRoute(Name = "university_id")] int id, UniversityHistory universityHistory)
         {
-            return this.universityService.CollectionOfUniversityHistory(id, universityHistory).ToActionResult();
+            return this.universityService.CollectionOfUniversityHistory(id, universityHistory, this.UserCredit).ToActionResult();
         }
     }
 }

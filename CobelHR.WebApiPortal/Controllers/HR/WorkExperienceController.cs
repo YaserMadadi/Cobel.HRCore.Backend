@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.HR
         }
 
         [HttpPost]
-        [Route("WorkExperience/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("WorkExperience/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.workExperienceService.RetrieveAll(WorkExperience.Informer, paginate, this.UserCredit);
+            var result = await this.workExperienceService.RetrieveAll(WorkExperience.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<WorkExperience>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("WorkExperience/Seek")]
         public async Task<IActionResult> Seek([FromBody] WorkExperience workExperience)
         {
-            var result = await this.workExperienceService.Seek(workExperience);
+            var result = await this.workExperienceService.Seek(workExperience, this.UserCredit);
 
 			return result.ToActionResult<WorkExperience>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         [Route("WorkExperience/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.workExperienceService.SeekByValue(seekValue, WorkExperience.Informer);
+            var result = await this.workExperienceService.SeekByValue(seekValue, WorkExperience.Informer, this.UserCredit);
 
 			return result.ToActionResult<WorkExperience>();
         }

@@ -23,12 +23,13 @@ namespace CobelHR.Services.Base.PMS
             return await measurementUnit.SaveAttached(userCredit);
         }
 
-        public DataResult<List<FunctionalKPI>> CollectionOfFunctionalKPI(int measurementUnit_Id, FunctionalKPI functionalKPI)
+        public DataResult<List<FunctionalKPI>> CollectionOfFunctionalKPI(int measurementUnit_Id, FunctionalKPI functionalKPI, UserCredit userCredit)
         {
             var procedureName = "[Base.PMS].[MeasurementUnit.CollectionOfFunctionalKPI]";
 
             return this.CollectionOf<FunctionalKPI>(procedureName,
-                                                    new SqlParameter("@Id",measurementUnit_Id), 
+                                                    new SqlParameter("@Id",measurementUnit_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", functionalKPI.ToJson()));
         }
     }

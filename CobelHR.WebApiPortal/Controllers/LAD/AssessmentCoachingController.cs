@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.LAD
         }
 
         [HttpPost]
-        [Route("AssessmentCoaching/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("AssessmentCoaching/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.assessmentCoachingService.RetrieveAll(AssessmentCoaching.Informer, paginate, this.UserCredit);
+            var result = await this.assessmentCoachingService.RetrieveAll(AssessmentCoaching.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<AssessmentCoaching>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("AssessmentCoaching/Seek")]
         public async Task<IActionResult> Seek([FromBody] AssessmentCoaching assessmentCoaching)
         {
-            var result = await this.assessmentCoachingService.Seek(assessmentCoaching);
+            var result = await this.assessmentCoachingService.Seek(assessmentCoaching, this.UserCredit);
 
 			return result.ToActionResult<AssessmentCoaching>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("AssessmentCoaching/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.assessmentCoachingService.SeekByValue(seekValue, AssessmentCoaching.Informer);
+            var result = await this.assessmentCoachingService.SeekByValue(seekValue, AssessmentCoaching.Informer, this.UserCredit);
 
 			return result.ToActionResult<AssessmentCoaching>();
         }

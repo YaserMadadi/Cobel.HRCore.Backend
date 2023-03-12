@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         }
 
         [HttpPost]
-        [Route("CurrentSituation/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("CurrentSituation/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.currentSituationService.RetrieveAll(CurrentSituation.Informer, paginate, this.UserCredit);
+            var result = await this.currentSituationService.RetrieveAll(CurrentSituation.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<CurrentSituation>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("CurrentSituation/Seek")]
         public async Task<IActionResult> Seek([FromBody] CurrentSituation currentSituation)
         {
-            var result = await this.currentSituationService.Seek(currentSituation);
+            var result = await this.currentSituationService.Seek(currentSituation, this.UserCredit);
 
 			return result.ToActionResult<CurrentSituation>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("CurrentSituation/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.currentSituationService.SeekByValue(seekValue, CurrentSituation.Informer);
+            var result = await this.currentSituationService.SeekByValue(seekValue, CurrentSituation.Informer, this.UserCredit);
 
 			return result.ToActionResult<CurrentSituation>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         [Route("CurrentSituation/{currentSituation_id:int}/IndividualDevelopmentPlan")]
         public IActionResult CollectionOfIndividualDevelopmentPlan([FromRoute(Name = "currentSituation_id")] int id, IndividualDevelopmentPlan individualDevelopmentPlan)
         {
-            return this.currentSituationService.CollectionOfIndividualDevelopmentPlan(id, individualDevelopmentPlan).ToActionResult();
+            return this.currentSituationService.CollectionOfIndividualDevelopmentPlan(id, individualDevelopmentPlan, this.UserCredit).ToActionResult();
         }
     }
 }

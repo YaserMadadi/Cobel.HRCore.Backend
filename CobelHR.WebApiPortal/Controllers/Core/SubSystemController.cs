@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.Core
         }
 
         [HttpPost]
-        [Route("SubSystem/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("SubSystem/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.subSystemService.RetrieveAll(SubSystem.Informer, paginate, this.UserCredit);
+            var result = await this.subSystemService.RetrieveAll(SubSystem.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<SubSystem>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("SubSystem/Seek")]
         public async Task<IActionResult> Seek([FromBody] SubSystem subSystem)
         {
-            var result = await this.subSystemService.Seek(subSystem);
+            var result = await this.subSystemService.Seek(subSystem, this.UserCredit);
 
 			return result.ToActionResult<SubSystem>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("SubSystem/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.subSystemService.SeekByValue(seekValue, SubSystem.Informer);
+            var result = await this.subSystemService.SeekByValue(seekValue, SubSystem.Informer, this.UserCredit);
 
 			return result.ToActionResult<SubSystem>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("SubSystem/{subSystem_id:int}/Menu")]
         public IActionResult CollectionOfMenu([FromRoute(Name = "subSystem_id")] int id, Menu menu)
         {
-            return this.subSystemService.CollectionOfMenu(id, menu).ToActionResult();
+            return this.subSystemService.CollectionOfMenu(id, menu, this.UserCredit).ToActionResult();
         }
     }
 }

@@ -9,6 +9,6 @@ namespace CobelHR.Services.Base.Abstract
 {
     public interface IUniversityService : IService<University>
     {
-        DataResult<List<UniversityHistory>> CollectionOfUniversityHistory(int university_Id, UniversityHistory universityHistory);
+        DataResult<List<UniversityHistory>> CollectionOfUniversityHistory(int university_Id, UniversityHistory universityHistory, UserCredit userCredit);
     }
 }

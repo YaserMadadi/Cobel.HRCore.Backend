@@ -9,6 +9,6 @@ namespace CobelHR.Services.Base.PMS.Abstract
 {
     public interface IDevelopmentPlanPriorityService : IService<DevelopmentPlanPriority>
     {
-        DataResult<List<IndividualDevelopmentPlan>> CollectionOfIndividualDevelopmentPlan_Priority(int developmentPlanPriority_Id, IndividualDevelopmentPlan individualDevelopmentPlan);
+        DataResult<List<IndividualDevelopmentPlan>> CollectionOfIndividualDevelopmentPlan_Priority(int developmentPlanPriority_Id, IndividualDevelopmentPlan individualDevelopmentPlan, UserCredit userCredit);
     }
 }

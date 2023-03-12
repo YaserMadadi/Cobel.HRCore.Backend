@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("QualitativeObjective/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("QualitativeObjective/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.qualitativeObjectiveService.RetrieveAll(QualitativeObjective.Informer, paginate, this.UserCredit);
+            var result = await this.qualitativeObjectiveService.RetrieveAll(QualitativeObjective.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<QualitativeObjective>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("QualitativeObjective/Seek")]
         public async Task<IActionResult> Seek([FromBody] QualitativeObjective qualitativeObjective)
         {
-            var result = await this.qualitativeObjectiveService.Seek(qualitativeObjective);
+            var result = await this.qualitativeObjectiveService.Seek(qualitativeObjective, this.UserCredit);
 
 			return result.ToActionResult<QualitativeObjective>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("QualitativeObjective/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.qualitativeObjectiveService.SeekByValue(seekValue, QualitativeObjective.Informer);
+            var result = await this.qualitativeObjectiveService.SeekByValue(seekValue, QualitativeObjective.Informer, this.UserCredit);
 
 			return result.ToActionResult<QualitativeObjective>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("QualitativeObjective/{qualitativeObjective_id:int}/QualitativeKPI")]
         public IActionResult CollectionOfQualitativeKPI([FromRoute(Name = "qualitativeObjective_id")] int id, QualitativeKPI qualitativeKPI)
         {
-            return this.qualitativeObjectiveService.CollectionOfQualitativeKPI(id, qualitativeKPI).ToActionResult();
+            return this.qualitativeObjectiveService.CollectionOfQualitativeKPI(id, qualitativeKPI, this.UserCredit).ToActionResult();
         }
     }
 }

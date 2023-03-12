@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("InclusiveType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("InclusiveType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.inclusiveTypeService.RetrieveAll(InclusiveType.Informer, paginate, this.UserCredit);
+            var result = await this.inclusiveTypeService.RetrieveAll(InclusiveType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<InclusiveType>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("InclusiveType/Seek")]
         public async Task<IActionResult> Seek([FromBody] InclusiveType inclusiveType)
         {
-            var result = await this.inclusiveTypeService.Seek(inclusiveType);
+            var result = await this.inclusiveTypeService.Seek(inclusiveType, this.UserCredit);
 
 			return result.ToActionResult<InclusiveType>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("InclusiveType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.inclusiveTypeService.SeekByValue(seekValue, InclusiveType.Informer);
+            var result = await this.inclusiveTypeService.SeekByValue(seekValue, InclusiveType.Informer, this.UserCredit);
 
 			return result.ToActionResult<InclusiveType>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("InclusiveType/{inclusiveType_id:int}/MilitaryServiceInclusive")]
         public IActionResult CollectionOfMilitaryServiceInclusive([FromRoute(Name = "inclusiveType_id")] int id, MilitaryServiceInclusive militaryServiceInclusive)
         {
-            return this.inclusiveTypeService.CollectionOfMilitaryServiceInclusive(id, militaryServiceInclusive).ToActionResult();
+            return this.inclusiveTypeService.CollectionOfMilitaryServiceInclusive(id, militaryServiceInclusive, this.UserCredit).ToActionResult();
         }
     }
 }

@@ -9,10 +9,6 @@ using CobelHR.Entities.HR;
 
 using System.Threading.Tasks;
 
-using System.Threading.Tasks;
-
-using System.Threading.Tasks;
-
 namespace CobelHR.ApiServices.Controllers.Base
 {
     [Route("api/Base")]
@@ -40,10 +36,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("City/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("City/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.cityService.RetrieveAll(City.Informer, paginate, this.UserCredit);
+            var result = await this.cityService.RetrieveAll(City.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<City>();
         }
@@ -83,7 +79,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("City/Seek")]
         public async Task<IActionResult> Seek([FromBody] City city)
         {
-            var result = await this.cityService.Seek(city);
+            var result = await this.cityService.Seek(city, this.UserCredit);
 
             return result.ToActionResult<City>();
         }
@@ -92,7 +88,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("City/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.cityService.SeekByValue(seekValue, City.Informer);
+            var result = await this.cityService.SeekByValue(seekValue, City.Informer, this.UserCredit);
 
             return result.ToActionResult<City>();
         }
@@ -111,7 +107,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("City/{city_id:int}/Habitancy")]
         public IActionResult CollectionOfHabitancy([FromRoute(Name = "city_id")] int id, Habitancy habitancy)
         {
-            return this.cityService.CollectionOfHabitancy(id, habitancy).ToActionResult();
+            return this.cityService.CollectionOfHabitancy(id, habitancy, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfPerson_BirthCity
@@ -119,7 +115,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("BirthCity/{city_id:int}/Person")]
         public IActionResult CollectionOfPerson_BirthCity([FromRoute(Name = "city_id")] int id, Person person)
         {
-            return this.cityService.CollectionOfPerson_BirthCity(id, person).ToActionResult();
+            return this.cityService.CollectionOfPerson_BirthCity(id, person, this.UserCredit).ToActionResult();
         }
 
         // CollectionOfUniversity
@@ -127,7 +123,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("City/{city_id:int}/University")]
         public IActionResult CollectionOfUniversity([FromRoute(Name = "city_id")] int id, University university)
         {
-            return this.cityService.CollectionOfUniversity(id, university).ToActionResult();
+            return this.cityService.CollectionOfUniversity(id, university, this.UserCredit).ToActionResult();
         }
     }
 }

@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("DevelopmentPlanCompetency/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("DevelopmentPlanCompetency/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.developmentPlanCompetencyService.RetrieveAll(DevelopmentPlanCompetency.Informer, paginate, this.UserCredit);
+            var result = await this.developmentPlanCompetencyService.RetrieveAll(DevelopmentPlanCompetency.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<DevelopmentPlanCompetency>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("DevelopmentPlanCompetency/Seek")]
         public async Task<IActionResult> Seek([FromBody] DevelopmentPlanCompetency developmentPlanCompetency)
         {
-            var result = await this.developmentPlanCompetencyService.Seek(developmentPlanCompetency);
+            var result = await this.developmentPlanCompetencyService.Seek(developmentPlanCompetency, this.UserCredit);
 
 			return result.ToActionResult<DevelopmentPlanCompetency>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("DevelopmentPlanCompetency/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.developmentPlanCompetencyService.SeekByValue(seekValue, DevelopmentPlanCompetency.Informer);
+            var result = await this.developmentPlanCompetencyService.SeekByValue(seekValue, DevelopmentPlanCompetency.Informer, this.UserCredit);
 
 			return result.ToActionResult<DevelopmentPlanCompetency>();
         }

@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.LAD
         }
 
         [HttpPost]
-        [Route("QuestionaryItem/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("QuestionaryItem/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.questionaryItemService.RetrieveAll(QuestionaryItem.Informer, paginate, this.UserCredit);
+            var result = await this.questionaryItemService.RetrieveAll(QuestionaryItem.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<QuestionaryItem>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("QuestionaryItem/Seek")]
         public async Task<IActionResult> Seek([FromBody] QuestionaryItem questionaryItem)
         {
-            var result = await this.questionaryItemService.Seek(questionaryItem);
+            var result = await this.questionaryItemService.Seek(questionaryItem, this.UserCredit);
 
 			return result.ToActionResult<QuestionaryItem>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("QuestionaryItem/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.questionaryItemService.SeekByValue(seekValue, QuestionaryItem.Informer);
+            var result = await this.questionaryItemService.SeekByValue(seekValue, QuestionaryItem.Informer, this.UserCredit);
 
 			return result.ToActionResult<QuestionaryItem>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("QuestionaryItem/{questionaryItem_id:int}/CoachingQuestionaryAnswered")]
         public IActionResult CollectionOfCoachingQuestionaryAnswered([FromRoute(Name = "questionaryItem_id")] int id, CoachingQuestionaryAnswered coachingQuestionaryAnswered)
         {
-            return this.questionaryItemService.CollectionOfCoachingQuestionaryAnswered(id, coachingQuestionaryAnswered).ToActionResult();
+            return this.questionaryItemService.CollectionOfCoachingQuestionaryAnswered(id, coachingQuestionaryAnswered, this.UserCredit).ToActionResult();
         }
     }
 }

@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.PMS
         }
 
         [HttpPost]
-        [Route("CellAction/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("CellAction/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.cellActionService.RetrieveAll(CellAction.Informer, paginate, this.UserCredit);
+            var result = await this.cellActionService.RetrieveAll(CellAction.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<CellAction>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CellAction/Seek")]
         public async Task<IActionResult> Seek([FromBody] CellAction cellAction)
         {
-            var result = await this.cellActionService.Seek(cellAction);
+            var result = await this.cellActionService.Seek(cellAction, this.UserCredit);
 
 			return result.ToActionResult<CellAction>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         [Route("CellAction/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.cellActionService.SeekByValue(seekValue, CellAction.Informer);
+            var result = await this.cellActionService.SeekByValue(seekValue, CellAction.Informer, this.UserCredit);
 
 			return result.ToActionResult<CellAction>();
         }

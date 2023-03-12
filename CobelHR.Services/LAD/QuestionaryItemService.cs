@@ -22,12 +22,13 @@ namespace CobelHR.Services.LAD
             return await questionaryItem.SaveAttached(userCredit);
         }
 
-        public DataResult<List<CoachingQuestionaryAnswered>> CollectionOfCoachingQuestionaryAnswered(int questionaryItem_Id, CoachingQuestionaryAnswered coachingQuestionaryAnswered)
+        public DataResult<List<CoachingQuestionaryAnswered>> CollectionOfCoachingQuestionaryAnswered(int questionaryItem_Id, CoachingQuestionaryAnswered coachingQuestionaryAnswered, UserCredit userCredit)
         {
             var procedureName = "[LAD].[QuestionaryItem.CollectionOfCoachingQuestionaryAnswered]";
 
             return this.CollectionOf<CoachingQuestionaryAnswered>(procedureName,
-                                                    new SqlParameter("@Id",questionaryItem_Id), 
+                                                    new SqlParameter("@Id",questionaryItem_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", coachingQuestionaryAnswered.ToJson()));
         }
     }

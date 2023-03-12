@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.LAD
         }
 
         [HttpPost]
-        [Route("AssessmentType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("AssessmentType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.assessmentTypeService.RetrieveAll(AssessmentType.Informer, paginate, this.UserCredit);
+            var result = await this.assessmentTypeService.RetrieveAll(AssessmentType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<AssessmentType>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("AssessmentType/Seek")]
         public async Task<IActionResult> Seek([FromBody] AssessmentType assessmentType)
         {
-            var result = await this.assessmentTypeService.Seek(assessmentType);
+            var result = await this.assessmentTypeService.Seek(assessmentType, this.UserCredit);
 
 			return result.ToActionResult<AssessmentType>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("AssessmentType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.assessmentTypeService.SeekByValue(seekValue, AssessmentType.Informer);
+            var result = await this.assessmentTypeService.SeekByValue(seekValue, AssessmentType.Informer, this.UserCredit);
 
 			return result.ToActionResult<AssessmentType>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         [Route("AssessmentType/{assessmentType_id:int}/Assessment")]
         public IActionResult CollectionOfAssessment([FromRoute(Name = "assessmentType_id")] int id, Assessment assessment)
         {
-            return this.assessmentTypeService.CollectionOfAssessment(id, assessment).ToActionResult();
+            return this.assessmentTypeService.CollectionOfAssessment(id, assessment, this.UserCredit).ToActionResult();
         }
     }
 }

@@ -30,10 +30,10 @@ namespace CobelHR.ApiServices.Controllers.Core
         }
 
         [HttpPost]
-        [Route("Entity/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("Entity/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.entityService.RetrieveAll(Entity.Informer, paginate, this.UserCredit);
+            var result = await this.entityService.RetrieveAll(Entity.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<Entity>();
         }
@@ -73,7 +73,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Entity/Seek")]
         public async Task<IActionResult> Seek([FromBody] Entity entity)
         {
-            var result = await this.entityService.Seek(entity);
+            var result = await this.entityService.Seek(entity, this.UserCredit);
 
 			return result.ToActionResult<Entity>();
         }
@@ -82,7 +82,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Entity/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.entityService.SeekByValue(seekValue, Entity.Informer);
+            var result = await this.entityService.SeekByValue(seekValue, Entity.Informer, this.UserCredit);
 
 			return result.ToActionResult<Entity>();
         }
@@ -101,7 +101,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Entity/{entity_id:int}/Property")]
         public IActionResult CollectionOfProperty([FromRoute(Name = "entity_id")] int id, Property property)
         {
-            return this.entityService.CollectionOfProperty(id, property).ToActionResult();
+            return this.entityService.CollectionOfProperty(id, property, this.UserCredit).ToActionResult();
         }
 
 		// CollectionOfRolePermission
@@ -109,7 +109,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         [Route("Entity/{entity_id:int}/RolePermission")]
         public IActionResult CollectionOfRolePermission([FromRoute(Name = "entity_id")] int id, RolePermission rolePermission)
         {
-            return this.entityService.CollectionOfRolePermission(id, rolePermission).ToActionResult();
+            return this.entityService.CollectionOfRolePermission(id, rolePermission, this.UserCredit).ToActionResult();
         }
     }
 }

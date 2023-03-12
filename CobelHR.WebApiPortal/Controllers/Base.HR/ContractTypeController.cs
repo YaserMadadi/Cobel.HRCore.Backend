@@ -32,10 +32,10 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         }
 
         [HttpPost]
-        [Route("ContractType/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("ContractType/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.contractTypeService.RetrieveAll(ContractType.Informer, paginate, this.UserCredit);
+            var result = await this.contractTypeService.RetrieveAll(ContractType.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<ContractType>();
         }
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("ContractType/Seek")]
         public async Task<IActionResult> Seek([FromBody] ContractType contractType)
         {
-            var result = await this.contractTypeService.Seek(contractType);
+            var result = await this.contractTypeService.Seek(contractType, this.UserCredit);
 
 			return result.ToActionResult<ContractType>();
         }
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("ContractType/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.contractTypeService.SeekByValue(seekValue, ContractType.Informer);
+            var result = await this.contractTypeService.SeekByValue(seekValue, ContractType.Informer, this.UserCredit);
 
 			return result.ToActionResult<ContractType>();
         }
@@ -103,7 +103,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         [Route("ContractType/{contractType_id:int}/Contract")]
         public IActionResult CollectionOfContract([FromRoute(Name = "contractType_id")] int id, Contract contract)
         {
-            return this.contractTypeService.CollectionOfContract(id, contract).ToActionResult();
+            return this.contractTypeService.CollectionOfContract(id, contract, this.UserCredit).ToActionResult();
         }
     }
 }

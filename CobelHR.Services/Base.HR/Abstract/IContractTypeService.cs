@@ -9,6 +9,6 @@ namespace CobelHR.Services.Base.HR.Abstract
 {
     public interface IContractTypeService : IService<ContractType>
     {
-        DataResult<List<Contract>> CollectionOfContract(int contractType_Id, Contract contract);
+        DataResult<List<Contract>> CollectionOfContract(int contractType_Id, Contract contract, UserCredit userCredit);
     }
 }

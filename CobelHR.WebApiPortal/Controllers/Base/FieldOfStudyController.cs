@@ -31,10 +31,10 @@ namespace CobelHR.ApiServices.Controllers.Base
         }
 
         [HttpPost]
-        [Route("FieldOfStudy/RetrieveAll")]
-        public async Task<IActionResult> RetrieveAll([FromBody] Paginate paginate)
+        [Route("FieldOfStudy/RetrieveAll/{currentPage:int}")]
+        public async Task<IActionResult> RetrieveAll(int currentPage)
         {
-            var result = await this.fieldOfStudyService.RetrieveAll(FieldOfStudy.Informer, paginate, this.UserCredit);
+            var result = await this.fieldOfStudyService.RetrieveAll(FieldOfStudy.Informer, currentPage, this.UserCredit);
 
 			return result.ToActionResult<FieldOfStudy>();
         }
@@ -74,7 +74,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("FieldOfStudy/Seek")]
         public async Task<IActionResult> Seek([FromBody] FieldOfStudy fieldOfStudy)
         {
-            var result = await this.fieldOfStudyService.Seek(fieldOfStudy);
+            var result = await this.fieldOfStudyService.Seek(fieldOfStudy, this.UserCredit);
 
 			return result.ToActionResult<FieldOfStudy>();
         }
@@ -83,7 +83,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("FieldOfStudy/SeekByValue/{seekValue}")]
         public async Task<IActionResult> SeekByValue([FromRoute(Name = "seekValue")] string seekValue)
         {
-            var result = await this.fieldOfStudyService.SeekByValue(seekValue, FieldOfStudy.Informer);
+            var result = await this.fieldOfStudyService.SeekByValue(seekValue, FieldOfStudy.Informer, this.UserCredit);
 
 			return result.ToActionResult<FieldOfStudy>();
         }
@@ -102,7 +102,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         [Route("FieldOfStudy/{fieldOfStudy_id:int}/UniversityHistory")]
         public IActionResult CollectionOfUniversityHistory([FromRoute(Name = "fieldOfStudy_id")] int id, UniversityHistory universityHistory)
         {
-            return this.fieldOfStudyService.CollectionOfUniversityHistory(id, universityHistory).ToActionResult();
+            return this.fieldOfStudyService.CollectionOfUniversityHistory(id, universityHistory, this.UserCredit).ToActionResult();
         }
     }
 }
