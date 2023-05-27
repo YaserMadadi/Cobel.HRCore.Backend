@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.rotationAssessmentService.RetrieveById(id, RotationAssessment.Informer, this.UserCredit);
 
-			return result.ToActionResult<RotationAssessment>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.rotationAssessmentService.RetrieveAll(RotationAssessment.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<RotationAssessment>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.rotationAssessmentService.Save(rotationAssessment, this.UserCredit);
 
-			return result.ToActionResult<RotationAssessment>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.rotationAssessmentService.Seek(rotationAssessment, this.UserCredit);
 
-			return result.ToActionResult<RotationAssessment>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.rotationAssessmentService.SeekByValue(seekValue, RotationAssessment.Informer, this.UserCredit);
 
-			return result.ToActionResult<RotationAssessment>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

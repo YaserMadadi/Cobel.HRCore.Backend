@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.expectedLevelService.RetrieveById(id, ExpectedLevel.Informer, this.UserCredit);
 
-			return result.ToActionResult<ExpectedLevel>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.expectedLevelService.RetrieveAll(ExpectedLevel.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<ExpectedLevel>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.expectedLevelService.Save(expectedLevel, this.UserCredit);
 
-			return result.ToActionResult<ExpectedLevel>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.expectedLevelService.Seek(expectedLevel, this.UserCredit);
 
-			return result.ToActionResult<ExpectedLevel>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.expectedLevelService.SeekByValue(seekValue, ExpectedLevel.Informer, this.UserCredit);
 
-			return result.ToActionResult<ExpectedLevel>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

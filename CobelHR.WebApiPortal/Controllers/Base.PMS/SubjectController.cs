@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.subjectService.RetrieveById(id, Subject.Informer, this.UserCredit);
 
-			return result.ToActionResult<Subject>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.subjectService.RetrieveAll(Subject.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<Subject>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.subjectService.Save(subject, this.UserCredit);
 
-			return result.ToActionResult<Subject>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.subjectService.Seek(subject, this.UserCredit);
 
-			return result.ToActionResult<Subject>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.subjectService.SeekByValue(seekValue, Subject.Informer, this.UserCredit);
 
-			return result.ToActionResult<Subject>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

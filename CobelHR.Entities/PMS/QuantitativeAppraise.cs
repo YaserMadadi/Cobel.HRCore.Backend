@@ -32,17 +32,21 @@ namespace CobelHR.Entities.PMS
 		
         public PMS.TargetSetting TargetSetting { get; set; }
 		
+        public PMS.QuantitativeItemType QuantitativeItemType { get; set; }
+
         public decimal? Score { get; set; }
 		
 		public string Comment { get; set; }
 
-		#endregion
+        #endregion
 
         #region    List Of Related Entities
 
-		#endregion
+        [JsonIgnore]
+        public List<QuantitativeItemType> ListOfQuantitativeItemType { get; set; }
 
-        
+        #endregion
+
         public override bool Validate()
         {
             return TargetSetting.Validate() &&

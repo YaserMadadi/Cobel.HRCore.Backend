@@ -31,7 +31,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.competencyItemService.RetrieveById(id, CompetencyItem.Informer, this.UserCredit);
 
-			return result.ToActionResult<CompetencyItem>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -40,7 +40,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.competencyItemService.RetrieveAll(CompetencyItem.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<CompetencyItem>();
+			return this.ToActionResult(result);
         }
             
 
@@ -51,7 +51,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.competencyItemService.Save(competencyItem, this.UserCredit);
 
-			return result.ToActionResult<CompetencyItem>();
+			return this.ToActionResult(result);
         }
 
         
@@ -80,7 +80,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.competencyItemService.Seek(competencyItem, this.UserCredit);
 
-			return result.ToActionResult<CompetencyItem>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -89,7 +89,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.competencyItemService.SeekByValue(seekValue, CompetencyItem.Informer, this.UserCredit);
 
-			return result.ToActionResult<CompetencyItem>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

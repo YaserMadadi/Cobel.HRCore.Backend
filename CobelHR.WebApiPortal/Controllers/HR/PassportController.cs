@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.passportService.RetrieveById(id, Passport.Informer, this.UserCredit);
 
-			return result.ToActionResult<Passport>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.passportService.RetrieveAll(Passport.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<Passport>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.passportService.Save(passport, this.UserCredit);
 
-			return result.ToActionResult<Passport>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.passportService.Seek(passport, this.UserCredit);
 
-			return result.ToActionResult<Passport>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.passportService.SeekByValue(seekValue, Passport.Informer, this.UserCredit);
 
-			return result.ToActionResult<Passport>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

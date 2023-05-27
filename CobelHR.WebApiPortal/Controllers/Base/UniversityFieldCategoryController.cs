@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.universityFieldCategoryService.RetrieveById(id, UniversityFieldCategory.Informer, this.UserCredit);
 
-			return result.ToActionResult<UniversityFieldCategory>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.universityFieldCategoryService.RetrieveAll(UniversityFieldCategory.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<UniversityFieldCategory>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.universityFieldCategoryService.Save(universityFieldCategory, this.UserCredit);
 
-			return result.ToActionResult<UniversityFieldCategory>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.universityFieldCategoryService.Seek(universityFieldCategory, this.UserCredit);
 
-			return result.ToActionResult<UniversityFieldCategory>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.universityFieldCategoryService.SeekByValue(seekValue, UniversityFieldCategory.Informer, this.UserCredit);
 
-			return result.ToActionResult<UniversityFieldCategory>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

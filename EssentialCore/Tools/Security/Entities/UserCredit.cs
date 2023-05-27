@@ -18,6 +18,6 @@ namespace EssentialCore.Tools.Security.Entities
 
         public int Employee_Id { get; set; }
 
-        public int UserAccount_Id { get; set; }
+        public int UserAccount_Id { get; set; } = 0;
     }
 }

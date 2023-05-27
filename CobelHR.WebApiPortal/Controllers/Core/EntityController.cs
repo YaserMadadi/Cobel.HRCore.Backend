@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.entityService.RetrieveById(id, Entity.Informer, this.UserCredit);
 
-			return result.ToActionResult<Entity>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.entityService.RetrieveAll(Entity.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<Entity>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.entityService.Save(entity, this.UserCredit);
 
-			return result.ToActionResult<Entity>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.entityService.Seek(entity, this.UserCredit);
 
-			return result.ToActionResult<Entity>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.entityService.SeekByValue(seekValue, Entity.Informer, this.UserCredit);
 
-			return result.ToActionResult<Entity>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

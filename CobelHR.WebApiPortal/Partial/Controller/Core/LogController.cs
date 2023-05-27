@@ -25,7 +25,9 @@ namespace CobelHR.WebApiPortal.Partial.Controller.Core
         [Route("Load/{entityName}/{recordId}")]
         public async Task<IActionResult> Load([FromRoute] string entityName, [FromRoute] int recordId)
         {
-            return (await this.logService.LoadLog(entityName, recordId, this.UserCredit)).ToActionResult<Log>();
+            var result = await this.logService.LoadLog(entityName, recordId, this.UserCredit);
+
+            return this.ToActionResult(result);
         }
 
     }

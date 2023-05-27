@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.quarterService.RetrieveById(id, Quarter.Informer, this.UserCredit);
 
-			return result.ToActionResult<Quarter>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.quarterService.RetrieveAll(Quarter.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<Quarter>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.quarterService.Save(quarter, this.UserCredit);
 
-			return result.ToActionResult<Quarter>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.quarterService.Seek(quarter, this.UserCredit);
 
-			return result.ToActionResult<Quarter>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.quarterService.SeekByValue(seekValue, Quarter.Informer, this.UserCredit);
 
-			return result.ToActionResult<Quarter>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

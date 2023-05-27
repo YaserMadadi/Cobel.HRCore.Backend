@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.habitancyTypeService.RetrieveById(id, HabitancyType.Informer, this.UserCredit);
 
-			return result.ToActionResult<HabitancyType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.habitancyTypeService.RetrieveAll(HabitancyType.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<HabitancyType>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.habitancyTypeService.Save(habitancyType, this.UserCredit);
 
-			return result.ToActionResult<HabitancyType>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.habitancyTypeService.Seek(habitancyType, this.UserCredit);
 
-			return result.ToActionResult<HabitancyType>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.habitancyTypeService.SeekByValue(seekValue, HabitancyType.Informer, this.UserCredit);
 
-			return result.ToActionResult<HabitancyType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

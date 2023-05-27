@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.eventTypeService.RetrieveById(id, EventType.Informer, this.UserCredit);
 
-			return result.ToActionResult<EventType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.eventTypeService.RetrieveAll(EventType.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<EventType>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.eventTypeService.Save(eventType, this.UserCredit);
 
-			return result.ToActionResult<EventType>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.eventTypeService.Seek(eventType, this.UserCredit);
 
-			return result.ToActionResult<EventType>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.eventTypeService.SeekByValue(seekValue, EventType.Informer, this.UserCredit);
 
-			return result.ToActionResult<EventType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

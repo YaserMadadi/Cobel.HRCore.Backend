@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.holdingSectionService.RetrieveById(id, HoldingSection.Informer, this.UserCredit);
 
-			return result.ToActionResult<HoldingSection>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.holdingSectionService.RetrieveAll(HoldingSection.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<HoldingSection>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.holdingSectionService.Save(holdingSection, this.UserCredit);
 
-			return result.ToActionResult<HoldingSection>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.holdingSectionService.Seek(holdingSection, this.UserCredit);
 
-			return result.ToActionResult<HoldingSection>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.holdingSectionService.SeekByValue(seekValue, HoldingSection.Informer, this.UserCredit);
 
-			return result.ToActionResult<HoldingSection>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

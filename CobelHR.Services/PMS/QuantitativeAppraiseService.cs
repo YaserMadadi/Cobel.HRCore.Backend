@@ -22,6 +22,16 @@ namespace CobelHR.Services.PMS
             return await quantitativeAppraise.SaveAttached(userCredit);
         }
 
-        
+        public DataResult<List<QuantitativeItemType>> CollectionOfQuantitativeItemType(int quantitativeAppraise_Id, QuantitativeItemType quantitativeItemType, UserCredit userCredit)
+        {
+            var procedureName = "[PMS].[QuantitativeAppraise.CollectionOfQuantitativeItemType]";
+
+            return this.CollectionOf<QuantitativeItemType>(procedureName,
+                                                    new SqlParameter("@Id", quantitativeAppraise_Id),
+                                                    new SqlParameter("@User_Id", userCredit.Person_Id),
+                                                    new SqlParameter("@jsonValue", quantitativeItemType.ToJson()));
+        }
+
+
     }
 }

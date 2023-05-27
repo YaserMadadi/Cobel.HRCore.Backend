@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.countryService.RetrieveById(id, Country.Informer, this.UserCredit);
 
-			return result.ToActionResult<Country>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.countryService.RetrieveAll(Country.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<Country>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.countryService.Save(country, this.UserCredit);
 
-			return result.ToActionResult<Country>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.countryService.Seek(country, this.UserCredit);
 
-			return result.ToActionResult<Country>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.countryService.SeekByValue(seekValue, Country.Informer, this.UserCredit);
 
-			return result.ToActionResult<Country>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

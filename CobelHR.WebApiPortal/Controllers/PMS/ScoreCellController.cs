@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.scoreCellService.RetrieveById(id, ScoreCell.Informer, this.UserCredit);
 
-			return result.ToActionResult<ScoreCell>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.scoreCellService.RetrieveAll(ScoreCell.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<ScoreCell>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.scoreCellService.Save(scoreCell, this.UserCredit);
 
-			return result.ToActionResult<ScoreCell>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.scoreCellService.Seek(scoreCell, this.UserCredit);
 
-			return result.ToActionResult<ScoreCell>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.scoreCellService.SeekByValue(seekValue, ScoreCell.Informer, this.UserCredit);
 
-			return result.ToActionResult<ScoreCell>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

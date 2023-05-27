@@ -32,7 +32,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.cityService.RetrieveById(id, City.Informer, this.UserCredit);
 
-			return result.ToActionResult<City>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -41,7 +41,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.cityService.RetrieveAll(City.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<City>();
+			return this.ToActionResult(result);
         }
 
 
@@ -52,7 +52,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.cityService.Save(city, this.UserCredit);
 
-			return result.ToActionResult<City>();
+			return this.ToActionResult(result);
         }
 
 
@@ -81,7 +81,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.cityService.Seek(city, this.UserCredit);
 
-            return result.ToActionResult<City>();
+            return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -90,7 +90,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.cityService.SeekByValue(seekValue, City.Informer, this.UserCredit);
 
-            return result.ToActionResult<City>();
+            return this.ToActionResult(result);
         }
 
         [HttpPost]

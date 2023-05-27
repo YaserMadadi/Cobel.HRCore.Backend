@@ -19,15 +19,15 @@ namespace EssentialCore.Tools.Security.Service
                                                        new SqlParameter("@UserName", userName))
                                                             .ExecuteDataResult();
 
-            var userCredit = dataResult.Data.Deserialize<UserCredit>(JsonType.Collection);
+            var userCredit = dataResult.Data.Deserialize<UserCredit[]>(JsonType.Collection);
 
             if (userCredit == null ||
-                userCredit.Impersonation_Id <= 0)
+                userCredit[0].Impersonation_Id <= 0)
             {
-                return new ErrorDataResult<UserCredit>(-1, "User not found!", userCredit);
+                return new ErrorDataResult<UserCredit>(-1, "User not found!", userCredit[0]);
             }
 
-            return new SuccessfulDataResult<UserCredit>(userCredit);
+            return new SuccessfulDataResult<UserCredit>(userCredit[0]);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.excemptionTypeService.RetrieveById(id, ExcemptionType.Informer, this.UserCredit);
 
-			return result.ToActionResult<ExcemptionType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.excemptionTypeService.RetrieveAll(ExcemptionType.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<ExcemptionType>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.excemptionTypeService.Save(excemptionType, this.UserCredit);
 
-			return result.ToActionResult<ExcemptionType>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.excemptionTypeService.Seek(excemptionType, this.UserCredit);
 
-			return result.ToActionResult<ExcemptionType>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.excemptionTypeService.SeekByValue(seekValue, ExcemptionType.Informer, this.UserCredit);
 
-			return result.ToActionResult<ExcemptionType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

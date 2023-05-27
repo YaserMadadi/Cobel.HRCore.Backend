@@ -28,7 +28,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.positionCategoryService.RetrieveById(id, PositionCategory.Informer, this.UserCredit);
 
-			return result.ToActionResult<PositionCategory>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -37,7 +37,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.positionCategoryService.RetrieveAll(PositionCategory.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<PositionCategory>();
+			return this.ToActionResult(result);
         }
             
 
@@ -48,7 +48,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.positionCategoryService.Save(positionCategory, this.UserCredit);
 
-			return result.ToActionResult<PositionCategory>();
+			return this.ToActionResult(result);
         }
 
         
@@ -77,7 +77,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.positionCategoryService.Seek(positionCategory, this.UserCredit);
 
-			return result.ToActionResult<PositionCategory>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -86,7 +86,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.positionCategoryService.SeekByValue(seekValue, PositionCategory.Informer, this.UserCredit);
 
-			return result.ToActionResult<PositionCategory>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

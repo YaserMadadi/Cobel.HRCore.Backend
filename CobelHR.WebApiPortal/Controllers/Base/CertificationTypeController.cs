@@ -28,7 +28,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.certificationTypeService.RetrieveById(id, CertificationType.Informer, this.UserCredit);
 
-			return result.ToActionResult<CertificationType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -37,7 +37,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.certificationTypeService.RetrieveAll(CertificationType.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<CertificationType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.certificationTypeService.Save(certificationType, this.UserCredit);
 
-			return result.ToActionResult<CertificationType>();
+			return this.ToActionResult(result);
         }
 
 
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.certificationTypeService.Seek(certificationType, this.UserCredit);
 
-			return result.ToActionResult<CertificationType>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.certificationTypeService.SeekByValue(seekValue, CertificationType.Informer, this.UserCredit);
 
-			return result.ToActionResult<CertificationType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

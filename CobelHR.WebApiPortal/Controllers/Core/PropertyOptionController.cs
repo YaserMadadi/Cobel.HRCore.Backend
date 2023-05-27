@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.propertyOptionService.RetrieveById(id, PropertyOption.Informer, this.UserCredit);
 
-			return result.ToActionResult<PropertyOption>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.propertyOptionService.RetrieveAll(PropertyOption.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<PropertyOption>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.propertyOptionService.Save(propertyOption, this.UserCredit);
 
-			return result.ToActionResult<PropertyOption>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.propertyOptionService.Seek(propertyOption, this.UserCredit);
 
-			return result.ToActionResult<PropertyOption>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.propertyOptionService.SeekByValue(seekValue, PropertyOption.Informer, this.UserCredit);
 
-			return result.ToActionResult<PropertyOption>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

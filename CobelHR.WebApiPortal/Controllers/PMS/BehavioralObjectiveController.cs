@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.behavioralObjectiveService.RetrieveById(id, BehavioralObjective.Informer, this.UserCredit);
 
-			return result.ToActionResult<BehavioralObjective>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.behavioralObjectiveService.RetrieveAll(BehavioralObjective.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<BehavioralObjective>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.behavioralObjectiveService.Save(behavioralObjective, this.UserCredit);
 
-			return result.ToActionResult<BehavioralObjective>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.behavioralObjectiveService.Seek(behavioralObjective, this.UserCredit);
 
-			return result.ToActionResult<BehavioralObjective>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.behavioralObjectiveService.SeekByValue(seekValue, BehavioralObjective.Informer, this.UserCredit);
 
-			return result.ToActionResult<BehavioralObjective>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

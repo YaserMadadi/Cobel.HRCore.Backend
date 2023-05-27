@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.militaryServiceExcemptionService.RetrieveById(id, MilitaryServiceExcemption.Informer, this.UserCredit);
 
-			return result.ToActionResult<MilitaryServiceExcemption>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.militaryServiceExcemptionService.RetrieveAll(MilitaryServiceExcemption.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<MilitaryServiceExcemption>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.militaryServiceExcemptionService.Save(militaryServiceExcemption, this.UserCredit);
 
-			return result.ToActionResult<MilitaryServiceExcemption>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.militaryServiceExcemptionService.Seek(militaryServiceExcemption, this.UserCredit);
 
-			return result.ToActionResult<MilitaryServiceExcemption>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.militaryServiceExcemptionService.SeekByValue(seekValue, MilitaryServiceExcemption.Informer, this.UserCredit);
 
-			return result.ToActionResult<MilitaryServiceExcemption>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

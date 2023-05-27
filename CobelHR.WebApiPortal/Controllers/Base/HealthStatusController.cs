@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.healthStatusService.RetrieveById(id, HealthStatus.Informer, this.UserCredit);
 
-			return result.ToActionResult<HealthStatus>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.healthStatusService.RetrieveAll(HealthStatus.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<HealthStatus>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.healthStatusService.Save(healthStatus, this.UserCredit);
 
-			return result.ToActionResult<HealthStatus>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.healthStatusService.Seek(healthStatus, this.UserCredit);
 
-			return result.ToActionResult<HealthStatus>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.healthStatusService.SeekByValue(seekValue, HealthStatus.Informer, this.UserCredit);
 
-			return result.ToActionResult<HealthStatus>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

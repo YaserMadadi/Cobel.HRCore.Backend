@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.relativeTypeService.RetrieveById(id, RelativeType.Informer, this.UserCredit);
 
-			return result.ToActionResult<RelativeType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.relativeTypeService.RetrieveAll(RelativeType.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<RelativeType>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.relativeTypeService.Save(relativeType, this.UserCredit);
 
-			return result.ToActionResult<RelativeType>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.relativeTypeService.Seek(relativeType, this.UserCredit);
 
-			return result.ToActionResult<RelativeType>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.relativeTypeService.SeekByValue(seekValue, RelativeType.Informer, this.UserCredit);
 
-			return result.ToActionResult<RelativeType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

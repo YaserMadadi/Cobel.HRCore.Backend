@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.logService.RetrieveById(id, Log.Informer, this.UserCredit);
 
-			return result.ToActionResult<Log>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.logService.RetrieveAll(Log.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<Log>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.logService.Save(log, this.UserCredit);
 
-			return result.ToActionResult<Log>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.logService.Seek(log, this.UserCredit);
 
-			return result.ToActionResult<Log>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.logService.SeekByValue(seekValue, Log.Informer, this.UserCredit);
 
-			return result.ToActionResult<Log>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

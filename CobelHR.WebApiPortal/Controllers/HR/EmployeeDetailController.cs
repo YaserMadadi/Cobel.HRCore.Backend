@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.employeeDetailService.RetrieveById(id, EmployeeDetail.Informer, this.UserCredit);
 
-			return result.ToActionResult<EmployeeDetail>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.employeeDetailService.RetrieveAll(EmployeeDetail.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<EmployeeDetail>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.employeeDetailService.Save(employeeDetail, this.UserCredit);
 
-			return result.ToActionResult<EmployeeDetail>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.employeeDetailService.Seek(employeeDetail, this.UserCredit);
 
-			return result.ToActionResult<EmployeeDetail>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.employeeDetailService.SeekByValue(seekValue, EmployeeDetail.Informer, this.UserCredit);
 
-			return result.ToActionResult<EmployeeDetail>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.militaryServiceService.RetrieveById(id, MilitaryService.Informer, this.UserCredit);
 
-			return result.ToActionResult<MilitaryService>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.militaryServiceService.RetrieveAll(MilitaryService.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<MilitaryService>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.militaryServiceService.Save(militaryService, this.UserCredit);
 
-			return result.ToActionResult<MilitaryService>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.militaryServiceService.Seek(militaryService, this.UserCredit);
 
-			return result.ToActionResult<MilitaryService>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.militaryServiceService.SeekByValue(seekValue, MilitaryService.Informer, this.UserCredit);
 
-			return result.ToActionResult<MilitaryService>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

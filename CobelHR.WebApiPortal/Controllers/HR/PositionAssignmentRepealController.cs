@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.positionAssignmentRepealService.RetrieveById(id, PositionAssignmentRepeal.Informer, this.UserCredit);
 
-			return result.ToActionResult<PositionAssignmentRepeal>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.positionAssignmentRepealService.RetrieveAll(PositionAssignmentRepeal.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<PositionAssignmentRepeal>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.positionAssignmentRepealService.Save(positionAssignmentRepeal, this.UserCredit);
 
-			return result.ToActionResult<PositionAssignmentRepeal>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.positionAssignmentRepealService.Seek(positionAssignmentRepeal, this.UserCredit);
 
-			return result.ToActionResult<PositionAssignmentRepeal>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.positionAssignmentRepealService.SeekByValue(seekValue, PositionAssignmentRepeal.Informer, this.UserCredit);
 
-			return result.ToActionResult<PositionAssignmentRepeal>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

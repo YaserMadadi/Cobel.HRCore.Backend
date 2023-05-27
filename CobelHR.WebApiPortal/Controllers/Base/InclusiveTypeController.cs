@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.inclusiveTypeService.RetrieveById(id, InclusiveType.Informer, this.UserCredit);
 
-			return result.ToActionResult<InclusiveType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.inclusiveTypeService.RetrieveAll(InclusiveType.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<InclusiveType>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.inclusiveTypeService.Save(inclusiveType, this.UserCredit);
 
-			return result.ToActionResult<InclusiveType>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.inclusiveTypeService.Seek(inclusiveType, this.UserCredit);
 
-			return result.ToActionResult<InclusiveType>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.inclusiveTypeService.SeekByValue(seekValue, InclusiveType.Informer, this.UserCredit);
 
-			return result.ToActionResult<InclusiveType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

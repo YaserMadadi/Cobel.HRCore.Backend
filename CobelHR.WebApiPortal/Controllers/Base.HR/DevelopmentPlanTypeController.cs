@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.developmentPlanTypeService.RetrieveById(id, DevelopmentPlanType.Informer, this.UserCredit);
 
-			return result.ToActionResult<DevelopmentPlanType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.developmentPlanTypeService.RetrieveAll(DevelopmentPlanType.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<DevelopmentPlanType>();
+			return this.ToActionResult(result);
         }
 
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.developmentPlanTypeService.Save(developmentPlanType, this.UserCredit);
 
-			return result.ToActionResult<DevelopmentPlanType>();
+			return this.ToActionResult(result);
         }
 
 
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.developmentPlanTypeService.Seek(developmentPlanType, this.UserCredit);
 
-			return result.ToActionResult<DevelopmentPlanType>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.developmentPlanTypeService.SeekByValue(seekValue, DevelopmentPlanType.Informer, this.UserCredit);
 
-			return result.ToActionResult<DevelopmentPlanType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

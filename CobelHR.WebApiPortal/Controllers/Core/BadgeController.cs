@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.badgeService.RetrieveById(id, Badge.Informer, this.UserCredit);
 
-			return result.ToActionResult<Badge>();
+            return this.ToActionResult(result);// this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.badgeService.RetrieveAll(Badge.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<Badge>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.badgeService.Save(badge, this.UserCredit);
 
-			return result.ToActionResult<Badge>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.badgeService.Seek(badge, this.UserCredit);
 
-			return result.ToActionResult<Badge>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.badgeService.SeekByValue(seekValue, Badge.Informer, this.UserCredit);
 
-			return result.ToActionResult<Badge>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

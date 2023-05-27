@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.functionalKPIService.RetrieveById(id, FunctionalKPI.Informer, this.UserCredit);
 
-			return result.ToActionResult<FunctionalKPI>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.functionalKPIService.RetrieveAll(FunctionalKPI.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<FunctionalKPI>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.functionalKPIService.Save(functionalKPI, this.UserCredit);
 
-			return result.ToActionResult<FunctionalKPI>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.functionalKPIService.Seek(functionalKPI, this.UserCredit);
 
-			return result.ToActionResult<FunctionalKPI>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.functionalKPIService.SeekByValue(seekValue, FunctionalKPI.Informer, this.UserCredit);
 
-			return result.ToActionResult<FunctionalKPI>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

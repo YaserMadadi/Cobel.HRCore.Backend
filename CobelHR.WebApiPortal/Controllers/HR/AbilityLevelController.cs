@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.abilityLevelService.RetrieveById(id, AbilityLevel.Informer, this.UserCredit);
 
-			return result.ToActionResult<AbilityLevel>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.abilityLevelService.RetrieveAll(AbilityLevel.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<AbilityLevel>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.abilityLevelService.Save(abilityLevel, this.UserCredit);
 
-			return result.ToActionResult<AbilityLevel>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.abilityLevelService.Seek(abilityLevel, this.UserCredit);
 
-			return result.ToActionResult<AbilityLevel>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.abilityLevelService.SeekByValue(seekValue, AbilityLevel.Informer, this.UserCredit);
 
-			return result.ToActionResult<AbilityLevel>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

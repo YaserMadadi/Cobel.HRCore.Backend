@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.subSystemService.RetrieveById(id, SubSystem.Informer, this.UserCredit);
 
-			return result.ToActionResult<SubSystem>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.subSystemService.RetrieveAll(SubSystem.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<SubSystem>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.subSystemService.Save(subSystem, this.UserCredit);
 
-			return result.ToActionResult<SubSystem>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.subSystemService.Seek(subSystem, this.UserCredit);
 
-			return result.ToActionResult<SubSystem>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.subSystemService.SeekByValue(seekValue, SubSystem.Informer, this.UserCredit);
 
-			return result.ToActionResult<SubSystem>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

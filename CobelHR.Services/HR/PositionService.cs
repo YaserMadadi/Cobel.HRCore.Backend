@@ -13,10 +13,11 @@ using CobelHR.Entities.PMS;
 
 namespace CobelHR.Services.HR
 {
-    public class PositionService : Service<Position>, IPositionService
+    public class PositionService : TemporalService<Position>, IPositionService
     {
         public PositionService() : base()
         {
+            
         }
 
         public override async Task<DataResult<Position>> SaveAttached(Position position, UserCredit userCredit)

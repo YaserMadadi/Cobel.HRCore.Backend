@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.languageService.RetrieveById(id, Language.Informer, this.UserCredit);
 
-			return result.ToActionResult<Language>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.languageService.RetrieveAll(Language.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<Language>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.languageService.Save(language, this.UserCredit);
 
-			return result.ToActionResult<Language>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.languageService.Seek(language, this.UserCredit);
 
-			return result.ToActionResult<Language>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.languageService.SeekByValue(seekValue, Language.Informer, this.UserCredit);
 
-			return result.ToActionResult<Language>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.drivingLicenseTypeService.RetrieveById(id, DrivingLicenseType.Informer, this.UserCredit);
 
-			return result.ToActionResult<DrivingLicenseType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.drivingLicenseTypeService.RetrieveAll(DrivingLicenseType.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<DrivingLicenseType>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.drivingLicenseTypeService.Save(drivingLicenseType, this.UserCredit);
 
-			return result.ToActionResult<DrivingLicenseType>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.drivingLicenseTypeService.Seek(drivingLicenseType, this.UserCredit);
 
-			return result.ToActionResult<DrivingLicenseType>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.drivingLicenseTypeService.SeekByValue(seekValue, DrivingLicenseType.Informer, this.UserCredit);
 
-			return result.ToActionResult<DrivingLicenseType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

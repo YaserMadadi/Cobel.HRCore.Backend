@@ -24,7 +24,7 @@ namespace EssentialCore.Entities.Log
 
         public string CommandParameters { get; set; }
 
-        public string ExceptionType { get; set; }
+        public int ExceptionType_Id { get; set; }
 
         public string ErrorMessage { get; set; }
 

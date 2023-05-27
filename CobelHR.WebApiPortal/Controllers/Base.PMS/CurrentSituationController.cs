@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.currentSituationService.RetrieveById(id, CurrentSituation.Informer, this.UserCredit);
 
-			return result.ToActionResult<CurrentSituation>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.currentSituationService.RetrieveAll(CurrentSituation.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<CurrentSituation>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.currentSituationService.Save(currentSituation, this.UserCredit);
 
-			return result.ToActionResult<CurrentSituation>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.currentSituationService.Seek(currentSituation, this.UserCredit);
 
-			return result.ToActionResult<CurrentSituation>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.currentSituationService.SeekByValue(seekValue, CurrentSituation.Informer, this.UserCredit);
 
-			return result.ToActionResult<CurrentSituation>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

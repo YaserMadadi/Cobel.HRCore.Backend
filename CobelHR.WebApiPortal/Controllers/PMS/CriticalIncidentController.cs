@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.criticalIncidentService.RetrieveById(id, CriticalIncident.Informer, this.UserCredit);
 
-			return result.ToActionResult<CriticalIncident>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.criticalIncidentService.RetrieveAll(CriticalIncident.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<CriticalIncident>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.criticalIncidentService.Save(criticalIncident, this.UserCredit);
 
-			return result.ToActionResult<CriticalIncident>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.criticalIncidentService.Seek(criticalIncident, this.UserCredit);
 
-			return result.ToActionResult<CriticalIncident>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.criticalIncidentService.SeekByValue(seekValue, CriticalIncident.Informer, this.UserCredit);
 
-			return result.ToActionResult<CriticalIncident>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

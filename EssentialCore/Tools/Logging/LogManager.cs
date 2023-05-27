@@ -51,7 +51,7 @@ namespace EssentialCore.Tools.Logging
                 Time = DateTime.Now.TimeOfDay,
                 CommandName = commandName,
                 CommandParameters = commandParameters,
-                ExceptionType = ex.GetType().Name,
+                ExceptionType_Id = ex.GetType().Name == "SqlException" ? 1 : 2,
                 ErrorMessage = ex.Message,
                 ErrorNumber = 0,
                 ErrorCode = 0,
@@ -88,6 +88,11 @@ namespace EssentialCore.Tools.Logging
 
             try
             {
+                if(commandName.Equals("[Log].[Exception.Save]", StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new Exception();
+                }
+
                 result = await service.Save(currentLog, userCredit, transaction);
 
                 transaction.Commit();

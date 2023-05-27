@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.positionDivisionService.RetrieveById(id, PositionDivision.Informer, this.UserCredit);
 
-			return result.ToActionResult<PositionDivision>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.positionDivisionService.RetrieveAll(PositionDivision.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<PositionDivision>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.positionDivisionService.Save(positionDivision, this.UserCredit);
 
-			return result.ToActionResult<PositionDivision>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.positionDivisionService.Seek(positionDivision, this.UserCredit);
 
-			return result.ToActionResult<PositionDivision>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.positionDivisionService.SeekByValue(seekValue, PositionDivision.Informer, this.UserCredit);
 
-			return result.ToActionResult<PositionDivision>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

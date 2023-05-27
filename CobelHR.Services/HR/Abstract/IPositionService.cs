@@ -8,7 +8,7 @@ using CobelHR.Entities.PMS;
 
 namespace CobelHR.Services.HR.Abstract
 {
-    public interface IPositionService : IService<Position>
+    public interface IPositionService : ITemporalService<Position>
     {
         DataResult<List<Position>> CollectionOfPosition_Parent(int position_Id, Position position, UserCredit userCredit);
 

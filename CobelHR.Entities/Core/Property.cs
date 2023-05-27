@@ -8,12 +8,12 @@ namespace CobelHR.Entities.Core
 {
     public class Property : EntityBase, IEntityBase
     {
-        public static Info Informer { get; } = new Info("Core", "Property", "Property");
+        public static Info Informer { get; private set; } = new Info("Core", "Property", "Property");
 
         #region Constructor
         public Property() : this(0)
         {
-
+            
         }
 
         public Property(int id) : this(id, default)

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EssentialCore.Entities
 {
-    public class EntityBase : IEntityBase
+    public abstract class EntityBase : IEntityBase
     {
         private EntityBase()
         {
@@ -54,30 +54,12 @@ namespace EssentialCore.Entities
         public Paginate Paginate { get; set; }
 
         [JsonIgnore]
-        public bool IsNew
-        {
-            get
-            {
-                return Id == 0;
-            }
+        public bool IsNew => Id == 0;
 
-        }
+        public static bool Confirm(IEntityBase enttiy) =>  enttiy != null && enttiy.Id > 0;
 
+        public bool Confirm() => EntityBase.Confirm(this);
 
-
-        public static bool Confirm(IEntityBase enttiy)
-        {
-            return enttiy != null && enttiy.Id > 0;
-        }
-
-        public bool Confirm()
-        {
-            return EntityBase.Confirm(this);
-        }
-
-        public virtual bool Validate()
-        {
-            return true;
-        }
+        public virtual bool Validate() => true;
     }
 }

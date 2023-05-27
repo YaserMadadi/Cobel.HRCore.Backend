@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.configQualitativeObjectiveService.RetrieveById(id, ConfigQualitativeObjective.Informer, this.UserCredit);
 
-			return result.ToActionResult<ConfigQualitativeObjective>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.configQualitativeObjectiveService.RetrieveAll(ConfigQualitativeObjective.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<ConfigQualitativeObjective>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.configQualitativeObjectiveService.Save(configQualitativeObjective, this.UserCredit);
 
-			return result.ToActionResult<ConfigQualitativeObjective>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.configQualitativeObjectiveService.Seek(configQualitativeObjective, this.UserCredit);
 
-			return result.ToActionResult<ConfigQualitativeObjective>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.configQualitativeObjectiveService.SeekByValue(seekValue, ConfigQualitativeObjective.Informer, this.UserCredit);
 
-			return result.ToActionResult<ConfigQualitativeObjective>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

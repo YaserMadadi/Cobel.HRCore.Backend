@@ -2,6 +2,7 @@
 using EssentialCore.Tools.Result;
 using EssentialCore.Tools.Security.Entities;
 using EssentialCore.Tools.Security.JWT;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.DirectoryServices;

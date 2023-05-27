@@ -13,7 +13,7 @@ namespace CobelHR.Entities.Core
         #region Constructor
         public MenuItem() : this(0)
         {
-
+            
         }
 
         public MenuItem(int id) : this(id, default)

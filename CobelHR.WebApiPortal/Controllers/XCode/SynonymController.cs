@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.XCode
         {
             var result = await this.synonymService.RetrieveById(id, Synonym.Informer, this.UserCredit);
 
-			return result.ToActionResult<Synonym>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.XCode
         {
             var result = await this.synonymService.RetrieveAll(Synonym.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<Synonym>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.XCode
         {
             var result = await this.synonymService.Save(synonym, this.UserCredit);
 
-			return result.ToActionResult<Synonym>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.XCode
         {
             var result = await this.synonymService.Seek(synonym, this.UserCredit);
 
-			return result.ToActionResult<Synonym>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.XCode
         {
             var result = await this.synonymService.SeekByValue(seekValue, Synonym.Informer, this.UserCredit);
 
-			return result.ToActionResult<Synonym>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

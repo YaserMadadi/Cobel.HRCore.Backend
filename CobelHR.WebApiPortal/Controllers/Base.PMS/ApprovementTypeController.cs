@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.approvementTypeService.RetrieveById(id, ApprovementType.Informer, this.UserCredit);
 
-			return result.ToActionResult<ApprovementType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.approvementTypeService.RetrieveAll(ApprovementType.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<ApprovementType>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.approvementTypeService.Save(approvementType, this.UserCredit);
 
-			return result.ToActionResult<ApprovementType>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.approvementTypeService.Seek(approvementType, this.UserCredit);
 
-			return result.ToActionResult<ApprovementType>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.approvementTypeService.SeekByValue(seekValue, ApprovementType.Informer, this.UserCredit);
 
-			return result.ToActionResult<ApprovementType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

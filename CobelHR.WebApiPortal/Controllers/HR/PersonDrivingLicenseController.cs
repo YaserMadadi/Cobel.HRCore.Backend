@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.personDrivingLicenseService.RetrieveById(id, PersonDrivingLicense.Informer, this.UserCredit);
 
-			return result.ToActionResult<PersonDrivingLicense>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.personDrivingLicenseService.RetrieveAll(PersonDrivingLicense.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<PersonDrivingLicense>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.personDrivingLicenseService.Save(personDrivingLicense, this.UserCredit);
 
-			return result.ToActionResult<PersonDrivingLicense>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.personDrivingLicenseService.Seek(personDrivingLicense, this.UserCredit);
 
-			return result.ToActionResult<PersonDrivingLicense>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.personDrivingLicenseService.SeekByValue(seekValue, PersonDrivingLicense.Informer, this.UserCredit);
 
-			return result.ToActionResult<PersonDrivingLicense>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

@@ -31,7 +31,7 @@ namespace CobelHR.WebApiPortal.Partial.Controller.HR
 
             //result.Data
 
-            return new OkObjectResult(result.Data);
+            return Ok(result.Data);
         }
     }
 }

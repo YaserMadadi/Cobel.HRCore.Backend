@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.coachingQuestionaryAnsweredService.RetrieveById(id, CoachingQuestionaryAnswered.Informer, this.UserCredit);
 
-			return result.ToActionResult<CoachingQuestionaryAnswered>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.coachingQuestionaryAnsweredService.RetrieveAll(CoachingQuestionaryAnswered.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<CoachingQuestionaryAnswered>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.coachingQuestionaryAnsweredService.Save(coachingQuestionaryAnswered, this.UserCredit);
 
-			return result.ToActionResult<CoachingQuestionaryAnswered>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.coachingQuestionaryAnsweredService.Seek(coachingQuestionaryAnswered, this.UserCredit);
 
-			return result.ToActionResult<CoachingQuestionaryAnswered>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.coachingQuestionaryAnsweredService.SeekByValue(seekValue, CoachingQuestionaryAnswered.Informer, this.UserCredit);
 
-			return result.ToActionResult<CoachingQuestionaryAnswered>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

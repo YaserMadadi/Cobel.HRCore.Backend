@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.visionCommentService.RetrieveById(id, VisionComment.Informer, this.UserCredit);
 
-			return result.ToActionResult<VisionComment>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.visionCommentService.RetrieveAll(VisionComment.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<VisionComment>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.visionCommentService.Save(visionComment, this.UserCredit);
 
-			return result.ToActionResult<VisionComment>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.visionCommentService.Seek(visionComment, this.UserCredit);
 
-			return result.ToActionResult<VisionComment>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.visionCommentService.SeekByValue(seekValue, VisionComment.Informer, this.UserCredit);
 
-			return result.ToActionResult<VisionComment>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

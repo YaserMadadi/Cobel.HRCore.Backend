@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.workExperienceService.RetrieveById(id, WorkExperience.Informer, this.UserCredit);
 
-			return result.ToActionResult<WorkExperience>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.workExperienceService.RetrieveAll(WorkExperience.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<WorkExperience>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.workExperienceService.Save(workExperience, this.UserCredit);
 
-			return result.ToActionResult<WorkExperience>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.workExperienceService.Seek(workExperience, this.UserCredit);
 
-			return result.ToActionResult<WorkExperience>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.HR
         {
             var result = await this.workExperienceService.SeekByValue(seekValue, WorkExperience.Informer, this.UserCredit);
 
-			return result.ToActionResult<WorkExperience>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

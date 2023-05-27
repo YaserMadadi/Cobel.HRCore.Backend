@@ -34,7 +34,9 @@ namespace CobelHR.WebApiPortal.Partial.Controller.HR
         [Route("Employee/{employee_id:int}/LoadPermission")]
         public IActionResult LoadPermission(int employee_id)
         {
-            return this.employeeService.LoadRolePermission(employee_id).ToActionResult<RolePermission>();
+            var result = this.employeeService.LoadRolePermission(employee_id);
+
+            return this.ToActionResult(result);
         }
 
     }

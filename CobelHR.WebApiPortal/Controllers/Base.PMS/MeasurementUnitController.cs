@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.measurementUnitService.RetrieveById(id, MeasurementUnit.Informer, this.UserCredit);
 
-			return result.ToActionResult<MeasurementUnit>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.measurementUnitService.RetrieveAll(MeasurementUnit.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<MeasurementUnit>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.measurementUnitService.Save(measurementUnit, this.UserCredit);
 
-			return result.ToActionResult<MeasurementUnit>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.measurementUnitService.Seek(measurementUnit, this.UserCredit);
 
-			return result.ToActionResult<MeasurementUnit>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.measurementUnitService.SeekByValue(seekValue, MeasurementUnit.Informer, this.UserCredit);
 
-			return result.ToActionResult<MeasurementUnit>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

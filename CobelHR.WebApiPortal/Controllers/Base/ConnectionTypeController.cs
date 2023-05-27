@@ -28,7 +28,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.connectionTypeService.RetrieveById(id, ConnectionType.Informer, this.UserCredit);
 
-			return result.ToActionResult<ConnectionType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -37,7 +37,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.connectionTypeService.RetrieveAll(ConnectionType.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<ConnectionType>();
+			return this.ToActionResult(result);
         }
             
 
@@ -48,7 +48,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.connectionTypeService.Save(connectionType, this.UserCredit);
 
-			return result.ToActionResult<ConnectionType>();
+			return this.ToActionResult(result);
         }
 
         
@@ -77,7 +77,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.connectionTypeService.Seek(connectionType, this.UserCredit);
 
-			return result.ToActionResult<ConnectionType>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -86,7 +86,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.connectionTypeService.SeekByValue(seekValue, ConnectionType.Informer, this.UserCredit);
 
-			return result.ToActionResult<ConnectionType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

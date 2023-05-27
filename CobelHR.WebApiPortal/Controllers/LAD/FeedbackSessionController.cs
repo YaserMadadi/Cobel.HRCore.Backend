@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.feedbackSessionService.RetrieveById(id, FeedbackSession.Informer, this.UserCredit);
 
-			return result.ToActionResult<FeedbackSession>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.feedbackSessionService.RetrieveAll(FeedbackSession.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<FeedbackSession>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.feedbackSessionService.Save(feedbackSession, this.UserCredit);
 
-			return result.ToActionResult<FeedbackSession>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.feedbackSessionService.Seek(feedbackSession, this.UserCredit);
 
-			return result.ToActionResult<FeedbackSession>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.feedbackSessionService.SeekByValue(seekValue, FeedbackSession.Informer, this.UserCredit);
 
-			return result.ToActionResult<FeedbackSession>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

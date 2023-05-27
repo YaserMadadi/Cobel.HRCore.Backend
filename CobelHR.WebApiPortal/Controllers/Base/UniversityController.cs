@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.universityService.RetrieveById(id, University.Informer, this.UserCredit);
 
-			return result.ToActionResult<University>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.universityService.RetrieveAll(University.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<University>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.universityService.Save(university, this.UserCredit);
 
-			return result.ToActionResult<University>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.universityService.Seek(university, this.UserCredit);
 
-			return result.ToActionResult<University>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.universityService.SeekByValue(seekValue, University.Informer, this.UserCredit);
 
-			return result.ToActionResult<University>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

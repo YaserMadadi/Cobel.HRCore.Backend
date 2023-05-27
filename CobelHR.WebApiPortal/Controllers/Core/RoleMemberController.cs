@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.roleMemberService.RetrieveById(id, RoleMember.Informer, this.UserCredit);
 
-			return result.ToActionResult<RoleMember>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.roleMemberService.RetrieveAll(RoleMember.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<RoleMember>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.roleMemberService.Save(roleMember, this.UserCredit);
 
-			return result.ToActionResult<RoleMember>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.roleMemberService.Seek(roleMember, this.UserCredit);
 
-			return result.ToActionResult<RoleMember>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.roleMemberService.SeekByValue(seekValue, RoleMember.Informer, this.UserCredit);
 
-			return result.ToActionResult<RoleMember>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

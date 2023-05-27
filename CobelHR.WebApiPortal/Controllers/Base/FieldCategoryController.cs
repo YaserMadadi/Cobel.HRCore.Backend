@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.fieldCategoryService.RetrieveById(id, FieldCategory.Informer, this.UserCredit);
 
-			return result.ToActionResult<FieldCategory>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.fieldCategoryService.RetrieveAll(FieldCategory.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<FieldCategory>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.fieldCategoryService.Save(fieldCategory, this.UserCredit);
 
-			return result.ToActionResult<FieldCategory>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.fieldCategoryService.Seek(fieldCategory, this.UserCredit);
 
-			return result.ToActionResult<FieldCategory>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.fieldCategoryService.SeekByValue(seekValue, FieldCategory.Informer, this.UserCredit);
 
-			return result.ToActionResult<FieldCategory>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

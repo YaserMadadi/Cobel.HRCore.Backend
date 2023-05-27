@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.menuItemService.RetrieveById(id, MenuItem.Informer, this.UserCredit);
 
-			return result.ToActionResult<MenuItem>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.menuItemService.RetrieveAll(MenuItem.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<MenuItem>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.menuItemService.Save(menuItem, this.UserCredit);
 
-			return result.ToActionResult<MenuItem>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.menuItemService.Seek(menuItem, this.UserCredit);
 
-			return result.ToActionResult<MenuItem>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.menuItemService.SeekByValue(seekValue, MenuItem.Informer, this.UserCredit);
 
-			return result.ToActionResult<MenuItem>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

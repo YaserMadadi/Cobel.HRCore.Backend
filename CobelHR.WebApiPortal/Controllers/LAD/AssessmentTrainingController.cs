@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.assessmentTrainingService.RetrieveById(id, AssessmentTraining.Informer, this.UserCredit);
 
-			return result.ToActionResult<AssessmentTraining>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.assessmentTrainingService.RetrieveAll(AssessmentTraining.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<AssessmentTraining>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.assessmentTrainingService.Save(assessmentTraining, this.UserCredit);
 
-			return result.ToActionResult<AssessmentTraining>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.assessmentTrainingService.Seek(assessmentTraining, this.UserCredit);
 
-			return result.ToActionResult<AssessmentTraining>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.assessmentTrainingService.SeekByValue(seekValue, AssessmentTraining.Informer, this.UserCredit);
 
-			return result.ToActionResult<AssessmentTraining>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

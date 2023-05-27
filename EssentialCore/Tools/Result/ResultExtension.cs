@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EssentialCore.Controllers;
 using EssentialCore.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -67,13 +68,13 @@ namespace EssentialCore.Tools.Result
         /// <typeparam name="T"></typeparam>
         /// <param name="dataResult"></param>
         /// <returns></returns>
-        public static IActionResult ToActionResult<T>(this DataResult<T> dataResult) where T : IEntityBase
+        public static IActionResult ToActionResult<T>(this ControllerBase controller, DataResult<T> dataResult) where T : IEntityBase
         {
             if (!dataResult.IsSucceeded)
 
-                return new BadRequestObjectResult(dataResult);
+                return controller.BadRequest(dataResult);
 
-            return new OkObjectResult(dataResult); //OkObjectResult(new SuccessfulDataResult<T>(dataResult.Data));
+            return  controller.Ok(dataResult); //OkObjectResult(new SuccessfulDataResult<T>(dataResult.Data));
         }
 
         public static IActionResult ToActionResult<T>(this Task<DataResult<T>> dataResult) where T : IEntityBase
@@ -92,13 +93,13 @@ namespace EssentialCore.Tools.Result
         /// <typeparam name="T"></typeparam>
         /// <param name="dataResult"></param>
         /// <returns></returns>
-        public static IActionResult ToActionResult<T>(this DataResult<List<T>> dataResult) where T : IEntityBase
+        public static IActionResult ToActionResult<T>(this ControllerBase controller, DataResult<List<T>> dataResult) where T : IEntityBase
         {
             if (!dataResult.IsSucceeded || dataResult.Data == null)
 
-                return new BadRequestObjectResult(dataResult);
+                return controller.BadRequest(dataResult);
 
-            return new OkObjectResult(dataResult);
+            return controller.Ok(dataResult);
         }
 
         //public static IActionResult ToActionResult<T>(this Task<DataResult<List<T>>> dataResult) where T : IEntityBase

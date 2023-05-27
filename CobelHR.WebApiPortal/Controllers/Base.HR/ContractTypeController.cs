@@ -28,7 +28,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.contractTypeService.RetrieveById(id, ContractType.Informer, this.UserCredit);
 
-			return result.ToActionResult<ContractType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -37,7 +37,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.contractTypeService.RetrieveAll(ContractType.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<ContractType>();
+			return this.ToActionResult(result);
         }
             
 
@@ -48,7 +48,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.contractTypeService.Save(contractType, this.UserCredit);
 
-			return result.ToActionResult<ContractType>();
+			return this.ToActionResult(result);
         }
 
         
@@ -77,7 +77,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.contractTypeService.Seek(contractType, this.UserCredit);
 
-			return result.ToActionResult<ContractType>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -86,7 +86,7 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         {
             var result = await this.contractTypeService.SeekByValue(seekValue, ContractType.Informer, this.UserCredit);
 
-			return result.ToActionResult<ContractType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

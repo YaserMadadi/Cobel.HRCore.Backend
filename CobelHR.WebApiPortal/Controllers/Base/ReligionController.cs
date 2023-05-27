@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.religionService.RetrieveById(id, Religion.Informer, this.UserCredit);
 
-			return result.ToActionResult<Religion>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.religionService.RetrieveAll(Religion.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<Religion>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.religionService.Save(religion, this.UserCredit);
 
-			return result.ToActionResult<Religion>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.religionService.Seek(religion, this.UserCredit);
 
-			return result.ToActionResult<Religion>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.religionService.SeekByValue(seekValue, Religion.Informer, this.UserCredit);
 
-			return result.ToActionResult<Religion>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

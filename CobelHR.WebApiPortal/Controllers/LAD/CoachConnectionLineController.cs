@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.coachConnectionLineService.RetrieveById(id, CoachConnectionLine.Informer, this.UserCredit);
 
-			return result.ToActionResult<CoachConnectionLine>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.coachConnectionLineService.RetrieveAll(CoachConnectionLine.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<CoachConnectionLine>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.coachConnectionLineService.Save(coachConnectionLine, this.UserCredit);
 
-			return result.ToActionResult<CoachConnectionLine>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.coachConnectionLineService.Seek(coachConnectionLine, this.UserCredit);
 
-			return result.ToActionResult<CoachConnectionLine>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.coachConnectionLineService.SeekByValue(seekValue, CoachConnectionLine.Informer, this.UserCredit);
 
-			return result.ToActionResult<CoachConnectionLine>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

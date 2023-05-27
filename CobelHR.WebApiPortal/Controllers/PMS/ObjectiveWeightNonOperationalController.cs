@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.objectiveWeightNonOperationalService.RetrieveById(id, ObjectiveWeightNonOperational.Informer, this.UserCredit);
 
-			return result.ToActionResult<ObjectiveWeightNonOperational>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.objectiveWeightNonOperationalService.RetrieveAll(ObjectiveWeightNonOperational.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<ObjectiveWeightNonOperational>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.objectiveWeightNonOperationalService.Save(objectiveWeightNonOperational, this.UserCredit);
 
-			return result.ToActionResult<ObjectiveWeightNonOperational>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.objectiveWeightNonOperationalService.Seek(objectiveWeightNonOperational, this.UserCredit);
 
-			return result.ToActionResult<ObjectiveWeightNonOperational>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.PMS
         {
             var result = await this.objectiveWeightNonOperationalService.SeekByValue(seekValue, ObjectiveWeightNonOperational.Informer, this.UserCredit);
 
-			return result.ToActionResult<ObjectiveWeightNonOperational>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

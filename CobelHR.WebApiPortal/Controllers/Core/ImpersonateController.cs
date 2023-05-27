@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.impersonateService.RetrieveById(id, Impersonate.Informer, this.UserCredit);
 
-			return result.ToActionResult<Impersonate>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.impersonateService.RetrieveAll(Impersonate.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<Impersonate>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.impersonateService.Save(impersonate, this.UserCredit);
 
-			return result.ToActionResult<Impersonate>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.impersonateService.Seek(impersonate, this.UserCredit);
 
-			return result.ToActionResult<Impersonate>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Core
         {
             var result = await this.impersonateService.SeekByValue(seekValue, Impersonate.Informer, this.UserCredit);
 
-			return result.ToActionResult<Impersonate>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

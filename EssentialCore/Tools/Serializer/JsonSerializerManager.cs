@@ -36,16 +36,24 @@ namespace EssentialCore.Tools.Serializer
 
         public static T Deserialize<T>(this string jsonValue, JsonType jsonType)
         {
+
             if (jsonType == JsonType.Collection)
             {
                 jsonValue = string.IsNullOrWhiteSpace(jsonValue) ? "[]" : jsonValue;
-
-                return JsonConvert.DeserializeObject<T>(jsonValue);
+            }
+            else // JsonType.Single
+            {
+                jsonValue = string.IsNullOrWhiteSpace(jsonValue) ? "{}" : jsonValue.Singlize();
             }
 
-            jsonValue = string.IsNullOrWhiteSpace(jsonValue) ? "{}" : jsonValue;
-
-            return JsonConvert.DeserializeObject<T>(jsonValue.Singlize());
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(jsonValue);
+            }
+            catch (Exception ex)
+            {
+                return default;
+            }
         }
 
         public static string Singlize(this string jsonValue)

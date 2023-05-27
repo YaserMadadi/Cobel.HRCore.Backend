@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.targetSettingTypeService.RetrieveById(id, TargetSettingType.Informer, this.UserCredit);
 
-			return result.ToActionResult<TargetSettingType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.targetSettingTypeService.RetrieveAll(TargetSettingType.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<TargetSettingType>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.targetSettingTypeService.Save(targetSettingType, this.UserCredit);
 
-			return result.ToActionResult<TargetSettingType>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.targetSettingTypeService.Seek(targetSettingType, this.UserCredit);
 
-			return result.ToActionResult<TargetSettingType>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.targetSettingTypeService.SeekByValue(seekValue, TargetSettingType.Informer, this.UserCredit);
 
-			return result.ToActionResult<TargetSettingType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

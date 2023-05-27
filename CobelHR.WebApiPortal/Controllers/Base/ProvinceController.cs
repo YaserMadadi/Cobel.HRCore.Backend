@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.provinceService.RetrieveById(id, Province.Informer, this.UserCredit);
 
-			return result.ToActionResult<Province>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.provinceService.RetrieveAll(Province.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<Province>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.provinceService.Save(province, this.UserCredit);
 
-			return result.ToActionResult<Province>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.provinceService.Seek(province, this.UserCredit);
 
-			return result.ToActionResult<Province>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.Base
         {
             var result = await this.provinceService.SeekByValue(seekValue, Province.Informer, this.UserCredit);
 
-			return result.ToActionResult<Province>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

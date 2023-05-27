@@ -131,7 +131,7 @@ namespace EssentialCore.BusinessLogic
 
         }
 
-        public virtual Task<DataResult<T>> SaveAttached(T entity, UserCredit userCredit)
+        public virtual async Task<DataResult<T>> SaveAttached(T entity, UserCredit userCredit)
         {
             throw new NotImplementedException();
         }
@@ -216,7 +216,5 @@ namespace EssentialCore.BusinessLogic
 
             return data.ToListDataResult<U>();
         }
-
-
     }
 }

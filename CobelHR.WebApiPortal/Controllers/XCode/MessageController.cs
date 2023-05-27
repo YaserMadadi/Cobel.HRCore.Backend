@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.XCode
         {
             var result = await this.messageService.RetrieveById(id, Message.Informer, this.UserCredit);
 
-			return result.ToActionResult<Message>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.XCode
         {
             var result = await this.messageService.RetrieveAll(Message.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<Message>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.XCode
         {
             var result = await this.messageService.Save(message, this.UserCredit);
 
-			return result.ToActionResult<Message>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.XCode
         {
             var result = await this.messageService.Seek(message, this.UserCredit);
 
-			return result.ToActionResult<Message>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.XCode
         {
             var result = await this.messageService.SeekByValue(seekValue, Message.Informer, this.UserCredit);
 
-			return result.ToActionResult<Message>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

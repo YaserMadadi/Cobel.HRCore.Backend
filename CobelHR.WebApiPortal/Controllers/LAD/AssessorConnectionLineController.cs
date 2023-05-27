@@ -26,7 +26,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.assessorConnectionLineService.RetrieveById(id, AssessorConnectionLine.Informer, this.UserCredit);
 
-			return result.ToActionResult<AssessorConnectionLine>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.assessorConnectionLineService.RetrieveAll(AssessorConnectionLine.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<AssessorConnectionLine>();
+			return this.ToActionResult(result);
         }
             
 
@@ -46,7 +46,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.assessorConnectionLineService.Save(assessorConnectionLine, this.UserCredit);
 
-			return result.ToActionResult<AssessorConnectionLine>();
+			return this.ToActionResult(result);
         }
 
         
@@ -75,7 +75,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.assessorConnectionLineService.Seek(assessorConnectionLine, this.UserCredit);
 
-			return result.ToActionResult<AssessorConnectionLine>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -84,7 +84,7 @@ namespace CobelHR.ApiServices.Controllers.LAD
         {
             var result = await this.assessorConnectionLineService.SeekByValue(seekValue, AssessorConnectionLine.Informer, this.UserCredit);
 
-			return result.ToActionResult<AssessorConnectionLine>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]

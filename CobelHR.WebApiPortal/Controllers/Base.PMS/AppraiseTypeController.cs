@@ -27,7 +27,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.appraiseTypeService.RetrieveById(id, AppraiseType.Informer, this.UserCredit);
 
-			return result.ToActionResult<AppraiseType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.appraiseTypeService.RetrieveAll(AppraiseType.Informer, currentPage, this.UserCredit);
 
-			return result.ToActionResult<AppraiseType>();
+			return this.ToActionResult(result);
         }
             
 
@@ -47,7 +47,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.appraiseTypeService.Save(appraiseType, this.UserCredit);
 
-			return result.ToActionResult<AppraiseType>();
+			return this.ToActionResult(result);
         }
 
         
@@ -76,7 +76,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.appraiseTypeService.Seek(appraiseType, this.UserCredit);
 
-			return result.ToActionResult<AppraiseType>();
+			return this.ToActionResult(result);
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         {
             var result = await this.appraiseTypeService.SeekByValue(seekValue, AppraiseType.Informer, this.UserCredit);
 
-			return result.ToActionResult<AppraiseType>();
+			return this.ToActionResult(result);
         }
 
         [HttpPost]
