@@ -14,7 +14,7 @@ namespace CobelHR.Services.Partial.HR.Abstract
     {
         public DataResult<List<RolePermission>> LoadRolePermission(int employee_id);
 
-        public DataResult<List<TargetSetting>> LoadTargetSetting(int employee_id, TargetSetting targetSetting);
+        public DataResult<List<TargetSetting>> LoadTargetSetting(int employee_id, TargetSetting targetSetting, bool justDirect);
 
     }
 }

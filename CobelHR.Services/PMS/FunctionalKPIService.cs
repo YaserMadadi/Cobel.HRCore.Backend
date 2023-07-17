@@ -28,7 +28,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<FunctionalAppraise>(procedureName,
                                                     new SqlParameter("@Id",functionalKPI_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", functionalAppraise.ToJson()));
         }
 
@@ -38,7 +38,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<FunctionalKPIComment>(procedureName,
                                                     new SqlParameter("@Id",functionalKPI_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", functionalKPIComment.ToJson()));
         }
     }

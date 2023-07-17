@@ -28,7 +28,7 @@ namespace CobelHR.Services.LAD
 
             return this.CollectionOf<PromotionAssessment>(procedureName,
                                                     new SqlParameter("@Id",promotionResult_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", promotionAssessment.ToJson()));
         }
     }

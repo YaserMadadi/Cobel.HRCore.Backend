@@ -5,8 +5,9 @@ using EssentialCore.Tools.Pagination;
 using EssentialCore.Tools.Result;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
-
+using EnPharma = CobelHR.Entities.PMS.Pharma;
 using System.Threading.Tasks;
+//using CobelHR.Entities.PMS.Pharma;
 
 namespace CobelHR.ApiServices.Controllers.PMS
 {
@@ -104,7 +105,18 @@ namespace CobelHR.ApiServices.Controllers.PMS
             return this.targetSettingService.CollectionOfAppraiseResult(id, appraiseResult, this.UserCredit).ToActionResult();
         }
 
-		// CollectionOfBehavioralObjective
+        //https://localhost:44337/api/PMS/TargetSetting/17037/PharmaAppraiseResult
+        // CollectionOfPharmaAppraiseResult
+        [HttpPost]
+        [Route("TargetSetting/{targetSetting_id:int}/PharmaAppraiseResult")]
+                                    //               PharmaAppraiseResult
+        public IActionResult CollectionOfPharmaAppraiseResult([FromRoute(Name = "targetSetting_id")] int id, EnPharma.PharmaAppraiseResult appraiseResult)
+        {
+            return this.targetSettingService.CollectionOfPharmaAppraiseResult(id, appraiseResult, this.UserCredit).ToActionResult();
+        }
+
+
+        // CollectionOfBehavioralObjective
         [HttpPost]
         [Route("TargetSetting/{targetSetting_id:int}/BehavioralObjective")]
         public IActionResult CollectionOfBehavioralObjective([FromRoute(Name = "targetSetting_id")] int id, BehavioralObjective behavioralObjective)
@@ -142,6 +154,14 @@ namespace CobelHR.ApiServices.Controllers.PMS
         public IActionResult CollectionOfQuantitativeAppraise([FromRoute(Name = "targetSetting_id")] int id, QuantitativeAppraise quantitativeAppraise)
         {
             return this.targetSettingService.CollectionOfQuantitativeAppraise(id, quantitativeAppraise, this.UserCredit).ToActionResult();
+        }
+
+        // CollectionOfQuantitativeAppraise
+        [HttpPost]
+        [Route("TargetSetting/{targetSetting_id:int}/Objective")]
+        public IActionResult CollectionOfObjective([FromRoute(Name = "targetSetting_id")] int id, EnPharma.Objective objective)
+        {
+            return this.targetSettingService.CollectionOfObjective(id, objective, this.UserCredit).ToActionResult();
         }
     }
 }

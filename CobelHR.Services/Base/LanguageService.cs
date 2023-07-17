@@ -29,7 +29,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<LanguageAbility>(procedureName,
                                                     new SqlParameter("@Id",language_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", languageAbility.ToJson()));
         }
     }

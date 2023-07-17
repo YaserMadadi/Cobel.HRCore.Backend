@@ -28,7 +28,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<BehavioralAppraise>(procedureName,
                                                     new SqlParameter("@Id",behavioralKPI_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", behavioralAppraise.ToJson()));
         }
     }

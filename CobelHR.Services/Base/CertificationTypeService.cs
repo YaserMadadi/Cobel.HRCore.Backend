@@ -29,7 +29,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<UniversityHistory>(procedureName,
                                                     new SqlParameter("@Id",certificationType_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", universityHistory.ToJson()));
         }
     }

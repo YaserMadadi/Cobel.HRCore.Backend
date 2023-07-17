@@ -29,7 +29,7 @@ namespace CobelHR.Services.Base.HR
 
             return this.CollectionOf<Person>(procedureName,
                                                     new SqlParameter("@Id",maritalStatus_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", person.ToJson()));
         }
     }

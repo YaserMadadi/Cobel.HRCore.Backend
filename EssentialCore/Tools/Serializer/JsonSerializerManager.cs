@@ -39,13 +39,21 @@ namespace EssentialCore.Tools.Serializer
             if (jsonType == JsonType.Collection)
             {
                 jsonValue = string.IsNullOrWhiteSpace(jsonValue) ? "[]" : jsonValue;
-
-                return JsonConvert.DeserializeObject<T>(jsonValue);
+            }
+            else
+            {
+                jsonValue = string.IsNullOrWhiteSpace(jsonValue) ? "{}" : jsonValue.Singlize();
             }
 
-            jsonValue = string.IsNullOrWhiteSpace(jsonValue) ? "{}" : jsonValue;
-
-            return JsonConvert.DeserializeObject<T>(jsonValue.Singlize());
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(jsonValue);
+                //return JsonConvert.DeserializeObject<T>(jsonValue.Singlize());
+            }
+            catch (Exception ex)
+            {
+                return default;
+            }
         }
 
         public static string Singlize(this string jsonValue)

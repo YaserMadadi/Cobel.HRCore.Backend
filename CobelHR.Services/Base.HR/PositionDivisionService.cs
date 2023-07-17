@@ -29,7 +29,7 @@ namespace CobelHR.Services.Base.HR
 
             return this.CollectionOf<Position>(procedureName,
                                                     new SqlParameter("@Id",positionDivision_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", position.ToJson()));
         }
 
@@ -39,7 +39,7 @@ namespace CobelHR.Services.Base.HR
 
             return this.CollectionOf<Unit>(procedureName,
                                                     new SqlParameter("@Id",positionDivision_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", unit.ToJson()));
         }
     }

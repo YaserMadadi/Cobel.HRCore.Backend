@@ -24,10 +24,10 @@ namespace CobelHR.WebApiPortal.Partial.Controller.HR
         }
 
         [HttpPost]
-        [Route("Employee/{employee_id:int}/LoadTargetSettings")]
-        public IActionResult LoadTargetSetting(int employee_id, TargetSetting targetSetting)
+        [Route("Employee/{employee_id:int}/LoadTargetSettings/{direct:bool}")]
+        public IActionResult LoadTargetSetting(int employee_id, TargetSetting targetSetting, bool direct = false)
         {
-            return this.employeeService.LoadTargetSetting(employee_id, targetSetting).ToActionResult();
+            return this.employeeService.LoadTargetSetting(employee_id, targetSetting, direct).ToActionResult();
         }
 
         [HttpGet]

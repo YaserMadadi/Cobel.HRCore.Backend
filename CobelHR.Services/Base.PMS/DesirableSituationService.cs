@@ -29,7 +29,7 @@ namespace CobelHR.Services.Base.PMS
 
             return this.CollectionOf<IndividualDevelopmentPlan>(procedureName,
                                                     new SqlParameter("@Id",desirableSituation_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", individualDevelopmentPlan.ToJson()));
         }
     }

@@ -8,6 +8,7 @@ using EssentialCore.Entities;
 using CobelHR.Entities.PMS;
 using CobelHR.Services.PMS.Actions;
 using CobelHR.Services.PMS.Abstract;
+using EnPharma = CobelHR.Entities.PMS.Pharma;
 
 namespace CobelHR.Services.PMS
 {
@@ -28,17 +29,27 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<AppraiseResult>(procedureName,
                                                     new SqlParameter("@Id",targetSetting_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", appraiseResult.ToJson()));
         }
 
-		public DataResult<List<BehavioralObjective>> CollectionOfBehavioralObjective(int targetSetting_Id, BehavioralObjective behavioralObjective, UserCredit userCredit)
+        public DataResult<List<EnPharma.PharmaAppraiseResult>> CollectionOfPharmaAppraiseResult(int targetSetting_Id, EnPharma.PharmaAppraiseResult appraiseResult, UserCredit userCredit)
+        {
+            var procedureName = "[PMS].[TargetSetting.CollectionOfPharmaAppraiseResult]";
+
+            return this.CollectionOf<EnPharma.PharmaAppraiseResult>(procedureName,
+                                                    new SqlParameter("@Id", targetSetting_Id),
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    new SqlParameter("@jsonValue", appraiseResult.ToJson()));
+        }
+
+        public DataResult<List<BehavioralObjective>> CollectionOfBehavioralObjective(int targetSetting_Id, BehavioralObjective behavioralObjective, UserCredit userCredit)
         {
             var procedureName = "[PMS].[TargetSetting.CollectionOfBehavioralObjective]";
 
             return this.CollectionOf<BehavioralObjective>(procedureName,
                                                     new SqlParameter("@Id",targetSetting_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", behavioralObjective.ToJson()));
         }
 
@@ -48,7 +59,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<FinalAppraise>(procedureName,
                                                     new SqlParameter("@Id",targetSetting_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", finalAppraise.ToJson()));
         }
 
@@ -58,7 +69,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<FunctionalObjective>(procedureName,
                                                     new SqlParameter("@Id",targetSetting_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", functionalObjective.ToJson()));
         }
 
@@ -68,7 +79,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<QualitativeObjective>(procedureName,
                                                     new SqlParameter("@Id",targetSetting_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", qualitativeObjective.ToJson()));
         }
 
@@ -78,8 +89,18 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<QuantitativeAppraise>(procedureName,
                                                     new SqlParameter("@Id",targetSetting_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", quantitativeAppraise.ToJson()));
+        }
+
+        public DataResult<List<EnPharma.Objective>> CollectionOfObjective(int targetSetting_Id, EnPharma.Objective objective, UserCredit userCredit)
+        {
+            var procedureName = "[PMS].[TargetSetting.CollectionOfObjective]";
+
+            return this.CollectionOf<EnPharma.Objective>(procedureName,
+                                                    new SqlParameter("@Id", targetSetting_Id),
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    new SqlParameter("@jsonValue", objective.ToJson()));
         }
     }
 }

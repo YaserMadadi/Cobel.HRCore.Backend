@@ -9,6 +9,12 @@ namespace CobelHR.Entities
 {
     public class CheckConnection
     {
+
+        public string CheckConnectionAction()
+        {
+            return ConnectionManager.CheckConnection();
+        }
+
         public override string ToString()
         {
             var connection =  EssentialCore.Tools.Configuartion.ConfigurationService.ReadSection<Connection>("Connection");

@@ -28,7 +28,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<PositionAssignmentRepeal>(procedureName,
                                                     new SqlParameter("@Id",positionAssignment_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", positionAssignmentRepeal.ToJson()));
         }
     }

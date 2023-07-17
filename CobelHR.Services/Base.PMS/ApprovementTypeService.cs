@@ -29,7 +29,7 @@ namespace CobelHR.Services.Base.PMS
 
             return this.CollectionOf<VisionApproved>(procedureName,
                                                     new SqlParameter("@Id",approvementType_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", visionApproved.ToJson()));
         }
     }

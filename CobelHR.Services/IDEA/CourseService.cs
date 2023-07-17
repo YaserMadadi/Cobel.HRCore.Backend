@@ -28,7 +28,7 @@ namespace CobelHR.Services.IDEA
 
             return this.CollectionOf<Training>(procedureName,
                                                     new SqlParameter("@Id",course_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", training.ToJson()));
         }
     }

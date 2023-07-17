@@ -28,7 +28,7 @@ namespace CobelHR.Services.LAD
 
             return this.CollectionOf<CoachingQuestionaryAnswered>(procedureName,
                                                     new SqlParameter("@Id",questionaryItem_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", coachingQuestionaryAnswered.ToJson()));
         }
     }

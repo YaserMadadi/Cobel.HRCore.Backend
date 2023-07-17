@@ -28,7 +28,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<City>(procedureName,
                                                     new SqlParameter("@Id",province_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", city.ToJson()));
         }
     }

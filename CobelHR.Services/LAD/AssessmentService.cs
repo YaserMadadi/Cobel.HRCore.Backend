@@ -28,7 +28,7 @@ namespace CobelHR.Services.LAD
 
             return this.CollectionOf<AssessmentCoaching>(procedureName,
                                                     new SqlParameter("@Id",assessment_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", assessmentCoaching.ToJson()));
         }
 
@@ -38,7 +38,7 @@ namespace CobelHR.Services.LAD
 
             return this.CollectionOf<AssessmentScore>(procedureName,
                                                     new SqlParameter("@Id",assessment_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", assessmentScore.ToJson()));
         }
 
@@ -48,7 +48,7 @@ namespace CobelHR.Services.LAD
 
             return this.CollectionOf<AssessmentTraining>(procedureName,
                                                     new SqlParameter("@Id",assessment_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", assessmentTraining.ToJson()));
         }
 
@@ -58,7 +58,7 @@ namespace CobelHR.Services.LAD
 
             return this.CollectionOf<CoachingQuestionary>(procedureName,
                                                     new SqlParameter("@Id",assessment_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", coachingQuestionary.ToJson()));
         }
 
@@ -68,7 +68,7 @@ namespace CobelHR.Services.LAD
 
             return this.CollectionOf<Conclusion>(procedureName,
                                                     new SqlParameter("@Id",assessment_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", conclusion.ToJson()));
         }
 
@@ -78,7 +78,7 @@ namespace CobelHR.Services.LAD
 
             return this.CollectionOf<DevelopmentGoal>(procedureName,
                                                     new SqlParameter("@Id",assessment_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", developmentGoal.ToJson()));
         }
 
@@ -88,7 +88,7 @@ namespace CobelHR.Services.LAD
 
             return this.CollectionOf<FeedbackSession>(procedureName,
                                                     new SqlParameter("@Id",assessment_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", feedbackSession.ToJson()));
         }
 
@@ -98,7 +98,7 @@ namespace CobelHR.Services.LAD
 
             return this.CollectionOf<PromotionAssessment>(procedureName,
                                                     new SqlParameter("@Id",assessment_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", promotionAssessment.ToJson()));
         }
 
@@ -108,7 +108,7 @@ namespace CobelHR.Services.LAD
 
             return this.CollectionOf<RotationAssessment>(procedureName,
                                                     new SqlParameter("@Id",assessment_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", rotationAssessment.ToJson()));
         }
     }

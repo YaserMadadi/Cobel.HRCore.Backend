@@ -29,7 +29,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<PersonDrivingLicense>(procedureName,
                                                     new SqlParameter("@Id",drivingLicenseType_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", personDrivingLicense.ToJson()));
         }
     }

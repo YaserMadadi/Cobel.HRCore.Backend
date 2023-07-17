@@ -28,7 +28,7 @@ namespace CobelHR.Services.Core
 
             return this.CollectionOf<Badge>(procedureName,
                                                     new SqlParameter("@Id",badgeType_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", badge.ToJson()));
         }
     }

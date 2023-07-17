@@ -28,7 +28,7 @@ namespace CobelHR.Services.Core
 
             return this.CollectionOf<PropertyOption>(procedureName,
                                                     new SqlParameter("@Id",property_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", propertyOption.ToJson()));
         }
     }

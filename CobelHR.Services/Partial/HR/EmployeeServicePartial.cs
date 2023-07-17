@@ -26,10 +26,11 @@ namespace CobelHR.Services.Partial.HR
             return dataResult.Result;
         }
 
-        public DataResult<List<TargetSetting>> LoadTargetSetting(int employee_id, TargetSetting targetSetting)
+        public DataResult<List<TargetSetting>> LoadTargetSetting(int employee_id, TargetSetting targetSetting, bool direct = false)
         {
             var dataResult = UserClass.CreateCommand("[HR].[Employee.LoadTargetSettings]",
                                                 new SqlParameter("@Employee_Id", employee_id),
+                                                new SqlParameter("@DirectEmployee", direct),
                                                 new SqlParameter("@jsonValue", targetSetting.ToJson()))
                                                         .ExecuteDataResult<List<TargetSetting>>(JsonType.Collection);
 

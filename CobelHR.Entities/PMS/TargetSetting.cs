@@ -68,7 +68,10 @@ namespace CobelHR.Entities.PMS
         [JsonIgnore]
 		public List<AppraiseResult> ListOfAppraiseResult { get; set; }
 
-		[JsonIgnore]
+        [JsonIgnore]
+        public List<PMS.Pharma.PharmaAppraiseResult> ListOfPharmaAppraiseResult { get; set; }
+
+        [JsonIgnore]
 		public List<BehavioralObjective> ListOfBehavioralObjective { get; set; }
 
 		[JsonIgnore]

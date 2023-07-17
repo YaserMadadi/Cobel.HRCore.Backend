@@ -29,7 +29,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<AssessmentTraining>(procedureName,
                                                     new SqlParameter("@Id",yearQuarter_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", assessmentTraining.ToJson()));
         }
     }

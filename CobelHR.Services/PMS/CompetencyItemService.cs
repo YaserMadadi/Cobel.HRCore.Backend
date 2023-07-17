@@ -29,7 +29,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<AssessmentScore>(procedureName,
                                                     new SqlParameter("@Id",competencyItem_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", assessmentScore.ToJson()));
         }
 
@@ -39,7 +39,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<BehavioralObjective>(procedureName,
                                                     new SqlParameter("@Id",competencyItem_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", behavioralObjective.ToJson()));
         }
 
@@ -49,7 +49,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<CompetencyItemKPI>(procedureName,
                                                     new SqlParameter("@Id",competencyItem_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", competencyItemKPI.ToJson()));
         }
 
@@ -59,7 +59,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<DevelopmentPlanCompetency>(procedureName,
                                                     new SqlParameter("@Id",competencyItem_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", developmentPlanCompetency.ToJson()));
         }
     }

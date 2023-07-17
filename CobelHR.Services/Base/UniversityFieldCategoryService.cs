@@ -28,7 +28,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<FieldOfStudy>(procedureName,
                                                     new SqlParameter("@Id",universityFieldCategory_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", fieldOfStudy.ToJson()));
         }
     }

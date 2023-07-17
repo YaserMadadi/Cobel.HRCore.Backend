@@ -28,7 +28,7 @@ namespace CobelHR.Services.LAD
 
             return this.CollectionOf<CoachConnectionLine>(procedureName,
                                                     new SqlParameter("@Id",coach_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", coachConnectionLine.ToJson()));
         }
 
@@ -38,7 +38,7 @@ namespace CobelHR.Services.LAD
 
             return this.CollectionOf<Coaching>(procedureName,
                                                     new SqlParameter("@Id",coach_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", coaching.ToJson()));
         }
     }

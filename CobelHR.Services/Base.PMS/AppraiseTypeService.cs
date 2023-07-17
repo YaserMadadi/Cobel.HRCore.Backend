@@ -29,7 +29,7 @@ namespace CobelHR.Services.Base.PMS
 
             return this.CollectionOf<AppraiseResult>(procedureName,
                                                     new SqlParameter("@Id",appraiseType_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", appraiseResult.ToJson()));
         }
 
@@ -39,7 +39,7 @@ namespace CobelHR.Services.Base.PMS
 
             return this.CollectionOf<BehavioralAppraise>(procedureName,
                                                     new SqlParameter("@Id",appraiseType_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", behavioralAppraise.ToJson()));
         }
 
@@ -49,7 +49,7 @@ namespace CobelHR.Services.Base.PMS
 
             return this.CollectionOf<FunctionalAppraise>(procedureName,
                                                     new SqlParameter("@Id",appraiseType_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", functionalAppraise.ToJson()));
         }
 
@@ -59,7 +59,7 @@ namespace CobelHR.Services.Base.PMS
 
             return this.CollectionOf<QualitativeAppraise>(procedureName,
                                                     new SqlParameter("@Id",appraiseType_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", qualitativeAppraise.ToJson()));
         }
     }

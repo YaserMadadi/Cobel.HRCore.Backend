@@ -22,8 +22,8 @@ namespace EssentialCore.BusinessLogic
             //TODO: CheckPermission
             //                                                                   RetrieveById
             var command = UserClass.CreateCommand($"[{info.Schema}].[{info.Name}.RetrieveById]",
-                                                                        new SqlParameter("@Id", id),
-                                                                        new SqlParameter("@User_Id", userCredit.Person_Id));
+                                                                        new SqlParameter("@Id", id));
+            //new SqlParameter("@User_Id", userCredit.Person_Id));
 
             IDataResult<string> result = await command.ExecuteDataResult();
 
@@ -53,7 +53,7 @@ namespace EssentialCore.BusinessLogic
         {
             var command = UserClass.CreateCommand($"[{info.Schema}].[{info.Name}.RetrieveAll]",
                                                                             new SqlParameter("@User_Id", user_Id),
-                                                                            new SqlParameter("@CurrentPage", currentPage));
+                                                                            new SqlParameter("@PaginateJson", new Paginate(80, currentPage).ToJson()));
 
             IDataResult<string> result = await command.ExecuteDataResult();
 
@@ -145,7 +145,7 @@ namespace EssentialCore.BusinessLogic
             var command = UserClass.CreateCommand($"[{entity.Info.Schema}].[{entity.Info.Name}.Seek]",
                                                             new SqlParameter("@jsonValue", entity.ToJson()),
                                                             new SqlParameter("@User_Id", userCredit.Person_Id),
-                                                            new SqlParameter("@Current_Page", paginate.CurrentPage));
+                                                            new SqlParameter("@PaginateJson", new Paginate(80, paginate.CurrentPage).ToJson()));
 
             var result = await command.ExecuteDataResult();
 
@@ -186,11 +186,12 @@ namespace EssentialCore.BusinessLogic
 
                 return new ErrorResult(-1, $"Sent {entity?.Info?.Name ?? "Object"} Has Problem!", string.Empty);
 
-            IResult result = await UserClass.CreateCommand($"[{entity.Info.Schema}].[{entity.Info.Name}.Delete]",
+            var command = UserClass.CreateCommand($"[{entity.Info.Schema}].[{entity.Info.Name}.Delete]",
                                                             new SqlParameter("@Id", entity.Id),
                                                             new SqlParameter("@TimeStamp", entity.TimeStamp),
-                                                            new SqlParameter("@User_Id", userCredit.Person_Id))
-                                                                .ExecuteResult();
+                                                            new SqlParameter("@User_Id", userCredit.Person_Id));
+
+            IResult result = await command.ExecuteResult();
 
             if (!result.IsSucceeded)
 
@@ -209,8 +210,9 @@ namespace EssentialCore.BusinessLogic
 
         public DataResult<List<U>> CollectionOf<U>(string procedureName, params SqlParameter[] parameter) where U : IEntityBase
         {
-            var result = UserClass.CreateCommand(procedureName, parameter)
-                                            .ExecuteDataResult();
+            var command = UserClass.CreateCommand(procedureName, parameter);
+
+            var result = command.ExecuteDataResult();
 
             var data = result.Result.Data.Deserialize<List<U>>(JsonType.Collection);
 

@@ -10,6 +10,10 @@ using CobelHR.Services.HR.Abstract;
 using CobelHR.Services.HR;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Services.PMS;
+
+using PharmaAbstract =  CobelHR.Services.PMS.Pharma.Abstract;
+using PharmaEntities = CobelHR.Services.PMS.Pharma;
+
 using CobelHR.Services.LAD.Abstract;
 using CobelHR.Services.LAD;
 using CobelHR.Services.Base.HR.Abstract;
@@ -24,8 +28,10 @@ using CobelHR.Services.Partial.HR.Abstract;
 using CobelHR.Services.Partial.HR;
 using CobelHR.Services.Partial.PMS.Abstract;
 using CobelHR.Services.Partial.PMS;
+
 using CobelHR.Services.Partial.Core.Abstract;
 using CobelHR.Services.Partial.Core;
+using CobelHR.Entities.PMS.Pharma;
 
 namespace CobelHR.Services
 {
@@ -241,6 +247,19 @@ namespace CobelHR.Services
             services.AddScoped<IVisionService, VisionService>();
             services.AddScoped<IVisionApprovedService, VisionApprovedService>();
             services.AddScoped<IVisionCommentService, VisionCommentService>();
+
+            #endregion
+
+            #region PMS.Pharma
+
+            services.AddScoped<PharmaAbstract.IAppraiseService, PharmaEntities.AppraiseService>();
+            services.AddScoped<PharmaAbstract.IAppraiseResultService, PharmaEntities.AppraiseResultService>();
+            services.AddScoped<PharmaAbstract.IConfigKPIService, PharmaEntities.ConfigKPIService>();
+            services.AddScoped<PharmaAbstract.IConfigObjectiveService, PharmaEntities.ConfigObjectiveService>();
+            services.AddScoped<PharmaAbstract.IKPIService, PharmaEntities.KPIService>();
+            services.AddScoped<PharmaAbstract.IObjectiveService, PharmaEntities.ObjectiveService>();
+            services.AddScoped<PharmaAbstract.IObjectiveTypeService, PharmaEntities.ObjectiveTypeService>();
+            services.AddScoped<PharmaAbstract.IPharmaConfigTargetSettingService, PharmaEntities.PharmaConfigTargetSettingService>();
 
             #endregion
 

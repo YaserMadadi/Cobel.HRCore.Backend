@@ -28,7 +28,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<IndividualDevelopmentPlan>(procedureName,
                                                     new SqlParameter("@Id",vision_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", individualDevelopmentPlan.ToJson()));
         }
 
@@ -38,7 +38,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<VisionApproved>(procedureName,
                                                     new SqlParameter("@Id",vision_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", visionApproved.ToJson()));
         }
 
@@ -48,7 +48,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<VisionComment>(procedureName,
                                                     new SqlParameter("@Id",vision_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", visionComment.ToJson()));
         }
     }

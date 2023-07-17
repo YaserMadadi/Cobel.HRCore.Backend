@@ -25,13 +25,16 @@ namespace EssentialCore.Tools.Middleware
 
         public async Task InvokeAsync(HttpContext context)
         {
-            var userName = context.User.Identity.Name;
+            var userName = context.User.Identity.Name ?? string.Empty;
+
 
             UserCredit userCredit = null;
 
             if (!string.IsNullOrEmpty(userName))
             {
                 var userCreditResult = this.userService.RetrieveByUserName(userName);
+                
+                //context.Response.WriteAsync(userCreditResult.Result.Data.ToString());
 
                 userCredit = userCreditResult.Result.IsSucceeded ? userCreditResult.Result.Data : null;
             }

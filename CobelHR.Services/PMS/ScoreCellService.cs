@@ -28,7 +28,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<AppraiseResult>(procedureName,
                                                     new SqlParameter("@Id",scoreCell_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", appraiseResult.ToJson()));
         }
 
@@ -38,7 +38,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<CellAction>(procedureName,
                                                     new SqlParameter("@Id",scoreCell_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", cellAction.ToJson()));
         }
 
@@ -48,7 +48,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<FinalAppraise>(procedureName,
                                                     new SqlParameter("@Id",scoreCell_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", finalAppraise.ToJson()));
         }
     }

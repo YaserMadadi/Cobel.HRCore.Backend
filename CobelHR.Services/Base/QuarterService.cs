@@ -28,7 +28,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<YearQuarter>(procedureName,
                                                     new SqlParameter("@Id",quarter_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", yearQuarter.ToJson()));
         }
     }

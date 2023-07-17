@@ -28,7 +28,7 @@ namespace CobelHR.Services.Core
 
             return this.CollectionOf<Menu>(procedureName,
                                                     new SqlParameter("@Id",subSystem_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", menu.ToJson()));
         }
     }

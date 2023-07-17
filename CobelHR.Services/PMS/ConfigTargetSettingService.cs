@@ -28,7 +28,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<ConfigQualitativeObjective>(procedureName,
                                                     new SqlParameter("@Id",configTargetSetting_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", configQualitativeObjective.ToJson()));
         }
     }

@@ -28,7 +28,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<UniversityTerminate>(procedureName,
                                                     new SqlParameter("@Id",universityHistory_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", universityTerminate.ToJson()));
         }
     }

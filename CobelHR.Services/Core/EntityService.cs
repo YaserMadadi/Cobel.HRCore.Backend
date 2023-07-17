@@ -28,7 +28,7 @@ namespace CobelHR.Services.Core
 
             return this.CollectionOf<Property>(procedureName,
                                                     new SqlParameter("@Id",entity_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", property.ToJson()));
         }
 
@@ -38,7 +38,7 @@ namespace CobelHR.Services.Core
 
             return this.CollectionOf<RolePermission>(procedureName,
                                                     new SqlParameter("@Id",entity_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", rolePermission.ToJson()));
         }
     }

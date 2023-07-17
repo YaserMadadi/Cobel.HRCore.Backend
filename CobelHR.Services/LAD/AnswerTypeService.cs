@@ -28,7 +28,7 @@ namespace CobelHR.Services.LAD
 
             return this.CollectionOf<AnswerTypeItem>(procedureName,
                                                     new SqlParameter("@Id",answerType_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", answerTypeItem.ToJson()));
         }
 
@@ -38,7 +38,7 @@ namespace CobelHR.Services.LAD
 
             return this.CollectionOf<QuestionaryItem>(procedureName,
                                                     new SqlParameter("@Id",answerType_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", questionaryItem.ToJson()));
         }
     }

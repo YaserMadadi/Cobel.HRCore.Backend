@@ -28,7 +28,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<MilitaryServiceExcemption>(procedureName,
                                                     new SqlParameter("@Id",militaryService_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", militaryServiceExcemption.ToJson()));
         }
 
@@ -38,7 +38,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<MilitaryServiceInclusive>(procedureName,
                                                     new SqlParameter("@Id",militaryService_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", militaryServiceInclusive.ToJson()));
         }
     }

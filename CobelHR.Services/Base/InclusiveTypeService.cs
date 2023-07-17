@@ -29,7 +29,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<MilitaryServiceInclusive>(procedureName,
                                                     new SqlParameter("@Id",inclusiveType_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", militaryServiceInclusive.ToJson()));
         }
     }

@@ -29,7 +29,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<ObjectiveWeightNonOperational>(procedureName,
                                                     new SqlParameter("@Id",level_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", objectiveWeightNonOperational.ToJson()));
         }
 
@@ -39,7 +39,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<Position>(procedureName,
                                                     new SqlParameter("@Id",level_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", position.ToJson()));
         }
     }

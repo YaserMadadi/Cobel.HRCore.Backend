@@ -34,7 +34,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<Habitancy>(procedureName,
                                                     new SqlParameter("@Id",city_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", habitancy.ToJson()));
         }
 
@@ -44,7 +44,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<Person>(procedureName,
                                                     new SqlParameter("@Id",city_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", person.ToJson()));
         }
 
@@ -54,7 +54,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<University>(procedureName,
                                                     new SqlParameter("@Id",city_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", university.ToJson()));
         }
     }

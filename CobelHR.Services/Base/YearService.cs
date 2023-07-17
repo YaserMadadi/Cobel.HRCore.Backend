@@ -29,7 +29,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<TargetSetting>(procedureName,
                                                     new SqlParameter("@Id",year_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", targetSetting.ToJson()));
         }
 
@@ -39,7 +39,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<Vision>(procedureName,
                                                     new SqlParameter("@Id",year_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", vision.ToJson()));
         }
 
@@ -49,7 +49,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<YearQuarter>(procedureName,
                                                     new SqlParameter("@Id",year_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", yearQuarter.ToJson()));
         }
     }

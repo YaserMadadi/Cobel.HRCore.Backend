@@ -28,7 +28,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<DevelopmentPlanCompetency>(procedureName,
                                                     new SqlParameter("@Id",individualDevelopmentPlan_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", developmentPlanCompetency.ToJson()));
         }
     }

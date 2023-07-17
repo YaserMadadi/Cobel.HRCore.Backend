@@ -13,6 +13,37 @@ namespace EssentialCore.DataAccess
 {
     public static class UserClassExtension
     {
+        public async static Task<bool> ExecuteAsNonQuery(this SqlCommand command)
+        {
+            try
+            {
+                if (command.Connection.State != System.Data.ConnectionState.Open)
+
+                    command.Connection.Open();
+
+                var result = await command.ExecuteNonQueryAsync();
+
+                return result != 0;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                if (command?.Connection?.State == System.Data.ConnectionState.Open)
+                {
+                    command.Connection?.Close();
+
+                    command.Connection.Dispose();
+
+                    command.Dispose();
+                }
+            }
+
+            return true;
+        }
+
         public async static Task<IResult> ExecuteResult(this SqlCommand command)
         {
             SqlDataReader reader = null;

@@ -30,7 +30,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<Assessor>(procedureName,
                                                     new SqlParameter("@Id",gender_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", assessor.ToJson()));
         }
 
@@ -40,7 +40,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<Coach>(procedureName,
                                                     new SqlParameter("@Id",gender_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", coach.ToJson()));
         }
 
@@ -50,7 +50,7 @@ namespace CobelHR.Services.Base
 
             return this.CollectionOf<Person>(procedureName,
                                                     new SqlParameter("@Id",gender_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", person.ToJson()));
         }
     }

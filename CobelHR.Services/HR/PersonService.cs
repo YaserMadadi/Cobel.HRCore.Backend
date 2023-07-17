@@ -30,7 +30,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<CoachingQuestionary>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", coachingQuestionary.ToJson()));
         }
 
@@ -40,7 +40,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<Employee>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", employee.ToJson()));
         }
 
@@ -50,7 +50,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<Habitancy>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", habitancy.ToJson()));
         }
 
@@ -60,7 +60,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<LanguageAbility>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", languageAbility.ToJson()));
         }
 
@@ -70,7 +70,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<Log>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", log.ToJson()));
         }
 
@@ -80,7 +80,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<MaritalInfo>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", maritalInfo.ToJson()));
         }
 
@@ -90,7 +90,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<MilitaryService>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", militaryService.ToJson()));
         }
 
@@ -100,7 +100,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<Passport>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", passport.ToJson()));
         }
 
@@ -110,7 +110,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<PersonCertificate>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", personCertificate.ToJson()));
         }
 
@@ -120,7 +120,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<PersonConnection>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", personConnection.ToJson()));
         }
 
@@ -130,7 +130,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<PersonDrivingLicense>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", personDrivingLicense.ToJson()));
         }
 
@@ -140,7 +140,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<Relative>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", relative.ToJson()));
         }
 
@@ -150,7 +150,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<SchoolHistory>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", schoolHistory.ToJson()));
         }
 
@@ -160,7 +160,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<UniversityHistory>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", universityHistory.ToJson()));
         }
 
@@ -170,7 +170,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<UserAccount>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", userAccount.ToJson()));
         }
 
@@ -180,7 +180,7 @@ namespace CobelHR.Services.HR
 
             return this.CollectionOf<WorkExperience>(procedureName,
                                                     new SqlParameter("@Id",person_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", workExperience.ToJson()));
         }
     }

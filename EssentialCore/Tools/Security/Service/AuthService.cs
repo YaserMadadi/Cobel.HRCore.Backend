@@ -59,7 +59,7 @@ namespace EssentialCore.Tools.Security.Service
 
         private async Task<Result.Result> CheckInActiveDirectory(LoginUser loginUser)
         {
-#if !DEBUG 
+#if DEBUG 
 
             return new SuccessfulResult();
 #endif

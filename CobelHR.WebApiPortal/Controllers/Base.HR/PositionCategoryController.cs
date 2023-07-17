@@ -7,8 +7,10 @@ using CobelHR.Services.Base.HR.Abstract;
 using CobelHR.Entities.Base.HR;
 using CobelHR.Entities.PMS;
 using CobelHR.Entities.HR;
+using Pharma = CobelHR.Entities.PMS.Pharma;
 
 using System.Threading.Tasks;
+using CobelHR.Entities.PMS.Pharma;
 
 namespace CobelHR.ApiServices.Controllers.Base.HR
 {
@@ -117,9 +119,17 @@ namespace CobelHR.ApiServices.Controllers.Base.HR
         // CollectionOfUnit
         [HttpPost]
         [Route("PositionCategory/{positionCategory_id:int}/ConfigTargetSetting")]
-        public IActionResult CollectionOfUnit([FromRoute(Name = "positionCategory_id")] int id, ConfigTargetSetting configTargetSetting)
+        public IActionResult CollectionOfConfigTargetSetting([FromRoute(Name = "positionCategory_id")] int id, ConfigTargetSetting configTargetSetting)
         {
             return this.positionCategoryService.CollectionOfConfigTargetSetting(id, configTargetSetting, this.UserCredit).ToActionResult();
+        }
+
+        // CollectionOfUnit
+        [HttpPost]
+        [Route("PositionCategory/{positionCategory_id:int}/PharmaConfigTargetSetting")]
+        public IActionResult CollectionOfPharmaConfigTargetSetting([FromRoute(Name = "positionCategory_id")] int id, PharmaConfigTargetSetting pharmaConfigTargetSetting)
+        {
+            return this.positionCategoryService.CollectionOfPharmaConfigTargetSetting(id, pharmaConfigTargetSetting, this.UserCredit).ToActionResult();
         }
     }
 }

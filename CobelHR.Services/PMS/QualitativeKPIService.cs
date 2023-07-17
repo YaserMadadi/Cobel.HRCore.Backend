@@ -28,7 +28,7 @@ namespace CobelHR.Services.PMS
 
             return this.CollectionOf<QualitativeAppraise>(procedureName,
                                                     new SqlParameter("@Id",qualitativeKPI_Id),
-                                                    new SqlParameter("@User_Id", userCredit.Person_Id), 
+                                                    //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", qualitativeAppraise.ToJson()));
         }
     }
