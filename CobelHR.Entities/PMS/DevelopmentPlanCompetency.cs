@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CobelHR.Entities.Base.PMS;
 using EssentialCore.Entities;
 using EssentialCore.Entities.Validator;
 
@@ -30,7 +31,7 @@ namespace CobelHR.Entities.PMS
         #region Properties
 
 		
-        public PMS.IndividualDevelopmentPlan IndividualDevelopmentPlan { get; set; }
+        public IndividualDevelopmentPlan IndividualDevelopmentPlan { get; set; }
 		
         public PMS.CompetencyItem CompetencyItem { get; set; }
 

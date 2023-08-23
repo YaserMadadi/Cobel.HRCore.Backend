@@ -10,7 +10,6 @@ using EssentialCore.Tools.Result;
 using CobelHR.Entities.PMS;
 using CobelHR.Services.PMS.Abstract;
 
-
 namespace CobelHR.Services.PMS.Actions
 {
     public static class Vision_Action

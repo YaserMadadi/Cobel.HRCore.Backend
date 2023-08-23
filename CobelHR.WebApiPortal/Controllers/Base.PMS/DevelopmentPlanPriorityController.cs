@@ -5,7 +5,6 @@ using EssentialCore.Tools.Pagination;
 using EssentialCore.Tools.Result;
 using CobelHR.Services.Base.PMS.Abstract;
 using CobelHR.Entities.Base.PMS;
-using CobelHR.Entities.PMS;
 
 using System.Threading.Tasks;
 
@@ -100,7 +99,7 @@ namespace CobelHR.ApiServices.Controllers.Base.PMS
         // CollectionOfIndividualDevelopmentPlan_Priority
         [HttpPost]
         [Route("Priority/{developmentPlanPriority_id:int}/IndividualDevelopmentPlan")]
-        public IActionResult CollectionOfIndividualDevelopmentPlan_Priority([FromRoute(Name = "developmentPlanPriority_id")] int id, IndividualDevelopmentPlan individualDevelopmentPlan)
+        public IActionResult CollectionOfIndividualDevelopmentPlan_Priority([FromRoute(Name = "developmentPlanPriority_id")] int id, IndividualDevelopmentPlanAction individualDevelopmentPlan)
         {
             return this.developmentPlanPriorityService.CollectionOfIndividualDevelopmentPlan_Priority(id, individualDevelopmentPlan, this.UserCredit).ToActionResult();
         }

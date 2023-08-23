@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using EssentialCore.BusinessLogic;
 using EssentialCore.Tools.Result;
 using CobelHR.Entities.PMS;
-
+using CobelHR.Entities.Base.PMS;
 
 namespace CobelHR.Services.PMS.Abstract
 {

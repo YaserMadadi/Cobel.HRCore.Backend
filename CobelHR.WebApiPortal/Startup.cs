@@ -55,6 +55,7 @@ namespace CobelHR.WebApiPortal
             });
 
             var tokenOption = Configuration.GetSection("TokenConfig").Get<TokenConfig>();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
                 {

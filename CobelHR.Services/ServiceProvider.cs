@@ -11,7 +11,7 @@ using CobelHR.Services.HR;
 using CobelHR.Services.PMS.Abstract;
 using CobelHR.Services.PMS;
 
-using PharmaAbstract =  CobelHR.Services.PMS.Pharma.Abstract;
+using PharmaAbstract = CobelHR.Services.PMS.Pharma.Abstract;
 using PharmaEntities = CobelHR.Services.PMS.Pharma;
 
 using CobelHR.Services.LAD.Abstract;
@@ -110,6 +110,7 @@ namespace CobelHR.Services
             services.AddScoped<ICurrentSituationService, CurrentSituationService>();
             services.AddScoped<IDesirableSituationService, DesirableSituationService>();
             services.AddScoped<IDevelopmentPlanPriorityService, DevelopmentPlanPriorityService>();
+            services.AddScoped<IIndividualDevelopmentPlanActionService, IndividualDevelopmentPlanActionService>();
             services.AddScoped<IExpectedLevelService, ExpectedLevelService>();
             services.AddScoped<IMeasurementUnitService, MeasurementUnitService>();
             services.AddScoped<ISubjectService, SubjectService>();

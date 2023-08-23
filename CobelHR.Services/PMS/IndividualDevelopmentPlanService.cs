@@ -7,6 +7,8 @@ using EssentialCore.BusinessLogic;
 using EssentialCore.Entities;
 using CobelHR.Entities.PMS;
 using CobelHR.Services.PMS.Actions;
+using CobelHR.Entities.Base.PMS;
+using CobelHR.Services.Base.PMS.Actions;
 using CobelHR.Services.PMS.Abstract;
 
 namespace CobelHR.Services.PMS
@@ -26,8 +28,8 @@ namespace CobelHR.Services.PMS
         {
             var procedureName = "[PMS].[IndividualDevelopmentPlan.CollectionOfDevelopmentPlanCompetency]";
 
-            return this.CollectionOf<DevelopmentPlanCompetency>(procedureName,
-                                                    new SqlParameter("@Id",individualDevelopmentPlan_Id),
+            return CollectionOf<DevelopmentPlanCompetency>(procedureName,
+                                                    new SqlParameter("@Id", individualDevelopmentPlan_Id),
                                                     //new SqlParameter("@User_Id", userCredit.Person_Id), 
                                                     new SqlParameter("@jsonValue", developmentPlanCompetency.ToJson()));
         }

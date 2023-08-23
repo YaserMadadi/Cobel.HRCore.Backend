@@ -51,7 +51,7 @@ namespace EssentialCore.Entities
         public virtual Info Info { get; init; }
 
 
-        public Paginate Paginate { get; set; }
+        public Paginate Paginate { get; set; } = new Paginate(80, 1);
 
         [JsonIgnore]
         public bool IsNew

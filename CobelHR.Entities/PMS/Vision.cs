@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using EssentialCore.Entities;
 using EssentialCore.Entities.Validator;
-using CobelHR.Entities.PMS;
+using CobelHR.Entities.Base.PMS;
 
 namespace CobelHR.Entities.PMS
 {

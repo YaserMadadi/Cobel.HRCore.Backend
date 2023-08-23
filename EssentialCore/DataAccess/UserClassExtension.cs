@@ -133,7 +133,7 @@ namespace EssentialCore.DataAccess
 
                     command.Connection.Open();
 
-                reader = command.ExecuteReader();
+                reader = await command.ExecuteReaderAsync();
 
                 while (reader.Read())
                 {
@@ -164,7 +164,7 @@ namespace EssentialCore.DataAccess
                 {
                     reader.Close();
 
-                    reader.DisposeAsync();
+                    await reader.DisposeAsync();
                 }
 
 

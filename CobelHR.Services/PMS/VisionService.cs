@@ -8,6 +8,7 @@ using EssentialCore.Entities;
 using CobelHR.Entities.PMS;
 using CobelHR.Services.PMS.Actions;
 using CobelHR.Services.PMS.Abstract;
+using CobelHR.Entities.Base.PMS;
 
 namespace CobelHR.Services.PMS
 {

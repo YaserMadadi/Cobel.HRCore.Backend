@@ -7,6 +7,7 @@ using CobelHR.Services.PMS.Abstract;
 using CobelHR.Entities.PMS;
 
 using System.Threading.Tasks;
+using CobelHR.Entities.Base.PMS;
 
 namespace CobelHR.ApiServices.Controllers.PMS
 {

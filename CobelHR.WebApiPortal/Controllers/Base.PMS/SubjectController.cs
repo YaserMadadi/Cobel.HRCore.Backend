@@ -5,9 +5,9 @@ using EssentialCore.Tools.Pagination;
 using EssentialCore.Tools.Result;
 using CobelHR.Services.Base.PMS.Abstract;
 using CobelHR.Entities.Base.PMS;
-using CobelHR.Entities.PMS;
 
 using System.Threading.Tasks;
+using CobelHR.Entities.PMS;
 
 namespace CobelHR.ApiServices.Controllers.Base.PMS
 {

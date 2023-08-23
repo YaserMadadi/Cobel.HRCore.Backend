@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using CobelHR.Entities.PMS;
 using EssentialCore.Entities;
 using EssentialCore.Entities.Validator;
-using CobelHR.Entities.PMS;
 
 namespace CobelHR.Entities.Base.PMS
 {

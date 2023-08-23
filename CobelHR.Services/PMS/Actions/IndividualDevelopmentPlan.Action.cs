@@ -9,7 +9,7 @@ using EssentialCore.Tools.Security.Entities;
 using EssentialCore.Tools.Result;
 using CobelHR.Entities.PMS;
 using CobelHR.Services.PMS.Abstract;
-
+using CobelHR.Services.PMS;
 
 namespace CobelHR.Services.PMS.Actions
 {
@@ -49,7 +49,7 @@ namespace CobelHR.Services.PMS.Actions
 
                 if (childResult.Id <= 0)
                 {
-                    return childResult.ToDataResult<IndividualDevelopmentPlan>(result.Data);
+                    return childResult.ToDataResult(result.Data);
                 }
             }
 
